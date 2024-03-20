@@ -11,7 +11,7 @@
 </script>
 
 <template>
-    <Tile :add-image="true" :image="repo.image" :title="repo.title">
+    <Tile :add-image="true" :image="repo.image" :title="repo.title" :badges="true">
         <template #default>
             <p>{{ repo.description }}</p>
         </template>

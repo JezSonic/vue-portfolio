@@ -46,15 +46,73 @@ body {
     overflow-x: hidden;
 }
 
-a {
+a, a > strong {
     text-decoration: none;
     pointer-events: unset;
     cursor: pointer;
-    color: var(--accent-color);
+    color: var(--accent-color) !important;
     transition: all 1s ease-in-out;
 
     &:hover {
         text-decoration: underline;
         transition: all 1s ease-in-out;
     }
+}
+
+code {
+    background: transparent !important;
+}
+
+.typingEffect {
+    padding-right: 5px;
+    border-right: 2px solid white;
+    white-space: nowrap;
+    animation: blink 1s linear infinite;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--color2);
+    border-radius: 6px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color2);
+}
+
+@keyframes blink {
+    0%, 45% {
+        border-color: transparent;
+    }
+    50%, 100% {
+        border-color: white;
+    }
+}
+
+.position__bottom {
+    position: fixed !important;
+    bottom: 20px;
+}
+
+.position__top {
+    position: fixed !important;
+    top: 20px;
+}
+
+.position__left {
+    position: fixed !important;
+    left: 20px;
+}
+
+.position__right {
+    position: fixed !important;
+    right: 20px;
 }
