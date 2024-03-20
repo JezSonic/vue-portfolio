@@ -16,7 +16,7 @@
     </a>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
     p {
         display: inline;
         padding: 2px 5px;

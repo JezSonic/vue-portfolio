@@ -15,6 +15,14 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: 'Projects'
     }
+  },
+  {
+    name: 'games',
+    path: '/games',
+    component: () => import('../views/GamesView.vue'),
+    meta: {
+      title: 'Games'
+    }
   }
 
 ];

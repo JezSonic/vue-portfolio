@@ -10,7 +10,7 @@
     </button>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
     span {
         position: relative;
         left: 0;

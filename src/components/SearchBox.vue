@@ -13,7 +13,7 @@
     />
 </template>
 
-<style scoped>
+<style scoped lang="scss">
     input {
         background-color: var(--color2);
         padding: 10px 15px;

@@ -75,7 +75,7 @@ typeEffect2()
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
     .tile-separator {
         margin-top: 12px;
         grid-template-columns: calc(50% - 6px) calc(50% - 6px);

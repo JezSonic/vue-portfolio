@@ -8,38 +8,6 @@
     "image": "https://opengraph.githubassets.com/5e6f05cb827bb25ee420ecd74efef4b2ae854a9672edd01f1206afc0ef3ef6e7/JezSonic/Advanced-Backgound-Loader"
   },
   {
-    "name": "JezSonic",
-    "stars": 0,
-    "description": null,
-    "url": "https://github.com/JezSonic/JezSonic",
-    "fork": false,
-    "image": "https://opengraph.githubassets.com/83932b7cde34ff6c65c7291298f4c48156540b8c639cb4b43783fb736578cd93/JezSonic/JezSonic"
-  },
-  {
-    "name": "VBS-Custom-Windows-Popups-Godot-Plugin",
-    "stars": 2,
-    "description": null,
-    "url": "https://github.com/JezSonic/VBS-Custom-Windows-Popups-Godot-Plugin",
-    "fork": false,
-    "image": "https://opengraph.githubassets.com/8fa52487b2b98af710b1771beb4b2e7dcc67df8262ae3629f32e8ae40ae65107/JezSonic/VBS-Custom-Windows-Popups-Godot-Plugin"
-  },
-  {
-    "name": "Godot-Game-Installer-Template",
-    "stars": 1,
-    "description": null,
-    "url": "https://github.com/JezSonic/Godot-Game-Installer-Template",
-    "fork": false,
-    "image": "https://opengraph.githubassets.com/65be36059e7b86932cbbf678f2f9a596b6dbbcfc53d220d99f5249a5581f0d87/JezSonic/Godot-Game-Installer-Template"
-  },
-  {
-    "name": "Audio-Loader",
-    "stars": 2,
-    "description": null,
-    "url": "https://github.com/JezSonic/Audio-Loader",
-    "fork": false,
-    "image": "https://opengraph.githubassets.com/9760e34ec6d0210fae87a471eab0f223b13e6d75b84fd355691f4f1d0a98ba2d/JezSonic/Audio-Loader"
-  },
-  {
     "name": "Furry-Potato",
     "stars": 0,
     "description": "Game for 5th's Godocik GameJam",
@@ -56,22 +24,6 @@
     "image": "https://repository-images.githubusercontent.com/286320908/d44ba880-87c4-11eb-9ce1-3b15ef25b822"
   },
   {
-    "name": "Foxy-Adventure-Level-Editor",
-    "stars": 0,
-    "description": null,
-    "url": "https://github.com/NewDEV-github/Foxy-Adventure-Level-Editor",
-    "fork": false,
-    "image": "https://opengraph.githubassets.com/a4d4f6f642b4b4177acff3ef4bbd650861632b5df38e22052284c5ef0eee1e83/NewDEV-github/Foxy-Adventure-Level-Editor"
-  },
-  {
-    "name": "new-dev-dl",
-    "stars": 0,
-    "description": null,
-    "url": "https://github.com/NewDEV-github/new-dev-dl",
-    "fork": false,
-    "image": "https://opengraph.githubassets.com/6fdc2e5082dcc57d1b21735c70364a7231e4a39b393c184a697703e446b1ddd8/NewDEV-github/new-dev-dl"
-  },
-  {
     "name": "pixel-zone-master",
     "stars": 11,
     "description": "Platformer game made for Godot 3.2",
@@ -86,37 +38,5 @@
     "url": "https://github.com/NewDEV-github/super-duper-disco",
     "fork": false,
     "image": "https://opengraph.githubassets.com/91d3b2ee0a75659321f289c78e501c33eb402b97b7a1fd5d32a9635963b93280/NewDEV-github/super-duper-disco"
-  },
-  {
-    "name": "godocik",
-    "stars": 0,
-    "description": null,
-    "url": "https://github.com/NewDEV-github/godocik",
-    "fork": false,
-    "image": "https://opengraph.githubassets.com/54adfbcbfd7501245cda8a57ce5d4a128dcf0ff46e30901a348d663858fe7544/NewDEV-github/godocik"
-  },
-  {
-    "name": "FoxyAdventureModCreator",
-    "stars": 1,
-    "description": "Simple mod creator plugin for godot that helps with the .cfg files for Foxy Adventure Modifications",
-    "url": "https://github.com/NewDEV-github/FoxyAdventureModCreator",
-    "fork": false,
-    "image": "https://opengraph.githubassets.com/98a322314202a7b53e9878d2d054c5a69558871a79c8569201eb80f182f87a8c/NewDEV-github/FoxyAdventureModCreator"
-  },
-  {
-    "name": "newthefox-website",
-    "stars": 0,
-    "description": null,
-    "url": "https://github.com/NewDEV-github/newthefox-website",
-    "fork": false,
-    "image": "https://opengraph.githubassets.com/d3b48f6ee97f4a9c87b4b4af9615bfa51bd0f4ffbd8211fad94cf873b488288e/NewDEV-github/newthefox-website"
-  },
-  {
-    "name": "NewDEV-github",
-    "stars": 0,
-    "description": null,
-    "url": "https://github.com/NewDEV-github/NewDEV-github",
-    "fork": false,
-    "image": "https://opengraph.githubassets.com/a877884cd3800a225ca3bbbfc0d866e47be53fd7cdb32caf37390c3784eeccd6/NewDEV-github/NewDEV-github"
   }
 ]

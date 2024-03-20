@@ -27,12 +27,3 @@
         </template>
     </Tile>
 </template>
-
-<style scoped>
-    .repo-tile img {
-        object-fit: cover;
-        min-width: 100%;
-        min-height: 100%;
-        height: 100%;
-    }
-</style>

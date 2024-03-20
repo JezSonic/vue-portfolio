@@ -33,7 +33,7 @@
     </UseMouse>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
     @keyframes rotate {
         from {
             transform: rotateZ(0deg);

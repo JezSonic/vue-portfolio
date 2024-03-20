@@ -22,7 +22,7 @@
     <div :class="{ 'nav-container': true, 'transparent': transparent }">
         <nav>
             <div class="left">
-                <p class="title">{{ settings.title }}</p>
+                <a href="/" class="title">{{ settings.title }}</a>
             </div>
 
             <div class="right">
@@ -36,7 +36,7 @@
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
     .nav-container {
         width: 100%;
         display: flex;
@@ -48,18 +48,19 @@
         z-index: 10;
         backdrop-filter: blur(10px);
         transition-duration: 500ms;
-    }
 
-    .nav-container:not(.transparent) {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        background-color: rgba(0, 0, 0, 0.5);
-        box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.5);
+        &:not(.transparent) {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(0, 0, 0, 0.5);
+            box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
     }
 
     .title {
         cursor: pointer;
         user-select: none;
         display: inline;
+        text-decoration: none;
         color: var(--accent-color);
         font-size: 25px;
         font-weight: bold;

@@ -40,7 +40,7 @@
                 "
             />
         </div>
-        <div class="text">
+        <div :class="`${props.badges == true ? 'text__badges' : 'text'}`">
             <p class="title">{{ props.title }}</p>
             <slot name="default" class="description" />
             <div class="badges" v-if="badges">
@@ -50,7 +50,7 @@
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
     .badges {
         display: flex;
         flex-wrap: wrap;
@@ -97,6 +97,15 @@
         flex-direction: column;
         gap: 10px;
         justify-content: space-between;
+
+        &__badges {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: space-between;
+        }
     }
 
     .tile img {
