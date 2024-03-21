@@ -22,14 +22,14 @@
     <div :class="{ 'nav-container': true, 'transparent': transparent }">
         <nav>
             <div class="left">
-                <a href="/" class="title">{{ settings.title }}</a>
+                <router-link to="/">{{ settings.title }}</router-link>
             </div>
 
             <div class="right">
-                <a href="/games">Games</a>
-                <a href="/commissions">Commissions</a>
-                <a href="/projects">GitHub Projects</a>
-                <a href="/contact">Contact</a>
+                <router-link to="/games">Games</router-link>
+                <router-link to="/commissions">Commissions</router-link>
+                <router-link to="/projects">GitHub Projects</router-link>
+                <router-link to="/contact">Contact</router-link>
                 <SearchBox @filter="filter" />
             </div>
         </nav>

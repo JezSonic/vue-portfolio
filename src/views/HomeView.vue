@@ -26,8 +26,8 @@ typeEffect2()
 </script>
 
 <template>
-    <div :style="{ gap: settings.gap_size }">
-        <Tile title="About me">
+    <div class="container" :style="{ gap: settings.gap_size }">
+        <Tile title="About me" v-motion-pop-visible-once>
             <template #default>
                 <highlightjs language="typescript" :code="typeValue"></highlightjs>
                 <p>
@@ -50,7 +50,7 @@ typeEffect2()
             </template>
         </Tile>
         <div class="tile-separator">
-            <Tile title="Games" :background-image="img" hover-shadow-color="#00459280">
+            <Tile title="Games" v-motion-slide-visible-left :background-image="img" hover-shadow-color="#00459280">
                 <p>
                     All of my games are open-sourced and free to download and modify. On this site you can find links to all my GitHub repositories.
                 </p>
@@ -68,7 +68,7 @@ typeEffect2()
                     <Button @click="router.push('/games')" text="Go to Games" />
                 </div>
             </Tile>
-            <Tile title="About this site" hover-shadow-color="#92550066">
+            <Tile v-motion-slide-visible-right title="About this site" hover-shadow-color="#92550066">
                 <highlightjs language="typescript" :code="typeValue2"></highlightjs>
             </Tile>
         </div>
@@ -76,6 +76,10 @@ typeEffect2()
 </template>
 
 <style scoped lang="scss">
+    .container {
+        width: 100%;
+    }
+
     .tile-separator {
         margin-top: 12px;
         grid-template-columns: calc(50% - 6px) calc(50% - 6px);
@@ -90,5 +94,26 @@ typeEffect2()
         display: flex;
         justify-content: flex-end;
     }
+    @media (max-width: 1550px) and (min-width: 1201px) {
+        .container {
+            width: 90%;
+        }
+    }
 
+    @media (max-width: 1200px) {
+        .container {
+            width: 90%;
+        }
+
+        .tile-separator {
+            margin-top: 12px;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            display: grid;
+            justify-content: space-between;
+            align-items: stretch;
+            align-content: stretch;
+            justify-items: stretch;
+        }
+    }
 </style>

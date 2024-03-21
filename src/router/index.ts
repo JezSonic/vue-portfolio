@@ -23,6 +23,14 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: 'Games'
     }
+  },
+  {
+    name: 'contact',
+    path: '/contact',
+    component: () => import('../views/ContactView.vue'),
+    meta: {
+      title: 'Contact'
+    }
   }
 
 ];

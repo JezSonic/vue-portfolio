@@ -9,9 +9,13 @@
 <template>
     <MouseAura v-if="settings.mouse_aura" />
 
-    <Navbar @filter="filter" />
+    <Navbar />
     <main>
-        <router-view />
+        <router-view v-slot="{ Component }">
+            <transition name="slide" mode="out-in">
+                <component :is="Component" />
+            </transition>
+        </router-view>
     </main>
 </template>
 
@@ -22,14 +26,17 @@
         max-width: 1500px;
         z-index: 8;
     }
+    .slide-move,
+    .slide-leave-active,
+    .slide-enter-active {
+        transition: all 0.5s
+    }
 
-    .tile-list {
-        display: grid;
-        grid-template-columns: repeat(
-            auto-fit,
-            minmax(100px, min(100%, 400px))
-        );
-        width: 100%;
-        justify-content: center;
+    .slide-enter-from {
+        transform: translate(90vw, 0);
+    }
+
+    .slide-leave-to {
+        transform: translate(-100vw, 0);
     }
 </style>

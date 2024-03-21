@@ -3,6 +3,7 @@ interface GameData {
         images: string[];
         downloadUrls: { win_64: string; x11_64: string; macos: string };
         description: string;
+        shortDescription: string;
         title: string;
         copyright: string;
         made_with: string;
@@ -46,6 +47,7 @@ const gameData: GameData = {
     'foxy-adventure': {
         title: 'Foxy Adventure',
         description: '2D platform game with New The Fox and Miles "Tails" Prower as a playable characters',
+        shortDescription: '2D platform game with New The Fox and Miles "Tails" Prower as a playable characters',
         images: [fa1, fa2, fa3, fa4, fa5, fa6, fa7, fa8, fa9, fa10, fa11, fa12],
         downloadUrls: {
             win_64: 'https://github.com/NewDEV-github/new-dev-dl/releases/download/static/FoxyAdventure-windows-x64-installer.exe   ',
@@ -62,6 +64,7 @@ const gameData: GameData = {
             'Defeat all of the enemies, visit places, beautiful views and much more!\n' +
             'Your goal is to help Robi to get out of this place... Are You into this?\n' +
             'Go and help him! He needs a hero just like You!',
+        shortDescription: 'Go with Robi on his adventure!',
         images: [pz1, pz2, pz3, pz4, pz5, pz6, pz7, pz8, pz9],
         downloadUrls: {
             win_64: 'https://github.com/NewDEV-github/new-dev-dl/releases/download/static/PixelZone-windows-x64-installer.exe',
@@ -78,6 +81,7 @@ const gameData: GameData = {
             '\nYou are an DJ... on the beginning of Your career.\n' +
             'Your way to earn money is: Play as DJ in Night clubs and earn money.\n' +
             'The better You are - the better equipment You can afford yourself and the more You earn, got it?',
+        shortDescription: 'You are an DJ... on the beginning of Your career.',
         images: [fp1, fp2, fp3, fp4],
         downloadUrls: {
             win_64: 'https://github.com/NewDEV-github/new-dev-dl/releases/download/static/FurryPotato-windows-x64-installer.exe',
@@ -93,6 +97,7 @@ const gameData: GameData = {
         description: 'Short multiplayer game novel made for Godocikowy Dżem #4.\n' +
             'It\'s all about pressing keys in the rhythm of the song. Nothing hard, huh?\n' +
             'Try and ask again then 😏',
+        shortDescription: 'It\'s all about pressing keys in the rhythm of the song. Nothing hard, huh?\n',
         images: [sdd1, sdd2, sdd3],
         downloadUrls: {
             win_64: 'https://github.com/NewDEV-github/new-dev-dl/releases/download/static/SuperDuperDisco-windows-x64-installer.exe',
