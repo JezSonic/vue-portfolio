@@ -12,11 +12,9 @@ import LinkedInProfileCard from "@/components/LinkedInProfileCard.vue";
 <template>
     <div class="container" :style="{ gap: settings.gap_size }">
         <Tile title="Contact me" v-motion-pop-visible-once>
-            <template #default>
-                <p>
-                    I have listed there all possible ways to contact me. Feel welcome to use any of them!
-                </p>
-            </template>
+            <p>
+                I have listed there all possible ways to contact me. Feel welcome to use any of them!
+            </p>
         </Tile>
         <div class="tile-separator">
             <Tile title="Discord" v-motion-slide-visible-left :background-image="discord_img" hover-shadow-color="#00459280">
