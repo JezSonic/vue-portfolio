@@ -1,8 +1,7 @@
 {
-    "name": "github-portfolio",
+    "name": "vue-portfolio",
     "version": "0.0.0",
     "private": true,
-    "type": "module",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
@@ -10,7 +9,8 @@
         "format": "prettier . --write",
         "lint": "eslint ./ --fix",
         "fetch-repos": "node scripts/fetch-repos.js",
-        "serve": "node server/server.js"
+        "serve": "node server/server.js",
+        "deploy:beta:vue": "vite build && firebase hosting:channel:deploy beta-vue --expires 14d"
     },
     "dependencies": {
         "@highlightjs/vue-plugin": "^2.1.0",

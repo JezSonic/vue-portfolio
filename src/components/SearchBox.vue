@@ -1,16 +1,25 @@
 <script setup lang="ts">
-    const emit = defineEmits(["filter"]);
+    import Tile from "@/components/Tile.vue";
     import { ref } from "vue";
+    const emit = defineEmits(["filter"]);
     const filter = ref("");
+    const results = ref([]);
 </script>
 
 <template>
-    <input
-        v-model="filter"
-        @input="emit('filter', filter)"
-        type="text"
-        placeholder="Search..."
-    />
+    <div>
+        <input
+            v-model="filter"
+            @input="emit('filter', filter)"
+            type="text"
+            placeholder="Search..."
+        />
+        <div class="results">
+            <Tile v-if="filter.length > 0">
+                <h3 v-if="results.length === 0">No search results</h3>
+            </Tile>
+        </div>
+    </div>
 </template>
 
 <style scoped lang="scss">
@@ -19,7 +28,12 @@
         padding: 10px 15px;
         border-radius: 10px;
         font-size: 10px;
-        width: 100%;
-        max-width: 200px;
+        width: 200px;
+    }
+
+    .results {
+        width: 200px;
+        margin-top: 6px;
+        position: fixed;
     }
 </style>
