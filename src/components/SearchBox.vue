@@ -1,14 +1,15 @@
 <script setup lang="ts">
     import Tile from "@/components/Tile.vue";
     import { ref } from "vue";
-    import { SearchEngine } from "@/helpers/search.ts";
-    const emit = defineEmits(["filter"]);
+    import { SearchData, SearchEngine } from "@/helpers/search.ts";
+
     const filter = ref("");
-    const results = ref([]);
+    const results = ref<SearchData[]>([]);
     const _searchEngine = new SearchEngine()
 
     const performSearch = (keyword: string) => {
-        console.log(_searchEngine.performSearch(keyword))
+        results.value = _searchEngine.performSearch(keyword)
+        console.log(results.value)
     }
 </script>
 
@@ -21,8 +22,11 @@
             placeholder="Search..."
         />
         <div class="results">
-            <Tile v-if="filter.length > 0">
-                <h3 v-if="results.length === 0">No search results</h3>
+            <Tile v-if="filter.length > 0 && results.length === 0">
+                <h3>No search results</h3>
+            </Tile>
+            <Tile v-else-if="filter.length > 0 && results.length >= 1">
+                <p v-for="(item, index) in results">{{item.title}}</p>
             </Tile>
         </div>
     </div>
