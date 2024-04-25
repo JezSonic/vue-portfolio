@@ -1,16 +1,22 @@
 <script setup lang="ts">
     import Tile from "@/components/Tile.vue";
     import { ref } from "vue";
+    import { SearchEngine } from "@/helpers/search.ts";
     const emit = defineEmits(["filter"]);
     const filter = ref("");
     const results = ref([]);
+    const _searchEngine = new SearchEngine()
+
+    const performSearch = (keyword: string) => {
+        console.log(_searchEngine.performSearch(keyword))
+    }
 </script>
 
 <template>
     <div>
         <input
             v-model="filter"
-            @input="emit('filter', filter)"
+            @input="performSearch(filter)"
             type="text"
             placeholder="Search..."
         />
