@@ -3,15 +3,11 @@
     import { onMounted, ref } from "vue";
     import settings from "../../data/settings";
     const emit = defineEmits("filter");
-
     const filter = text => emit("filter", text);
     const transparent = ref(true);
-
     const onDocumentScroll = () => {
-        if (window.scrollY === 0) transparent.value = true;
-        else transparent.value = false;
+        transparent.value = window.scrollY === 0;
     };
-
     onMounted(() => {
         window.addEventListener("scroll", onDocumentScroll);
         onDocumentScroll();
@@ -30,7 +26,6 @@
                 <router-link to="/commissions">Commissions</router-link>
                 <router-link to="/projects">GitHub Projects</router-link>
                 <router-link to="/contact">Contact</router-link>
-                <SearchBox @filter="filter" />
             </div>
         </nav>
     </div>

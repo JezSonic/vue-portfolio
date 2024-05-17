@@ -10,7 +10,7 @@
         "lint": "eslint ./ --fix",
         "fetch-repos": "node scripts/fetch-repos.js",
         "serve": "node server/server.js",
-        "deploy:beta:vue": "vite build && firebase hosting:channel:deploy beta-vue --expires 14d"
+        "deploy:beta:vue": "vite build && firebase hosting:channel:deploy beta-vue --expires 14d --project api-9176249411662404922-339889"
     },
     "dependencies": {
         "@highlightjs/vue-plugin": "^2.1.0",

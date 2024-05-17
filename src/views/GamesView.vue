@@ -14,11 +14,21 @@ import gameData from "@/helpers/games.ts";
 <style scoped lang="scss">
     .grid {
         display: grid;
-        grid-template-columns: 50% 50%;
+        grid-template-columns: 49% 49%;
         gap: 24px;
+        justify-content: center;
     }
-
-    @media (max-width: 1670px) {
+    @media (min-width: 1771px) and (max-width: 1600px) {
+        .grid {
+            grid-template-columns: 80%;
+        }
+    }
+    @media (min-width: 651px) and (max-width: 1170px) {
+        .grid {
+            grid-template-columns: 80%;
+        }
+    }
+    @media (max-width: 650px) {
         .grid {
             grid-template-columns: 1fr;
         }
