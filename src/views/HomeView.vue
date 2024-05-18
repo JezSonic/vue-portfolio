@@ -4,32 +4,24 @@ import settings from "../../data/settings";
 import { ref } from "vue";
 import Button from "@/components/Button.vue";
 import router from "@/router";
-const code = "console.log(\"Hello there!\")"
 const code2 = "import { onMounted } from 'vue' \n\nconst site = () => {\n   const description = \"This site is my portfolio showing some projects that I have been working on\";\n   console.log(description);\n   return;\n}\n\nonMounted(() => {\n   site();\n}"
 const typeValue = ref('')
 const typeValue2 = ref('')
 import img from '@/assets/img/games/foxy-adventure/bg.webp'
-const typeEffect = () => {
-    if (typeValue.value.length < code.length) {
-        typeValue.value += code.charAt(typeValue.value.length);
-        setTimeout(typeEffect, 50);
-    }
-}
 const typeEffect2 = () => {
     if (typeValue2.value.length < code2.length) {
         typeValue2.value += code2.charAt(typeValue2.value.length);
         setTimeout(typeEffect2, 10);
     }
 }
-typeEffect()
 typeEffect2()
 </script>
 
 <template>
     <div class="container" :style="{ gap: settings.gap_size }">
-        <Tile title="About me" v-motion-pop-visible-once>
+        <h1>About me</h1>
+        <Tile title="Hello there" v-motion-pop-visible-once>
             <template #default>
-                <highlightjs language="typescript" :code="typeValue"></highlightjs>
                 <p>
                     I’m Karol, a junior full-stack web developer with a passion for bringing websites and web applications to life.
                     While I have about 2 years of professional experience,

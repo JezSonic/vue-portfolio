@@ -31,6 +31,14 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: 'Contact'
     }
+  },
+  {
+    name: 'commissions',
+    path: '/commissions',
+    component: () => import('../views/CommissionsView.vue'),
+    meta: {
+      title: 'Commissions'
+    }
   }
 
 ];

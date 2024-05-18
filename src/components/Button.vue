@@ -1,16 +1,20 @@
-<script setup lang="ts">
+<script lang="ts" setup>
     const props = defineProps({
-        text: String
+        text: {
+            type: String,
+            required: false
+        }
     });
 </script>
 
 <template>
     <button class="button">
-        <span>{{ props.text }}&nbsp;</span>
+        <span v-if="props.text !== null">{{ props.text }}&nbsp;</span>
+        <span v-if="props.text == null"><slot class="button-text"/>&nbsp;</span>
     </button>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
     span {
         position: relative;
         left: 0;

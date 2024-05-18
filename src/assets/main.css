@@ -132,3 +132,31 @@ main {
     flex-direction: column;
     align-items: center;
 }
+
+.title {
+    width: 100%;
+}
+
+@media (max-width: 1550px) and (min-width: 1201px) {
+    .title {
+        width: 90%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .title {
+        width: 90%;
+    }
+}
+
+h1, h2 {
+    margin: 12px 0;
+}
+
+.a__clear {
+    color: var(--color1) !important;
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+    }
+}

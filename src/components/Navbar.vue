@@ -2,8 +2,8 @@
     import SearchBox from "@/components/SearchBox.vue";
     import { onMounted, ref } from "vue";
     import settings from "../../data/settings";
-    const emit = defineEmits("filter");
-    const filter = text => emit("filter", text);
+    const emit = defineEmits(["filter"]);
+    const filter = (text: string) => emit("filter", text);
     const transparent = ref(true);
     const onDocumentScroll = () => {
         transparent.value = window.scrollY === 0;
