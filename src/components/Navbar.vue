@@ -38,10 +38,10 @@
                             fill="#FFFFFF">
                         </path>
                     </svg>
-                    <h4><router-link to="/games">Games</router-link></h4>
-                    <h4><router-link to="/commissions">Commissions</router-link></h4>
-                    <h4><router-link to="/projects">GitHub Projects</router-link></h4>
-                    <h4><router-link to="/contact">Contact</router-link></h4>
+                    <h4 @click="hamburgerOn = false"><router-link to="/games">Games</router-link></h4>
+                    <h4 @click="hamburgerOn = false"><router-link to="/commissions">Commissions</router-link></h4>
+                    <h4 @click="hamburgerOn = false"><router-link to="/projects">GitHub Projects</router-link></h4>
+                    <h4 @click="hamburgerOn = false"><router-link to="/contact">Contact</router-link></h4>
                 </div>
                 <div class="right__open">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" @click="hamburgerOn = !hamburgerOn">
