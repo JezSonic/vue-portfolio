@@ -32,7 +32,7 @@
 
             <div class="right">
                 <div :class="'right__links' + (hamburgerOn ? '__hamburger' : '')">
-                    <svg xmlns="http://www.w3.org/2000/svg" v-if="hamburgerOn" viewBox="0 0 352 512" class="right__close">
+                    <svg xmlns="http://www.w3.org/2000/svg" v-if="hamburgerOn" viewBox="0 0 352 512" class="right__close" @click="hamburgerOn = false">
                         <path
                             d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
                             fill="#FFFFFF">
@@ -44,7 +44,7 @@
                     <h4><router-link to="/contact">Contact</router-link></h4>
                 </div>
                 <div class="right__open">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" @click="console.log('Navbar toggled'); hamburgerOn = !hamburgerOn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" @click="hamburgerOn = !hamburgerOn">
                         <path
                             d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"
                             fill="#FFFFFF">
