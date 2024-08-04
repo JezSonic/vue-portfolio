@@ -50,7 +50,7 @@ a, a > strong {
     text-decoration: none;
     pointer-events: unset;
     cursor: pointer;
-    color: var(--accent-color) !important;
+    color: var(--accent-color);
     transition: all 1s ease-in-out;
 
     &:hover {
@@ -159,4 +159,8 @@ h1, h2 {
     &:hover {
         text-decoration: none;
     }
+}
+
+a, a:hover {
+    text-decoration: none !important;
 }

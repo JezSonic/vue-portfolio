@@ -8,7 +8,6 @@
 
 <template>
     <MouseAura v-if="settings.mouse_aura" />
-
     <Navbar />
     <main>
         <router-view v-slot="{ Component }">

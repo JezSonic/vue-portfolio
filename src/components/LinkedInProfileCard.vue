@@ -185,7 +185,7 @@ import img from '@/assets/img/core-img/linkedinimg.webp'
 @media (max-width: 1200px) {
   .linkedIn-main {
     min-width: 280px;
-    width: 80%;
+    width: 100%;
   }
 }
 </style>

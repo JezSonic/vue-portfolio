@@ -5,6 +5,7 @@ import Button from "@/components/Button.vue";
 import router from "@/router";
 import artist from '@/assets/img/core-img/artist.png'
 import oldwebsite from '@/assets/img/core-img/oldwebsite.png'
+import ciasteczkowo from '@/assets/img/core-img/ciasteczkowo.png'
 </script>
 
 <template>
@@ -25,6 +26,7 @@ import oldwebsite from '@/assets/img/core-img/oldwebsite.png'
         <h2>Projects</h2>
         <div class="grid">
             <Tile title="Old website" v-motion-slide-visible-left :background-image="oldwebsite" hover-shadow-color="#00459280">
+                <h4>Older version of my website</h4>
                 <p>Technology stack: Vue, SCSS, TypeScript</p>
                 <div class="button-container">
                     <Button :text="undefined">
@@ -33,10 +35,20 @@ import oldwebsite from '@/assets/img/core-img/oldwebsite.png'
                 </div>
             </Tile>
             <Tile title="Artist.pl" v-motion-slide-visible-right :background-image="artist" hover-shadow-color="#f7af3260">
+                <h4>Website for Artist - Biuro tłumaczeń I Szkoła języków obcych in Dębica</h4>
                 <p>Technology stack: React.js, WordPress</p>
                 <div class="button-container">
                     <Button :text="undefined">
                         <a class="a__clear" href="https://artist.com.pl" rel="noopener noreferrer" target="_blank">artist.com.pl</a>
+                    </Button>
+                </div>
+            </Tile>
+            <Tile title="Ciasteczkowo" v-motion-slide-visible-left :background-image="ciasteczkowo" hover-shadow-color="#FFFFFF60">
+                <h4>Blog about cakes</h4>
+                <p>Technology stack: Next.js, HyGraph, tailwind CSS</p>
+                <div class="button-container">
+                    <Button :text="undefined">
+                        <a class="a__clear" href="https://ciasteczkowo.vercel.app" rel="noopener noreferrer" target="_blank">Ciasteczkowo</a>
                     </Button>
                 </div>
             </Tile>

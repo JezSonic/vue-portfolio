@@ -5,11 +5,18 @@
     const emit = defineEmits(["filter"]);
     const filter = (text: string) => emit("filter", text);
     const transparent = ref(true);
+    const hamburgerOn = ref(false)
     const onDocumentScroll = () => {
         transparent.value = window.scrollY === 0;
     };
+    const onResize = () => {
+        if (window.innerWidth >= 870) {
+            hamburgerOn.value = false;
+        }
+    }
     onMounted(() => {
         window.addEventListener("scroll", onDocumentScroll);
+        window.addEventListener("resize", onResize);
         onDocumentScroll();
     });
 </script>
@@ -18,14 +25,32 @@
     <div :class="{ 'nav-container': true, 'transparent': transparent }">
         <nav>
             <div class="left">
-                <router-link to="/">{{ settings.title }}</router-link>
+                <h1>
+                    <router-link to="/">{{ settings.title }}</router-link>
+                </h1>
             </div>
 
             <div class="right">
-                <router-link to="/games">Games</router-link>
-                <router-link to="/commissions">Commissions</router-link>
-                <router-link to="/projects">GitHub Projects</router-link>
-                <router-link to="/contact">Contact</router-link>
+                <div :class="'right__links' + (hamburgerOn ? '__hamburger' : '')">
+                    <svg xmlns="http://www.w3.org/2000/svg" v-if="hamburgerOn" viewBox="0 0 352 512" class="right__close">
+                        <path
+                            d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                            fill="#FFFFFF">
+                        </path>
+                    </svg>
+                    <h4><router-link to="/games">Games</router-link></h4>
+                    <h4><router-link to="/commissions">Commissions</router-link></h4>
+                    <h4><router-link to="/projects">GitHub Projects</router-link></h4>
+                    <h4><router-link to="/contact">Contact</router-link></h4>
+                </div>
+                <div class="right__open">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" @click="console.log('Navbar toggled'); hamburgerOn = !hamburgerOn">
+                        <path
+                            d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"
+                            fill="#FFFFFF">
+                        </path>
+                    </svg>
+                </div>
             </div>
         </nav>
     </div>
@@ -78,8 +103,63 @@
         display: flex;
         justify-content: end;
         align-items: center;
-        a {
-            margin-right: 12px;
+        &__links {
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            a {
+                margin-right: 12px;
+            }
+        }
+        &__open, &__close {
+            width: 30px;
+            height: 30px;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+        }
+    }
+
+    @media (max-width: 869px) {
+        .right {
+            &__open {
+                display: block;
+            }
+
+            &__links {
+                display: none;
+                &__hamburger {
+                    a {
+                        color: white !important;
+                    }
+                    h4 {
+                        padding-bottom:12px;
+                    }
+                    position: fixed;
+                    height: 100vh;
+                    width: 100%;
+                    max-width: 400px;
+                    top: 0;
+                    left: 0;
+                    display: inline-flex;
+                    margin-top: 0;
+                    padding: 40px 0;
+                    text-align: center;
+                    background: #222;
+                    overflow-y: auto;
+                    transition: all 0.3s ease;
+                    flex-direction: column;
+                    align-items: center;
+
+                    > .right__close {
+                        display: block;
+                        position: fixed;
+                        top: 16px;
+                        left: 358px;
+                    }
+                }
+            }
         }
     }
 </style>
