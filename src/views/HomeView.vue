@@ -29,7 +29,8 @@ typeEffect2()
                     My background includes experience with both front-end and back-end development, as evidenced by the technology stack I’ve included on this page (TypeScript, SCSS, Vue.js).
                 </p>
                 <p>
-                    While web development is my primary focus, I also enjoy game development and have a number of game projects on GitHub under the username JezSonic.
+                    While web development is my primary focus,
+                    I enjoy game development and have some game projects on GitHub under the username JezSonic.
                 </p>
                 <p>
                     I’m proficient in a variety of web development technologies, including PHP, Docker, Node.js, Vue.js, Laravel and other well-known frameworks.
