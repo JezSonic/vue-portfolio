@@ -5,7 +5,7 @@
     import ForkBadge from "./ForkBadge.vue";
     import GithubLinkBadge from "./GithubLinkBadge.vue";
     import StarsBadge from "./StarsBadge.vue";
-    import settings from "../../data/settings";
+    import settings from "../../../data/settings";
     import Badge from "./Badge.vue";
     
 </script>

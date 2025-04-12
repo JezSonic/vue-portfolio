@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import Tile from "@/components/Tile.vue";
+import Tile from "@/components/tiles/Tile.vue";
 import settings from "../../data/settings";
 import mail_img from '@/assets/img/core-img/gmail_new.webp'
 import discord_img from '@/assets/img/core-img/discord.webp'
 import telegram_img from '@/assets/img/core-img/telegram.webp'
-import LinkedInProfileCard from "@/components/LinkedInProfileCard.vue";
+import LinkedInProfileCard from "@/components/linkedIn/LinkedInProfileCard.vue";
 
 
 </script>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Tile from "@/components/Tile.vue";
+import Tile from "@/components/tiles/Tile.vue";
 import settings from "../../data/settings";
-import Button from "@/components/Button.vue";
+import Button from "@/components/ui/Button.vue";
 import router from "@/router";
 import artist from '@/assets/img/core-img/artist.png'
 import oldwebsite from '@/assets/img/core-img/oldwebsite.png'
@@ -49,6 +49,15 @@ import ciasteczkowo from '@/assets/img/core-img/ciasteczkowo.png'
                 <div class="button-container">
                     <Button :text="undefined">
                         <a class="a__clear" href="https://ciasteczkowo.vercel.app" rel="noopener noreferrer" target="_blank">Ciasteczkowo</a>
+                    </Button>
+                </div>
+            </Tile>
+            <Tile title="MaSzyna: Reloaded" v-motion-slide-visible-right :background-image="artist" hover-shadow-color="#f7af3260">
+                <h4>Port of MaSzyna Train Simulator into Godot Engine</h4>
+                <p>Technology stack: C++, GDScript, Godot Engine</p>
+                <div class="button-container">
+                    <Button :text="undefined">
+                        <a class="a__clear" href="https://github.com/MaSzyna-Reloaded" rel="noopener noreferrer" target="_blank">GitHub organization</a>
                     </Button>
                 </div>
             </Tile>

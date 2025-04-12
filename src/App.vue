@@ -1,6 +1,6 @@
 <script setup lang="ts">
-    import Navbar from "@/components/Navbar.vue";
-    import MouseAura from "@/components/MouseAura.vue";
+    import Navbar from "@/components/ui/Navbar.vue";
+    import MouseAura from "@/components/ui/MouseAura.vue";
     import settings from "../data/settings.ts";
 
 

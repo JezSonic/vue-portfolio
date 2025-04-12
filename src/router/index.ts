@@ -39,6 +39,14 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: 'Commissions'
     }
+  },
+  {
+    name: 'auth',
+    path: '/auth',
+    component: () => import('../views/AuthView.vue'),
+    meta: {
+      title: 'Login / Register'
+    }
   }
 
 ];

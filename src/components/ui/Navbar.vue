@@ -1,9 +1,8 @@
 <script setup lang="ts">
-    import SearchBox from "@/components/SearchBox.vue";
     import { onMounted, ref } from "vue";
-    import settings from "../../data/settings";
-    const emit = defineEmits(["filter"]);
-    const filter = (text: string) => emit("filter", text);
+    import settings from "../../../data/settings";
+    import { env } from "@/helpers/app.ts";
+    import Button from "@/components/ui/Button.vue";
     const transparent = ref(true);
     const hamburgerOn = ref(false)
     const onDocumentScroll = () => {
@@ -42,6 +41,7 @@
                     <h4 @click="hamburgerOn = false"><router-link to="/commissions">Commissions</router-link></h4>
                     <h4 @click="hamburgerOn = false"><router-link to="/projects">GitHub Projects</router-link></h4>
                     <h4 @click="hamburgerOn = false"><router-link to="/contact">Contact</router-link></h4>
+                    <Button :text="undefined" @click="hamburgerOn = false" v-if="env('VITE_APP_ENABLE_BACKEND')"><router-link to="/auth">Login / Register</router-link></Button>
                 </div>
                 <div class="right__open">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" @click="hamburgerOn = !hamburgerOn">

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import Tile from "@/components/Tile.vue";
+import Tile from "@/components/tiles/Tile.vue";
 import settings from "../../data/settings";
 import { ref } from "vue";
-import Button from "@/components/Button.vue";
+import Button from "@/components/ui/Button.vue";
 import router from "@/router";
 const code2 = "import { onMounted } from 'vue' \n\nconst site = () => {\n   const description = \"This site is my portfolio showing some projects that I have been working on\";\n   console.log(description);\n   return;\n}\n\nonMounted(() => {\n   site();\n}"
 const typeValue = ref('')

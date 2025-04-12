@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Tile from "@/components/Tile.vue";
+import Tile from "@/components/tiles/Tile.vue";
 import gameData from "@/helpers/games.ts";
 </script>
 
