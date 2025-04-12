@@ -39,7 +39,6 @@
                     </svg>
                     <h4 @click="hamburgerOn = false"><router-link to="/games">Games</router-link></h4>
                     <h4 @click="hamburgerOn = false"><router-link to="/commissions">Commissions</router-link></h4>
-                    <h4 @click="hamburgerOn = false"><router-link to="/projects">GitHub Projects</router-link></h4>
                     <h4 @click="hamburgerOn = false"><router-link to="/contact">Contact</router-link></h4>
                     <Button :text="undefined" @click="hamburgerOn = false" v-if="env('VITE_APP_ENABLE_BACKEND')"><router-link to="/auth">Login / Register</router-link></Button>
                 </div>

@@ -9,14 +9,6 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    name: 'projects',
-    path: '/projects',
-    component: () => import('../views/ReposView.vue'),
-    meta: {
-      title: 'Projects'
-    }
-  },
-  {
     name: 'games',
     path: '/games',
     component: () => import('../views/GamesView.vue'),
@@ -38,6 +30,22 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/CommissionsView.vue'),
     meta: {
       title: 'Commissions'
+    }
+  },
+  {
+    name: 'commissions-tos',
+    path: '/commissions/tos',
+    component: () => import('../views/commissions/TosView.vue'),
+    meta: {
+      title: 'ToS'
+    }
+  },
+  {
+    name: 'privacy-policy',
+    path: '/privacy-policy',
+    component: () => import('../views/PrivacyPolicyView.vue'),
+    meta: {
+      title: 'Privacy Policy'
     }
   },
   {

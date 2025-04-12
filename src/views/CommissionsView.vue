@@ -4,8 +4,9 @@ import settings from "../../data/settings";
 import Button from "@/components/ui/Button.vue";
 import router from "@/router";
 import artist from '@/assets/img/core-img/artist.png'
-import oldwebsite from '@/assets/img/core-img/oldwebsite.png'
+import old_website from '@/assets/img/core-img/oldwebsite.png'
 import ciasteczkowo from '@/assets/img/core-img/ciasteczkowo.png'
+import maszyna_reloaded from '@/assets/img/core-img/maszyna_reloaded.webp'
 </script>
 
 <template>
@@ -25,7 +26,7 @@ import ciasteczkowo from '@/assets/img/core-img/ciasteczkowo.png'
         </Tile>
         <h2>Projects</h2>
         <div class="grid">
-            <Tile title="Old website" v-motion-slide-visible-left :background-image="oldwebsite" hover-shadow-color="#00459280">
+            <Tile title="Old website" v-motion-slide-visible-left :background-image="old_website" hover-shadow-color="#00459280">
                 <h4>Older version of my website</h4>
                 <p>Technology stack: Vue, SCSS, TypeScript</p>
                 <div class="button-container">
@@ -52,7 +53,7 @@ import ciasteczkowo from '@/assets/img/core-img/ciasteczkowo.png'
                     </Button>
                 </div>
             </Tile>
-            <Tile title="MaSzyna: Reloaded" v-motion-slide-visible-right :background-image="artist" hover-shadow-color="#f7af3260">
+            <Tile title="MaSzyna: Reloaded" v-motion-slide-visible-right :background-image="maszyna_reloaded" hover-shadow-color="#70685b">
                 <h4>Port of MaSzyna Train Simulator into Godot Engine</h4>
                 <p>Technology stack: C++, GDScript, Godot Engine</p>
                 <div class="button-container">
