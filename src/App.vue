@@ -2,13 +2,12 @@
     import Navbar from "@/components/ui/Navbar.vue";
     import MouseAura from "@/components/ui/MouseAura.vue";
     import settings from "../data/settings.ts";
-
-
+    import router from "@/router";
 </script>
 
 <template>
     <MouseAura v-if="settings.mouse_aura" />
-    <Navbar />
+    <Navbar v-if="router.currentRoute.value.name !== 'error_404'"/>
     <main>
         <router-view v-slot="{ Component }">
             <transition name="slide" mode="out-in">

@@ -49,12 +49,9 @@ export default class ApiService {
                 response.json()
                     .then((data: T) => {
                         if (this.logoutResponseCodes.includes(response.status)) {
-
                             if (this.doNotLogOutExceptions.includes(data.type)) {
                                 return reject(this.convertToResponseException(data));
                             }
-                            // this.authStore.logout();
-                            document.cookie = "";
                             return;
                         }
 

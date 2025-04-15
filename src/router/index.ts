@@ -1,11 +1,13 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { env } from "@/helpers/app.ts";
 const routes: Array<RouteRecordRaw> = [
   {
     name: 'home',
     path: '/',
     component: () => import('../views/HomeView.vue'),
     meta: {
-      title: 'Home'
+      title: 'Home',
+      requires_backend: false,
     }
   },
   {
@@ -13,7 +15,17 @@ const routes: Array<RouteRecordRaw> = [
     path: '/games',
     component: () => import('../views/GamesView.vue'),
     meta: {
-      title: 'Games'
+      title: 'Games',
+      requires_backend: false,
+    }
+  },
+  {
+    name: 'profile',
+    path: '/profile',
+    component: () => import('../views/UserProfileView.vue'),
+    meta: {
+      title: 'Profile',
+      requires_backend: true,
     }
   },
   {
@@ -21,7 +33,8 @@ const routes: Array<RouteRecordRaw> = [
     path: '/contact',
     component: () => import('../views/ContactView.vue'),
     meta: {
-      title: 'Contact'
+      title: 'Contact',
+      requires_backend: false,
     }
   },
   {
@@ -29,7 +42,8 @@ const routes: Array<RouteRecordRaw> = [
     path: '/commissions',
     component: () => import('../views/CommissionsView.vue'),
     meta: {
-      title: 'Commissions'
+      title: 'Commissions',
+      requires_backend: false,
     }
   },
   {
@@ -37,7 +51,8 @@ const routes: Array<RouteRecordRaw> = [
     path: '/commissions/tos',
     component: () => import('../views/commissions/TosView.vue'),
     meta: {
-      title: 'ToS'
+      title: 'ToS',
+      requires_backend: false,
     }
   },
   {
@@ -45,7 +60,8 @@ const routes: Array<RouteRecordRaw> = [
     path: '/privacy-policy',
     component: () => import('../views/PrivacyPolicyView.vue'),
     meta: {
-      title: 'Privacy Policy'
+      title: 'Privacy Policy',
+      requires_backend: false,
     }
   },
   {
@@ -53,10 +69,18 @@ const routes: Array<RouteRecordRaw> = [
     path: '/auth',
     component: () => import('../views/AuthView.vue'),
     meta: {
-      title: 'Login / Register'
+      title: 'Login / Register',
+      requires_backend: true,
+    }
+  },
+  {
+    name: "error_404",
+    path: '/:pathMatch(.*)*',
+    component: () => import('../views/errors/404.vue'),
+    meta: {
+      title: '404'
     }
   }
-
 ];
 
 const router = createRouter({
@@ -64,7 +88,17 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to) => {
+router.beforeEach((to, from, next) => {
   document.title = 'New DEV - ' + to.meta.title;
+  if (to.meta.requires_backend && env("VITE_APP_ENABLE_BACKEND", false)) {
+    next()
+  } else {
+    if (!to.meta.requires_backend) {
+      return next()
+    }
+    return next({path: "/"})
+  }
+
+
 })
 export default router;

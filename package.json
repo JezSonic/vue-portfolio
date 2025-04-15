@@ -14,27 +14,24 @@
         "deploy:beta:vue": "vite build && firebase hosting:channel:deploy beta-vue --expires 14d --project api-9176249411662404922-339889"
     },
     "dependencies": {
-        "@highlightjs/vue-plugin": "^2.1.0",
-        "@vueuse/components": "^10.3.0",
-        "@vueuse/core": "^10.3.0",
-        "@vueuse/motion": "^2.1.0",
-        "axios": "1.6.8",
-        "express": "^4.18.2",
-        "open-graph-scraper": "^6.2.2",
-        "vue": "^3.3.4",
-        "vue-router": "^4.2.4",
-        "vue-writer": "^2.0.1"
+        "@highlightjs/vue-plugin": "2.1.0",
+        "@vueuse/components": "13.1.0",
+        "@vueuse/core": "13.1.0",
+        "@vueuse/motion": "3.0.3",
+        "pinia": "3.0.2",
+        "pinia-plugin-persistedstate": "4.2.0",
+        "vue": "3.5.13",
+        "vue-router": "4.5.0",
+        "vue-writer": "2.0.2"
     },
     "devDependencies": {
-        "@types/node": "^20.11.30",
-        "@vitejs/plugin-vue": "^4.2.3",
-        "@vue/cli-plugin-typescript": "^5.0.8",
-        "eslint": "^8.47.0",
-        "eslint-plugin-vue": "^9.17.0",
-        "prettier": "3.0.2",
-        "sass": "^1.72.0",
-        "ts-loader": "^9.5.1",
-        "typescript": "^5.4.2",
-        "vite": "^4.4.6"
+        "@types/node": "22.14.1",
+        "@vitejs/plugin-vue": "5.2.3",
+        "@vue/cli-plugin-typescript": "5.0.8",
+        "prettier": "3.5.3",
+        "sass": "1.86.3",
+        "ts-loader": "9.5.2",
+        "typescript": "5.8.3",
+        "vite": "6.2.6"
     }
 }

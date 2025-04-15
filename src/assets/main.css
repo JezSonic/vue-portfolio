@@ -164,3 +164,9 @@ h1, h2 {
 a, a:hover {
     text-decoration: none !important;
 }
+
+input {
+    border-radius: 16px;
+    padding: 8px 12px;
+    color: black;
+}

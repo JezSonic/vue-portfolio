@@ -24,7 +24,7 @@
 
     button {
         cursor: pointer;
-        background: var(--text-color);
+        background: #FFF;
         color: var(--color1);
         height: max-content;
         padding: 10px 24px;
@@ -33,6 +33,10 @@
         transition: all 0.5s ease-in-out;
         position: relative;
         overflow: hidden;
+
+        &:disabled {
+            background: gray;
+        }
 
         &::after {
             content: '🡒';

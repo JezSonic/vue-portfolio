@@ -1,8 +1,3 @@
-export interface UrlParams {
-    none?: string
-    params?: object
-}
-
 export enum ExceptionType {
     /**
      * Thrown when body payload is incorrectly formatted.
