@@ -1,16 +1,26 @@
 <script lang="ts" setup>
+    import { ref } from "vue";
+
     const props = defineProps({
         text: {
             type: String,
             required: false
+        },
+        displayLoadingText: {
+            type: Boolean,
+            required: false,
+            default: false
         }
     });
+
+    const isLoading = ref<boolean>(false)
 </script>
 
 <template>
-    <button class="button">
-        <span v-if="props.text !== null">{{ props.text }}&nbsp;</span>
-        <span v-if="props.text == null"><slot class="button-text"/>&nbsp;</span>
+    <button class="button" @click="() => {if (props.displayLoadingText) {isLoading = true}}">
+        <span v-if="props.text !== null && !isLoading">{{ props.text }}&nbsp;</span>
+        <span v-if="props.text == null && !isLoading"><slot class="button-text"/>&nbsp;</span>
+        <span v-if="isLoading">Loading...</span>
     </button>
 </template>
 

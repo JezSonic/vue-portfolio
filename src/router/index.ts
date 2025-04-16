@@ -67,9 +67,18 @@ const routes: Array<RouteRecordRaw> = [
   {
     name: 'auth',
     path: '/auth',
-    component: () => import('../views/AuthView.vue'),
+    component: () => import('../views/auth/AuthView.vue'),
     meta: {
       title: 'Login / Register',
+      requires_backend: true,
+    }
+  },
+  {
+    name: 'auth-callback',
+    path: '/auth/:id/callback',
+    component: () => import('../views/auth/AuthCallbackView.vue'),
+    meta: {
+      title: 'OAuth Callback',
       requires_backend: true,
     }
   },

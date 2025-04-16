@@ -39,7 +39,12 @@
             <p><strong>Created at: </strong> {{ timestampToDate(userData.created_at) }}</p>
             <p><strong>Last updated at: </strong> {{ timestampToDate(userData.updated_at) }}</p>
         </div>
-        <p class="info"><strong><i>Information from connected social accounts might be outdated</i></strong></p>
+
+<!--        @TODO: Add ability to connect social accounts to existing account from the profile-->
+<!--        @TODO: Add ability to add password login to only social account-->
+<!--        @TODO: Add password change options-->
+
+        <p class="info" v-if="userData?.google || userData?.github"><strong><i>Information from connected social accounts might be outdated</i></strong></p>
         <div v-if="userData?.google">
             <h2>Connected Google account:</h2>
             <p v-if="userData.google.name"><strong>Name: </strong> {{ userData.google.name }}</p>
