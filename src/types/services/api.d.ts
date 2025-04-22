@@ -26,7 +26,7 @@ export enum ExceptionType {
 }
 
 export interface ExceptionResponse {
-    type: string;
+    type: ExceptionType;
     errors: {
         [key: string]: string[]
     }

@@ -9,6 +9,7 @@
     import { OAuthProvider } from "@/types/services/auth";
     import AuthService from "@/services/authService.ts";
     import { useRoute } from "vue-router";
+    import Loading from "@/components/ui/Loading.vue";
 
     const login_password = ref<string>("");
     const login_email = ref<string>("");
@@ -29,9 +30,7 @@
 
 <template>
     <div>
-        <h2>Hold tight...</h2>
-        <p>Getting your account ready...</p>
-        <p> {{ }}</p>
+        <Loading :loading="true"/>
     </div>
 </template>
 

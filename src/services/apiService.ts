@@ -40,7 +40,7 @@ export default class ApiService {
                 method: method.toUpperCase(),
                 headers: { ...defaultHeaders, ...extraHeaders },
                 body: params ? JSON.stringify(params) : null,
-                credentials: credentialsMode || "omit"
+                credentials: credentialsMode || "include"
             };
 
             const response = await fetch(target, options);

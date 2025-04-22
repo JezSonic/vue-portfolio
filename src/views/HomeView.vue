@@ -23,10 +23,7 @@ typeEffect2()
         <Tile title="Hello there" v-motion-pop-visible-once>
             <template #default>
                 <p>
-                    I’m Karol, a junior full-stack web developer with a passion for bringing websites and web applications to life.
-                    While I have about 2 years of professional experience,
-                    I’ve been coding for much longer and am constantly eager to learn new technologies.
-                    My background includes experience with both front-end and back-end development, as evidenced by the technology stack I’ve included on this page (TypeScript, SCSS, Vue.js).
+                    I'm Karol, a junior full-stack web developer with a passion for designing websites and web applications to fit any taste while I have about {{ new Date().getFullYear() - 2023}} years of professional experience, be it front-end coding for much longer and am constantly eager to learn new technologies. My background includes experience with both front-end and back-end development, as evidenced by the technology stack I've included on this page (TypeScript, SCSS, Vue.js)
                 </p>
                 <p>
                     While web development is my primary focus,
@@ -43,20 +40,17 @@ typeEffect2()
             </template>
         </Tile>
         <div class="tile-separator">
-            <Tile title="Games" v-motion-slide-visible-left :background-image="img" hover-shadow-color="#00459280">
+            <Tile title="Dive into My Games" v-motion-slide-visible-left :background-image="img" hover-shadow-color="#00459280">
                 <p>
-                    All of my games are open-sourced and free to download and modify. On this site you can find links to all my GitHub repositories.
+                    Explore a collection of open-source games I've developed. Ready to play and modify!
                 </p>
                 <p>
-                    You can check my <a href="https://play.google.com/store/apps/dev?id=9176249411662404922" target="_blank" rel="noopener noreferrer">Google Play Developer Page</a> to see my mobile games and projects.
+                    On this site, you can find links to all my GitHub repositories<br/>
+                    You're free to modify them or use their assets/code within your projects
                 </p>
                 <p>
-                    Currently, I'm learning in high school on IT profile, but all my projects, i.g. games and this website are non-school projects.
+                    Technology stack I use for games is: C++, Godot Engine, GDScript, Unity, C#
                 </p>
-                <p>
-                    My most favourite game engines are <a href="https://unity.com/" target="_blank" rel="noreferrer noopener"><strong>Unity Engine</strong></a> and <a href="https://godotengine.com" target="_blank" rel="noreferrer noopener"><strong>Godot Engine</strong></a> .
-                </p>
-
                 <div class="button-container">
                     <Button @click="router.push('/games')" text="Go to Games" />
                 </div>

@@ -1,5 +1,6 @@
 import ApiService from "@/services/apiService.ts";
 import { OAuthProvider } from "@/types/services/auth.d";
+import { useUserStore } from "@/stores/userStore.ts";
 
 export default class AuthService extends ApiService {
     constructor() {
@@ -12,7 +13,32 @@ export default class AuthService extends ApiService {
 
     public static verifyOAuthCallback(provider: string): Promise<{ content: number }> {
         const url = window.location.search; // remove the ?
-        console.log(url);
         return this.get<{ content: number }>(`auth/${provider}/callback` + url);
+    }
+
+    public static logout() {
+        const userStore = useUserStore();
+        this.get<{ content: number }>(`auth/logout`)
+            .then(() => {
+                userStore.logout();
+            });
+        return;
+    }
+
+
+
+    public static register(email: string, name: string, password: string) {
+        return this.post<{ content: number }, { email: string, password: string, name: string }>("auth/register", {
+            email: email,
+            name: name,
+            password: password
+        })
+    };
+
+    public static login(email: string, password: string) {
+        return this.post<{ content: number }, { email: string, password: string }>("auth/login", {
+            email: email,
+            password: password
+        })
     }
 }

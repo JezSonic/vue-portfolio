@@ -3,8 +3,12 @@
     import settings from "../../../data/settings";
     import { env } from "@/helpers/app.ts";
     import Button from "@/components/ui/Button.vue";
+    import { useUserStore } from "@/stores/userStore.ts";
+    import AuthService from "@/services/authService.ts";
+    import router from "@/router";
     const transparent = ref(true);
-    const hamburgerOn = ref(false)
+    const hamburgerOn = ref(false);
+    const userStore = useUserStore();
     const onDocumentScroll = () => {
         transparent.value = window.scrollY === 0;
     };
@@ -40,7 +44,8 @@
                     <h4 @click="hamburgerOn = false"><router-link to="/games">Games</router-link></h4>
                     <h4 @click="hamburgerOn = false"><router-link to="/commissions">Commissions</router-link></h4>
                     <h4 @click="hamburgerOn = false"><router-link to="/contact">Contact</router-link></h4>
-                    <Button :text="undefined" @click="hamburgerOn = false" v-if="env('VITE_APP_ENABLE_BACKEND')"><router-link to="/auth">Login / Register</router-link></Button>
+                    <Button text="Login / Register" @click="hamburgerOn = false; router.push('/auth')" v-if="env('VITE_APP_ENABLE_BACKEND') && !userStore.isLoggedIn()" />
+                    <Button text="Logout" @click="AuthService.logout(); hamburgerOn = false" v-if="env('VITE_APP_ENABLE_BACKEND') && userStore.isLoggedIn()" />
                 </div>
                 <div class="right__open">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" @click="hamburgerOn = !hamburgerOn">

@@ -13,14 +13,15 @@
     const login_email = ref<string>("");
     const register_password = ref<string>("");
     const register_email = ref<string>("");
+    const register_name = ref<string>("");
     const success = ref<boolean>(false);
     const errors = ref<{ [key: string]: string[] } | null>(null);
-
+    const userStore = useUserStore();
+    if (userStore.id !== null ) {
+        router.push("/profile");
+    }
     const login = () => {
-        ApiService.post<{ content: number }, { email: string, password: string }>("auth/login", {
-            email: login_email.value,
-            password: login_password.value
-        })
+        AuthService.login(login_email.value, login_password.value)
             .then((res) => {
                 success.value = true;
                 useUserStore().id = res.content;
@@ -32,11 +33,7 @@
     };
 
     const register = () => {
-        ApiService.post<{ content: number }, { email: string, password: string }>("auth/register", {
-            email: register_email.value,
-            password: register_password.value
-        })
-            .then(() => {
+        AuthService.register(register_email.value, register_name.value, register_password.value).then(() => {
                 success.value = true;
             })
             .catch((e: ExceptionResponse) => {
@@ -63,6 +60,8 @@
         <h2>...or create an account</h2>
         <input v-model="register_email" placeholder="Email..." type="email" />
         <p v-for="(item, index) in errors['email']" v-if="errors !== null && errors['email']" :key="index">{{ item }}</p>
+        <input v-model="register_name" placeholder="Name" type="text" />
+        <p v-for="(item, index) in errors['name']" v-if="errors !== null && errors['name']" :key="index">{{ item }}</p>
         <input v-model="register_password" placeholder="Password..." type="password" />
         <p v-for="(item, index) in errors['password']" v-if="errors !== null && errors['password']" :key="index">{{ item }}</p>
         <Button :disabled="register_email.length == 0 || register_password.length == 0" :text="'Submit'"

@@ -1,16 +1,20 @@
 <script lang="ts" setup>
     import { ref } from "vue";
-    import ApiService from "@/services/apiService.ts";
+    import UserService from "@/services/userService.ts";
     import { useUserStore } from "@/stores/userStore.ts";
     import router from "@/router";
-    import { IUserData } from "@/types/user";
+    import { IUserData } from "@/types/user.d";
+    import Loading from "@/components/ui/Loading.vue";
 
     const userStore = useUserStore();
     if (userStore.id == null) {
         router.push("/auth");
     }
+
+    const notConnectedAccounts = ref<string[]>([]);
+
     const userData = ref<IUserData | null>(null);
-    ApiService.get<IUserData>("user/" + userStore.id)
+    UserService.getUser()
         .then((data) => {
             userData.value = data;
         });
@@ -31,8 +35,9 @@
 <template>
     <div>
         <h1>
-            Your user profile
+            {{userData ? 'Your user profile' : 'Loading...'}}
         </h1>
+        <Loading v-if="!userData" :loading="true"/>
         <div v-if="userData">
             <p><strong>Name: </strong> {{ userData.name }}</p>
             <p><strong>Email: </strong> {{ userData.email }}</p>
