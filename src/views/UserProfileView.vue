@@ -9,12 +9,11 @@
     import Button from "@/components/ui/Button.vue";
     import AuthService from "@/services/authService.ts";
 
+    const error = ref<boolean>(false);
     const userStore = useUserStore();
     if (userStore.id == null) {
         router.push("/auth");
     }
-
-    const notConnectedAccounts = ref<string[]>([]);
 
     const userData = ref<IUserData | null>(null);
     UserService.getUser()
@@ -26,7 +25,9 @@
             if (data.github) {
                 connectedSocialAccounts.value.push(OAuthProvider.GitHub);
             }
-        });
+        }).catch(() => {
+        error.value = true;
+    })
 
     const timestampToDate = (timestamp: string) => {
         const date = new Date(timestamp);
@@ -45,10 +46,10 @@
 
 <template>
     <div>
-        <h1>
+        <h1 v-if="!error">
             {{userData ? 'Your user profile' : 'Loading...'}}
         </h1>
-        <Loading v-if="!userData" :loading="true"/>
+        <Loading v-if="!userData" :loading="true" :error="error"/>
         <div v-if="userData">
             <p><strong>Name: </strong> {{ userData.name }}</p>
             <p><strong>Email: </strong> {{ userData.email }}</p>
@@ -56,7 +57,6 @@
             <p><strong>Last updated at: </strong> {{ timestampToDate(userData.updated_at) }}</p>
         </div>
 
-<!--        @TODO: Add ability to connect social accounts to existing account from the profile-->
 <!--        @TODO: Add ability to add password login to only social account-->
 <!--        @TODO: Add password change options-->
 
@@ -88,7 +88,7 @@
             <p v-if="userData.github.followers"><strong>Followers: </strong> {{ userData.github.followers }}</p>
             <p v-if="userData.github.following"><strong>Following: </strong> {{ userData.github.following }}</p>
 
-            <h3>Connect social accounts</h3>
+            <h3 v-if="connectedSocialAccounts.length == 0">Connect social accounts</h3>
             <Button v-if="!connectedSocialAccounts.includes(OAuthProvider.GitHub)" @click="AuthService.performOAuth(OAuthProvider.GitHub)" text="GitHub" />
             <Button v-if="!connectedSocialAccounts.includes(OAuthProvider.Google)" @click="AuthService.performOAuth(OAuthProvider.Google)" text="Google" />
         </div>

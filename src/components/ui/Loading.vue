@@ -1,14 +1,21 @@
 <script setup lang="ts">
     defineProps<{
         loading?: boolean;
-        error?: string;
+        error?: boolean;
     }>();
 </script>
 
 <template>
     <div class="loading-container" v-if="loading || error">
-        <div v-if="loading" class="loading-spinner"></div>
-        <div v-if="error" class="error-message">{{ error }}</div>
+        <div v-if="loading && !error" class="loading-spinner"></div>
+        <Transition name="fade">
+
+        <div v-if="error" class="error-message">
+            <h1>Oops! Something went wrong</h1>
+            <p>Please a try again in a while or if the issue persists, please report it to me via the <a href="/contact">Contact page</a></p>
+        </div>
+        </Transition>
+
     </div>
 </template>
 
@@ -31,10 +38,15 @@
     }
 
     .error-message {
-        color: #e74c3c;
-        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         text-align: center;
-        font-weight: bold;
+        gap: 6px;
+        font-weight: normal;
+        min-width: 200px;
+        width: 460px;
     }
 
     @keyframes spin {
@@ -45,4 +57,16 @@
             transform: rotate(360deg);
         }
     }
+
+    /* Style dla przejścia "fade" */
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: opacity 0.5s ease;
+    }
+
+    .fade-enter-from,
+    .fade-leave-to {
+        opacity: 0;
+    }
+
 </style>

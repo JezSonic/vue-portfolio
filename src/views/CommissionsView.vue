@@ -28,6 +28,7 @@ import maszyna_reloaded from '@/assets/img/core-img/maszyna_reloaded.webp'
         <div class="grid">
             <Tile title="Old website" v-motion-slide-visible-left :background-image="old_website" hover-shadow-color="#00459280">
                 <h4>Older version of my website</h4>
+                <p><i>This older version of this website is not maintained any longer</i></p>
                 <p>Technology stack: Vue, SCSS, TypeScript</p>
                 <div class="button-container">
                     <Button :text="undefined">

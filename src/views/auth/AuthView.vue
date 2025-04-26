@@ -17,7 +17,7 @@
     const success = ref<boolean>(false);
     const errors = ref<{ [key: string]: string[] } | null>(null);
     const userStore = useUserStore();
-    if (userStore.id !== null ) {
+    if (userStore.id !== null) {
         router.push("/profile");
     }
     const login = () => {

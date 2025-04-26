@@ -7,7 +7,7 @@ import router from "@/router";
 <template>
     <div class="error_404">
         <h1>404 - That's all we know</h1>
-        <p>You have requested unknown resource that has not been found</p>
+        <p>You have requested an unknown resource that has not been found</p>
         <Button class="error_404_button" text="Go to home page" @click="router.push('/')"/>
     </div>
 </template>
@@ -21,7 +21,7 @@ import router from "@/router";
     position: absolute;
     top: 50%; right: 50%;
     animation-play-state: running;
-    animation-name: test;
+    animation-name: anim;
     animation-duration: 16s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
@@ -31,7 +31,7 @@ import router from "@/router";
     }
 }
 
-@keyframes test {
+@keyframes anim {
     0% {
         transform: translate(50%,-50%);
     }

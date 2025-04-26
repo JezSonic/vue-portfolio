@@ -9,7 +9,6 @@ export const env = (key: string, default_val: any | null = null) => {
 };
 
 export const getApiUrl = () => {
-    if (env("VITE_APP_APP_ENV") == 'local') {
-        return "http://localhost:81/api/"
-    }
+    //Can add custom logic there :)
+    return env("VITE_APP_API_URL");
 }
