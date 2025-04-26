@@ -28,7 +28,7 @@ import LinkedInProfileCard from "@/components/linkedIn/LinkedInProfileCard.vue";
 
             <Tile v-motion-slide-visible-bottom title="Telegram" hover-shadow-color="#92550066" :background-image="telegram_img">
                 <p>I do use telegram as well. You're welcome to contact me there too!</p>
-                <a href="https://t.me/Futrzaty">@Futrzasty</a>
+                <a href="https://t.me/Futrzasty">@Futrzasty</a>
             </Tile>
             <LinkedInProfileCard />
         </div>

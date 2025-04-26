@@ -41,4 +41,11 @@ export default class AuthService extends ApiService {
             password: password
         })
     }
+
+    public static performOAuth(provider: OAuthProvider) {
+        this.getOAuthUrl(provider)
+            .then((res) => {
+                window.location.href = res.content;
+            });
+    };
 }

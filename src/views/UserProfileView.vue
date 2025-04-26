@@ -5,6 +5,9 @@
     import router from "@/router";
     import { IUserData } from "@/types/user.d";
     import Loading from "@/components/ui/Loading.vue";
+    import { OAuthProvider } from "@/types/services/auth.d";
+    import Button from "@/components/ui/Button.vue";
+    import AuthService from "@/services/authService.ts";
 
     const userStore = useUserStore();
     if (userStore.id == null) {
@@ -17,6 +20,12 @@
     UserService.getUser()
         .then((data) => {
             userData.value = data;
+            if (data.google) {
+                connectedSocialAccounts.value.push(OAuthProvider.Google);
+            }
+            if (data.github) {
+                connectedSocialAccounts.value.push(OAuthProvider.GitHub);
+            }
         });
 
     const timestampToDate = (timestamp: string) => {
@@ -30,6 +39,8 @@
             second: "numeric"
         });
     };
+
+    const connectedSocialAccounts = ref<OAuthProvider[]>([]);
 </script>
 
 <template>
@@ -77,6 +88,9 @@
             <p v-if="userData.github.followers"><strong>Followers: </strong> {{ userData.github.followers }}</p>
             <p v-if="userData.github.following"><strong>Following: </strong> {{ userData.github.following }}</p>
 
+            <h3>Connect social accounts</h3>
+            <Button v-if="!connectedSocialAccounts.includes(OAuthProvider.GitHub)" @click="AuthService.performOAuth(OAuthProvider.GitHub)" text="GitHub" />
+            <Button v-if="!connectedSocialAccounts.includes(OAuthProvider.Google)" @click="AuthService.performOAuth(OAuthProvider.Google)" text="Google" />
         </div>
     </div>
 </template>
