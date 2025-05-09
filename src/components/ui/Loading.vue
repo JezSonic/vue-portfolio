@@ -7,15 +7,13 @@
 
 <template>
     <div class="loading-container" v-if="loading || error">
-        <div v-if="loading && !error" class="loading-spinner"></div>
+        <div v-if="loading && !error" class="loading-spinner border-t-blue-500 border-t-5 border-5 border-white" />
         <Transition name="fade">
-
         <div v-if="error" class="error-message">
-            <h1>Oops! Something went wrong</h1>
-            <p>Please a try again in a while or if the issue persists, please report it to me via the <a href="/contact">Contact page</a></p>
+            <h1 class="text-white">Oops! Something went wrong</h1>
+            <p class="text-white">Please, try again in a while or if the issue persists, report it to me via the <a href="/contact">Contact page</a></p>
         </div>
         </Transition>
-
     </div>
 </template>
 
@@ -29,10 +27,10 @@
     }
 
     .loading-spinner {
+        margin: 0;
+        padding: 0;
         width: 64px;
         height: 64px;
-        border: 5px solid white;
-        border-top: 5px solid var(--accent-color);
         border-radius: 50%;
         animation: spin 1s linear infinite;
     }

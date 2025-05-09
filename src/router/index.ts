@@ -87,7 +87,8 @@ const routes: Array<RouteRecordRaw> = [
     path: '/:pathMatch(.*)*',
     component: () => import('../views/errors/404.vue'),
     meta: {
-      title: '404'
+      title: '404',
+      requires_backend: false,
     }
   }
 ];

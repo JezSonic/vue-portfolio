@@ -1,11 +1,13 @@
 import ApiService from "@/services/apiService.ts";
-import { OAuthProvider } from "@/types/services/auth.d";
+import type { OAuthProvider } from "@/types/services/auth.d.ts";
 import { useUserStore } from "@/stores/userStore.ts";
+import router from "@/router/index.js";
 
 export default class AuthService extends ApiService {
     constructor() {
         super();
     }
+
 
     public static getOAuthUrl(provider: OAuthProvider): Promise<{ content: string }> {
         return this.get<{ content: string }>(`auth/${provider}`);
@@ -21,6 +23,7 @@ export default class AuthService extends ApiService {
         this.get<{ content: number }>(`auth/logout`)
             .then(() => {
                 userStore.logout();
+                router.push('/')
             });
         return;
     }

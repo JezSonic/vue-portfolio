@@ -16,7 +16,7 @@
         );
     });
 
-    const toFixed = absScroll => absScroll - currentScroll;
+    const toFixed = (absScroll: number) => absScroll - currentScroll;
 </script>
 
 <template>
@@ -28,8 +28,7 @@
                 left: x - width / 2 + 'px',
                 height: height + 'px',
                 width: width + 'px'
-            }"
-        ></div>
+            }"></div>
     </UseMouse>
 </template>
 
@@ -47,7 +46,7 @@
     }
 
     .mouse-aura {
-        z-index: 1;
+        z-index: -100;
         position: fixed;
         background: linear-gradient(
             90deg,

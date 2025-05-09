@@ -1,5 +1,5 @@
 import { env, getApiUrl } from "@/helpers/app.ts";
-import { ExceptionResponse, ExceptionType } from "@/types/services/api.d";
+import { ExceptionResponse, ExceptionType } from "@/types/services/api.d.ts";
 /**
  * Basic API service inherited by all other API Services
  */

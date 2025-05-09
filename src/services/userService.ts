@@ -1,5 +1,5 @@
 import ApiService from "@/services/apiService.ts";
-import { IUserData } from "@/types/user.d";
+import type { IUserData } from "@/types/user.d.ts";
 
 export default class USerService extends ApiService {
     constructor() {

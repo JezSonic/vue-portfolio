@@ -5,8 +5,8 @@ import gameData from "@/helpers/games.ts";
 
 <template>
     <div class="grid">
-        <Tile v-motion-pop-visible-once v-for="(item, index) in gameData" :key="index" :title="item.title" :add-image="true" :image="item.images[0]" badges>
-            {{ item.shortDescription }}
+        <Tile v-for="(item, index) in gameData" :key="index" :title="item.title" :background-image="item.images[0]">
+            <p class="text-white">{{ item.shortDescription }}</p>
         </Tile>
     </div>
 </template>

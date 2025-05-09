@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "dev": "vite",
+        "dev": "vite --host",
         "build": "vite build",
         "preview": "vite preview",
         "format": "prettier . --write",
@@ -14,24 +14,28 @@
         "deploy:beta:vue": "vite build && firebase hosting:channel:deploy beta-vue --expires 14d --project api-9176249411662404922-339889"
     },
     "dependencies": {
-        "@highlightjs/vue-plugin": "2.1.0",
+        "@headlessui/vue": "^1.7.23",
+        "@heroicons/vue": "^2.2.0",
+        "@tailwindcss/vite": "4.1.5",
         "@vueuse/components": "13.1.0",
         "@vueuse/core": "13.1.0",
         "@vueuse/motion": "3.0.3",
         "pinia": "3.0.2",
         "pinia-plugin-persistedstate": "4.2.0",
+        "tailwindcss": "4.1.5",
         "vue": "3.5.13",
         "vue-router": "4.5.1",
         "vue-writer": "2.0.2"
     },
     "devDependencies": {
-        "@types/node": "22.15.2",
+        "@types/node": "22.15.17",
         "@vitejs/plugin-vue": "5.2.3",
         "@vue/cli-plugin-typescript": "5.0.8",
         "prettier": "3.5.3",
         "sass": "1.87.0",
         "ts-loader": "9.5.2",
         "typescript": "5.8.3",
-        "vite": "6.3.3"
-    }
+        "vite": "6.3.5"
+    },
+    "type": "module"
 }

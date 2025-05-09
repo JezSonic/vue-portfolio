@@ -1,7 +1,0 @@
-The settings.js contains a list of settings that are used by the scripts and frontend.
-
-The repos-cache.json contains a list of all the repos, with the name, the preview image, the description, the stars and the url.
-It is updated by the backend server. It should not be updated, I tried to add it to the .gitignore 
-but it can't work since I already commited the file... I will try to find a solution later.
-For now you can use :
-$ git update-index --assume-unchanged data/repos-cache.json

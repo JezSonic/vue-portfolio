@@ -8,7 +8,6 @@
     import { OAuthProvider } from "@/types/services/auth.d";
     import Button from "@/components/ui/Button.vue";
     import AuthService from "@/services/authService.ts";
-
     const error = ref<boolean>(false);
     const userStore = useUserStore();
     if (userStore.id == null) {
@@ -51,12 +50,19 @@
         </h1>
         <Loading v-if="!userData" :loading="true" :error="error"/>
         <div v-if="userData">
-            <p><strong>Name: </strong> {{ userData.name }}</p>
-            <p><strong>Email: </strong> {{ userData.email }}</p>
-            <p><strong>Created at: </strong> {{ timestampToDate(userData.created_at) }}</p>
-            <p><strong>Last updated at: </strong> {{ timestampToDate(userData.updated_at) }}</p>
+            <p class="text-white"><strong>Name: </strong> {{ userData.name }}</p>
+            <p class="text-white"><strong>Email: </strong> {{ userData.email }}</p>
+            <p class="text-white"><strong>Created at: </strong> {{ timestampToDate(userData.created_at) }}</p>
+            <p class="text-white"><strong>Last updated at: </strong> {{ timestampToDate(userData.updated_at) }}</p>
         </div>
 
+        <div class="password-management">
+            <h3>Add a password to your account</h3>
+            <input type="password">
+            <h3>Change password for your account</h3>
+            <input type="password">
+            <input type="password">
+        </div>
 <!--        @TODO: Add ability to add password login to only social account-->
 <!--        @TODO: Add password change options-->
 
@@ -64,9 +70,9 @@
         <div v-if="userData?.google">
             <h2>Connected Google account:</h2>
             <p v-if="userData.google.name"><strong>Name: </strong> {{ userData.google.name }}</p>
-            <p><strong>Email: </strong> {{ userData.google.email }}</p>
+            <p class="text-white"><strong>Email: </strong> {{ userData.google.email }}</p>
             <p v-if="userData.google.nickname"><strong>Nickname: </strong> {{ userData.google.nickname }}</p>
-            <p><strong>Avatar:</strong></p>
+            <p class="text-white"><strong>Avatar:</strong></p>
             <img v-if="userData.google.avatar_url" :src="userData.google.avatar_url" alt="Google Account avatar" />
         </div>
         <div v-if="userData?.github">
@@ -79,9 +85,9 @@
             <p v-if="userData.github.website"><strong>Website: </strong> {{ userData.github.website }}</p>
             <p v-if="userData.github.blog"><strong>Blog: </strong> <a :href="userData.github.blog"> {{userData.github.blog}} </a></p>
             <p v-if="userData.github.location"><strong>Location: </strong> {{ userData.github.location }}</p>
-            <p><strong>Avatar:</strong></p>
+            <p class="text-white"><strong>Avatar:</strong></p>
             <img v-if="userData.github.avatar_url" :src="userData.github.avatar_url" alt="GitHub Account avatar" />
-            <p><strong>Profile url:</strong> <a :href="userData.github.html_url"
+            <p class="text-white"><strong>Profile url:</strong> <a :href="userData.github.html_url"
                                                 target="_blank">{{ userData.github.html_url }}</a></p>
             <p v-if="userData.github.public_repos"><strong>Public repositories: </strong> {{ userData.github.public_repos }}</p>
             <p v-if="userData.github.public_gists"><strong>Public gists: </strong> {{ userData.github.public_gists }}</p>
