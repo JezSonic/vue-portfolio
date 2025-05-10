@@ -60,7 +60,7 @@
             </strong>
             <h4 class="text-white">Google Firebase</h4>
             <p class="text-white">I use Google Firebase services for hosting this website</p>
-            <p class="text-white">Google Firebase has its own Terms of Service at <a href="https://firebase.google.com/terms">https://firebase.google.com/terms</a>
+            <p class="text-white">Google Firebase has its own Terms of Service at <a class="font-semibold text-blue-600 hover:text-blue-500" href="https://firebase.google.com/terms">https://firebase.google.com/terms</a>
             </p>
             <h4 class="text-white">Hosting, domains and other resources must be paid by the customer themselves</h4>
             <h4 class="text-white">How do I accept orders</h4>
@@ -95,7 +95,7 @@
                 transmission over the Internet, or method of electronic storage is 100% secure. While We
                 strive to use commercially acceptable means to protect Your Personal Data, We cannot
                 guarantee its absolute security.</p>
-            <p class="text-white">For more info, please, look at our <a href="/privacy-policy/">Privacy Policy</a></p>
+            <p class="text-white">For more info, please, look at our <a class="font-semibold text-blue-600 hover:text-blue-500" href="/privacy-policy/">Privacy Policy</a></p>
         </Tile>
     </div>
 </template>

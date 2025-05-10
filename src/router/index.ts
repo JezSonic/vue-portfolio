@@ -11,17 +11,8 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    name: 'games',
-    path: '/games',
-    component: () => import('../views/GamesView.vue'),
-    meta: {
-      title: 'Games',
-      requires_backend: false,
-    }
-  },
-  {
     name: 'profile',
-    path: '/profile',
+    path: '/profile/:id',
     component: () => import('../views/UserProfileView.vue'),
     meta: {
       title: 'Profile',

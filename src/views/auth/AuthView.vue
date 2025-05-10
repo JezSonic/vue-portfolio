@@ -23,6 +23,7 @@
             .then((res) => {
                 success.value = true;
                 userStore.id = res.content;
+                userStore.token = res.token
                 router.push("/profile");
             })
             .catch((e: ExceptionResponse) => {
@@ -31,8 +32,9 @@
     };
 
     const register = () => {
-        AuthService.register(email.value, name.value, password.value).then(() => {
+        AuthService.register(email.value, name.value, password.value).then((data) => {
             success.value = true;
+            userStore.token = data.token
         })
             .catch((e: ExceptionResponse) => {
                 errors.value = e.errors;
@@ -82,9 +84,6 @@
                     <div class="flex items-center justify-between">
                         <label class="text-white block text-sm/6 font-medium text-gray-900"
                                for="password">Password</label>
-<!--                        <div v-if="hasAccount" class="text-sm">-->
-<!--                            <a class="font-semibold text-blue-600 hover:text-blue-500" href="#">Forgot password?</a>-->
-<!--                        </div>-->
                     </div>
                     <div class="mt-2">
                         <input id="password" v-model="password" placeholder="Password..." :required="true" autocomplete="current-password"

@@ -15,7 +15,7 @@ export default class AuthService extends ApiService {
 
     public static verifyOAuthCallback(provider: string): Promise<{ content: number }> {
         const url = window.location.search; // remove the ?
-        return this.get<{ content: number }>(`auth/${provider}/callback` + url);
+        return this.get<{ content: number, token: string }>(`auth/${provider}/callback` + url);
     }
 
     public static logout() {
@@ -31,7 +31,7 @@ export default class AuthService extends ApiService {
 
 
     public static register(email: string, name: string, password: string) {
-        return this.post<{ content: number }, { email: string, password: string, name: string }>("auth/register", {
+        return this.post<{ content: number, token: string }, { email: string, password: string, name: string }>("auth/register", {
             email: email,
             name: name,
             password: password
@@ -39,7 +39,7 @@ export default class AuthService extends ApiService {
     };
 
     public static login(email: string, password: string) {
-        return this.post<{ content: number }, { email: string, password: string }>("auth/login", {
+        return this.post<{ content: number, token: string }, { email: string, password: string }>("auth/login", {
             email: email,
             password: password
         })

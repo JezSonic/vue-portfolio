@@ -1,5 +1,6 @@
 import ApiService from "@/services/apiService.ts";
 import type { IUserData } from "@/types/user.d.ts";
+import { useUserStore } from "@/stores/userStore.js";
 
 export default class USerService extends ApiService {
     constructor() {
@@ -7,7 +8,7 @@ export default class USerService extends ApiService {
     }
 
     public static getUser() {
-        return this.get<IUserData>("user")
+        return this.get<IUserData>("user", {'Authorization': `Bearer ${useUserStore().token}`})
     }
 
 

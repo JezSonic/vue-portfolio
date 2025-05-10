@@ -8,14 +8,12 @@
         "preview": "vite preview",
         "format": "prettier . --write",
         "lint": "eslint ./ --fix",
-        "fetch-repos": "node scripts/fetch-repos.js",
-        "serve": "node server/server.js",
         "deploy": "vite build && firebase deploy --only hosting",
-        "deploy:beta:vue": "vite build && firebase hosting:channel:deploy beta-vue --expires 14d --project api-9176249411662404922-339889"
+        "deploy:beta": "vite build && firebase hosting:channel:deploy beta --expires 14d --project api-9176249411662404922-339889"
     },
     "dependencies": {
-        "@headlessui/vue": "^1.7.23",
-        "@heroicons/vue": "^2.2.0",
+        "@headlessui/vue": "1.7.23",
+        "@heroicons/vue": "2.2.0",
         "@tailwindcss/vite": "4.1.5",
         "@vueuse/components": "13.1.0",
         "@vueuse/core": "13.1.0",

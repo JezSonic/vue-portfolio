@@ -5,11 +5,13 @@
     import AuthService from "@/services/authService.ts";
     import { useRoute } from "vue-router";
     import Loading from "@/components/ui/Loading.vue";
+    const userStore = useUserStore()
     const error = ref<boolean>(false);
     onMounted(() => {
         AuthService.verifyOAuthCallback(useRoute().params.id as string)
             .then((res) => {
-                useUserStore().id = res.content;
+                userStore.id = res.content;
+                userStore.token = res.token;
                 router.push("/profile");
             }).catch(() => {
                 error.value = true;

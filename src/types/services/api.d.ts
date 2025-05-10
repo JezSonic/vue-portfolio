@@ -29,5 +29,6 @@ export interface ExceptionResponse {
     type: ExceptionType;
     errors: {
         [key: string]: string[]
-    }
+    };
+    code: number
 }

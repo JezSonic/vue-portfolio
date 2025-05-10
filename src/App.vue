@@ -7,7 +7,7 @@
 <template>
     <MouseAura />
     <Navbar v-if="router.currentRoute.value.name !== 'error_404'"/>
-    <main class="min-h-full place-items-center px-6 py-6 ">
+    <main class="min-h-full place-items-center px-6 py-6 pt-16">
         <router-view v-slot="{ Component }">
             <component :is="Component" />
         </router-view>

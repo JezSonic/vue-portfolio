@@ -20,12 +20,12 @@ import LinkedInProfileCard from "@/components/linkedIn/LinkedInProfileCard.vue";
             </Tile>
             <Tile title="Email" hover-shadow-color="#92550066" :background-image="mail_img">
                 <p class="text-white">Feel free to email me. I'll respond as soon as I will receive the email</p>
-                <a href="mailto:karoltomaszewskimusic@gmail.com">karoltomaszewskimusic@gmail.com</a>
+                <a class="font-semibold text-blue-600 hover:text-blue-500" href="mailto:karoltomaszewskimusic@gmail.com">karoltomaszewskimusic@gmail.com</a>
             </Tile>
 
             <Tile title="Telegram" hover-shadow-color="#92550066" :background-image="telegram_img">
                 <p class="text-white">I do use Telegram as well. You're welcome to contact me there too!</p>
-                <a href="https://t.me/Futrzasty">@Futrzasty</a>
+                <a class="font-semibold text-blue-600 hover:text-blue-500" href="https://t.me/Futrzasty">@Futrzasty</a>
             </Tile>
             <LinkedInProfileCard />
         </div>

@@ -45,7 +45,7 @@ export default class ApiService {
 
             const response = await fetch(target, options);
             const contentType = response.headers.get("Content-Type");
-            if (contentType === "application/json") {
+            if (contentType && contentType.indexOf("application/json") !== -1) {
                 response.json()
                     .then((data: T) => {
                         if (this.logoutResponseCodes.includes(response.status)) {
@@ -70,8 +70,9 @@ export default class ApiService {
 
     private static convertToResponseException(data: any): ExceptionResponse {
         return {
-            type: data.type,
-            errors: data.errors,
+            type: data.content.type,
+            errors: data.content.errors,
+            code: data.content.code
         }
     }
 }

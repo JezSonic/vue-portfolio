@@ -10,5 +10,9 @@ export const env = (key: string, default_val: any | null = null) => {
 
 export const getApiUrl = () => {
     //Can add custom logic there :)
-    return env("VITE_APP_API_URL");
+    if (env("VITE_APP_APP_ENV") == "local") {
+        return env("VITE_APP_API_URL");
+    } else if (env("VITE_APP_APP_ENV") == "production") {
+        return env("VITE_APP_API_URL_PROD",env("VITE_APP_API_URL", ""));
+    }
 }

@@ -61,9 +61,9 @@
                 the
                 Service or from the Service infrastructure itself (for example, the duration of a page visit).</p></li>
             <li class="text-white"><p class="text-white"><strong>Website</strong> refers to New DEV, accessible from <a
-                href="https://newdev.web.app/">https://newdev.web.app/</a>
+                class="font-semibold text-blue-600 hover:text-blue-500" href="https://newdev.web.app/">https://newdev.web.app/</a>
                 and <a
-                    href="https://newdev.pl/">https://newdev.pl/</a></p></li>
+                    class="font-semibold text-blue-600 hover:text-blue-500" href="https://newdev.pl/">https://newdev.pl/</a></p></li>
             <li class="text-white"><p class="text-white"><strong>You</strong> means the individual accessing or using
                 the Service, or the company, or other
                 legal
@@ -112,7 +112,7 @@
             mobile
             device when You go offline, while Session Cookies are deleted as soon as You close your web browser. Learn
             more
-            about cookies: <a href="https://www.termsfeed.com/blog/cookies/" rel="noopener noreferrer" target="_blank">All
+            about cookies: <a  class="font-semibold text-blue-600 hover:text-blue-500" href="https://www.termsfeed.com/blog/cookies/" rel="noopener noreferrer" target="_blank">All
                 About Cookies</a>.</p>
         <p class="text-white">We use both session and persistent Cookies for the purposes set out below:</p>
         <ul>
@@ -333,7 +333,7 @@
         <h1 class="text-white">Contact Us</h1>
         <p class="text-white">If you have any questions about this Privacy Policy, You can contact us:</p>
         <ul>
-            <li class="text-white"><p class="text-white">By visiting <a href="/contact">Contact page</a> on our website
+            <li class="text-white"><p class="text-white">By visiting <a class="font-semibold text-blue-600 hover:text-blue-500" href="/contact">Contact page</a> on our website
             </p></li>
         </ul>
     </div>

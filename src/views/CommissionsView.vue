@@ -14,7 +14,7 @@ import maszyna_reloaded from '@/assets/img/core-img/maszyna_reloaded.webp'
             <template #default>
                 <p class="text-white">
                     I agree on the prices individually with the client.
-                    For payment, and more information, please, reach out to me on discord: dos_cutey (old: DoS#5905) or telegram of mine - <a href="https://t.me/Futrzasty" target="_blank" rel="noopener noreferrer">@Futrzasty</a>
+                    For payment, and more information, please, reach out to me on discord: dos_cutey (old: DoS#5905) or telegram of mine - <a class="font-semibold text-blue-600 hover:text-blue-500" href="https://t.me/Futrzasty" target="_blank" rel="noopener noreferrer">@Futrzasty</a>
                 </p>
                 <p class="text-white">
                     By hiring me to do work, You agree to my ToS.
