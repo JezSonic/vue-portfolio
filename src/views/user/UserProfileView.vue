@@ -2,9 +2,9 @@
     import { ref } from "vue";
     import UserService from "@/services/userService.ts";
     import router from "@/router";
-    import { IUserData } from "@/types/user.d";
+    import type { IUserData } from "@/types/user.d.ts";
     import Loading from "@/components/ui/Loading.vue";
-    import { OAuthProvider } from "@/types/services/auth.d";
+    import { OAuthProvider } from "@/types/services/auth.d.ts";
     const error = ref<boolean>(false);
     const userId = parseInt(router.currentRoute.value.params.id.toString() as string, 10);
     const userData = ref<IUserData | null>(null);
@@ -43,9 +43,9 @@
         </div>
         <div v-else class="text-white w-full">
             <div class="px-4 sm:px-0">
-                <h3 class="text-base/7 font-semibold text-gray-200">{{userData?.name}}'s profile</h3>
+                <h3 class="text-lg font-semibold text-gray-200">{{userData?.name}}'s profile</h3>
             </div>
-            <div class="mt-6 bg-gray-800 rounded-md">
+            <div class="mt-6 bg-gray-800 rounded-lg">
                 <dl class="divide-y divide-gray-500">
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4">
                         <dt class="text-sm/6 font-medium text-gray-500">Full name</dt>

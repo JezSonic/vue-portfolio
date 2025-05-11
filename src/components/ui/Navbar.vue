@@ -58,7 +58,7 @@
                             <MenuButton class="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
                                 <span class="absolute -inset-1.5" />
                                 <span class="sr-only">Open user menu</span>
-                                <img class="size-8 rounded-full" :src="userDefault" alt="" />
+                                <img class="size-8 rounded-full" :src="userStore.avatarSourceUrl || userDefault" alt="" />
                             </MenuButton>
                         </div>
                         <div v-else-if="env('VITE_APP_ENABLE_BACKEND', false)">

@@ -13,9 +13,18 @@ const routes: Array<RouteRecordRaw> = [
   {
     name: 'profile',
     path: '/profile/:id',
-    component: () => import('../views/UserProfileView.vue'),
+    component: () => import('../views/user/UserProfileView.vue'),
     meta: {
       title: 'Profile',
+      requires_backend: true,
+    }
+  },
+  {
+    name: 'settings',
+    path: '/settings',
+    component: () => import('../views/user/AccountSettingsView.vue'),
+    meta: {
+      title: 'Settings',
       requires_backend: true,
     }
   },

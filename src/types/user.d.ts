@@ -7,6 +7,7 @@ export interface IUserData {
     updated_at: string;
     google?: IGoogleUserData;
     github?: IGitHubUserData;
+    profile_settings: IProfileSettings;
 }
 
 export interface IGoogleUserData {
@@ -49,4 +50,9 @@ export interface IGitHubUserData {
     public_gists: number;
     followers: number;
     following: number;
+}
+
+export interface IProfileSettings {
+    is_public: boolean;
+    avatar_source: string;
 }
