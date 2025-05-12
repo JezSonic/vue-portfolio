@@ -71,8 +71,8 @@
                                 <MenuItem v-slot="{ active }">
                                     <a :href="`/profile/${userStore.id}`" :class="[active ? 'bg-gray-100 outline-hidden' : '', 'block px-4 py-2 text-sm text-gray-700']">Your Profile</a>
                                 </MenuItem>
-                                <MenuItem disabled v-slot="{ active }">
-                                    <a href="#" :class="[active ? 'bg-gray-100 outline-hidden' : '', 'block px-4 py-2 text-sm text-gray-700']">Settings</a>
+                                <MenuItem v-slot="{ active }">
+                                    <a href="/settings" :class="[active ? 'bg-gray-100 outline-hidden' : '', 'block px-4 py-2 text-sm text-gray-700']">Settings</a>
                                 </MenuItem>
                                 <MenuItem v-slot="{ active }">
                                     <a href="#" @click="AuthService.logout()" :class="[active ? 'bg-red-100 outline-hidden' : '', 'block px-4 py-2 text-sm text-red-700']">Sign out</a>

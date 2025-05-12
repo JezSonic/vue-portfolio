@@ -55,4 +55,25 @@ export interface IGitHubUserData {
 export interface IProfileSettings {
     is_public: boolean;
     avatar_source: string;
+    theme: string;
+    language: string;
+    notifications: INotificationSettings;
+}
+
+export interface INotificationSettings {
+    email_notifications: boolean;
+    email_marketing: boolean;
+    email_security_alerts: boolean;
+}
+
+export interface ILoginHistory {
+    id: number;
+    ip_address: string;
+    user_agent: string;
+    location: string;
+    timestamp: string;
+}
+
+export interface IProfileUpdateData extends IProfileSettings {
+    name: string
 }

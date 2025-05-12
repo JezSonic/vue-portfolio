@@ -1,7 +1,7 @@
 import ApiService from "@/services/apiService.ts";
 import type { OAuthProvider } from "@/types/services/auth.d.ts";
 import { useUserStore } from "@/stores/userStore.ts";
-import router from "@/router/index.js";
+import router from "@/router/index.ts";
 
 export default class AuthService extends ApiService {
     constructor() {
@@ -51,4 +51,8 @@ export default class AuthService extends ApiService {
                 window.location.href = res.content;
             });
     };
+
+    public static revokeOAuth(provider: OAuthProvider) {
+        return this.post<{ content: boolean }, {}>(`auth/${provider}/revoke`, {}, {'Authorization': `Bearer ${useUserStore().token}`});
+    }
 }

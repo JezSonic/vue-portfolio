@@ -16,7 +16,7 @@
     const userStore = useUserStore();
     const hasAccount = ref<boolean>(true);
     if (userStore.id !== null) {
-        router.push("/profile");
+        router.push("/settings");
     }
     const login = () => {
         AuthService.login(email.value, password.value)
@@ -24,7 +24,6 @@
                 success.value = true;
                 userStore.id = res.content;
                 userStore.token = res.token
-                router.push("/profile");
             })
             .catch((e: ExceptionResponse) => {
                 errors.value = e.errors;

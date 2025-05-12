@@ -68,11 +68,11 @@ import img from '@/assets/img/core-img/linkedinimg.webp'
   &-main {
     margin-left: 1px;
     width: 280px;
-    background-color: #fff;
-    color: #000;
+    background-color: #1f2937; /* Changed to dark background */
+    color: #fff; /* Changed to white text */
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 -1px 1px rgba(0,0,0,.08), 1px 0 1px rgba(0,0,0,.08), -1px 0 1px rgba(0,0,0,.08), 0 1px 1px rgba(0,0,0,.08);
+    box-shadow: 0 -1px 1px rgba(255,255,255,.08), 1px 0 1px rgba(255,255,255,.08), -1px 0 1px rgba(255,255,255,.08), 0 1px 1px rgba(255,255,255,.08);
     padding: 0;
   }
 
@@ -88,7 +88,7 @@ import img from '@/assets/img/core-img/linkedinimg.webp'
     width: 1px !important;
   }
   &-header {
-    background-color: #e9e5df !important;
+    background-color: #111827 !important; /* Changed to darker background */
     padding: 12px 16px;
     margin: 0;
     border: 0;
@@ -131,25 +131,25 @@ import img from '@/assets/img/core-img/linkedinimg.webp'
         font-size: 1rem;
         line-height: 1.5;
         font-weight: 550;
-        color: rgba(0, 0, 0, .9) !important;
+        color: #fff !important; /* Changed to white */
       }
     }
 
     &-about {
       padding: 0 0 4px;
       font-weight: 400;
-      color: rgba(0, 0, 0, .9) !important;
+      color: #d1d5db !important; /* Changed to light gray */
     }
 
     &-company, &-company-link {
       line-height: 1.33333;
       font-weight: 400;
-      color: rgba(0, 0, 0, .9) !important;
+      color: #d1d5db !important; /* Changed to light gray */
     }
 
     &-btn {
       margin: 4px 0 12px;
-      background-color: transparent;
+      background-color: #2563eb; /* Changed to blue-600 */
       border: 0;
       box-sizing: border-box;
       cursor: pointer;
@@ -169,15 +169,13 @@ import img from '@/assets/img/core-img/linkedinimg.webp'
       transition-timing-function: cubic-bezier(0,0,.2,1);
       vertical-align: middle;
       z-index: 0;
-      box-shadow: inset 0 0 0 1px #0073b1, inset 0 0 0 2px transparent, inset 0 0 0 1px transparent !important;
       border-radius: 24px;
-      color: #0a66c2 !important;
+      color: #ffffff !important; /* Changed to white */
     }
 
     &-btn:hover {
-      background-color: rgba(152, 216, 244, .25) !important;
-      color: #006097 !important;
-      box-shadow: inset 0 0 0 1px #0073b1, inset 0 0 0 2px #006097, inset 0 0 0 1px transparent !important;
+      background-color: #3b82f6 !important; /* Changed to blue-500 */
+      color: #ffffff !important; /* Changed to white */
     }
   }
 }
