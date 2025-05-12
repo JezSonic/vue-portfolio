@@ -1,6 +1,6 @@
 import ApiService from "@/services/apiService.ts";
-import type { IProfileSettings, IUserData } from "@/types/user.d.ts";
-import { useUserStore } from "@/stores/userStore.js";
+import type { ILoginHistory, INotificationSettings, IProfileUpdateData, IUserData } from "@/types/user.d.ts";
+import { useUserStore } from "@/stores/userStore.ts";
 
 export default class USerService extends ApiService {
     constructor() {
@@ -16,7 +16,23 @@ export default class USerService extends ApiService {
         return this.get<IUserData>(`user/${id}`)
     }
 
-    public static updateProfileSettings(userId: number, profileSettings: IProfileSettings) {
-        return this.put<{content: boolean}, IProfileSettings>(`user/${userId}`, profileSettings, {'Authorization': `Bearer ${useUserStore().token}`})
+    public static update(data: IProfileUpdateData) {
+        return this.patch<{content: boolean}, IProfileUpdateData>(`user`, data, {'Authorization': `Bearer ${useUserStore().token}`})
+    }
+
+    public static getLoginHistory(userId: number) {
+        return this.get<ILoginHistory[]>(`user/${userId}/login-history`, {'Authorization': `Bearer ${useUserStore().token}`})
+    }
+
+    public static updateNotificationSettings(userId: number, notificationSettings: INotificationSettings) {
+        return this.put<{content: boolean}, INotificationSettings>(
+            `user/${userId}/notifications`, 
+            notificationSettings, 
+            {'Authorization': `Bearer ${useUserStore().token}`}
+        )
+    }
+
+    public static exportUserData(userId: number) {
+        return this.get<{content: string}>(`user/${userId}/export`, {'Authorization': `Bearer ${useUserStore().token}`})
     }
 }

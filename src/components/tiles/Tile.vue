@@ -13,6 +13,11 @@
         badges: {
             type: Boolean,
             default: false,
+        },
+        textClass: {
+            type: String,
+            default: null,
+            required: false
         }
     });
     
@@ -20,7 +25,7 @@
 
 <template>
     <div :class="`rounded-xl px-6 py-8 shadow-sm ${backgroundImage == null ? 'bg-gray-800' : 'background-image'}`">
-        <div :class="`${props.badges == true ? 'text__badges' : 'text'}`">
+        <div :class="`${props.badges == true ? 'text__badges' : 'text'} ${textClass}`">
             <h2 class="text-2xl/7 font-display font-medium text-blue-600">{{ props.title }}</h2>
             <slot name="default" />
             <div class="badges" v-if="badges">

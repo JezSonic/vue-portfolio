@@ -6,12 +6,25 @@
         bg_color: { default: "rgba(255, 255, 255, .1)" },
         text_color: { default: "white" }
     });
+
+    // Convert icon string to FontAwesome format
+    const getIconArray = (iconName: string) => {
+        // Remove 'fa-' prefix if present
+        const name = iconName.startsWith('fa-') ? iconName.substring(3) : iconName;
+
+        // Determine if it's a brand icon or a solid icon
+        const prefix = ['vuejs', 'php', 'laravel', 'node-js', 'docker', 'sass', 'js', 'html5', 'css3-alt', 'git-alt', 'wordpress', 'react', 'google', 'github'].includes(name)
+            ? 'fab' 
+            : 'fas';
+
+        return [prefix, name];
+    };
 </script>
 
 <template>
     <a :href="link">
         <p :style="{ backgroundColor: bg_color, color: text_color }">
-            <i :class="['fa', icon]"></i>{{ text }}
+            <font-awesome-icon :icon="getIconArray(icon)" /> {{ text }}
         </p>
     </a>
 </template>

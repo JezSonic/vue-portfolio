@@ -12,7 +12,7 @@
             .then((res) => {
                 userStore.id = res.content;
                 userStore.token = res.token;
-                router.push("/profile");
+                router.push(`/settings`);
             }).catch(() => {
                 error.value = true;
         })

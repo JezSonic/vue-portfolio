@@ -6,11 +6,31 @@ import router from "./router/index.js";
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createPinia } from "pinia";
 import { MotionPlugin } from '@vueuse/motion'
+
+// Import FontAwesome core
+import { library } from '@fortawesome/fontawesome-svg-core'
+// Import FontAwesome component
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+// Import specific icons
+import { faCode, faLink, faDatabase, faGamepad, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { 
+    faVuejs, faPhp, faLaravel, faNodeJs, faDocker, 
+    faSass, faJs, faHtml5, faCss3Alt, faGitAlt, faGoogle, faReact, faWordpress, faDiscord, faLinkedin, faTelegram, faGithub
+} from '@fortawesome/free-brands-svg-icons'
+
+// Add icons to the library
+library.add(
+    faCode, faLink, faVuejs, faPhp, faLaravel, 
+    faNodeJs, faDocker, faSass, faJs, faHtml5, 
+    faCss3Alt, faGitAlt, faGoogle, faReact, faWordpress, faDatabase, faGamepad, faDiscord, faLinkedin, faEnvelope, faTelegram, faGithub
+)
+
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
-createApp(App)
-    .use(router)
+const app = createApp(App)
+app.component('font-awesome-icon', FontAwesomeIcon)
+app.use(router)
     .use(MotionPlugin)
     .use(pinia)
     .mount("#app");
