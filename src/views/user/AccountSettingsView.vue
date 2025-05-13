@@ -6,7 +6,7 @@
     import Loading from "@/components/ui/Loading.vue";
     import { OAuthProvider } from "@/types/services/auth.d.ts";
     import { useUserStore } from "@/stores/userStore.js";
-    import userDefault from "@/assets/img/core-img/userDefault.png";
+    import userDefault from "@/assets/profile/userDefault.png";
     // User data and error handling
     const userStore = useUserStore();
     const error = ref<boolean>(false);
@@ -380,7 +380,7 @@
 
             <!-- Mobile Tab Dropdown -->
             <div class="md:hidden mb-4">
-                <div class="relative">
+                <div class="relative z-0">
                     <button
                         class="w-full flex items-center justify-between px-4 py-2 bg-gray-800 border border-gray-700 rounded-md text-gray-200 cursor-pointer"
                         @click="isMobileMenuOpen = !isMobileMenuOpen"
@@ -422,7 +422,7 @@
                     <div class="bg-gray-800 rounded-lg shadow">
                         <div class="p-4">
                             <h3 class="text-sm font-medium text-gray-400 mb-3">Settings</h3>
-                            <nav class="space-y-1">
+                            <nav>
                                 <button
                                     v-for="tab in tabs"
                                     :key="tab.id"
@@ -472,14 +472,17 @@
                                             <dt class="text-sm font-medium text-gray-400">Full name</dt>
                                             <dd class="mt-1 text-sm text-gray-300 sm:col-span-2 sm:mt-0">
                                                 <div v-if="!isEditingName" class="flex items-center">
-                                                    <span>{{ userData?.name }}</span>
-                                                    <button class="ml-2 text-blue-500 hover:text-blue-400"
+                                                    <span class="truncate max-w-[200px] sm:max-w-[300px] md:max-w-full">{{ userData?.name }}</span>
+                                                    <button class="ml-2 text-blue-500 hover:text-blue-400 flex-shrink-0"
                                                             @click="startEditName">
                                                         <svg class="h-4 w-4" fill="none"
-                                                             stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-linecap="round"
-                                                                  stroke-linejoin="round"
-                                                                  stroke-width="2" />
+                                                             stroke="currentColor" viewBox="0 0 24 24"
+                                                             xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                                                                stroke-linecap="round"
+                                                                stroke-linejoin="round"
+                                                                stroke-width="2" />
                                                         </svg>
                                                     </button>
                                                 </div>
@@ -492,7 +495,8 @@
                                                     <button class="ml-2 text-green-500 hover:text-green-400"
                                                             @click="saveName">
                                                         <svg class="h-5 w-5" fill="none"
-                                                             stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                             stroke="currentColor" viewBox="0 0 24 24"
+                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M5 13l4 4L19 7" stroke-linecap="round"
                                                                   stroke-linejoin="round" stroke-width="2" />
                                                         </svg>
@@ -500,7 +504,8 @@
                                                     <button class="ml-2 text-red-500 hover:text-red-400"
                                                             @click="cancelEditName">
                                                         <svg class="h-5 w-5" fill="none"
-                                                             stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                             stroke="currentColor" viewBox="0 0 24 24"
+                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round"
                                                                   stroke-linejoin="round" stroke-width="2" />
                                                         </svg>
@@ -512,11 +517,11 @@
                                             <dt class="text-sm font-medium text-gray-400">Email address</dt>
                                             <dd class="mt-1 text-sm text-gray-300 sm:col-span-2 sm:mt-0">
                                                 <div class="flex items-center">
-                                                    <span>{{ userData?.email }}</span>
+                                                    <span class="truncate max-w-[200px] sm:max-w-[300px] md:max-w-full">{{ userData?.email }}</span>
                                                     <span v-if="userData?.email_verified_at"
-                                                          class="ml-2 px-2 py-0.5 bg-green-900 text-green-300 rounded-full text-xs">Verified</span>
+                                                          class="ml-2 px-2 py-0.5 bg-green-900 text-green-300 rounded-full text-xs flex-shrink-0">Verified</span>
                                                     <span v-else
-                                                          class="ml-2 px-2 py-0.5 bg-yellow-900 text-yellow-300 rounded-full text-xs">Not verified</span>
+                                                          class="ml-2 px-2 py-0.5 bg-yellow-900 text-yellow-300 rounded-full text-xs flex-shrink-0">Not verified</span>
                                                 </div>
                                             </dd>
                                         </div>
@@ -571,14 +576,18 @@
 
                                 <div class="space-y-2">
                                     <label class="flex items-center space-x-3">
-                                        <input v-model="userStore.avatarSource" class="form-radio h-4 w-4 text-blue-600 bg-gray-700 border-gray-600 focus:ring-blue-500" type="radio"
+                                        <input v-model="userStore.avatarSource"
+                                               class="form-radio h-4 w-4 text-blue-600 bg-gray-700 border-gray-600 focus:ring-blue-500"
+                                               type="radio"
                                                value="auto">
                                         <span class="text-sm text-gray-300">Automatic (use first available)</span>
                                     </label>
 
                                     <label :class="{'opacity-50': !userData?.google?.avatar_url}"
                                            class="flex items-center space-x-3">
-                                        <input v-model="userStore.avatarSource" :disabled="!userData?.google?.avatar_url" class="form-radio h-4 w-4 text-blue-600 bg-gray-700 border-gray-600 focus:ring-blue-500"
+                                        <input v-model="userStore.avatarSource"
+                                               :disabled="!userData?.google?.avatar_url"
+                                               class="form-radio h-4 w-4 text-blue-600 bg-gray-700 border-gray-600 focus:ring-blue-500"
                                                type="radio"
                                                value="google">
                                         <span class="text-sm text-gray-300">Google</span>
@@ -587,7 +596,9 @@
 
                                     <label :class="{'opacity-50': !userData?.github?.avatar_url}"
                                            class="flex items-center space-x-3">
-                                        <input v-model="userStore.avatarSource" :disabled="!userData?.github?.avatar_url" class="form-radio h-4 w-4 text-blue-600 bg-gray-700 border-gray-600 focus:ring-blue-500"
+                                        <input v-model="userStore.avatarSource"
+                                               :disabled="!userData?.github?.avatar_url"
+                                               class="form-radio h-4 w-4 text-blue-600 bg-gray-700 border-gray-600 focus:ring-blue-500"
                                                type="radio"
                                                value="github">
                                         <span class="text-sm text-gray-300">GitHub</span>
@@ -595,7 +606,9 @@
                                     </label>
 
                                     <label class="flex items-center space-x-3">
-                                        <input v-model="userStore.avatarSource" class="form-radio h-4 w-4 text-blue-600 bg-gray-700 border-gray-600 focus:ring-blue-500" type="radio"
+                                        <input v-model="userStore.avatarSource"
+                                               class="form-radio h-4 w-4 text-blue-600 bg-gray-700 border-gray-600 focus:ring-blue-500"
+                                               type="radio"
                                                value="default">
                                         <span class="text-sm text-gray-300">Default avatar</span>
                                     </label>
@@ -631,7 +644,8 @@
                                 <li class="py-4 flex justify-between items-center">
                                     <div class="flex items-center">
                                         <svg class="h-6 w-6 text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                                            <path clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"
+                                            <path clip-rule="evenodd"
+                                                  d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"
                                                   fill-rule="evenodd" />
                                         </svg>
                                         <div class="ml-3">
@@ -789,20 +803,20 @@
                             </div>
                             <div v-else>
                                 <h3 class="text-sm font-medium text-gray-400 mb-3">Recent Logins</h3>
-                                <div class="overflow-x-auto">
+                                <div class="overflow-x-auto -mx-6 sm:mx-0">
                                     <table class="min-w-full divide-y divide-gray-700">
                                         <thead>
                                         <tr>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                                            <th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                                                 Date & Time
                                             </th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                                            <th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                                                 IP Address
                                             </th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                                            <th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                                                 Location
                                             </th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                                            <th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                                                 Device
                                             </th>
                                         </tr>
@@ -810,16 +824,16 @@
                                         <tbody class="divide-y divide-gray-700">
                                         <tr v-for="(login, index) in loginHistory" :key="index"
                                             class="hover:bg-gray-700">
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                                            <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                                                 {{ timestampToDate(login.timestamp) }}
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                                            <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-[80px] sm:max-w-[150px] truncate">
                                                 {{ login.ip_address }}
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                                            <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-[80px] sm:max-w-[150px] truncate">
                                                 {{ login.location }}
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                                            <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-[100px] sm:max-w-[200px] md:max-w-[300px] truncate">
                                                 {{ login.user_agent }}
                                             </td>
                                         </tr>

@@ -40,7 +40,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     name: 'commissions',
     path: '/commissions',
-    component: () => import('../views/CommissionsView.vue'),
+    component: () => import('../views/commissions/CommissionsView.vue'),
     meta: {
       title: 'Commissions',
       requires_backend: false,

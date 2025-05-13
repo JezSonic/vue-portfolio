@@ -2,10 +2,9 @@ import "./assets/main.css";
 
 import { createApp } from "vue";
 import App from "./App.vue";
-import router from "./router/index.js";
+import router from "./router/index";
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createPinia } from "pinia";
-import { MotionPlugin } from '@vueuse/motion'
 
 // Import FontAwesome core
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -31,6 +30,5 @@ pinia.use(piniaPluginPersistedstate)
 const app = createApp(App)
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.use(router)
-    .use(MotionPlugin)
     .use(pinia)
     .mount("#app");

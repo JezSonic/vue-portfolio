@@ -3,10 +3,10 @@ import Tile from "@/components/tiles/Tile.vue";
 import Button from "@/components/ui/Button.vue";
 import router from "@/router";
 import Badge from "@/components/badges/Badge.vue";
-import artist from '@/assets/img/core-img/artist.png'
-import old_website from '@/assets/img/core-img/oldwebsite.png'
-import ciasteczkowo from '@/assets/img/core-img/ciasteczkowo.png'
-import maszyna_reloaded from '@/assets/img/core-img/maszyna_reloaded.webp'
+import artist from '@/assets/projects/artist.png'
+import old_website from '@/assets/projects/oldwebsite.png'
+import ciasteczkowo from '@/assets/projects/ciasteczkowo.png'
+import maszyna_reloaded from '@/assets/projects/maszyna_reloaded.webp'
 </script>
 
 <template>

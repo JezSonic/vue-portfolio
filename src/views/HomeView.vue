@@ -24,7 +24,7 @@ import Badge from "@/components/badges/Badge.vue";
                 </div>
             </div>
             <div class="md:w-1/2 flex justify-center">
-                <img src="@/assets/img/core-img/1692166119791.webp" alt="Karol - Web Developer" class="rounded-full w-64 h-64 object-cover border-4 border-blue-600 shadow-lg">
+                <img src="@/assets/profile/linkedin_avatar.webp" alt="Karol - Web Developer" class="rounded-full w-64 h-64 object-cover border-4 border-blue-600 shadow-lg">
             </div>
         </div>
 
@@ -79,7 +79,7 @@ import Badge from "@/components/badges/Badge.vue";
             <template #default>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                     <div class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
-                        <img src="@/assets/img/core-img/oldwebsite.png" alt="Project Screenshot" class="w-full h-48 object-cover">
+                        <img src="@/assets/projects/oldwebsite.png" alt="Project Screenshot" class="w-full h-48 object-cover">
                         <div class="p-4">
                             <h3 class="text-xl font-semibold text-blue-500 mb-2">Previous Portfolio</h3>
                             <p class="text-gray-300 mb-4">My previous portfolio website showcasing my earlier work and skills.</p>
@@ -90,7 +90,7 @@ import Badge from "@/components/badges/Badge.vue";
                         </div>
                     </div>
                     <div class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
-                        <img src="@/assets/img/core-img/ciasteczkowo.png" alt="Project Screenshot" class="w-full h-48 object-cover">
+                        <img src="@/assets/projects/ciasteczkowo.png" alt="Project Screenshot" class="w-full h-48 object-cover">
                         <div class="p-4">
                             <h3 class="text-xl font-semibold text-blue-500 mb-2">Ciasteczkowo</h3>
                             <p class="text-gray-300 mb-4">A web application for a bakery business with online ordering capabilities.</p>

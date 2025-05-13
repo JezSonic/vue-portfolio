@@ -6,7 +6,7 @@
     import Loading from "@/components/ui/Loading.vue";
     import { OAuthProvider } from "@/types/services/auth.d.ts";
     import Badge from "@/components/badges/Badge.vue";
-    import userDefault from "@/assets/img/core-img/userDefault.png";
+    import userDefault from "@/assets/profile/userDefault.png";
     import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
     const error = ref<boolean>(false);
@@ -64,7 +64,7 @@
             <!-- Profile Header -->
             <div class="bg-gradient-to-r from-blue-900 to-purple-900 rounded-t-lg p-6 shadow-lg">
                 <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
-                    <div class="relative">
+                    <div class="relative z-0">
                         <img 
                             :src="avatarUrl" 
                             alt="Profile picture" 
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <div class="text-center md:text-left">
-                        <h1 class="text-3xl font-bold text-white mb-2">{{ userData?.name }}</h1>
+                        <h1 class="text-3xl font-bold text-white mb-2 truncate max-w-full">{{ userData?.name }}</h1>
                         <div class="flex flex-wrap justify-center md:justify-start gap-2 mb-4">
                             <Badge 
                                 v-if="connectedSocialAccounts.includes(OAuthProvider.Google)" 
@@ -95,10 +95,11 @@
                                 text_color="#ffffff"
                             />
                         </div>
-                        <p class="text-gray-300">
-                            <i class="fa fa-envelope mr-2"></i>{{ userData?.email }}
-                            <span v-if="userData?.email_verified_at" class="ml-2 px-2 py-0.5 bg-green-900 text-green-300 rounded-full text-xs">Verified</span>
-                            <span v-else class="ml-2 px-2 py-0.5 bg-yellow-900 text-yellow-300 rounded-full text-xs">Not verified</span>
+                        <p class="text-gray-300 flex items-center flex-wrap">
+                            <i class="fa fa-envelope mr-2 flex-shrink-0"></i>
+                            <span class="truncate max-w-[200px] sm:max-w-[300px] md:max-w-[400px]">{{ userData?.email }}</span>
+                            <span v-if="userData?.email_verified_at" class="ml-2 px-2 py-0.5 bg-green-900 text-green-300 rounded-full text-xs flex-shrink-0">Verified</span>
+                            <span v-else class="ml-2 px-2 py-0.5 bg-yellow-900 text-yellow-300 rounded-full text-xs flex-shrink-0">Not verified</span>
                         </p>
                     </div>
                 </div>
@@ -118,11 +119,11 @@
                             <div class="space-y-3">
                                 <div>
                                     <p class="text-sm font-medium text-gray-400">Full Name</p>
-                                    <p class="text-gray-200">{{ userData?.name }}</p>
+                                    <p class="text-gray-200 truncate max-w-full">{{ userData?.name }}</p>
                                 </div>
                                 <div>
                                     <p class="text-sm font-medium text-gray-400">Email Address</p>
-                                    <p class="text-gray-200">{{ userData?.email }}</p>
+                                    <p class="text-gray-200 truncate max-w-full">{{ userData?.email }}</p>
                                 </div>
                             </div>
                         </div>
@@ -172,9 +173,9 @@
                                 <div class="flex-shrink-0 h-12 w-12 rounded-full bg-white flex items-center justify-center">
                                     <font-awesome-icon class="text-2xl" style="color: #DB4437;" :icon="['fab', 'google']" />
                                 </div>
-                                <div class="ml-4">
+                                <div class="ml-4 overflow-hidden">
                                     <h3 class="text-lg font-medium text-gray-300">Google</h3>
-                                    <p class="text-sm text-gray-400">{{ userData?.google?.email }}</p>
+                                    <p class="text-sm text-gray-400 truncate max-w-[200px] sm:max-w-full">{{ userData?.google?.email }}</p>
                                 </div>
                             </div>
                         </div>
@@ -185,11 +186,11 @@
                                 <div class="flex-shrink-0 h-12 w-12 rounded-full bg-gray-900 flex items-center justify-center">
                                     <font-awesome-icon class="text-2xl text-white" :icon="['fab', 'github']" />
                                 </div>
-                                <div class="ml-4">
+                                <div class="ml-4 overflow-hidden">
                                     <h3 class="text-lg font-medium text-gray-300">GitHub</h3>
-                                    <p class="text-sm text-gray-400">{{ userData?.github?.login }}</p>
-                                    <p class="text-sm text-gray-400" v-if="userData?.github?.location">
-                                        <i class="fa fa-map-marker-alt mr-1"></i>{{ userData?.github?.location }}
+                                    <p class="text-sm text-gray-400 truncate max-w-[200px] sm:max-w-full">{{ userData?.github?.login }}</p>
+                                    <p class="text-sm text-gray-400 truncate max-w-[200px] sm:max-w-full" v-if="userData?.github?.location">
+                                        <i class="fa fa-map-marker-alt mr-1 flex-shrink-0"></i>{{ userData?.github?.location }}
                                     </p>
                                 </div>
                             </div>

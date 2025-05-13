@@ -2,8 +2,8 @@
     import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
     import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
     import router from "@/router";
-    import logo from "@/assets/img/core-img/logo.png";
-    import userDefault from "@/assets/img/core-img/userDefault.png";
+    import logo from "@/assets/icons/logo.png";
+    import userDefault from "@/assets/profile/userDefault.png";
     import { onMounted, ref } from "vue";
     import { useUserStore } from "@/stores/userStore.js";
     import Button from "@/components/ui/Button.vue";
@@ -29,12 +29,12 @@
 </script>
 
 <template>
-    <Disclosure as="nav" v-slot="{ open }" :class="[!transparent ? 'bg-transparent shadow-sm backdrop-blur-xs transparent' : '', 'top-0', 'left-0', 'fixed', 'w-full']">
+    <Disclosure as="nav" v-slot="{ open }" :class="[!transparent ? 'bg-transparent shadow-sm backdrop-blur-xs transparent' : 'z-100', 'top-0', 'left-0', 'fixed', 'w-full']">
         <div :class="`mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ${open ? ' bg-gray-800' : ''}`">
             <div class="relative flex h-16 items-center justify-between">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                     <!-- Mobile menu button-->
-                    <DisclosureButton class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
+                    <DisclosureButton class="relative z-100 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
                         <span class="absolute -inset-0.5" />
                         <span class="sr-only">Open main menu</span>
                         <Bars3Icon v-if="!open" class="block size-6" aria-hidden="true" />
@@ -94,6 +94,7 @@
 
 <style scoped lang="scss">
     .transparent {
+        z-index: 100;
         position: fixed;
         border-bottom: 1px solid rgba(255, 255, 255, .2);
         background-color: #00000080;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import img from '@/assets/img/core-img/linkedinimg.webp'
+import img from '@/assets/profile/linkedin_avatar.webp'
 </script>
 
 <template>
