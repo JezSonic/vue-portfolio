@@ -392,6 +392,7 @@
       "table": {
         "dateTime": "Date & Time",
         "ipAddress": "IP Address",
+        "loginMethod": "Login Method",
         "location": "Location",
         "device": "Device"
       }

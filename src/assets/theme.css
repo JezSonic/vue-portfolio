@@ -65,7 +65,7 @@
 }
 
 /* Additional light theme overrides for AccountSettingsView */
-.light .divide-gray-700 > :not([hidden]) ~ :not([hidden]) {
+.light .divide-gray-700 > * {
   border-color: var(--border-color);
 }
 

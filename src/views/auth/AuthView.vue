@@ -8,6 +8,7 @@
     import logo from "@/assets/icons/logo.png";
     import Button from "@/components/ui/Button.vue";
     import { useI18n } from "vue-i18n";
+import ApiService from "@/services/apiService";
 
     const password = ref<string>("");
     const email = ref<string>("");
@@ -21,21 +22,25 @@
         router.push("/settings");
     }
     const login = () => {
-        AuthService.login(email.value, password.value)
-            .then((res) => {
-                success.value = true;
-                userStore.id = res.content;
-                userStore.token = res.token
-            })
-            .catch((e: ExceptionResponse) => {
-                errors.value = e.errors;
-            });
+        ApiService.getIP().then((data) => {
+            AuthService.login(email.value, password.value, data.ip)
+                .then((res) => {
+                    success.value = true;
+                    userStore.id = res.content;
+                    userStore.token = res.token
+                    router.push('/settings')
+                })
+                .catch((e: ExceptionResponse) => {
+                    errors.value = e.errors;
+                });
+        })
     };
 
     const register = () => {
         AuthService.register(email.value, name.value, password.value).then((data) => {
             success.value = true;
             userStore.token = data.token
+            router.push('/settings')
         })
             .catch((e: ExceptionResponse) => {
                 errors.value = e.errors;
@@ -63,8 +68,8 @@
                     </div>
                 </div>
 
-                <div v-if="!hasAccount">
-                    <label class="!text-white block text-sm/6 font-medium" for="name">{{ t('authView.form.nameLabel') }}</label>
+                <div v-if="!hasAccount">{{ t('authView.form.nameLabel') }}
+                    <label class="!text-white block text-sm/6 font-medium" for="name"></label>
                     <div class="mt-2">
                         <input id="name" v-model="name" :required="true" autocomplete="name" class="block w-full rounded-md dark:bg-gray-700 bg-white px-3 py-1.5 text-base dark:text-white text-gray-900 outline-1 -outline-offset-1 outline-gray-300 dark:placeholder:text-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"
                                name="name"

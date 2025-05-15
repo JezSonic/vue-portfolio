@@ -10,9 +10,9 @@
     import userDefault from "@/assets/profile/userDefault.png";
     import i18n from "@/i18n";
     import { useI18n } from "vue-i18n";
-    
+
     const { t } = useI18n();
-    
+
     // User data and error handling
     const userStore = useUserStore();
     const themeStore = useThemeStore();
@@ -208,9 +208,9 @@
         loadingHistory.value = true;
         historyError.value = false;
 
-        UserService.getLoginHistory(userId)
+        UserService.getLoginHistory()
             .then((data) => {
-                loginHistory.value = data;
+                loginHistory.value = data.content;
                 loadingHistory.value = false;
             })
             .catch(() => {
@@ -377,10 +377,10 @@
             <Loading :error="error" :loading="loading"
                      :error-text="t('accountSettingsView.error.notFound')" />
         </div>
-        <div v-else class="text-white w-full max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div v-else class="!text-white w-full max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
             <div class="mb-8">
-                <h1 class="text-2xl font-bold text-gray-100">{{ t('accountSettingsView.title') }}</h1>
-                <p class="mt-2 text-sm text-gray-400">{{ t('accountSettingsView.subtitle') }}</p>
+                <h1 class="text-2xl font-bold !text-gray-100">{{ t('accountSettingsView.title') }}</h1>
+                <p class="mt-2 text-sm !text-gray-400">{{ t('accountSettingsView.subtitle') }}</p>
             </div>
 
             <!-- Mobile Tab Dropdown -->
@@ -464,7 +464,7 @@
                                             {{ t('accountSettingsView.profile.avatarHelp') }}
                                         </p>
                                         <button
-                                            class="px-12 py-2 rounded text-sm font-medium transition-colors bg-blue-600 hover:bg-blue-700 text-white mt-5 cursor-pointer"
+                                            class="px-12 py-2 rounded text-sm font-medium transition-colors bg-blue-600 hover:bg-blue-700 !text-white mt-5 cursor-pointer"
                                             @click="saveProfileSettings">
                                             {{ t('accountSettingsView.profile.saveButton') }}
                                         </button>
@@ -549,7 +549,7 @@
                                                         <input v-model="showProfilePublicly" class="sr-only peer"
                                                                type="checkbox">
                                                         <div
-                                                            class="relative w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                                            :class="`relative w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:!ring-blue-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all ${themeStore.theme == 'light' ? ' peer-checked:!bg-blue-500' : ' peer-checked:!bg-blue-600'}`"></div>
                                                         <span
                                                             class="ml-3 text-sm font-medium text-gray-300">{{ showProfilePublicly ? t('accountSettingsView.profile.visibility.public') : t('accountSettingsView.profile.visibility.private')
                                                             }}</span>
@@ -759,6 +759,9 @@
                                                 {{ t('accountSettingsView.activity.table.ipAddress') }}
                                             </th>
                                             <th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                                                {{ t('accountSettingsView.activity.table.loginMethod') }}
+                                            </th>
+                                            <th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                                                 {{ t('accountSettingsView.activity.table.location') }}
                                             </th>
                                             <th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
@@ -770,10 +773,13 @@
                                         <tr v-for="(login, index) in loginHistory" :key="index"
                                             class="hover:bg-gray-700">
                                             <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                                                {{ timestampToDate(login.timestamp) }}
+                                                {{ timestampToDate(login.created_at) }}
                                             </td>
                                             <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-[80px] sm:max-w-[150px] truncate">
                                                 {{ login.ip_address }}
+                                            </td>
+                                            <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-[80px] sm:max-w-[150px] truncate">
+                                                {{ login.login_method }}
                                             </td>
                                             <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-[80px] sm:max-w-[150px] truncate">
                                                 {{ login.location }}

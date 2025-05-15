@@ -13,9 +13,11 @@ export default class AuthService extends ApiService {
         return this.get<{ content: string }>(`auth/${provider}`);
     }
 
-    public static verifyOAuthCallback(provider: string): Promise<{ content: number, token: string }> {
+    public static verifyOAuthCallback(provider: string, ip_address: string): Promise<{ content: number, token: string }> {
         const url = window.location.search; // remove the ?
-        return this.get<{ content: number, token: string }>(`auth/${provider}/callback` + url);
+        return this.post<{ content: number, token: string }, {ip_address: string}>(`auth/${provider}/callback` + url, {
+            ip_address: ip_address
+        });
     }
 
     public static logout() {
@@ -24,10 +26,7 @@ export default class AuthService extends ApiService {
             .then(() => {
                 userStore.logout();
                 router.push('/')
-            }).catch(() => {
-                userStore.logout();
-                router.push('/')
-        })
+            })
         return;
     }
 
@@ -41,11 +40,12 @@ export default class AuthService extends ApiService {
         })
     };
 
-    public static login(email: string, password: string): Promise<{ content: number, token: string }> {
-        return this.post<{ content: number, token: string }, { email: string, password: string }>("auth/login", {
-            email: email,
-            password: password
-        })
+    public static login(email: string, password: string, ip_address: string): Promise<{ content: number, token: string }> {
+        return this.post<{ content: number, token: string }, { email: string, password: string, ip_address: string }>("auth/login", {
+                email: email,
+                password: password,
+                ip_address: ip_address
+            })
     }
 
     public static performOAuth(provider: OAuthProvider) {

@@ -5,16 +5,20 @@
     import AuthService from "@/services/authService.ts";
     import { useRoute } from "vue-router";
     import Loading from "@/components/ui/Loading.vue";
+import ApiService from "@/services/apiService";
     const userStore = useUserStore()
     const error = ref<boolean>(false);
     onMounted(() => {
-        AuthService.verifyOAuthCallback(useRoute().params.id as string)
-            .then((res) => {
-                userStore.id = res.content;
-                userStore.token = res.token;
-                router.push(`/settings`);
-            }).catch(() => {
-                error.value = true;
+        const driver: string = useRoute().params.id as string;
+        ApiService.getIP().then((data) => {
+            AuthService.verifyOAuthCallback(driver, data.ip)
+                .then((res) => {
+                    userStore.id = res.content;
+                    userStore.token = res.token;
+                    router.push(`/settings`);
+                }).catch(() => {
+                    error.value = true;
+            })
         })
     })
 </script>

@@ -7,11 +7,11 @@
     import { onMounted, ref } from "vue";
     import { useUserStore } from "@/stores/userStore.js";
     import { useThemeStore } from "@/stores/themeStore";
-    import Button from "@/components/ui/Button.vue";
     import AuthService from "@/services/authService.js";
     import { env } from "@/helpers/app.js";
     import { useI18n } from 'vue-i18n';
     import { setLanguage } from '@/i18n';
+import UserService from '@/services/userService';
 
     const { t, locale } = useI18n();
     const currentRoute = ref(router.currentRoute.value.path)
@@ -44,6 +44,12 @@
     };
 
     onMounted(() => {
+        if (userStore.isLoggedIn()) {
+            UserService.getUser().then((data) => {
+                themeStore.setTheme(data.profile_settings.theme)
+            })
+        }
+
         window.addEventListener("scroll", onDocumentScroll);
         currentRoute.value = router.currentRoute.value.path;
     })

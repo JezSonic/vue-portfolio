@@ -20,8 +20,8 @@ export default class USerService extends ApiService {
         return this.patch<{content: boolean}, IProfileUpdateData>(`user`, data, {'Authorization': `Bearer ${useUserStore().token}`})
     }
 
-    public static getLoginHistory(userId: number) {
-        return this.get<ILoginHistory[]>(`user/${userId}/login-history`, {'Authorization': `Bearer ${useUserStore().token}`})
+    public static getLoginHistory() {
+        return this.get<{content: ILoginHistory[]}>(`user/activity/login`, {'Authorization': `Bearer ${useUserStore().token}`})
     }
 
     public static updateNotificationSettings(userId: number, notificationSettings: INotificationSettings) {

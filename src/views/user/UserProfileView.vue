@@ -102,7 +102,7 @@
                                 text_color="#ffffff"
                             />
                         </div>
-                        <p class="text-gray-100 dark:text-gray-300 flex items-center flex-wrap">
+                        <p class="!text-gray-100 flex items-center flex-wrap">
                             <font-awesome-icon icon="fa-solid fa-envelope" class="flex-shrink-0 mr-2" />
                             <span class="truncate max-w-[200px] sm:max-w-[300px] md:max-w-[400px]">{{ userData?.email }}</span>
                             <span v-if="userData?.email_verified_at" class="ml-2 px-2 py-0.5 bg-green-900 text-green-300 rounded-full text-xs flex-shrink-0">{{ t('userProfileView.emailStatus.verified') }}</span>

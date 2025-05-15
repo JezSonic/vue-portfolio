@@ -79,4 +79,14 @@ export default class ApiService {
             code: data.content.code
         }
     }
+
+    public static async getIP(): Promise<{ip: string}> {
+		return new Promise((resolve, reject): void => {
+			fetch("https://api.ipify.org?format=json")
+				.then((res) => {
+					resolve(res.json());
+				})
+				.catch(reject);
+		});
+	}
 }
