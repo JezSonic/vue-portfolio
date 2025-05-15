@@ -44,7 +44,7 @@ import Badge from "@/components/badges/Badge.vue";
                     </p>
                     <p class="text-white text-lg">
                         This website is a platform for me to showcase my abilities and experience. Here, you'll find examples of my web development 
-                        projects, and even games that I've worked on.
+                         projects and even games that I've worked on.
                     </p>
                 </div>
             </template>
@@ -90,13 +90,14 @@ import Badge from "@/components/badges/Badge.vue";
                         </div>
                     </div>
                     <div class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
-                        <img src="@/assets/projects/ciasteczkowo.png" alt="Project Screenshot" class="w-full h-48 object-cover">
+                        <img src="@/assets/projects/maszyna_reloaded.webp" alt="Project Screenshot" class="w-full h-48 object-cover">
                         <div class="p-4">
-                            <h3 class="text-xl font-semibold text-blue-500 mb-2">Ciasteczkowo</h3>
-                            <p class="text-gray-300 mb-4">A web application for a bakery business with online ordering capabilities.</p>
+                            <h3 class="text-xl font-semibold text-blue-500 mb-2">Maszyna: Reloaded</h3>
+                            <p class="text-gray-300 mb-4">A game development project porting a train simulator to a modern game engine.</p>
                             <div class="flex gap-2">
-                                <Badge text="Laravel" icon="fa-laravel" bg_color="#ff2d20" />
-                                <Badge text="PHP" icon="fa-php" bg_color="#777bb3" />
+                                <Badge text="C++" icon="fa-code" bg_color="#00599c" />
+                                <Badge text="GDScript" icon="fa-code" bg_color="#478cbf" />
+                                <Badge text="Godot" icon="fa-gamepad" bg_color="#478cbf" />
                             </div>
                         </div>
                     </div>

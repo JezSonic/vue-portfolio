@@ -26,7 +26,7 @@
 <template>
     <div :class="`rounded-xl px-6 py-8 shadow-sm ${backgroundImage == null ? 'bg-gray-800' : 'background-image'}`">
         <div :class="`${props.badges == true ? 'text__badges' : 'text'} ${textClass}`">
-            <h2 class="text-2xl/7 font-display font-medium text-blue-600">{{ props.title }}</h2>
+            <h2 class="text-2xl/7 font-display font-medium text-blue-600 mb-2">{{ props.title }}</h2>
             <slot name="default" />
             <div class="badges" v-if="badges">
                 <slot name="badges" />

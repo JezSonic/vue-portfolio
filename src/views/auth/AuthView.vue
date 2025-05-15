@@ -5,7 +5,7 @@
     import { useUserStore } from "@/stores/userStore.ts";
     import { OAuthProvider } from "@/types/services/auth.d";
     import AuthService from "@/services/authService.ts";
-    import logo from "@/assets/img/core-img/logo.png";
+    import logo from "@/assets/icons/logo.png";
     import Button from "@/components/ui/Button.vue";
 
     const password = ref<string>("");
