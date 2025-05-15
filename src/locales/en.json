@@ -1,0 +1,652 @@
+{
+  "navigation": {
+    "home": "Home",
+    "commissions": "Commissions",
+    "privacyPolicy": "Privacy Policy",
+    "contact": "Contact"
+  },
+  "theme": {
+    "dark": "Dark theme",
+    "light": "Light theme"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "loginRegister": "Login / Register",
+    "profile": "Your Profile",
+    "settings": "Settings",
+    "signOut": "Sign out"
+  },
+  "authView": {
+    "logo": {
+      "alt": "Your Company"
+    },
+    "signIn": {
+      "title": "Sign in to your account",
+      "button": "Sign in",
+      "noAccount": "Not a member?",
+      "createAccount": "Create an account instead"
+    },
+    "register": {
+      "title": "Create your account",
+      "button": "Create an account",
+      "hasAccount": "Already a member?",
+      "loginInstead": "Login to your account"
+    },
+    "form": {
+      "emailLabel": "Email address",
+      "emailPlaceholder": "E-mail...",
+      "nameLabel": "Name",
+      "namePlaceholder": "Name...",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Password..."
+    },
+    "oauth": {
+      "title": "Or continue with",
+      "google": "Google",
+      "github": "GitHub"
+    }
+  },
+  "common": {
+    "language": "Language",
+    "english": "English",
+    "polish": "Polish"
+  },
+  "home": {
+    "hero": {
+      "greeting": "Hello, I'm Karol",
+      "title": "Full-Stack Web Developer",
+      "description": "A passionate developer with {years} years of professional experience, creating websites and web applications that combine functionality with elegant design.",
+      "viewProjects": "View Projects",
+      "contactMe": "Contact Me"
+    },
+    "aboutMe": {
+      "title": "About Me",
+      "paragraph1": "I'm a junior full-stack web developer with a passion for designing websites and web applications to fit any taste. While I have about {years} years of professional experience, I've been coding front-end for much longer and am constantly eager to learn new technologies.",
+      "paragraph2": "My background includes experience with both front-end and back-end development, as evidenced by the technology stack I've included on this page. While web development is my primary focus, I enjoy game development and have some game projects on GitHub under the username JezSonic.",
+      "paragraph3": "This website is a platform for me to showcase my abilities and experience. Here, you'll find examples of my web development projects and even games that I've worked on."
+    },
+    "skills": {
+      "title": "My Skills",
+      "description": "I'm proficient in a variety of web development technologies, including:"
+    },
+    "projects": {
+      "title": "Featured Projects",
+      "previousPortfolio": {
+        "title": "Previous Portfolio",
+        "description": "My previous portfolio website showcasing my earlier work and skills."
+      },
+      "maszynaReloaded": {
+        "title": "Maszyna: Reloaded",
+        "description": "A game development project porting a train simulator to a modern game engine."
+      },
+      "viewAll": "View All Projects"
+    },
+    "contact": {
+      "title": "Get In Touch",
+      "description": "I'm always open to new opportunities and collaborations. Feel free to reach out to me through any of the following channels:",
+      "discord": "Discord",
+      "email": "Email",
+      "linkedin": "LinkedIn"
+    }
+  },
+  "contactView": {
+    "getInTouch": {
+      "title": "Get in Touch",
+      "paragraph1": "I'm always open to new opportunities, collaborations, or just a friendly chat. Feel free to reach out through any of the following channels:",
+      "paragraph2": "For professional inquiries, LinkedIn and Email are the best options. For quick questions or casual conversations, Discord and Telegram work great!"
+    },
+    "linkedin": {
+      "title": "LinkedIn",
+      "name": "Karol Tomaszewski",
+      "school": "Student at Zespół Szkół nr 4 im. Mikołaja Kopernika W Dębicy",
+      "company": "Kenja K.K.",
+      "viewProfile": "View LinkedIn Profile"
+    },
+    "email": {
+      "title": "Email",
+      "description": "Best for detailed inquiries and professional communication. I check my email regularly and will respond promptly.",
+      "sendButton": "Send Email"
+    },
+    "discord": {
+      "title": "Discord",
+      "description": "Perfect for quick questions and real-time communication. I'm active on Discord most days.",
+      "username": "Username",
+      "previous": "Previous"
+    },
+    "telegram": {
+      "title": "Telegram",
+      "description": "Another great option for quick messages. I check Telegram regularly throughout the day.",
+      "messageButton": "Message on Telegram"
+    }
+  },
+  "errors": {
+    "notFound": {
+      "code": "404",
+      "title": "Page not found",
+      "message": "Sorry, we couldn't find the page you're looking for.",
+      "homeButton": "Go back home",
+      "contactButton": "Contact support"
+    }
+  },
+  "commissionsView": {
+    "hero": {
+      "title": "My Projects",
+      "description": "Welcome to my portfolio of web development projects. Here you'll find examples of my work, showcasing my skills and experience in creating modern, functional websites."
+    },
+    "info": {
+      "title": "Commission Information",
+      "paragraph1": "I'm available for freelance projects and commissions. I work closely with clients to create custom solutions that meet their specific needs and requirements.",
+      "paragraph2": "I agree on the prices individually with each client based on project scope and complexity. For payment details and more information, please reach out to me on:",
+      "discord": "Discord",
+      "telegram": "Telegram",
+      "tos": {
+        "agreement": "By hiring me to do work, you agree to my Terms of Service.",
+        "viewButton": "View Terms of Service"
+      }
+    },
+    "projects": {
+      "title": "Featured Projects",
+      "oldWebsite": {
+        "tileTitle": "Old website",
+        "title": "Previous Portfolio",
+        "subtitle": "This older version of my website is no longer maintained",
+        "description": "A previous iteration of my personal portfolio showcasing my earlier work and skills.",
+        "viewButton": "View Project"
+      },
+      "artist": {
+        "tileTitle": "Artist.pl",
+        "title": "Translation & Language School",
+        "subtitle": "Website for Artist - Biuro tłumaczeń I Szkoła języków obcych in Dębica",
+        "description": "A professional website for a translation and language school business built in Next.js based on the Client's design.",
+        "viewButton": "View Project"
+      },
+      "maszyna": {
+        "tileTitle": "MaSzyna: Reloaded",
+        "title": "Train Simulator",
+        "subtitle": "Port of MaSzyna Train Simulator into Godot Engine",
+        "description": "A game development project porting a train simulator to a modern game engine.",
+        "viewButton": "GitHub Repository"
+      }
+    },
+    "cta": {
+      "title": "Interested in Working Together?",
+      "description": "If you like my work and are interested in collaborating on a project, I'd love to hear from you!",
+      "contactButton": "Contact Me",
+      "tosButton": "View Terms of Service"
+    }
+  },
+  "tosView": {
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: September 15, 2020",
+    "introduction": {
+      "title": "Introduction",
+      "content": "This Terms of Service contains a list of rules regarding how I work on commissions. Please read this document carefully before engaging my services."
+    },
+    "importantInfo": {
+      "title": "Important Information",
+      "contentRestrictions": {
+        "title": "Content Restrictions",
+        "nsfw": {
+          "title": "NSFW Content",
+          "content": "I DO NOT create websites with NSFW content."
+        }
+      },
+      "documentation": {
+        "title": "Documentation",
+        "privacyAndTos": {
+          "title": "Privacy Policy and ToS",
+          "content": "I will include Privacy Policy and Terms of Service on your website ONLY if you provide the text content for these documents."
+        }
+      },
+      "billing": {
+        "title": "Billing",
+        "vatInvoices": {
+          "title": "VAT Invoices",
+          "content": "I do not issue VAT invoices."
+        }
+      },
+      "refundPolicy": {
+        "title": "Refund Policy",
+        "content": "Refunds will ONLY be issued in case of problems with the order where I cannot complete it.",
+        "points": {
+          "noRefunds": "In other cases, I do not return the money.",
+          "cancelAfterPayment": "If the order is canceled after payment, I will not refund the money.",
+          "cancelBeforePayment": "If an order is canceled before payment, EVERYTHING that has been created for the order will be deleted."
+        }
+      },
+      "warrantySupport": {
+        "title": "Warranty and Support",
+        "coverage": {
+          "title": "Warranty Coverage",
+          "myCode": "My code - refers to the code that I personally wrote. This does not include code written on Google backend servers, Google Firebase servers, or any other third-party services.",
+          "period": "Warranty for my code to work: 1 Year",
+          "details": "The warranty covers website corrections during the warranty period for free. After the warranty period expires, I am not responsible for the operation of the code and I will not repair it."
+        },
+        "support": {
+          "title": "Support",
+          "websiteIssues": "In case of any problems with the operation of the website: please let me know so I can take care of it.",
+          "thirdPartyIssues": "In case of any problems with the operation of Google Firebase or any other services used on the website: please let me know."
+        },
+        "changes": {
+          "title": "Changes to Orders",
+          "content": "Extra changes to the order, even the smallest ones, made after determining the content of the page will cost extra money."
+        }
+      }
+    },
+    "paymentServices": {
+      "title": "Payment and Services",
+      "paymentInfo": {
+        "title": "Payment Information",
+        "supportedServices": "Supported payment services:",
+        "services": {
+          "paypal": "PayPal",
+          "wise": "Wise",
+          "revolut": "Revolut"
+        },
+        "currencies": "Accepted currencies: USD",
+        "disclaimer": "I am not responsible for payment problems with services listed above - please contact their technical support regarding the solution of the problem and inform me about the situation."
+      },
+      "thirdParty": {
+        "title": "Third-Party Services",
+        "firebase": {
+          "title": "Google Firebase",
+          "usage": "I use Google Firebase services for hosting this website.",
+          "tos": "Google Firebase has its own Terms of Service at",
+          "tosLink": "https://firebase.google.com/terms",
+          "resources": "Hosting, domains, and other resources must be paid by the customer themselves."
+        }
+      },
+      "orderProcess": {
+        "title": "Order Process",
+        "steps": {
+          "step1": "First, you have to write to me on Discord. After determining the content of the page and obligatory acceptance by you, I will start working on the initial design.",
+          "step2": "After completing the initial design, I will arrange with you to show it in the form of a transmission of the design from my computer via Discord.",
+          "step3": "After accepting the design, I will wait for payment (then, of course, you will get a link to PayPal and the entire order summary, if you wish).",
+          "step4": "When the money arrives, I will start programming the website, if necessary. If not - I will send it to you right away in the form of HTML, JS, and CSS files with the required resources.",
+          "step5": "If the use of Google Firebase was required, after payment you will get access to the entire Google Firebase project created for the website."
+        },
+        "changeWarning": "Changes made by you after starting work on the order WILL COST EXTRA.",
+        "hostingNote": "If you plan to host a website on Google Firebase Hosting - you have to pay the cost of the Blaze plan for the project yourself and then I will help you with the configuration of everything (if it was not agreed at the beginning, you will have to pay a little more for help)."
+      }
+    },
+    "dataSecurity": {
+      "title": "Data Security",
+      "personalData": {
+        "title": "Security of Your Personal Data",
+        "content": "The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While We strive to use commercially acceptable means to protect Your Personal Data, We cannot guarantee its absolute security.",
+        "moreInfo": "For more information, please refer to our",
+        "privacyPolicy": "Privacy Policy"
+      }
+    }
+  },
+  "userProfileView": {
+    "error": {
+      "notFound": "Account you are trying to view does not exist anymore"
+    },
+    "alt": {
+      "profilePicture": "Profile picture"
+    },
+    "profileStatus": {
+      "public": "Public",
+      "private": "Private"
+    },
+    "emailStatus": {
+      "verified": "Verified",
+      "notVerified": "Not verified"
+    },
+    "sections": {
+      "profileInformation": "Profile Information",
+      "accountDetails": "Account Details",
+      "accountTimeline": "Account Timeline",
+      "connectedAccounts": "Connected Accounts"
+    },
+    "fields": {
+      "fullName": "Full Name",
+      "emailAddress": "Email Address",
+      "accountCreated": "Account Created",
+      "lastUpdated": "Last Updated"
+    },
+    "connectedAccounts": {
+      "google": "Google",
+      "github": "GitHub",
+      "repositories": "Repositories",
+      "followers": "Followers"
+    }
+  },
+  "accountSettingsView": {
+    "error": {
+      "notFound": "Account you are trying to view does not exist anymore"
+    },
+    "title": "Account Settings",
+    "subtitle": "Manage your account information and connected services.",
+    "tabs": {
+      "profile": "Profile Information",
+      "accounts": "Connected Accounts",
+      "notifications": "Notifications",
+      "activity": "Activity",
+      "security": "Security"
+    },
+    "profile": {
+      "title": "Profile Information",
+      "avatarHelp": "To change your avatar, connect a social account or select a different avatar source in the Connected Accounts section.",
+      "saveButton": "Save",
+      "fields": {
+        "fullName": "Full name",
+        "emailAddress": "Email address",
+        "profileCreated": "Profile created on",
+        "lastUpdate": "Last profile update on",
+        "profileVisibility": "Profile visibility"
+      },
+      "visibility": {
+        "public": "Public",
+        "private": "Private",
+        "publicDescription": "Your profile is visible to everyone",
+        "privateDescription": "Your profile is only visible to you"
+      }
+    },
+    "connectedAccounts": {
+      "title": "Connected Accounts",
+      "subtitle": "Manage your connected social accounts.",
+      "avatarSource": {
+        "title": "Avatar Source",
+        "description": "Select, which connected account to use for your profile avatar.",
+        "auto": "Automatic (use first available)",
+        "google": "Google",
+        "github": "GitHub",
+        "default": "Default avatar",
+        "notAvailable": "(not available)"
+      },
+      "status": {
+        "connected": "Connected",
+        "notConnected": "Not connected"
+      },
+      "buttons": {
+        "connect": "Connect",
+        "disconnect": "Disconnect"
+      }
+    },
+    "notifications": {
+      "title": "Notification Settings",
+      "subtitle": "Manage how you receive notifications.",
+      "emailNotifications": {
+        "title": "Email Notifications",
+        "description": "Receive notifications about account activity via email."
+      },
+      "marketingEmails": {
+        "title": "Marketing Emails",
+        "description": "Receive emails about new features and promotions."
+      },
+      "securityAlerts": {
+        "title": "Security Alerts",
+        "description": "Receive important security notifications about your account."
+      },
+      "saveButton": "Save Notification Settings"
+    },
+    "activity": {
+      "title": "Account Activity",
+      "subtitle": "View your recent login history and account activity.",
+      "noHistory": "No login history available.",
+      "loadError": "Failed to load login history. Please try again later.",
+      "recentLogins": "Recent Logins",
+      "table": {
+        "dateTime": "Date & Time",
+        "ipAddress": "IP Address",
+        "location": "Location",
+        "device": "Device"
+      }
+    },
+    "security": {
+      "title": "Security",
+      "subtitle": "Manage your password and account security.",
+      "changePassword": {
+        "title": "Change Password",
+        "currentPassword": "Current Password",
+        "newPassword": "New Password",
+        "confirmPassword": "Confirm New Password",
+        "updateButton": "Update Password",
+        "success": "Password updated successfully",
+        "errors": {
+          "required": "Current password is required",
+          "length": "New password must be at least 8 characters",
+          "match": "Passwords do not match"
+        }
+      },
+      "dataExport": {
+        "title": "Data Export",
+        "description": "Download a copy of all your account data.",
+        "exportButton": "Export My Data"
+      },
+      "dangerZone": {
+        "title": "Danger Zone",
+        "deleteButton": "Delete Account",
+        "confirmMessage": "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed.",
+        "confirmButton": "Yes, Delete My Account",
+        "cancelButton": "Cancel"
+      }
+    }
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: August 16, 2020",
+    "introduction": {
+      "title": "Introduction",
+      "paragraph1": "This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.",
+      "paragraph2": "We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy."
+    },
+    "interpretationDefinitions": {
+      "title": "Interpretation and Definitions",
+      "interpretation": {
+        "title": "Interpretation",
+        "content": "The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural."
+      },
+      "definitions": {
+        "title": "Definitions",
+        "intro": "For the purposes of this Privacy Policy:",
+        "account": "Account",
+        "accountDesc": "A unique account created for You to access our Service or parts of our Service.",
+        "company": "Company",
+        "companyDesc": "Referred to as either \"the Company\", \"We\", \"Us\" or \"Our\" in this Agreement, refers to New DEV.",
+        "cookies": "Cookies",
+        "cookiesDesc": "Small files that are placed on Your computer, mobile device or any other device by a website, containing the details of Your browsing history on that website among its many uses.",
+        "country": "Country",
+        "countryDesc": "Poland",
+        "device": "Device",
+        "deviceDesc": "Any device that can access the Service such as a computer, a cellphone or a digital tablet.",
+        "personalData": "Personal Data",
+        "personalDataDesc": "Any information that relates to an identified or identifiable individual.",
+        "service": "Service",
+        "serviceDesc": "Refers to the Website.",
+        "serviceProvider": "Service Provider",
+        "serviceProviderDesc": "Any natural or legal person who processes the data on behalf of the Company. It refers to third-party companies or individuals employed by the Company to facilitate the Service, to provide the Service on behalf of the Company, to perform services related to the Service or to assist the Company in analyzing how the Service is used.",
+        "thirdPartySocialMedia": "Third-party Social Media Service",
+        "thirdPartySocialMediaDesc": "Any website or any social network website through which a User can log in or create an account to use the Service.",
+        "usageData": "Usage Data",
+        "usageDataDesc": "Data collected automatically, either generated by the use of the Service or from the Service infrastructure itself (for example, the duration of a page visit).",
+        "website": "Website",
+        "websiteDesc": "Refers to New DEV, accessible from",
+        "you": "You",
+        "youDesc": "The individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable."
+      }
+    },
+    "personalData": {
+      "title": "Collecting and Using Your Personal Data",
+      "typesCollected": {
+        "title": "Types of Data Collected",
+        "personalData": {
+          "title": "Personal Data",
+          "content": "While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:",
+          "item1": "Email address",
+          "item2": "Usage Data"
+        },
+        "usageData": {
+          "title": "Usage Data",
+          "paragraph1": "Usage Data is collected automatically when using the Service.",
+          "paragraph2": "Usage Data may include information such as Your Device's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data.",
+          "paragraph3": "When You access the Service by or through a mobile device, We may collect certain information automatically, including, but not limited to, the type of mobile device You use, Your mobile device unique ID, the IP address of Your mobile device, Your mobile operating system, the type of mobile Internet browser You use, unique device identifiers and other diagnostic data.",
+          "paragraph4": "We may also collect information that Your browser sends whenever You visit our Service or when You access the Service by or through a mobile device."
+        },
+        "trackingTechnologies": {
+          "title": "Tracking Technologies and Cookies",
+          "paragraph1": "We use Cookies and similar tracking technologies to track the activity on Our Service and store certain information. Tracking technologies used are beacons, tags, and scripts to collect and track information and to improve and analyze Our Service.",
+          "paragraph2": "You can instruct Your browser to refuse all Cookies or to indicate when a Cookie is being sent. However, if You do not accept Cookies, You may not be able to use some parts of our Service.",
+          "paragraph3": "Cookies can be \"Persistent\" or \"Session\" Cookies. Persistent Cookies remain on your personal computer or mobile device when You go offline, while Session Cookies are deleted as soon as You close your web browser. Learn more about cookies:",
+          "cookiesLink": "All About Cookies",
+          "paragraph4": "We use both session and persistent Cookies for the purposes set out below:",
+          "necessaryCookies": {
+            "title": "Necessary / Essential Cookies",
+            "type": "Type:",
+            "typeValue": "Session Cookies",
+            "administeredBy": "Administered by:",
+            "administeredByValue": "Us",
+            "purpose": "Purpose:",
+            "purposeValue": "These Cookies are essential to provide You with services available through the Website and to enable You to use some of its features. They help to authenticate users and prevent fraudulent use of user accounts. Without these Cookies, the services that You have asked for cannot be provided, and We only use these Cookies to provide You with those services."
+          },
+          "acceptanceCookies": {
+            "title": "Cookies Policy / Notice Acceptance Cookies",
+            "type": "Type:",
+            "typeValue": "Persistent Cookies",
+            "administeredBy": "Administered by:",
+            "administeredByValue": "Us"
+          },
+          "functionalityCookies": {
+            "title": "Functionality Cookies",
+            "type": "Type:",
+            "typeValue": "Persistent Cookies",
+            "administeredBy": "Administered by:",
+            "administeredByValue": "Us",
+            "purpose": "Purpose:",
+            "purposeValue": "These Cookies allow us to remember choices You make when You use the Website, such as remembering your login details or language preference. The purpose of these Cookies is to provide You with a more personal experience and to avoid You having to re-enter your preferences every time You use the Website."
+          },
+          "moreInfo": "For more information about the cookies we use and your choices regarding cookies, please visit our Cookies Policy or the Cookies section of our Privacy Policy."
+        }
+      },
+      "useOfPersonalData": {
+        "title": "Use of Your Personal Data",
+        "intro": "The Company may use Personal Data for the following purposes:",
+        "purposes": {
+          "provideService": {
+            "title": "To provide and maintain our Service",
+            "description": "including to monitor the usage of our Service."
+          },
+          "manageAccount": {
+            "title": "To manage Your Account:",
+            "description": "to manage Your registration as a user of the Service. The Personal Data You provide can give You access to different functionalities of the Service that are available to You as a registered user."
+          },
+          "performContract": {
+            "title": "For the performance of a contract:",
+            "description": "the development, compliance and undertaking of the purchase contract for the products, items or services You have purchased or of any other contract with Us through the Service."
+          },
+          "contactYou": {
+            "title": "To contact You:",
+            "description": "To contact You by email, telephone calls, SMS, or other equivalent forms of electronic communication, such as a mobile application's push notifications regarding updates or informative communications related to the functionalities, products or contracted services, including the security updates, when necessary or reasonable for their implementation."
+          },
+          "provideOffers": {
+            "title": "To provide You",
+            "description": "with news, special offers and general information about other goods, services and events which we offer that are similar to those that you have already purchased or enquired about unless You have opted not to receive such information."
+          },
+          "manageRequests": {
+            "title": "To manage Your requests:",
+            "description": "To attend and manage Your requests to Us."
+          }
+        },
+        "sharingInfo": "We may share your personal information in the following situations:",
+        "sharingScenarios": {
+          "serviceProviders": {
+            "title": "With Service Providers:",
+            "description": "We may share Your personal information with Service Providers to monitor and analyze the use of our Service, to contact You."
+          },
+          "businessTransfers": {
+            "title": "For Business transfers:",
+            "description": "We may share or transfer Your personal information in connection with, or during negotiations of, any merger, sale of Company assets, financing, or acquisition of all or a portion of our business to another company."
+          },
+          "affiliates": {
+            "title": "With Affiliates:",
+            "description": "We may share Your information with Our affiliates, in which case we will require those affiliates to honor this Privacy Policy. Affiliates include Our parent company and any other subsidiaries, joint venture partners or other companies that We control or that are under common control with Us."
+          },
+          "businessPartners": {
+            "title": "With Business partners:",
+            "description": "We may share Your information with Our business partners to offer You certain products, services or promotions."
+          },
+          "otherUsers": {
+            "title": "With other users:",
+            "description": "when You share personal information or otherwise interact in the public areas with other users, such information may be viewed by all users and may be publicly distributed outside. If You interact with other users or register through a Third-Party Social Media Service, Your contacts on the Third-Party Social Media Service may see Your name, profile, pictures and description of Your activity. Similarly, other users will be able to view descriptions of Your activity, communicate with You and view Your profile."
+          }
+        }
+      }
+    },
+    "dataManagement": {
+      "title": "Data Management and Security",
+      "retention": {
+        "title": "Retention of Your Personal Data",
+        "paragraph1": "The Company will retain Your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use Your Personal Data to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.",
+        "paragraph2": "The Company will also retain Usage Data for internal analysis purposes. Usage Data is generally retained for a shorter period of time, except when this data is used to strengthen the security or to improve the functionality of Our Service, or We are legally obligated to retain this data for longer time periods."
+      },
+      "transfer": {
+        "title": "Transfer of Your Personal Data",
+        "paragraph1": "Your information, including Personal Data, is processed at the Company's operating offices and in any other places where the parties involved in the processing are located. It means that this information may be transferred to — and maintained on — computers located outside of Your state, province, country or other governmental jurisdiction where the data protection laws may differ than those from Your jurisdiction.",
+        "paragraph2": "Your consent to this Privacy Policy followed by Your submission of such information represents Your agreement to that transfer.",
+        "paragraph3": "The Company will take all steps reasonably necessary to ensure that Your data is treated securely and in accordance with this Privacy Policy and no transfer of Your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of Your data and other personal information."
+      },
+      "disclosure": {
+        "title": "Disclosure of Your Personal Data",
+        "businessTransactions": {
+          "title": "Business Transactions",
+          "content": "If the Company is involved in a merger, acquisition or asset sale, Your Personal Data may be transferred. We will provide notice before Your Personal Data is transferred and becomes subject to a different Privacy Policy."
+        },
+        "lawEnforcement": {
+          "title": "Law Enforcement",
+          "content": "Under certain circumstances, the Company may be required to disclose Your Personal Data if required to do so by law or in response to valid requests by public authorities (e.g. a court or a government agency)."
+        },
+        "otherLegalRequirements": {
+          "title": "Other Legal Requirements",
+          "intro": "The Company may disclose Your Personal Data in the good faith belief that such action is necessary to:",
+          "item1": "Comply with a legal obligation",
+          "item2": "Protect and defend the rights or property of the Company",
+          "item3": "Prevent or investigate possible wrongdoing in connection with the Service",
+          "item4": "Protect the personal safety of Users of the Service or the public",
+          "item5": "Protect against legal liability"
+        }
+      },
+      "security": {
+        "title": "Security of Your Personal Data",
+        "content": "The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While We strive to use commercially acceptable means to protect Your Personal Data, We cannot guarantee its absolute security."
+      }
+    },
+    "californiaRights": {
+      "title": "California Privacy Rights",
+      "shineTheLight": {
+        "title": "California's Shine the Light Law",
+        "paragraph1": "California Civil Code Section 1798 (California's Shine the Light law), California residents with an established business relationship with us can request information once a year about sharing their Personal Data with third parties for the third parties' direct marketing purposes.",
+        "paragraph2": "If you'd like to request more information under the California Shine the Light law, and if you are a California resident, You can contact Us using the contact information provided below."
+      },
+      "minorUsers": {
+        "title": "Privacy Rights for Minor Users",
+        "paragraph1": "California Business and Professions Code section 22581 allow California residents under the age of 18 who are registered users of online sites, services or applications to request and obtain removal of content or information they have publicly posted.",
+        "paragraph2": "To request removal of such data, and if you are a California resident, You can contact Us using the contact information provided below, and include the email address associated with Your account.",
+        "paragraph3": "Be aware that Your request does not guarantee complete or comprehensive removal of content or information posted online and that the law may not permit or require removal in certain circumstances."
+      }
+    },
+    "additionalInfo": {
+      "title": "Additional Information",
+      "otherWebsites": {
+        "title": "Links to Other Websites",
+        "paragraph1": "Our Service may contain links to other websites that are not operated by Us. If You click on a third party link, You will be directed to that third party's site. We strongly advise You to review the Privacy Policy of every site You visit.",
+        "paragraph2": "We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services."
+      },
+      "changes": {
+        "title": "Changes to this Privacy Policy",
+        "paragraph1": "We may update our Privacy Policy from time to time. We will notify You of any changes by posting the new Privacy Policy on this page.",
+        "paragraph2": "We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming effective and update the \"Last updated\" date at the top of this Privacy Policy.",
+        "paragraph3": "You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page."
+      }
+    },
+    "contact": {
+      "title": "Contact Us",
+      "intro": "If you have any questions about this Privacy Policy, You can contact us:",
+      "byVisiting": "By visiting",
+      "contactPage": "Contact page",
+      "onWebsite": "on our website"
+    }
+  }
+}

@@ -1,0 +1,153 @@
+:root {
+  /* Light theme variables (default) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f3f4f6;
+  --bg-tertiary: #e5e7eb;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-tertiary: #6b7280;
+  --border-color: #d1d5db;
+  --accent-color: #3b82f6;
+  --accent-hover: #2563eb;
+  --error-color: #ef4444;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --info-color: #3b82f6;
+}
+
+/* Dark theme variables */
+.dark {
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --bg-tertiary: #374151;
+  --text-primary: #f9fafb;
+  --text-secondary: #e5e7eb;
+  --text-tertiary: #d1d5db;
+  --border-color: #4b5563;
+  --accent-color: #3b82f6;
+  --accent-hover: #60a5fa;
+  --error-color: #f87171;
+  --success-color: #34d399;
+  --warning-color: #fbbf24;
+  --info-color: #60a5fa;
+}
+
+/* Apply theme variables to Tailwind classes */
+.light .bg-gray-800 {
+  background-color: var(--bg-secondary);
+}
+
+.light .bg-gray-700 {
+  background-color: var(--bg-tertiary);
+}
+
+.light .bg-gray-900 {
+  background-color: var(--bg-tertiary);
+}
+
+.light .text-gray-300, 
+.light .text-gray-400, 
+.light .text-gray-200, 
+.light .text-white {
+  color: var(--text-primary);
+}
+
+.light .border-gray-700 {
+  border-color: var(--border-color);
+}
+
+.light .hover\:bg-gray-700:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.light .hover\:text-white:hover {
+  color: var(--text-primary);
+}
+
+/* Additional light theme overrides for AccountSettingsView */
+.light .divide-gray-700 > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--border-color);
+}
+
+.light .bg-gray-700 {
+  background-color: var(--bg-tertiary);
+}
+
+.light .border-gray-600 {
+  border-color: var(--border-color);
+}
+
+.light .text-gray-100,
+.light .text-gray-200,
+.light .text-gray-300 {
+  color: var(--text-primary);
+}
+
+.light .text-white {
+  color: var(--text-primary);
+}
+
+.light .focus\:ring-white:focus {
+  --tw-ring-color: var(--accent-color);
+}
+
+.light .focus\:ring-offset-gray-800:focus {
+  --tw-ring-offset-color: var(--bg-secondary);
+}
+
+.light .focus\:ring-blue-500:focus {
+  --tw-ring-color: var(--accent-color);
+}
+
+.light .hover\:bg-blue-700:hover {
+  background-color: var(--accent-hover);
+}
+
+.light .bg-blue-600 {
+  background-color: var(--accent-color);
+}
+
+.light .bg-red-100 {
+  background-color: rgba(254, 226, 226, 0.5);
+}
+
+.light .text-red-700 {
+  color: var(--error-color);
+}
+
+.light .text-green-500,
+.light .text-green-400,
+.light .hover\:text-green-400:hover {
+  color: var(--success-color);
+}
+
+.light .text-blue-500,
+.light .text-blue-400,
+.light .hover\:text-blue-400:hover {
+  color: var(--accent-color);
+}
+
+.light .text-red-500,
+.light .text-red-400,
+.light .hover\:text-red-400:hover {
+  color: var(--error-color);
+}
+
+.light .bg-gray-100 {
+  background-color: var(--bg-secondary);
+}
+
+.light .text-gray-700 {
+  color: var(--text-primary);
+}
+
+.light .ring-black\/5 {
+  --tw-ring-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Navbar specific styles for light theme */
+.light .transparent {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1);
+}

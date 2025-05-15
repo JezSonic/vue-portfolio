@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import Tile from "@/components/tiles/Tile.vue";
 import Badge from "@/components/badges/Badge.vue";
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+const currentYear = new Date().getFullYear();
+const yearsOfExperience = currentYear - 2023;
 </script>
 
 <template>
@@ -8,18 +13,17 @@ import Badge from "@/components/badges/Badge.vue";
         <!-- Hero Section -->
         <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
             <div class="md:w-1/2">
-                <h1 class="text-4xl md:text-5xl font-bold text-blue-600 mb-4">Hello, I'm Karol</h1>
-                <h2 class="text-2xl md:text-3xl font-medium text-gray-200 mb-6">Full-Stack Web Developer</h2>
-                <p class="text-lg text-gray-300 mb-6">
-                    A passionate developer with {{ new Date().getFullYear() - 2023 }} years of professional experience, 
-                    creating websites and web applications that combine functionality with elegant design.
+                <h1 class="text-4xl md:text-5xl font-bold text-blue-600 mb-4">{{ t('home.hero.greeting') }}</h1>
+                <h2 class="text-2xl md:text-3xl font-medium !text-gray-200 mb-6">{{ t('home.hero.title') }}</h2>
+                <p class="text-lg !not-dark:text-white !text-gray-300 mb-6">
+                    {{ t('home.hero.description', { years: yearsOfExperience }) }}
                 </p>
                 <div class="flex gap-4">
-                    <a href="/commissions" class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-lg transition-colors">
-                        View Projects
+                    <a href="/commissions" class="px-6 py-3 bg-blue-600 hover:bg-blue-500 !text-white font-medium rounded-lg transition-colors">
+                        {{ t('home.hero.viewProjects') }}
                     </a>
-                    <a href="/contact" class="px-6 py-3 border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-medium rounded-lg transition-colors">
-                        Contact Me
+                    <a href="/contact" class="px-6 py-3 border border-blue-600 text-blue-600 hover:bg-blue-600 hover:!text-white font-medium rounded-lg transition-colors">
+                        {{ t('home.hero.contactMe') }}
                     </a>
                 </div>
             </div>
@@ -29,32 +33,27 @@ import Badge from "@/components/badges/Badge.vue";
         </div>
 
         <!-- About Me Section -->
-        <Tile title="About Me" class="mb-12">
+        <Tile :title="t('home.aboutMe.title')" class="mb-12">
             <template #default>
                 <div class="space-y-4">
                     <p class="text-white text-lg">
-                        I'm a junior full-stack web developer with a passion for designing websites and web applications to fit any taste. 
-                        While I have about {{ new Date().getFullYear() - 2023 }} years of professional experience, I've been coding front-end for much longer 
-                        and am constantly eager to learn new technologies.
+                        {{ t('home.aboutMe.paragraph1', { years: yearsOfExperience }) }}
                     </p>
                     <p class="text-white text-lg">
-                        My background includes experience with both front-end and back-end development, as evidenced by the technology stack 
-                        I've included on this page. While web development is my primary focus, I enjoy game development and have some game 
-                        projects on GitHub under the username JezSonic.
+                        {{ t('home.aboutMe.paragraph2') }}
                     </p>
                     <p class="text-white text-lg">
-                        This website is a platform for me to showcase my abilities and experience. Here, you'll find examples of my web development 
-                         projects and even games that I've worked on.
+                        {{ t('home.aboutMe.paragraph3') }}
                     </p>
                 </div>
             </template>
         </Tile>
 
         <!-- Skills Section -->
-        <Tile title="My Skills" class="mb-12" :badges="true">
+        <Tile :title="t('home.skills.title')" class="mb-12" :badges="true">
             <template #default>
                 <p class="text-white text-lg mb-6">
-                    I'm proficient in a variety of web development technologies, including:
+                    {{ t('home.skills.description') }}
                 </p>
             </template>
             <template #badges>
@@ -75,14 +74,14 @@ import Badge from "@/components/badges/Badge.vue";
         </Tile>
 
         <!-- Featured Projects -->
-        <Tile title="Featured Projects" class="mb-12">
+        <Tile :title="t('home.projects.title')" class="mb-12">
             <template #default>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                     <div class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
                         <img src="@/assets/projects/oldwebsite.png" alt="Project Screenshot" class="w-full h-48 object-cover">
                         <div class="p-4">
-                            <h3 class="text-xl font-semibold text-blue-500 mb-2">Previous Portfolio</h3>
-                            <p class="text-gray-300 mb-4">My previous portfolio website showcasing my earlier work and skills.</p>
+                            <h3 class="text-xl font-semibold text-blue-500 mb-2">{{ t('home.projects.previousPortfolio.title') }}</h3>
+                            <p class="text-gray-300 mb-4">{{ t('home.projects.previousPortfolio.description') }}</p>
                             <div class="flex gap-2">
                                 <Badge text="Vue.js" icon="fa-vuejs" bg_color="#42b883" />
                                 <Badge text="CSS" icon="fa-css3-alt" bg_color="#264de4" />
@@ -92,8 +91,8 @@ import Badge from "@/components/badges/Badge.vue";
                     <div class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
                         <img src="@/assets/projects/maszyna_reloaded.webp" alt="Project Screenshot" class="w-full h-48 object-cover">
                         <div class="p-4">
-                            <h3 class="text-xl font-semibold text-blue-500 mb-2">Maszyna: Reloaded</h3>
-                            <p class="text-gray-300 mb-4">A game development project porting a train simulator to a modern game engine.</p>
+                            <h3 class="text-xl font-semibold text-blue-500 mb-2">{{ t('home.projects.maszynaReloaded.title') }}</h3>
+                            <p class="text-gray-300 mb-4">{{ t('home.projects.maszynaReloaded.description') }}</p>
                             <div class="flex gap-2">
                                 <Badge text="C++" icon="fa-code" bg_color="#00599c" />
                                 <Badge text="GDScript" icon="fa-code" bg_color="#478cbf" />
@@ -103,34 +102,34 @@ import Badge from "@/components/badges/Badge.vue";
                     </div>
                 </div>
                 <div class="mt-6 text-center">
-                    <a href="/commissions" class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-lg transition-colors">
-                        View All Projects
+                    <a href="/commissions" class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-500 !text-white font-medium rounded-lg transition-colors">
+                        {{ t('home.projects.viewAll') }}
                     </a>
                 </div>
             </template>
         </Tile>
 
         <!-- Contact Section -->
-        <Tile title="Get In Touch">
+        <Tile :title="t('home.contact.title')">
             <template #default>
                 <p class="text-white text-lg mb-6">
-                    I'm always open to new opportunities and collaborations. Feel free to reach out to me through any of the following channels:
+                    {{ t('home.contact.description') }}
                 </p>
                 <div class="flex flex-wrap gap-4">
                     <a href="/contact"
                        class="flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors">
                         <font-awesome-icon icon="fa-brands fa-discord" class="w-6 h-6 text-white" />
-                        <span class="text-white">Discord</span>
+                        <span class="text-white">{{ t('home.contact.discord') }}</span>
                     </a>
                     <a href="/contact"
                        class="flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors">
                         <font-awesome-icon icon="fa-solid fa-envelope" class="w-6 h-6 text-white" />
-                        <span class="text-white">Email</span>
+                        <span class="text-white">{{ t('home.contact.email') }}</span>
                     </a>
                     <a href="/contact"
                        class="flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors">
                         <font-awesome-icon icon="fa-brands fa-linkedin" class="w-6 h-6 text-white" />
-                        <span class="text-white">LinkedIn</span>
+                        <span class="text-white">{{ t('home.contact.linkedin') }}</span>
                     </a>
                 </div>
             </template>

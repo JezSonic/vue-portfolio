@@ -1,0 +1,652 @@
+{
+  "navigation": {
+    "home": "Strona Główna",
+    "commissions": "Zlecenia",
+    "privacyPolicy": "Polityka Prywatności",
+    "contact": "Kontakt"
+  },
+  "auth": {
+    "login": "Logowanie",
+    "register": "Rejestracja",
+    "loginRegister": "Logowanie / Rejestracja",
+    "profile": "Twój Profil",
+    "settings": "Ustawienia",
+    "signOut": "Wyloguj"
+  },
+  "theme": {
+    "dark": "Ciemny motyw",
+    "light": "Jasny motyw"
+  },
+  "authView": {
+    "logo": {
+      "alt": "Twoja Firma"
+    },
+    "signIn": {
+      "title": "Zaloguj się na swoje konto",
+      "button": "Zaloguj się",
+      "noAccount": "Nie masz konta?",
+      "createAccount": "Utwórz konto"
+    },
+    "register": {
+      "title": "Utwórz swoje konto",
+      "button": "Utwórz konto",
+      "hasAccount": "Masz już konto?",
+      "loginInstead": "Zaloguj się na swoje konto"
+    },
+    "form": {
+      "emailLabel": "Adres email",
+      "emailPlaceholder": "E-mail...",
+      "nameLabel": "Imię",
+      "namePlaceholder": "Imię...",
+      "passwordLabel": "Hasło",
+      "passwordPlaceholder": "Hasło..."
+    },
+    "oauth": {
+      "title": "Lub kontynuuj z",
+      "google": "Google",
+      "github": "GitHub"
+    }
+  },
+  "common": {
+    "language": "Język",
+    "english": "Angielski",
+    "polish": "Polski"
+  },
+  "home": {
+    "hero": {
+      "greeting": "Cześć, jestem Karol",
+      "title": "Full-Stack Web Developer",
+      "description": "Pasjonat programowania z {years}-letnim doświadczeniem zawodowym, tworzący strony i aplikacje internetowe łączące funkcjonalność z eleganckim designem.",
+      "viewProjects": "Zobacz Projekty",
+      "contactMe": "Kontakt"
+    },
+    "aboutMe": {
+      "title": "O Mnie",
+      "paragraph1": "Jestem junior full-stack web developerem z pasją do projektowania stron i aplikacji internetowych dopasowanych do każdego gustu. Chociaż mam około {years} lat(a) doświadczenia zawodowego, programuję front-end znacznie dłużej i ciągle chętnie uczę się nowych technologii.",
+      "paragraph2": "Moje doświadczenie obejmuje zarówno rozwój front-end, jak i back-end, co widać po stosie technologicznym, który zawarłem na tej stronie. Chociaż tworzenie stron internetowych jest moim głównym zajęciem, lubię także tworzyć gry i mam kilka projektów gier na GitHubie pod nazwą użytkownika JezSonic.",
+      "paragraph3": "Ta strona internetowa jest platformą do prezentacji moich umiejętności i doświadczenia. Znajdziesz tu przykłady moich projektów webowych, a nawet gier, nad którymi pracowałem."
+    },
+    "skills": {
+      "title": "Moje Umiejętności",
+      "description": "Biegle posługuję się różnymi technologiami tworzenia stron internetowych, w tym:"
+    },
+    "projects": {
+      "title": "Wyróżnione Projekty",
+      "previousPortfolio": {
+        "title": "Poprzednie Portfolio",
+        "description": "Moja poprzednia strona portfolio prezentująca wcześniejsze prace i umiejętności."
+      },
+      "maszynaReloaded": {
+        "title": "Maszyna: Reloaded",
+        "description": "Projekt tworzenia gier przenoszący symulator pociągów na nowoczesny silnik gier."
+      },
+      "viewAll": "Zobacz Wszystkie Projekty"
+    },
+    "contact": {
+      "title": "Skontaktuj Się",
+      "description": "Zawsze jestem otwarty na nowe możliwości i współpracę. Śmiało skontaktuj się ze mną za pośrednictwem dowolnego z poniższych kanałów:",
+      "discord": "Discord",
+      "email": "Email",
+      "linkedin": "LinkedIn"
+    }
+  },
+  "contactView": {
+    "getInTouch": {
+      "title": "Skontaktuj się",
+      "paragraph1": "Jestem zawsze otwarty na nowe możliwości, współpracę lub po prostu przyjazną rozmowę. Śmiało skontaktuj się ze mną przez dowolny z poniższych kanałów:",
+      "paragraph2": "W przypadku zapytań zawodowych, LinkedIn i Email są najlepszymi opcjami. W przypadku szybkich pytań lub luźnych rozmów, Discord i Telegram sprawdzają się świetnie!"
+    },
+    "linkedin": {
+      "title": "LinkedIn",
+      "name": "Karol Tomaszewski",
+      "school": "Uczeń Zespołu Szkół nr 4 im. Mikołaja Kopernika W Dębicy",
+      "company": "Kenja K.K.",
+      "viewProfile": "Zobacz profil LinkedIn"
+    },
+    "email": {
+      "title": "Email",
+      "description": "Najlepszy do szczegółowych zapytań i profesjonalnej komunikacji. Regularnie sprawdzam pocztę i szybko odpowiadam.",
+      "sendButton": "Wyślij Email"
+    },
+    "discord": {
+      "title": "Discord",
+      "description": "Idealny do szybkich pytań i komunikacji w czasie rzeczywistym. Jestem aktywny na Discordzie przez większość dni.",
+      "username": "Nazwa użytkownika",
+      "previous": "Poprzednio"
+    },
+    "telegram": {
+      "title": "Telegram",
+      "description": "Kolejna świetna opcja do szybkich wiadomości. Regularnie sprawdzam Telegram w ciągu dnia.",
+      "messageButton": "Napisz na Telegramie"
+    }
+  },
+  "errors": {
+    "notFound": {
+      "code": "404",
+      "title": "Strona nie znaleziona",
+      "message": "Przepraszamy, nie mogliśmy znaleźć strony, której szukasz.",
+      "homeButton": "Wróć do strony głównej",
+      "contactButton": "Skontaktuj się z pomocą"
+    }
+  },
+  "commissionsView": {
+    "hero": {
+      "title": "Moje Projekty",
+      "description": "Witaj w moim portfolio projektów webowych. Znajdziesz tu przykłady mojej pracy, prezentujące moje umiejętności i doświadczenie w tworzeniu nowoczesnych, funkcjonalnych stron internetowych."
+    },
+    "info": {
+      "title": "Informacje o Zleceniach",
+      "paragraph1": "Jestem dostępny do projektów freelancerskich i zleceń. Ściśle współpracuję z klientami, aby tworzyć niestandardowe rozwiązania, które spełniają ich konkretne potrzeby i wymagania.",
+      "paragraph2": "Ustalam ceny indywidualnie z każdym klientem w oparciu o zakres i złożoność projektu. Aby uzyskać szczegóły dotyczące płatności i więcej informacji, skontaktuj się ze mną przez:",
+      "discord": "Discord",
+      "telegram": "Telegram",
+      "tos": {
+        "agreement": "Zatrudniając mnie do pracy, zgadzasz się na moje Warunki Świadczenia Usług.",
+        "viewButton": "Zobacz Warunki Świadczenia Usług"
+      }
+    },
+    "projects": {
+      "title": "Wyróżnione Projekty",
+      "oldWebsite": {
+        "tileTitle": "Stara strona",
+        "title": "Poprzednie Portfolio",
+        "subtitle": "Ta starsza wersja mojej strony nie jest już utrzymywana",
+        "description": "Wcześniejsza wersja mojego osobistego portfolio prezentująca moje wcześniejsze prace i umiejętności.",
+        "viewButton": "Zobacz Projekt"
+      },
+      "artist": {
+        "tileTitle": "Artist.pl",
+        "title": "Biuro Tłumaczeń i Szkoła Językowa",
+        "subtitle": "Strona dla Artist - Biuro tłumaczeń I Szkoła języków obcych w Dębicy",
+        "description": "Profesjonalna strona internetowa dla biura tłumaczeń i szkoły językowej zbudowana w Next.js na podstawie projektu Klienta.",
+        "viewButton": "Zobacz Projekt"
+      },
+      "maszyna": {
+        "tileTitle": "MaSzyna: Reloaded",
+        "title": "Symulator Pociągów",
+        "subtitle": "Port symulatora MaSzyna do silnika Godot",
+        "description": "Projekt tworzenia gier przenoszący symulator pociągów na nowoczesny silnik gier.",
+        "viewButton": "Repozytorium GitHub"
+      }
+    },
+    "cta": {
+      "title": "Zainteresowany Współpracą?",
+      "description": "Jeśli podoba Ci się moja praca i jesteś zainteresowany współpracą przy projekcie, chętnie się z Tobą skontaktuję!",
+      "contactButton": "Skontaktuj się ze mną",
+      "tosButton": "Zobacz Warunki Świadczenia Usług"
+    }
+  },
+  "tosView": {
+    "title": "Warunki Świadczenia Usług",
+    "lastUpdated": "Ostatnia aktualizacja: 15 września 2020",
+    "introduction": {
+      "title": "Wprowadzenie",
+      "content": "Ten dokument Warunków Świadczenia Usług zawiera listę zasad dotyczących tego, jak pracuję nad zleceniami. Proszę przeczytać ten dokument uważnie przed skorzystaniem z moich usług."
+    },
+    "importantInfo": {
+      "title": "Ważne Informacje",
+      "contentRestrictions": {
+        "title": "Ograniczenia Treści",
+        "nsfw": {
+          "title": "Treści NSFW",
+          "content": "NIE tworzę stron internetowych z treściami NSFW."
+        }
+      },
+      "documentation": {
+        "title": "Dokumentacja",
+        "privacyAndTos": {
+          "title": "Polityka Prywatności i Warunki Świadczenia Usług",
+          "content": "Dołączę Politykę Prywatności i Warunki Świadczenia Usług do Twojej strony internetowej TYLKO jeśli dostarczysz treść tych dokumentów."
+        }
+      },
+      "billing": {
+        "title": "Rozliczenia",
+        "vatInvoices": {
+          "title": "Faktury VAT",
+          "content": "Nie wystawiam faktur VAT."
+        }
+      },
+      "refundPolicy": {
+        "title": "Polityka Zwrotów",
+        "content": "Zwroty będą realizowane TYLKO w przypadku problemów z zamówieniem, gdy nie mogę go ukończyć.",
+        "points": {
+          "noRefunds": "W innych przypadkach nie zwracam pieniędzy.",
+          "cancelAfterPayment": "Jeśli zamówienie zostanie anulowane po dokonaniu płatności, nie zwrócę pieniędzy.",
+          "cancelBeforePayment": "Jeśli zamówienie zostanie anulowane przed dokonaniem płatności, WSZYSTKO, co zostało stworzone dla zamówienia, zostanie usunięte."
+        }
+      },
+      "warrantySupport": {
+        "title": "Gwarancja i Wsparcie",
+        "coverage": {
+          "title": "Zakres Gwarancji",
+          "myCode": "Mój kod - odnosi się do kodu, który osobiście napisałem. Nie obejmuje to kodu napisanego na serwerach Google, serwerach Google Firebase ani żadnych innych usługach stron trzecich.",
+          "period": "Gwarancja na działanie mojego kodu: 1 Rok",
+          "details": "Gwarancja obejmuje bezpłatne poprawki strony internetowej w okresie gwarancyjnym. Po wygaśnięciu okresu gwarancyjnego nie odpowiadam za działanie kodu i nie będę go naprawiać."
+        },
+        "support": {
+          "title": "Wsparcie",
+          "websiteIssues": "W przypadku jakichkolwiek problemów z działaniem strony internetowej: proszę dać mi znać, abym mógł się tym zająć.",
+          "thirdPartyIssues": "W przypadku jakichkolwiek problemów z działaniem Google Firebase lub innych usług używanych na stronie: proszę dać mi znać."
+        },
+        "changes": {
+          "title": "Zmiany w Zamówieniach",
+          "content": "Dodatkowe zmiany w zamówieniu, nawet najmniejsze, dokonane po określeniu zawartości strony będą kosztować dodatkowe pieniądze."
+        }
+      }
+    },
+    "paymentServices": {
+      "title": "Płatności i Usługi",
+      "paymentInfo": {
+        "title": "Informacje o Płatnościach",
+        "supportedServices": "Obsługiwane usługi płatnicze:",
+        "services": {
+          "paypal": "PayPal",
+          "wise": "Wise",
+          "revolut": "Revolut"
+        },
+        "currencies": "Akceptowane waluty: USD",
+        "disclaimer": "Nie odpowiadam za problemy z płatnościami w wymienionych powyżej serwisach - proszę skontaktować się z ich wsparciem technicznym w sprawie rozwiązania problemu i poinformować mnie o sytuacji."
+      },
+      "thirdParty": {
+        "title": "Usługi Stron Trzecich",
+        "firebase": {
+          "title": "Google Firebase",
+          "usage": "Korzystam z usług Google Firebase do hostowania tej strony internetowej.",
+          "tos": "Google Firebase ma własne Warunki Świadczenia Usług na",
+          "tosLink": "https://firebase.google.com/terms",
+          "resources": "Hosting, domeny i inne zasoby muszą być opłacane przez samego klienta."
+        }
+      },
+      "orderProcess": {
+        "title": "Proces Zamówienia",
+        "steps": {
+          "step1": "Najpierw musisz napisać do mnie na Discordzie. Po określeniu zawartości strony i obowiązkowej akceptacji przez Ciebie, zacznę pracować nad wstępnym projektem.",
+          "step2": "Po ukończeniu wstępnego projektu, umówię się z Tobą, aby pokazać go w formie transmisji projektu z mojego komputera przez Discorda.",
+          "step3": "Po zaakceptowaniu projektu, będę czekać na płatność (wtedy oczywiście otrzymasz link do PayPala i całe podsumowanie zamówienia, jeśli chcesz).",
+          "step4": "Gdy pieniądze dotrą, zacznę programować stronę internetową, jeśli to konieczne. Jeśli nie - wyślę ją od razu w formie plików HTML, JS i CSS z wymaganymi zasobami.",
+          "step5": "Jeśli wymagane było użycie Google Firebase, po dokonaniu płatności otrzymasz dostęp do całego projektu Google Firebase stworzonego dla strony internetowej."
+        },
+        "changeWarning": "Zmiany dokonane przez Ciebie po rozpoczęciu pracy nad zamówieniem BĘDĄ KOSZTOWAĆ DODATKOWO.",
+        "hostingNote": "Jeśli planujesz hostować stronę internetową na Google Firebase Hosting - musisz sam opłacić koszt planu Blaze dla projektu, a następnie pomogę Ci w konfiguracji wszystkiego (jeśli nie zostało to uzgodnione na początku, będziesz musiał zapłacić trochę więcej za pomoc)."
+      }
+    },
+    "dataSecurity": {
+      "title": "Bezpieczeństwo Danych",
+      "personalData": {
+        "title": "Bezpieczeństwo Twoich Danych Osobowych",
+        "content": "Bezpieczeństwo Twoich Danych Osobowych jest dla Nas ważne, ale pamiętaj, że żadna metoda transmisji przez Internet lub metoda elektronicznego przechowywania nie jest w 100% bezpieczna. Chociaż staramy się używać komercyjnie akceptowalnych środków do ochrony Twoich Danych Osobowych, nie możemy zagwarantować ich absolutnego bezpieczeństwa.",
+        "moreInfo": "Aby uzyskać więcej informacji, zapoznaj się z naszą",
+        "privacyPolicy": "Polityką Prywatności"
+      }
+    }
+  },
+  "userProfileView": {
+    "error": {
+      "notFound": "Konto, które próbujesz wyświetlić, już nie istnieje"
+    },
+    "alt": {
+      "profilePicture": "Zdjęcie profilowe"
+    },
+    "profileStatus": {
+      "public": "Publiczny",
+      "private": "Prywatny"
+    },
+    "emailStatus": {
+      "verified": "Zweryfikowany",
+      "notVerified": "Niezweryfikowany"
+    },
+    "sections": {
+      "profileInformation": "Informacje o Profilu",
+      "accountDetails": "Szczegóły Konta",
+      "accountTimeline": "Oś Czasu Konta",
+      "connectedAccounts": "Połączone Konta"
+    },
+    "fields": {
+      "fullName": "Pełne Imię",
+      "emailAddress": "Adres Email",
+      "accountCreated": "Konto Utworzone",
+      "lastUpdated": "Ostatnia Aktualizacja"
+    },
+    "connectedAccounts": {
+      "google": "Google",
+      "github": "GitHub",
+      "repositories": "Repozytoria",
+      "followers": "Obserwujący"
+    }
+  },
+  "accountSettingsView": {
+    "error": {
+      "notFound": "Konto, które próbujesz wyświetlić, już nie istnieje"
+    },
+    "title": "Ustawienia Konta",
+    "subtitle": "Zarządzaj informacjami o koncie i połączonymi usługami.",
+    "tabs": {
+      "profile": "Informacje o Profilu",
+      "accounts": "Połączone Konta",
+      "notifications": "Powiadomienia",
+      "activity": "Aktywność",
+      "security": "Bezpieczeństwo"
+    },
+    "profile": {
+      "title": "Informacje o Profilu",
+      "avatarHelp": "Aby zmienić swój awatar, połącz konto społecznościowe lub wybierz inne źródło awatara w sekcji Połączone Konta.",
+      "saveButton": "Zapisz",
+      "fields": {
+        "fullName": "Pełne imię",
+        "emailAddress": "Adres email",
+        "profileCreated": "Profil utworzony",
+        "lastUpdate": "Ostatnia aktualizacja profilu",
+        "profileVisibility": "Widoczność profilu"
+      },
+      "visibility": {
+        "public": "Publiczny",
+        "private": "Prywatny",
+        "publicDescription": "Twój profil jest widoczny dla wszystkich",
+        "privateDescription": "Twój profil jest widoczny tylko dla Ciebie"
+      }
+    },
+    "connectedAccounts": {
+      "title": "Połączone Konta",
+      "subtitle": "Zarządzaj swoimi połączonymi kontami społecznościowymi.",
+      "avatarSource": {
+        "title": "Źródło Awatara",
+        "description": "Wybierz, które połączone konto ma być używane jako awatar profilu.",
+        "auto": "Automatycznie (użyj pierwszego dostępnego)",
+        "google": "Google",
+        "github": "GitHub",
+        "default": "Domyślny awatar",
+        "notAvailable": "(niedostępne)"
+      },
+      "status": {
+        "connected": "Połączono",
+        "notConnected": "Nie połączono"
+      },
+      "buttons": {
+        "connect": "Połącz",
+        "disconnect": "Rozłącz"
+      }
+    },
+    "notifications": {
+      "title": "Ustawienia Powiadomień",
+      "subtitle": "Zarządzaj sposobem otrzymywania powiadomień.",
+      "emailNotifications": {
+        "title": "Powiadomienia Email",
+        "description": "Otrzymuj powiadomienia o aktywności konta przez email."
+      },
+      "marketingEmails": {
+        "title": "Emaile Marketingowe",
+        "description": "Otrzymuj emaile o nowych funkcjach i promocjach."
+      },
+      "securityAlerts": {
+        "title": "Alerty Bezpieczeństwa",
+        "description": "Otrzymuj ważne powiadomienia o bezpieczeństwie dotyczące Twojego konta."
+      },
+      "saveButton": "Zapisz Ustawienia Powiadomień"
+    },
+    "activity": {
+      "title": "Aktywność Konta",
+      "subtitle": "Zobacz swoją ostatnią historię logowania i aktywność konta.",
+      "noHistory": "Brak dostępnej historii logowania.",
+      "loadError": "Nie udało się załadować historii logowania. Spróbuj ponownie później.",
+      "recentLogins": "Ostatnie Logowania",
+      "table": {
+        "dateTime": "Data i Czas",
+        "ipAddress": "Adres IP",
+        "location": "Lokalizacja",
+        "device": "Urządzenie"
+      }
+    },
+    "security": {
+      "title": "Bezpieczeństwo",
+      "subtitle": "Zarządzaj swoim hasłem i bezpieczeństwem konta.",
+      "changePassword": {
+        "title": "Zmień Hasło",
+        "currentPassword": "Obecne Hasło",
+        "newPassword": "Nowe Hasło",
+        "confirmPassword": "Potwierdź Nowe Hasło",
+        "updateButton": "Aktualizuj Hasło",
+        "success": "Hasło zostało pomyślnie zaktualizowane",
+        "errors": {
+          "required": "Wymagane jest obecne hasło",
+          "length": "Nowe hasło musi mieć co najmniej 8 znaków",
+          "match": "Hasła nie pasują do siebie"
+        }
+      },
+      "dataExport": {
+        "title": "Eksport Danych",
+        "description": "Pobierz kopię wszystkich swoich danych konta.",
+        "exportButton": "Eksportuj Moje Dane"
+      },
+      "dangerZone": {
+        "title": "Strefa Niebezpieczna",
+        "deleteButton": "Usuń Konto",
+        "confirmMessage": "Czy na pewno chcesz usunąć swoje konto? Ta akcja nie może być cofnięta, a wszystkie Twoje dane zostaną trwale usunięte.",
+        "confirmButton": "Tak, Usuń Moje Konto",
+        "cancelButton": "Anuluj"
+      }
+    }
+  },
+  "privacyPolicy": {
+    "title": "Polityka Prywatności",
+    "lastUpdated": "Ostatnia aktualizacja: 16 sierpnia 2020",
+    "introduction": {
+      "title": "Wprowadzenie",
+      "paragraph1": "Niniejsza Polityka Prywatności opisuje nasze zasady i procedury dotyczące gromadzenia, wykorzystywania i ujawniania Twoich informacji podczas korzystania z Usługi oraz informuje o Twoich prawach do prywatności i o tym, jak prawo Cię chroni.",
+      "paragraph2": "Używamy Twoich danych osobowych w celu świadczenia i ulepszania Usługi. Korzystając z Usługi, zgadzasz się na gromadzenie i wykorzystywanie informacji zgodnie z niniejszą Polityką Prywatności."
+    },
+    "interpretationDefinitions": {
+      "title": "Interpretacja i Definicje",
+      "interpretation": {
+        "title": "Interpretacja",
+        "content": "Słowa, których pierwsza litera jest pisana wielką literą, mają znaczenia zdefiniowane w następujących warunkach. Poniższe definicje mają to samo znaczenie niezależnie od tego, czy występują w liczbie pojedynczej czy mnogiej."
+      },
+      "definitions": {
+        "title": "Definicje",
+        "intro": "Na potrzeby niniejszej Polityki Prywatności:",
+        "account": "Konto",
+        "accountDesc": "Unikalne konto utworzone dla Ciebie w celu uzyskania dostępu do naszej Usługi lub jej części.",
+        "company": "Firma",
+        "companyDesc": "Określana jako \"Firma\", \"My\", \"Nas\" lub \"Nasza\" w niniejszej Umowie, odnosi się do New DEV.",
+        "cookies": "Pliki Cookie",
+        "cookiesDesc": "Małe pliki umieszczane na Twoim komputerze, urządzeniu mobilnym lub innym urządzeniu przez stronę internetową, zawierające szczegóły Twojej historii przeglądania na tej stronie, wśród wielu innych zastosowań.",
+        "country": "Kraj",
+        "countryDesc": "Polska",
+        "device": "Urządzenie",
+        "deviceDesc": "Dowolne urządzenie, które może uzyskać dostęp do Usługi, takie jak komputer, telefon komórkowy lub tablet cyfrowy.",
+        "personalData": "Dane Osobowe",
+        "personalDataDesc": "Wszelkie informacje, które odnoszą się do zidentyfikowanej lub możliwej do zidentyfikowania osoby.",
+        "service": "Usługa",
+        "serviceDesc": "Odnosi się do Strony Internetowej.",
+        "serviceProvider": "Dostawca Usług",
+        "serviceProviderDesc": "Każda osoba fizyczna lub prawna, która przetwarza dane w imieniu Firmy. Odnosi się do firm zewnętrznych lub osób zatrudnionych przez Firmę w celu ułatwienia świadczenia Usługi, świadczenia Usługi w imieniu Firmy, wykonywania usług związanych z Usługą lub pomocy Firmie w analizowaniu sposobu korzystania z Usługi.",
+        "thirdPartySocialMedia": "Usługa Mediów Społecznościowych Stron Trzecich",
+        "thirdPartySocialMediaDesc": "Dowolna strona internetowa lub dowolna strona sieci społecznościowej, za pośrednictwem której Użytkownik może zalogować się lub utworzyć konto w celu korzystania z Usługi.",
+        "usageData": "Dane Użytkowania",
+        "usageDataDesc": "Dane zbierane automatycznie, generowane przez korzystanie z Usługi lub z infrastruktury Usługi (na przykład czas trwania wizyty na stronie).",
+        "website": "Strona Internetowa",
+        "websiteDesc": "Odnosi się do New DEV, dostępnej pod adresem",
+        "you": "Ty",
+        "youDesc": "Osoba fizyczna korzystająca z Usługi lub firma bądź inna osoba prawna, w imieniu której taka osoba fizyczna korzysta z Usługi."
+      }
+    },
+    "personalData": {
+      "title": "Gromadzenie i Wykorzystywanie Twoich Danych Osobowych",
+      "typesCollected": {
+        "title": "Rodzaje Gromadzonych Danych",
+        "personalData": {
+          "title": "Dane Osobowe",
+          "content": "Podczas korzystania z Naszej Usługi możemy poprosić Cię o podanie pewnych danych umożliwiających identyfikację, które mogą być wykorzystane do kontaktu lub identyfikacji. Dane umożliwiające identyfikację mogą obejmować, ale nie są ograniczone do:",
+          "item1": "Adres e-mail",
+          "item2": "Dane użytkowania"
+        },
+        "usageData": {
+          "title": "Dane Użytkowania",
+          "paragraph1": "Dane Użytkowania są zbierane automatycznie podczas korzystania z Usługi.",
+          "paragraph2": "Dane Użytkowania mogą obejmować informacje takie jak adres protokołu internetowego Twojego Urządzenia (np. adres IP), typ przeglądarki, wersja przeglądarki, strony naszej Usługi, które odwiedzasz, godzina i data Twojej wizyty, czas spędzony na tych stronach, unikalne identyfikatory urządzeń i inne dane diagnostyczne.",
+          "paragraph3": "Gdy uzyskujesz dostęp do Usługi za pomocą lub przez urządzenie mobilne, możemy automatycznie gromadzić pewne informacje, w tym między innymi typ używanego urządzenia mobilnego, unikalny identyfikator Twojego urządzenia mobilnego, adres IP Twojego urządzenia mobilnego, Twój mobilny system operacyjny, typ używanej mobilnej przeglądarki internetowej, unikalne identyfikatory urządzeń i inne dane diagnostyczne.",
+          "paragraph4": "Możemy również gromadzić informacje, które Twoja przeglądarka wysyła za każdym razem, gdy odwiedzasz naszą Usługę lub gdy uzyskujesz dostęp do Usługi za pomocą lub przez urządzenie mobilne."
+        },
+        "trackingTechnologies": {
+          "title": "Technologie Śledzenia i Pliki Cookie",
+          "paragraph1": "Używamy Plików Cookie i podobnych technologii śledzenia, aby śledzić aktywność w Naszej Usłudze i przechowywać określone informacje. Używane technologie śledzenia to sygnały nawigacyjne, znaczniki i skrypty do zbierania i śledzenia informacji oraz do ulepszania i analizowania Naszej Usługi.",
+          "paragraph2": "Możesz poinstruować swoją przeglądarkę, aby odrzucała wszystkie Pliki Cookie lub wskazywała, kiedy Plik Cookie jest wysyłany. Jednak jeśli nie akceptujesz Plików Cookie, możesz nie być w stanie korzystać z niektórych części naszej Usługi.",
+          "paragraph3": "Pliki Cookie mogą być \"Trwałe\" lub \"Sesyjne\". Trwałe Pliki Cookie pozostają na Twoim komputerze osobistym lub urządzeniu mobilnym, gdy przechodzisz w tryb offline, podczas gdy Sesyjne Pliki Cookie są usuwane, gdy tylko zamkniesz przeglądarkę internetową. Dowiedz się więcej o plikach cookie:",
+          "cookiesLink": "Wszystko o Plikach Cookie",
+          "paragraph4": "Używamy zarówno sesyjnych, jak i trwałych Plików Cookie w celach określonych poniżej:",
+          "necessaryCookies": {
+            "title": "Niezbędne / Podstawowe Pliki Cookie",
+            "type": "Typ:",
+            "typeValue": "Sesyjne Pliki Cookie",
+            "administeredBy": "Administrowane przez:",
+            "administeredByValue": "Nas",
+            "purpose": "Cel:",
+            "purposeValue": "Te Pliki Cookie są niezbędne do świadczenia usług dostępnych za pośrednictwem Strony Internetowej i umożliwienia korzystania z niektórych jej funkcji. Pomagają uwierzytelniać użytkowników i zapobiegać nieuczciwemu korzystaniu z kont użytkowników. Bez tych Plików Cookie usługi, o które prosiłeś, nie mogą być świadczone, a my używamy tych Plików Cookie tylko w celu świadczenia tych usług."
+          },
+          "acceptanceCookies": {
+            "title": "Pliki Cookie Polityki / Akceptacji Powiadomień",
+            "type": "Typ:",
+            "typeValue": "Trwałe Pliki Cookie",
+            "administeredBy": "Administrowane przez:",
+            "administeredByValue": "Nas"
+          },
+          "functionalityCookies": {
+            "title": "Funkcjonalne Pliki Cookie",
+            "type": "Typ:",
+            "typeValue": "Trwałe Pliki Cookie",
+            "administeredBy": "Administrowane przez:",
+            "administeredByValue": "Nas",
+            "purpose": "Cel:",
+            "purposeValue": "Te Pliki Cookie pozwalają nam zapamiętać wybory, których dokonujesz podczas korzystania ze Strony Internetowej, takie jak zapamiętywanie danych logowania lub preferencji językowych. Celem tych Plików Cookie jest zapewnienie Ci bardziej osobistego doświadczenia i uniknięcie konieczności ponownego wprowadzania preferencji za każdym razem, gdy korzystasz ze Strony Internetowej."
+          },
+          "moreInfo": "Aby uzyskać więcej informacji na temat używanych przez nas plików cookie i Twoich wyborów dotyczących plików cookie, odwiedź naszą Politykę Plików Cookie lub sekcję Pliki Cookie w naszej Polityce Prywatności."
+        }
+      },
+      "useOfPersonalData": {
+        "title": "Wykorzystanie Twoich Danych Osobowych",
+        "intro": "Firma może wykorzystywać Dane Osobowe w następujących celach:",
+        "purposes": {
+          "provideService": {
+            "title": "Aby świadczyć i utrzymywać naszą Usługę",
+            "description": "w tym monitorować korzystanie z naszej Usługi."
+          },
+          "manageAccount": {
+            "title": "Aby zarządzać Twoim Kontem:",
+            "description": "aby zarządzać Twoją rejestracją jako użytkownika Usługi. Podane przez Ciebie Dane Osobowe mogą dać Ci dostęp do różnych funkcjonalności Usługi, które są dostępne dla Ciebie jako zarejestrowanego użytkownika."
+          },
+          "performContract": {
+            "title": "Do wykonania umowy:",
+            "description": "rozwój, zgodność i podjęcie umowy kupna produktów, przedmiotów lub usług, które zakupiłeś, lub jakiejkolwiek innej umowy z Nami za pośrednictwem Usługi."
+          },
+          "contactYou": {
+            "title": "Aby się z Tobą skontaktować:",
+            "description": "Aby skontaktować się z Tobą za pomocą poczty elektronicznej, połączeń telefonicznych, wiadomości SMS lub innych równoważnych form komunikacji elektronicznej, takich jak powiadomienia push aplikacji mobilnej dotyczące aktualizacji lub informacyjnych komunikatów związanych z funkcjonalnościami, produktami lub zakontraktowanymi usługami, w tym aktualizacjami bezpieczeństwa, gdy jest to konieczne lub uzasadnione dla ich wdrożenia."
+          },
+          "provideOffers": {
+            "title": "Aby dostarczać Ci",
+            "description": "wiadomości, specjalne oferty i ogólne informacje o innych towarach, usługach i wydarzeniach, które oferujemy, a które są podobne do tych, które już kupiłeś lub o które pytałeś, chyba że zdecydowałeś się nie otrzymywać takich informacji."
+          },
+          "manageRequests": {
+            "title": "Aby zarządzać Twoimi prośbami:",
+            "description": "Aby obsługiwać i zarządzać Twoimi prośbami do Nas."
+          }
+        },
+        "sharingInfo": "Możemy udostępniać Twoje dane osobowe w następujących sytuacjach:",
+        "sharingScenarios": {
+          "serviceProviders": {
+            "title": "Z Dostawcami Usług:",
+            "description": "Możemy udostępniać Twoje dane osobowe Dostawcom Usług w celu monitorowania i analizowania korzystania z naszej Usługi, aby się z Tobą skontaktować."
+          },
+          "businessTransfers": {
+            "title": "Dla Transferów biznesowych:",
+            "description": "Możemy udostępniać lub przekazywać Twoje dane osobowe w związku z lub podczas negocjacji dotyczących fuzji, sprzedaży aktywów Firmy, finansowania lub przejęcia całości lub części naszej działalności przez inną firmę."
+          },
+          "affiliates": {
+            "title": "Z Podmiotami stowarzyszonymi:",
+            "description": "Możemy udostępniać Twoje informacje Naszym podmiotom stowarzyszonym, w którym to przypadku będziemy wymagać od tych podmiotów stowarzyszonych przestrzegania niniejszej Polityki Prywatności. Podmioty stowarzyszone obejmują Naszą spółkę macierzystą i wszelkie inne spółki zależne, partnerów joint venture lub inne firmy, które kontrolujemy lub które są pod wspólną kontrolą z Nami."
+          },
+          "businessPartners": {
+            "title": "Z Partnerami biznesowymi:",
+            "description": "Możemy udostępniać Twoje informacje Naszym partnerom biznesowym, aby zaoferować Ci określone produkty, usługi lub promocje."
+          },
+          "otherUsers": {
+            "title": "Z innymi użytkownikami:",
+            "description": "gdy udostępniasz dane osobowe lub w inny sposób wchodzisz w interakcje w obszarach publicznych z innymi użytkownikami, takie informacje mogą być widoczne dla wszystkich użytkowników i mogą być publicznie rozpowszechniane na zewnątrz. Jeśli wchodzisz w interakcje z innymi użytkownikami lub rejestrujesz się za pośrednictwem Usługi Mediów Społecznościowych Stron Trzecich, Twoje kontakty w Usłudze Mediów Społecznościowych Stron Trzecich mogą zobaczyć Twoje imię i nazwisko, profil, zdjęcia i opis Twojej aktywności. Podobnie, inni użytkownicy będą mogli przeglądać opisy Twojej aktywności, komunikować się z Tobą i przeglądać Twój profil."
+          }
+        }
+      }
+    },
+    "dataManagement": {
+      "title": "Zarządzanie Danymi i Bezpieczeństwo",
+      "retention": {
+        "title": "Przechowywanie Twoich Danych Osobowych",
+        "paragraph1": "Firma będzie przechowywać Twoje Dane Osobowe tylko tak długo, jak jest to konieczne dla celów określonych w niniejszej Polityce Prywatności. Będziemy przechowywać i wykorzystywać Twoje Dane Osobowe w zakresie niezbędnym do wypełnienia naszych zobowiązań prawnych (na przykład, jeśli jesteśmy zobowiązani do przechowywania Twoich danych w celu przestrzegania obowiązujących przepisów), rozstrzygania sporów i egzekwowania naszych umów i polityk prawnych.",
+        "paragraph2": "Firma będzie również przechowywać Dane Użytkowania do celów analizy wewnętrznej. Dane Użytkowania są generalnie przechowywane przez krótszy okres czasu, z wyjątkiem sytuacji, gdy dane te są wykorzystywane do wzmocnienia bezpieczeństwa lub poprawy funkcjonalności Naszej Usługi, lub gdy jesteśmy prawnie zobowiązani do przechowywania tych danych przez dłuższe okresy."
+      },
+      "transfer": {
+        "title": "Przekazywanie Twoich Danych Osobowych",
+        "paragraph1": "Twoje informacje, w tym Dane Osobowe, są przetwarzane w biurach operacyjnych Firmy i w każdym innym miejscu, gdzie znajdują się strony zaangażowane w przetwarzanie. Oznacza to, że informacje te mogą być przekazywane do — i utrzymywane na — komputerach znajdujących się poza Twoim stanem, prowincją, krajem lub inną jurysdykcją rządową, gdzie przepisy o ochronie danych mogą różnić się od tych z Twojej jurysdykcji.",
+        "paragraph2": "Twoja zgoda na niniejszą Politykę Prywatności, a następnie przekazanie przez Ciebie takich informacji, stanowi Twoją zgodę na takie przekazanie.",
+        "paragraph3": "Firma podejmie wszelkie niezbędne kroki, aby zapewnić, że Twoje dane są traktowane bezpiecznie i zgodnie z niniejszą Polityką Prywatności, a żadne przekazanie Twoich Danych Osobowych nie będzie miało miejsca do organizacji lub kraju, chyba że istnieją odpowiednie kontrole, w tym bezpieczeństwo Twoich danych i innych informacji osobistych."
+      },
+      "disclosure": {
+        "title": "Ujawnianie Twoich Danych Osobowych",
+        "businessTransactions": {
+          "title": "Transakcje Biznesowe",
+          "content": "Jeśli Firma jest zaangażowana w fuzję, przejęcie lub sprzedaż aktywów, Twoje Dane Osobowe mogą zostać przekazane. Powiadomimy Cię przed przekazaniem Twoich Danych Osobowych i poddaniem ich innej Polityce Prywatności."
+        },
+        "lawEnforcement": {
+          "title": "Egzekwowanie Prawa",
+          "content": "W pewnych okolicznościach Firma może być zobowiązana do ujawnienia Twoich Danych Osobowych, jeśli jest to wymagane przez prawo lub w odpowiedzi na ważne żądania organów publicznych (np. sądu lub agencji rządowej)."
+        },
+        "otherLegalRequirements": {
+          "title": "Inne Wymogi Prawne",
+          "intro": "Firma może ujawnić Twoje Dane Osobowe w dobrej wierze, że takie działanie jest konieczne do:",
+          "item1": "Przestrzegania obowiązku prawnego",
+          "item2": "Ochrony i obrony praw lub własności Firmy",
+          "item3": "Zapobiegania lub badania możliwych wykroczeń w związku z Usługą",
+          "item4": "Ochrony bezpieczeństwa osobistego Użytkowników Usługi lub społeczeństwa",
+          "item5": "Ochrony przed odpowiedzialnością prawną"
+        }
+      },
+      "security": {
+        "title": "Bezpieczeństwo Twoich Danych Osobowych",
+        "content": "Bezpieczeństwo Twoich Danych Osobowych jest dla Nas ważne, ale pamiętaj, że żadna metoda transmisji przez Internet lub metoda elektronicznego przechowywania nie jest w 100% bezpieczna. Chociaż staramy się używać komercyjnie akceptowalnych środków do ochrony Twoich Danych Osobowych, nie możemy zagwarantować ich absolutnego bezpieczeństwa."
+      }
+    },
+    "californiaRights": {
+      "title": "Prawa Prywatności w Kalifornii",
+      "shineTheLight": {
+        "title": "Kalifornijskie Prawo Shine the Light",
+        "paragraph1": "Sekcja 1798 Kalifornijskiego Kodeksu Cywilnego (kalifornijskie prawo Shine the Light), mieszkańcy Kalifornii z ustanowioną relacją biznesową z nami mogą raz w roku żądać informacji o udostępnianiu ich Danych Osobowych stronom trzecim do celów marketingu bezpośredniego stron trzecich.",
+        "paragraph2": "Jeśli chcesz poprosić o więcej informacji na podstawie kalifornijskiego prawa Shine the Light i jeśli jesteś mieszkańcem Kalifornii, możesz skontaktować się z Nami, korzystając z informacji kontaktowych podanych poniżej."
+      },
+      "minorUsers": {
+        "title": "Prawa Prywatności dla Nieletnich Użytkowników",
+        "paragraph1": "Sekcja 22581 Kalifornijskiego Kodeksu Biznesu i Zawodów pozwala mieszkańcom Kalifornii poniżej 18 roku życia, którzy są zarejestrowanymi użytkownikami stron internetowych, usług lub aplikacji, żądać i uzyskać usunięcie treści lub informacji, które publicznie opublikowali.",
+        "paragraph2": "Aby zażądać usunięcia takich danych, i jeśli jesteś mieszkańcem Kalifornii, możesz skontaktować się z Nami, korzystając z informacji kontaktowych podanych poniżej, i dołączyć adres e-mail powiązany z Twoim kontem.",
+        "paragraph3": "Pamiętaj, że Twoja prośba nie gwarantuje całkowitego lub kompleksowego usunięcia treści lub informacji opublikowanych online oraz że prawo może nie zezwalać lub nie wymagać usunięcia w pewnych okolicznościach."
+      }
+    },
+    "additionalInfo": {
+      "title": "Dodatkowe Informacje",
+      "otherWebsites": {
+        "title": "Linki do Innych Stron Internetowych",
+        "paragraph1": "Nasza Usługa może zawierać linki do innych stron internetowych, które nie są obsługiwane przez Nas. Jeśli klikniesz link strony trzeciej, zostaniesz przekierowany na stronę tej strony trzeciej. Zdecydowanie zalecamy zapoznanie się z Polityką Prywatności każdej odwiedzanej strony.",
+        "paragraph2": "Nie mamy kontroli i nie ponosimy odpowiedzialności za treść, polityki prywatności lub praktyki jakichkolwiek stron lub usług stron trzecich."
+      },
+      "changes": {
+        "title": "Zmiany w niniejszej Polityce Prywatności",
+        "paragraph1": "Możemy od czasu do czasu aktualizować naszą Politykę Prywatności. Powiadomimy Cię o wszelkich zmianach, publikując nową Politykę Prywatności na tej stronie.",
+        "paragraph2": "Poinformujemy Cię za pośrednictwem e-maila i/lub widocznego powiadomienia w Naszej Usłudze, przed wejściem zmiany w życie i zaktualizujemy datę \"Ostatnia aktualizacja\" na górze niniejszej Polityki Prywatności.",
+        "paragraph3": "Zaleca się okresowe przeglądanie niniejszej Polityki Prywatności pod kątem zmian. Zmiany w niniejszej Polityce Prywatności są skuteczne, gdy są publikowane na tej stronie."
+      }
+    },
+    "contact": {
+      "title": "Kontakt z Nami",
+      "intro": "Jeśli masz jakiekolwiek pytania dotyczące niniejszej Polityki Prywatności, możesz skontaktować się z nami:",
+      "byVisiting": "Odwiedzając",
+      "contactPage": "stronę Kontakt",
+      "onWebsite": "na naszej stronie internetowej"
+    }
+  }
+}
