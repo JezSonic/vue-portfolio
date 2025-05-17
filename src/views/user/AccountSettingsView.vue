@@ -773,7 +773,7 @@
                                         <tr v-for="(login, index) in loginHistory" :key="index"
                                             class="hover:bg-gray-700">
                                             <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                                                {{ timestampToDate(login.created_at) }}
+                                                {{ timestampToDate(login.performed_at) }}
                                             </td>
                                             <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-[80px] sm:max-w-[150px] truncate">
                                                 {{ login.ip_address }}

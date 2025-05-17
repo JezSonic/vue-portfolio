@@ -67,14 +67,11 @@ export interface INotificationSettings {
 }
 
 export interface ILoginHistory {
-    id: number;
-    user_id: number;
     ip_address: string;
     user_agent: string;
     login_method: string;
     location?: string;
-    created_at: string;
-    updated_at: string;
+    performed_at: string;
 }
 
 export interface IProfileUpdateData extends IProfileSettings {
