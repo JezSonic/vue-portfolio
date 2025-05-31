@@ -282,7 +282,8 @@
   },
   "userProfileView": {
     "error": {
-      "notFound": "Konto, które próbujesz wyświetlić, już nie istnieje"
+      "notFound": "Konto, które próbujesz wyświetlić, już nie istnieje",
+      "privateProfile": "Ten profil jest ustawiony jako prywatny i nie może być wyświetlony"
     },
     "alt": {
       "profilePicture": "Zdjęcie profilowe"

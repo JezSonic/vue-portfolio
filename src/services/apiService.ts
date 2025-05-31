@@ -74,9 +74,11 @@ export default class ApiService {
 
     private static convertToResponseException(data: any): ExceptionResponse {
         return {
-            type: data.content.type,
-            errors: data.content.errors,
-            code: data.content.code
+            type: data.type,
+            errors: data.errors,
+            code: data.code,
+            message: data.message,
+            debug: data.debug
         }
     }
 

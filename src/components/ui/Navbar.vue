@@ -4,23 +4,13 @@
     import router from "@/router";
     import logo from "@/assets/icons/logo.png";
     import userDefault from "@/assets/profile/userDefault.png";
-    import { onMounted, ref, watch } from "vue";
+    import { onMounted, ref } from "vue";
     import { useUserStore } from "@/stores/userStore.js";
     import { useThemeStore } from "@/stores/themeStore";
     import AuthService from "@/services/authService.js";
     import { env } from "@/helpers/app.js";
     import { useI18n } from 'vue-i18n';
     import { setLanguage } from '@/i18n';
-    import UserService from '@/services/userService';
-
-    // Debounce function to prevent too frequent API calls
-    const debounce = (fn, delay) => {
-        let timeout;
-        return (...args) => {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => fn(...args), delay);
-        };
-    };
 
     const { t, locale } = useI18n();
     const currentRoute = ref(router.currentRoute.value.path)
@@ -32,32 +22,8 @@
     const toggleTheme = () => {
         const newTheme = themeStore.actualTheme === 'dark' ? 'light' : 'dark';
         themeStore.setTheme(newTheme);
-
-        // Update user settings if logged in
-        if (userStore.isLoggedIn()) {
-            syncUserSettings();
-        }
     };
 
-    // Debounced function to sync user settings with the server
-    const syncUserSettings = debounce(() => {
-        if (userStore.isLoggedIn()) {
-            UserService.update({
-                name: '', // We're not changing the name
-                is_public: true, // Default value, not changing
-                avatar_source: userStore.avatarSource,
-                theme: themeStore.theme,
-                language: locale.value,
-                notifications: { // Default values, not changing
-                    email_notifications: true,
-                    email_marketing: true,
-                    email_security_alerts: true
-                }
-            }).catch(error => {
-                console.error('Error updating user settings:', error);
-            });
-        }
-    }, 1000); // Debounce for 1 second
     const navigation = [
         {name: 'navigation.home', href: "/", current: router.currentRoute.value.name === "home"},
         {name: 'navigation.commissions', href: "/commissions", current: router.currentRoute.value.name === "commissions"},
@@ -72,56 +38,13 @@
 
     const changeLanguage = (langCode) => {
         setLanguage(langCode);
-
-        // Update user settings if logged in
-        if (userStore.isLoggedIn()) {
-            syncUserSettings();
-        }
     };
 
     const onDocumentScroll = () => {
         transparent.value = (window.scrollY === 0);
     };
 
-    // Watch for theme changes to sync with server
-    watch(() => themeStore.theme, () => {
-        if (userStore.isLoggedIn()) {
-            syncUserSettings();
-        }
-    });
-
-    // Watch for language changes to sync with server
-    watch(() => locale.value, () => {
-        if (userStore.isLoggedIn()) {
-            syncUserSettings();
-        }
-    });
-
     onMounted(() => {
-        if (userStore.isLoggedIn()) {
-            UserService.getUser().then((data) => {
-                // Set theme from user settings
-                themeStore.setTheme(data.profile_settings.theme);
-
-                // Set language from user settings
-                if (data.profile_settings.language) {
-                    setLanguage(data.profile_settings.language);
-                }
-
-                // Set avatar source from user settings
-                userStore.avatarSource = data.profile_settings.avatar_source;
-
-                // Set avatar URL based on avatar source
-                if (userStore.avatarSource === "google" && data.google?.avatar_url) {
-                    userStore.avatarSourceUrl = data.google.avatar_url;
-                } else if (userStore.avatarSource === "github" && data.github?.avatar_url) {
-                    userStore.avatarSourceUrl = data.github.avatar_url;
-                }
-            }).catch(error => {
-                console.error('Error fetching user data:', error);
-            });
-        }
-
         window.addEventListener("scroll", onDocumentScroll);
         currentRoute.value = router.currentRoute.value.path;
     })

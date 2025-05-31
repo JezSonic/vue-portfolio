@@ -9,19 +9,16 @@
     import userDefault from "@/assets/profile/userDefault.png";
     import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
     import { useI18n } from "vue-i18n";
+    import { ExceptionResponse } from "@/types/services/api.js";
 
     const { t, locale } = useI18n();
     const error = ref<boolean>(false);
     const userId = parseInt(router.currentRoute.value.params.id.toString() as string, 10);
     const userData = ref<IUserData | null>(null);
+    const isPrivateProfile = ref<boolean>(false);
 
     UserService.getUserByID(userId)
         .then((data) => {
-            if (!data.profile_settings.is_public) {
-                error.value = true;
-                return;
-            }
-
             userData.value = data;
             if (data.google) {
                 connectedSocialAccounts.value.push(OAuthProvider.Google);
@@ -29,7 +26,11 @@
             if (data.github) {
                 connectedSocialAccounts.value.push(OAuthProvider.GitHub);
             }
-        }).catch(() => {
+        }).catch((err: ExceptionResponse) => {
+            if (err.message == "private_profile") {
+                isPrivateProfile.value = true;
+                return;
+            }
             error.value = true;
         });
 
@@ -64,7 +65,10 @@
 
 <template>
     <div class="w-full h-full">
-        <div v-if="userData == null" class="loading">
+        <div v-if="isPrivateProfile" class="loading">
+            <Loading :loading="false" :error="true" :error-text="t('userProfileView.error.privateProfile')" />
+        </div>
+        <div v-else-if="userData == null" class="loading">
             <Loading :loading="true" :error="error" :error-text="t('userProfileView.error.notFound')" />
         </div>
         <div v-else class="text-gray-900 dark:text-white w-full max-w-6xl mx-auto px-4 py-8">
@@ -114,6 +118,8 @@
 
             <!-- Profile Content -->
             <div class="bg-white dark:bg-gray-800 rounded-b-lg shadow-lg overflow-hidden">
+                <h2 v-if="!userData?.profile_settings.is_public" class="text-xl p-6 bg-yellow-600 font-semibold text-gray-800 dark:text-gray-200">You can see your profile only because you are logged in. It is still invisible to everyone else</h2>
+
                 <!-- Profile Information -->
                 <div class="p-6 border-b border-gray-300 dark:border-gray-700">
                     <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">{{ t('userProfileView.sections.profileInformation') }}</h2>

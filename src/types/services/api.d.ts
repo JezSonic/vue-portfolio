@@ -30,5 +30,13 @@ export interface ExceptionResponse {
     errors: {
         [key: string]: string[]
     };
+    message: string;
+    debug: {
+        code: number,
+        file: string,
+        line: number,
+        message: string;
+        type: ExceptionType;
+    }
     code: number
 }

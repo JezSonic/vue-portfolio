@@ -17,6 +17,7 @@ import ApiService from "@/services/apiService";
                     userStore.token = res.token;
                     router.push(`/settings`);
                 }).catch(() => {
+                    userStore.logout();
                     error.value = true;
             })
         })

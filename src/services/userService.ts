@@ -2,7 +2,7 @@ import ApiService from "@/services/apiService.ts";
 import type { ILoginHistory, INotificationSettings, IProfileUpdateData, IUserData } from "@/types/user.d.ts";
 import { useUserStore } from "@/stores/userStore.ts";
 
-export default class USerService extends ApiService {
+export default class UserService extends ApiService {
     constructor() {
         super();
     }
@@ -34,5 +34,9 @@ export default class USerService extends ApiService {
 
     public static exportUserData(userId: number) {
         return this.get<{content: string}>(`user/${userId}/export`, {'Authorization': `Bearer ${useUserStore().token}`})
+    }
+
+    public static sendVerificationEmail() {
+        return this.post<{content: boolean}, {}>(`user/verify-email`, {}, {'Authorization': `Bearer ${useUserStore().token}`})
     }
 }

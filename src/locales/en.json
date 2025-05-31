@@ -282,7 +282,8 @@
   },
   "userProfileView": {
     "error": {
-      "notFound": "Account you are trying to view does not exist anymore"
+      "notFound": "Account you are trying to view does not exist anymore",
+      "privateProfile": "This profile is set to private and cannot be viewed"
     },
     "alt": {
       "profilePicture": "Profile picture"
