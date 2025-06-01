@@ -39,4 +39,8 @@ export default class UserService extends ApiService {
     public static sendVerificationEmail() {
         return this.post<{content: boolean}, {}>(`user/verify-email`, {}, {'Authorization': `Bearer ${useUserStore().token}`})
     }
+
+    public static verifyEmail(token: string) {
+        return this.post<{ content: boolean }, {}>(`user/verify-email/${token}`, {}, {'Authorization': `Bearer ${useUserStore().token}`});
+    }
 }

@@ -5,7 +5,7 @@
     import AuthService from "@/services/authService.ts";
     import { useRoute } from "vue-router";
     import Loading from "@/components/ui/Loading.vue";
-import ApiService from "@/services/apiService";
+    import ApiService from "@/services/apiService";
     const userStore = useUserStore()
     const error = ref<boolean>(false);
     onMounted(() => {

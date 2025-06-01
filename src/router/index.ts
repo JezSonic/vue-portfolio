@@ -20,6 +20,24 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
+    name: 'verify-email',
+    path: '/auth/verify-email/:token',
+    component: () => import('../views/auth/VerifyEmail.vue'),
+    meta: {
+      title: 'Auth - Verifying email...',
+      requires_backend: true,
+    }
+  },
+  {
+    name: 'reset-password',
+    path: '/auth/reset-password/:token',
+    component: () => import('../views/auth/ResetPassword.vue'),
+    meta: {
+      title: 'Auth - Reset password',
+      requires_backend: true,
+    }
+  },
+  {
     name: 'settings',
     path: '/settings',
     component: () => import('../views/user/AccountSettingsView.vue'),

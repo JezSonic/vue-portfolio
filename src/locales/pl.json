@@ -33,13 +33,22 @@
       "hasAccount": "Masz już konto?",
       "loginInstead": "Zaloguj się na swoje konto"
     },
+    "resetPassword": {
+      "title": "Zresetuj hasło do swojego konta",
+      "button": "Zresetuj"
+    },
     "form": {
       "emailLabel": "Adres email",
       "emailPlaceholder": "E-mail...",
       "nameLabel": "Imię",
       "namePlaceholder": "Imię...",
       "passwordLabel": "Hasło",
-      "passwordPlaceholder": "Hasło..."
+      "passwordPlaceholder": "Hasło...",
+      "forgotPasswordLabel": "Zapomniałeś/aś hasła?",
+      "newPasswordLabel": "Nowe hasło",
+      "newPasswordPlaceholder": "Nowe hasło...",
+      "confirmNewPasswordLabel": "Powtórz hasło",
+      "confirmNewPasswordPlaceholder": "Powtórz hasło..."
     },
     "oauth": {
       "title": "Lub kontynuuj z",

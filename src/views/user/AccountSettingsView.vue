@@ -11,6 +11,7 @@
     import i18n from "@/i18n";
     import { useI18n } from "vue-i18n";
     import Button from "@/components/ui/Button.vue";
+    import { env } from "@/helpers/app.js";
 
     const { t } = useI18n();
 
@@ -133,9 +134,9 @@
 
             loading.value = false;
         }).catch(() => {
-        userStore.logout();
-        error.value = true;
-        loading.value = false;
+            userStore.logout();
+            error.value = true;
+            loading.value = false;
     });
 
     // Save profile settings when changed
@@ -477,13 +478,12 @@
                                 <div class="w-full md:w-3/4">
                                     <dl class="divide-y divide-gray-700">
                                         <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-                                            <dt class="text-sm font-medium text-gray-400">
+                                            <dt class="text-sm font-medium text-gray-400 flex items-center">
                                                 {{ t("accountSettingsView.profile.fields.fullName") }}
                                             </dt>
                                             <dd class="mt-1 text-sm text-gray-300 sm:col-span-2 sm:mt-0">
                                                 <div v-if="!isEditingName" class="flex items-center">
-                                                    <span class="truncate max-w-[200px] sm:max-w-[300px] md:max-w-full">{{ userData?.name
-                                                        }}</span>
+                                                    <span class="truncate max-w-[200px] sm:max-w-[300px] md:max-w-full">{{ userData?.name}}</span>
                                                     <button class="ml-2 text-blue-500 hover:text-blue-400 flex-shrink-0"
                                                             @click="startEditName">
                                                         <svg class="h-4 w-4" fill="none"
@@ -525,25 +525,20 @@
                                             </dd>
                                         </div>
                                         <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-                                            <dt class="text-sm font-medium text-gray-400">
+                                            <dt class="text-sm font-medium text-gray-400 flex items-center">
                                                 {{ t("accountSettingsView.profile.fields.emailAddress") }}
                                             </dt>
                                             <dd class="mt-1 text-sm text-gray-300 sm:col-span-2 sm:mt-0">
                                                 <div class="flex items-center">
-                                                    <span class="truncate max-w-[200px] sm:max-w-[300px] md:max-w-full">{{ userData?.email
-                                                        }}</span>
-                                                    <Button text="Verify email" @click="sendVerificationEmail" />
-                                                    <span v-if="userData?.email_verified_at"
-                                                          class="ml-2 px-2 py-0.5 bg-green-900 text-green-300 rounded-full text-xs flex-shrink-0">{{ t("userProfileView.emailStatus.verified")
-                                                        }}</span>
-                                                    <span v-else
-                                                          class="ml-2 px-2 py-0.5 bg-yellow-900 text-yellow-300 rounded-full text-xs flex-shrink-0">{{ t("userProfileView.emailStatus.notVerified")
-                                                        }}</span>
+                                                    <span class="truncate max-w-[200px] sm:max-w-[300px] md:max-w-full">{{ userData?.email}}</span>
+                                                    <Button class="ml-2" v-if="!userData?.email_verified_at && env('VITE_APP_ENABLE_EMAILING', false)" text="Verify" @click="sendVerificationEmail" />
+                                                    <span v-if="userData?.email_verified_at" class="ml-2 px-2 py-0.5 bg-green-900 text-green-300 rounded-full text-xs flex-shrink-0">{{ t("userProfileView.emailStatus.verified")}}</span>
+                                                    <span v-else class="ml-2 px-2 py-0.5 bg-yellow-900 text-yellow-300 rounded-full text-xs flex-shrink-0">{{ t("userProfileView.emailStatus.notVerified")}}</span>
                                                 </div>
                                             </dd>
                                         </div>
                                         <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-                                            <dt class="text-sm font-medium text-gray-400">
+                                            <dt class="text-sm font-medium text-gray-400 flex items-center">
                                                 {{ t("accountSettingsView.profile.fields.profileCreated") }}
                                             </dt>
                                             <dd class="mt-1 text-sm text-gray-300 sm:col-span-2 sm:mt-0">
@@ -551,7 +546,7 @@
                                             </dd>
                                         </div>
                                         <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-                                            <dt class="text-sm font-medium text-gray-400">
+                                            <dt class="text-sm font-medium text-gray-400 flex items-center">
                                                 {{ t("accountSettingsView.profile.fields.lastUpdate") }}
                                             </dt>
                                             <dd class="mt-1 text-sm text-gray-300 sm:col-span-2 sm:mt-0">
@@ -559,7 +554,7 @@
                                             </dd>
                                         </div>
                                         <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-                                            <dt class="text-sm font-medium text-gray-400">
+                                            <dt class="text-sm font-medium text-gray-400 flex items-center">
                                                 {{ t("accountSettingsView.profile.fields.profileVisibility") }}
                                             </dt>
                                             <dd class="mt-1 text-sm text-gray-300 sm:col-span-2 sm:mt-0">
@@ -570,12 +565,10 @@
                                                         <div
                                                             :class="`relative w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:!ring-blue-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all ${themeStore.theme == 'light' ? ' peer-checked:!bg-blue-500' : ' peer-checked:!bg-blue-600'}`"></div>
                                                         <span
-                                                            class="ml-3 text-sm font-medium text-gray-300">{{ showProfilePublicly ? t("accountSettingsView.profile.visibility.public") : t("accountSettingsView.profile.visibility.private")
-                                                            }}</span>
+                                                            class="ml-3 text-sm font-medium text-gray-300">{{ showProfilePublicly ? t("accountSettingsView.profile.visibility.public") : t("accountSettingsView.profile.visibility.private")}}</span>
                                                     </label>
                                                     <span
-                                                        class="ml-2 text-xs text-gray-400">{{ showProfilePublicly ? t("accountSettingsView.profile.visibility.publicDescription") : t("accountSettingsView.profile.visibility.privateDescription")
-                                                        }}</span>
+                                                        class="ml-2 text-xs text-gray-400">{{ showProfilePublicly ? t("accountSettingsView.profile.visibility.publicDescription") : t("accountSettingsView.profile.visibility.privateDescription")}}</span>
                                                 </div>
                                             </dd>
                                         </div>

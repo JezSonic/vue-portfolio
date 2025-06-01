@@ -30,8 +30,6 @@ export default class AuthService extends ApiService {
         return;
     }
 
-
-
     public static register(email: string, name: string, password: string) {
         return this.post<{ content: number, token: string }, { email: string, password: string, name: string }>("auth/register", {
             email: email,
@@ -57,5 +55,17 @@ export default class AuthService extends ApiService {
 
     public static revokeOAuth(provider: OAuthProvider) {
         return this.post<{ content: boolean }, {}>(`auth/${provider}/revoke`, {}, {'Authorization': `Bearer ${useUserStore().token}`});
+    }
+
+    public static requestPasswordReset(email: string) {
+        return this.post<{ content: boolean }, { email: string }>(`auth/reset-password/request`, { email: email });
+    }
+
+    public static resetPassword(token: string, password: string) {
+        return this.post<{ content: boolean }, { token: string, password: string }>(`auth/reset-password`, { token: token, password: password });
+    }
+
+    public static verifyPasswordResetToken(token: string) {
+        return this.post<{ content: boolean }, { token: string }>(`auth/reset-password/verify-token`, { token: token });
     }
 }
