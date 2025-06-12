@@ -10,6 +10,7 @@
     const error = ref<boolean>(false);
     onMounted(() => {
         const driver: string = useRoute().params.id as string;
+
         ApiService.getIP().then((data) => {
             AuthService.verifyOAuthCallback(driver, data.ip)
                 .then((res) => {

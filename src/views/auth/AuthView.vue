@@ -9,7 +9,7 @@
     import Button from "@/components/ui/Button.vue";
     import { useI18n } from "vue-i18n";
     import ApiService from "@/services/apiService";
-    import { env } from "@/helpers/app.ts";
+    import { env, getSupportedOAuthProviders } from "@/helpers/app.ts";
 
     const password = ref<string>("");
     const email = ref<string>("");
@@ -132,18 +132,18 @@
                    @click="hasAccount = true">{{ t("authView.register.loginInstead") }}</a>
             </p>
         </div>
-        <div>
+        <div v-if="getSupportedOAuthProviders().length > 0">
             <div class="flex justify-between items-center sm:mx-auto sm:w-full sm:max-w-sm mt-5 mb-2">
                 <hr class="dark:text-gray-600 !text-gray-300 w-24" />
                 <h2 class="font-semibold dark:text-white !text-white min-w-fit">{{ t("authView.oauth.title") }}</h2>
                 <hr class="dark:text-gray-600 !text-gray-300 w-24" />
             </div>
-            <div class="flex justify-between items-center sm:mx-auto sm:w-full sm:max-w-sm">
-                <Button :display-loading-text="true" :text="t('authView.oauth.google')"
+            <div class="flex justify-center items-center sm:mx-auto sm:w-full sm:max-w-sm gap-3">
+                <Button :display-loading-text="true" :text="t('authView.oauth.google')" v-if="getSupportedOAuthProviders().includes(OAuthProvider.Google)"
                         @click="AuthService.performOAuth(OAuthProvider.Google)" class="w-42">
                     <font-awesome-icon class="mr-2" style="color: #DB4437;" :icon="['fab', 'google']" />
                 </Button>
-                <Button :display-loading-text="true" :text="t('authView.oauth.github')"
+                <Button :display-loading-text="true" :text="t('authView.oauth.github')" v-if="getSupportedOAuthProviders().includes(OAuthProvider.GitHub)"
                         @click="AuthService.performOAuth(OAuthProvider.GitHub)" class="w-42">
                     <font-awesome-icon class="mr-2" :icon="['fab', 'github']" />
                 </Button>

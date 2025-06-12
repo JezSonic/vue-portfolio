@@ -11,7 +11,7 @@
     import i18n from "@/i18n";
     import { useI18n } from "vue-i18n";
     import Button from "@/components/ui/Button.vue";
-    import { env } from "@/helpers/app.js";
+    import { env, getSupportedOAuthProviders } from "@/helpers/app.js";
 
     const { t } = useI18n();
 
@@ -639,7 +639,7 @@
                                 </div>
                             </div>
 
-                            <ul class="divide-y divide-gray-700">
+                            <ul class="divide-y divide-gray-700" v-if="getSupportedOAuthProviders().includes(OAuthProvider.Google)">
                                 <li class="py-4 flex justify-between items-center">
                                     <div class="flex items-center">
                                         <svg class="h-6 w-6 text-red-500" fill="currentColor" viewBox="0 0 24 24">
@@ -650,8 +650,7 @@
                                             <p class="text-sm font-medium text-gray-200">
                                                 {{ t("accountSettingsView.connectedAccounts.avatarSource.google") }}</p>
                                             <p class="text-xs text-gray-400">
-                                                {{ connectedSocialAccounts.includes(OAuthProvider.Google) ? t("accountSettingsView.connectedAccounts.status.connected") : t("accountSettingsView.connectedAccounts.status.notConnected")
-                                                }}
+                                                {{ connectedSocialAccounts.includes(OAuthProvider.Google) ? t("accountSettingsView.connectedAccounts.status.connected") : t("accountSettingsView.connectedAccounts.status.notConnected") }}
                                             </p>
                                         </div>
                                     </div>
@@ -666,7 +665,7 @@
                                         }}
                                     </button>
                                 </li>
-                                <li class="py-4 flex justify-between items-center">
+                                <li class="py-4 flex justify-between items-center" v-if="getSupportedOAuthProviders().includes(OAuthProvider.GitHub)">
                                     <div class="flex items-center">
                                         <svg class="h-6 w-6 text-gray-300" fill="currentColor" viewBox="0 0 24 24">
                                             <path clip-rule="evenodd"
