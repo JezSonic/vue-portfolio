@@ -11,7 +11,6 @@ export default class UserService extends ApiService {
         return this.get<IUserData>("user", {'Authorization': `Bearer ${useUserStore().token}`})
     }
 
-
     public static getUserByID(id: number) {
         return this.get<IUserData>(`user/${id}`)
     }
@@ -42,5 +41,9 @@ export default class UserService extends ApiService {
 
     public static verifyEmail(token: string) {
         return this.post<{ content: boolean }, {}>(`user/verify-email/${token}`, {}, {'Authorization': `Bearer ${useUserStore().token}`});
+    }
+
+    public static deleteAccount() {
+        return this.delete<{content: boolean}, {}>(`user`, {'Authorization': `Bearer ${useUserStore().token}`});
     }
 }

@@ -1,8 +1,7 @@
 <script setup lang="ts">
-    const { icon, text, link, bg_color, text_color } = defineProps({
+    const { icon, text, bg_color, text_color } = defineProps({
         icon: { default: "link" },
         text: { default: "Badge" },
-        link: { default: "#" },
         bg_color: { default: "rgba(255, 255, 255, .1)" },
         text_color: { default: "white" }
     });
@@ -22,11 +21,9 @@
 </script>
 
 <template>
-    <a :href="link">
-        <p :style="{ backgroundColor: bg_color, color: text_color }">
-            <font-awesome-icon :icon="getIconArray(icon)" /> {{ text }}
-        </p>
-    </a>
+    <p :style="{ backgroundColor: bg_color, color: text_color }">
+        <font-awesome-icon :icon="getIconArray(icon)" /> {{ text }}
+    </p>
 </template>
 
 <style scoped lang="scss">

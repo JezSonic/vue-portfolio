@@ -197,7 +197,3 @@ const { t } = useI18n();
         </Tile>
     </div>
 </template>
-
-<style lang="scss" scoped>
-/* No additional styling needed as we're using Tailwind classes */
-</style>

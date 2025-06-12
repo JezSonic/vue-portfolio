@@ -5,7 +5,17 @@ import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 const currentYear = new Date().getFullYear();
-const yearsOfExperience = currentYear - 2023;
+const currentMonth = new Date().getMonth(); // 0-indexed
+const startDate = new Date(2023, 3, 1); // Month 3 is April (0-indexed)
+
+// Calculate total months since start date
+const totalMonths = (currentYear - startDate.getFullYear()) * 12 + (currentMonth - startDate.getMonth());
+
+// Convert total months to years, accounting for partial years
+// We add 1 day to the current date to ensure that if the start date is
+// the same month as the current month but a later day, it doesn't count
+// as a full month yet.
+const yearsOfExperience = Math.round(totalMonths / 12);
 </script>
 
 <template>
@@ -82,7 +92,7 @@ const yearsOfExperience = currentYear - 2023;
                         <div class="p-4">
                             <h3 class="text-xl font-semibold text-blue-500 mb-2">{{ t('home.projects.previousPortfolio.title') }}</h3>
                             <p class="text-gray-300 mb-4">{{ t('home.projects.previousPortfolio.description') }}</p>
-                            <div class="flex gap-2">
+                            <div class="flex gap-2 flex-wrap">
                                 <Badge text="Vue.js" icon="fa-vuejs" bg_color="#42b883" />
                                 <Badge text="CSS" icon="fa-css3-alt" bg_color="#264de4" />
                             </div>
@@ -93,7 +103,7 @@ const yearsOfExperience = currentYear - 2023;
                         <div class="p-4">
                             <h3 class="text-xl font-semibold text-blue-500 mb-2">{{ t('home.projects.maszynaReloaded.title') }}</h3>
                             <p class="text-gray-300 mb-4">{{ t('home.projects.maszynaReloaded.description') }}</p>
-                            <div class="flex gap-2">
+                            <div class="flex gap-2 flex-wrap">
                                 <Badge text="C++" icon="fa-code" bg_color="#00599c" />
                                 <Badge text="GDScript" icon="fa-code" bg_color="#478cbf" />
                                 <Badge text="Godot" icon="fa-gamepad" bg_color="#478cbf" />

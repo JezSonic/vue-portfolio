@@ -13,6 +13,7 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": true,
+    "noEmit": true,
     "sourceMap": false,
     "baseUrl": "./",
     "types": [

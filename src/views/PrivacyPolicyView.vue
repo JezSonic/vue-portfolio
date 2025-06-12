@@ -10,7 +10,7 @@ const { t } = useI18n();
         <!-- Header Section -->
         <div class="mb-6 sm:mb-8 text-center">
             <h1 class="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">{{ t('privacyPolicy.title') }}</h1>
-            <p class="text-gray-400">{{ t('privacyPolicy.lastUpdated') }}</p>
+            <p class="!text-gray-400">{{ t('privacyPolicy.lastUpdated') }}</p>
         </div>
 
         <!-- Introduction -->

@@ -8,7 +8,7 @@
         "preview": "vite preview",
         "format": "prettier . --write",
         "lint": "eslint ./ --fix",
-        "deploy": "vite build && firebase deploy --only hosting",
+        "deploy": "vite build && firebase deploy --only hosting --project api-9176249411662404922-339889",
         "deploy:beta": "vite build && firebase hosting:channel:deploy beta --expires 14d --project api-9176249411662404922-339889"
     },
     "dependencies": {
@@ -19,7 +19,7 @@
         "@headlessui/vue": "1.7.23",
         "@heroicons/vue": "2.2.0",
         "@tailwindcss/vite": "4.1.8",
-        "pinia": "3.0.2",
+        "pinia": "3.0.3",
         "pinia-plugin-persistedstate": "4.3.0",
         "tailwindcss": "4.1.8",
         "vue": "3.5.16",
@@ -27,11 +27,10 @@
         "vue-router": "4.5.1"
     },
     "devDependencies": {
-        "@types/node": "22.15.29",
+        "@types/node": "24.0.0",
         "@vitejs/plugin-vue": "5.2.4",
         "@vue/cli-plugin-typescript": "5.0.8",
         "prettier": "3.5.3",
-        "sass": "1.89.1",
         "ts-loader": "9.5.2",
         "typescript": "5.8.3",
         "vite": "6.3.5"

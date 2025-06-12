@@ -65,7 +65,7 @@
     "hero": {
       "greeting": "Hello, I'm Karol",
       "title": "Full-Stack Web Developer",
-      "description": "A passionate developer with {years} years of professional experience, creating websites and web applications that combine functionality with elegant design.",
+      "description": "A passionate developer with about {years} years of professional experience, creating websites and web applications that combine functionality with elegant design.",
       "viewProjects": "View Projects",
       "contactMe": "Contact Me"
     },

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { ref, watch } from "vue";
+    import { onMounted, ref, watch } from "vue";
     import UserService from "@/services/userService.ts";
     import AuthService from "@/services/authService.ts";
     import type { ILoginHistory, INotificationSettings, IUserData } from "@/types/user.d.ts";
@@ -25,13 +25,13 @@
     const connectedSocialAccounts = ref<OAuthProvider[]>([]);
 
     // Tab management
-    const tabs = [
+    const tabs = ref([
         { id: "profile", label: "accountSettingsView.tabs.profile" },
         { id: "accounts", label: "accountSettingsView.tabs.accounts" },
-        { id: "notifications", label: "accountSettingsView.tabs.notifications" },
         { id: "activity", label: "accountSettingsView.tabs.activity" },
         { id: "security", label: "accountSettingsView.tabs.security" }
-    ];
+    ]);
+
     const activeTab = ref<string>("profile");
     const isMobileMenuOpen = ref<boolean>(false);
 
@@ -134,9 +134,9 @@
 
             loading.value = false;
         }).catch(() => {
-            userStore.logout();
-            error.value = true;
-            loading.value = false;
+        userStore.logout();
+        error.value = true;
+        loading.value = false;
     });
 
     // Save profile settings when changed
@@ -247,11 +247,6 @@
         }
     });
 
-    // Watch for theme changes from outside the component
-    watch(() => themeStore.theme, (newTheme) => {
-        selectedTheme.value = newTheme;
-    });
-
     // We no longer automatically save profile settings when they change
     // Users must click the Save Avatar button to save changes
 
@@ -278,18 +273,8 @@
 
     const saveName = () => {
         if (editedName.value.trim() && userData.value) {
-            // Here you would call an API to update the name
             userData.value.name = editedName.value.trim();
             isEditingName.value = false;
-            // Example API call (commented out):
-            // UserService.updateUserName(userId, editedName.value.trim())
-            //     .then(() => {
-            //         userData.value.name = editedName.value.trim();
-            //         isEditingName.value = false;
-            //     })
-            //     .catch((err) => {
-            //         console.error('Failed to update name', err);
-            //     });
         }
     };
 
@@ -363,16 +348,20 @@
     };
 
     const deleteAccount = () => {
-        // UserService.deleteAccount(userId)
-        //     .then(() => {
-        //         // Logout and redirect
-        //         window.location.href = '/';
-        //     });
-
-        // For demo purposes:
-        alert("Account deletion would happen here");
+        UserService.deleteAccount()
+            .finally(() => {
+                userStore.logout();
+                // Logout and redirect
+                window.location.href = "/";
+            });
         showDeleteConfirm.value = false;
     };
+
+    onMounted(() => {
+        if (env("VITE_APP_ENABLE_EMAILING", false)) {
+            tabs.value = tabs.value.toSpliced(2, 0, { id: "notifications", label: "accountSettingsView.tabs.notifications" });
+        }
+    });
 </script>
 
 <template>
@@ -394,7 +383,7 @@
                         class="w-full flex items-center justify-between px-4 py-2 bg-gray-800 border border-gray-700 rounded-md text-gray-200 cursor-pointer"
                         @click="isMobileMenuOpen = !isMobileMenuOpen"
                     >
-                        <span>{{ t(tabs.find(tab => tab.id === activeTab)?.label) }}</span>
+                        <span>{{ t(tabs.find(tab => tab.id === activeTab).label) }}</span>
                         <svg
                             :class="{ 'transform rotate-180': isMobileMenuOpen }"
                             class="h-5 w-5 text-gray-400"
@@ -483,7 +472,7 @@
                                             </dt>
                                             <dd class="mt-1 text-sm text-gray-300 sm:col-span-2 sm:mt-0">
                                                 <div v-if="!isEditingName" class="flex items-center">
-                                                    <span class="truncate max-w-[200px] sm:max-w-[300px] md:max-w-full">{{ userData?.name}}</span>
+                                                    <span class="truncate max-w-[200px] sm:max-w-[300px] md:max-w-full">{{ userData?.name }}</span>
                                                     <button class="ml-2 text-blue-500 hover:text-blue-400 flex-shrink-0"
                                                             @click="startEditName">
                                                         <svg class="h-4 w-4" fill="none"
@@ -530,10 +519,14 @@
                                             </dt>
                                             <dd class="mt-1 text-sm text-gray-300 sm:col-span-2 sm:mt-0">
                                                 <div class="flex items-center">
-                                                    <span class="truncate max-w-[200px] sm:max-w-[300px] md:max-w-full">{{ userData?.email}}</span>
-                                                    <Button class="ml-2" v-if="!userData?.email_verified_at && env('VITE_APP_ENABLE_EMAILING', false)" text="Verify" @click="sendVerificationEmail" />
-                                                    <span v-if="userData?.email_verified_at" class="ml-2 px-2 py-0.5 bg-green-900 text-green-300 rounded-full text-xs flex-shrink-0">{{ t("userProfileView.emailStatus.verified")}}</span>
-                                                    <span v-else class="ml-2 px-2 py-0.5 bg-yellow-900 text-yellow-300 rounded-full text-xs flex-shrink-0">{{ t("userProfileView.emailStatus.notVerified")}}</span>
+                                                    <span class="truncate max-w-[200px] sm:max-w-[300px] md:max-w-full">{{ userData?.email }}</span>
+                                                    <Button class="ml-2"
+                                                            v-if="!userData?.email_verified_at && env('VITE_APP_ENABLE_EMAILING', false)"
+                                                            text="Verify" @click="sendVerificationEmail" />
+                                                    <span v-if="userData?.email_verified_at"
+                                                          class="ml-2 px-2 py-0.5 bg-green-900 text-green-300 rounded-full text-xs flex-shrink-0">{{ t("userProfileView.emailStatus.verified") }}</span>
+                                                    <span v-else
+                                                          class="ml-2 px-2 py-0.5 bg-yellow-900 text-yellow-300 rounded-full text-xs flex-shrink-0">{{ t("userProfileView.emailStatus.notVerified") }}</span>
                                                 </div>
                                             </dd>
                                         </div>
@@ -565,10 +558,10 @@
                                                         <div
                                                             :class="`relative w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:!ring-blue-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all ${themeStore.theme == 'light' ? ' peer-checked:!bg-blue-500' : ' peer-checked:!bg-blue-600'}`"></div>
                                                         <span
-                                                            class="ml-3 text-sm font-medium text-gray-300">{{ showProfilePublicly ? t("accountSettingsView.profile.visibility.public") : t("accountSettingsView.profile.visibility.private")}}</span>
+                                                            class="ml-3 text-sm font-medium text-gray-300">{{ showProfilePublicly ? t("accountSettingsView.profile.visibility.public") : t("accountSettingsView.profile.visibility.private") }}</span>
                                                     </label>
                                                     <span
-                                                        class="ml-2 text-xs text-gray-400">{{ showProfilePublicly ? t("accountSettingsView.profile.visibility.publicDescription") : t("accountSettingsView.profile.visibility.privateDescription")}}</span>
+                                                        class="ml-2 text-xs text-gray-400">{{ showProfilePublicly ? t("accountSettingsView.profile.visibility.publicDescription") : t("accountSettingsView.profile.visibility.privateDescription") }}</span>
                                                 </div>
                                             </dd>
                                         </div>
@@ -839,12 +832,12 @@
                     <!-- Security Tab -->
                     <div v-if="activeTab === 'security'" class="bg-gray-800 rounded-lg shadow">
                         <div class="px-6 py-4 border-b border-gray-700">
-                            <h2 class="text-lg font-medium text-gray-200">{{ t("accountSettingsView.security.title")
-                                }}</h2>
+                            <h2 class="text-lg font-medium text-gray-200">
+                                {{ t("accountSettingsView.security.title") }}</h2>
                             <p class="mt-1 text-sm text-gray-400">{{ t("accountSettingsView.security.subtitle") }}</p>
                         </div>
                         <div class="p-6">
-                            <div class="mb-6">
+                            <div class="mb-6" v-if="env('VITE_APP_ENABLE_EMAILING', false)">
                                 <h3 class="text-sm font-medium text-gray-400 mb-2">
                                     {{ t("accountSettingsView.security.changePassword.title") }}</h3>
                                 <div v-if="passwordSuccess" class="mb-4 p-3 bg-green-900 text-green-300 rounded">
@@ -897,27 +890,27 @@
                                 </div>
                             </div>
 
-                            <div class="pt-6 pb-6 border-t border-b border-gray-700">
+                            <div class="pt-6 pb-6 border-t border-b border-gray-700"
+                                 v-if="env('VITE_APP_ENABLE_DATA_EXPORT', false)">
                                 <h3 class="text-sm font-medium text-gray-400 mb-2">
                                     {{ t("accountSettingsView.security.dataExport.title") }}</h3>
                                 <p class="text-xs text-gray-400 mb-4">
                                     {{ t("accountSettingsView.security.dataExport.description") }}</p>
                                 <button
                                     class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded text-sm font-medium transition-colors cursor-pointer"
-                                    @click="exportUserData"
-                                >
+                                    @click="exportUserData">
+
                                     {{ t("accountSettingsView.security.dataExport.exportButton") }}
                                 </button>
                             </div>
 
-                            <div class="pt-6 border-t border-gray-700">
+                            <div :class="env('VITE_APP_ENABLE_DATA_EXPORT', false) && `pt-6 border-t border-gray-700`">
                                 <h3 class="text-sm font-medium text-gray-400 mb-2">
                                     {{ t("accountSettingsView.security.dangerZone.title") }}</h3>
                                 <div v-if="!showDeleteConfirm">
                                     <button
                                         class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded text-sm font-medium transition-colors cursor-pointer"
-                                        @click="confirmDeleteAccount"
-                                    >
+                                        @click="confirmDeleteAccount">
                                         {{ t("accountSettingsView.security.dangerZone.deleteButton") }}
                                     </button>
                                 </div>
