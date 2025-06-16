@@ -16,7 +16,7 @@
                 .then((res) => {
                     userStore.id = res.content;
                     userStore.token = res.token;
-                    router.push(`/settings`);
+                    router.push(`/user/settings`);
                 }).catch(() => {
                     userStore.logout();
                     error.value = true;

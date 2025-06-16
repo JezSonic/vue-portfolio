@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { onMounted, ref, watch } from "vue";
+    import { computed, onMounted, ref, watch } from "vue";
     import UserService from "@/services/userService.ts";
     import AuthService from "@/services/authService.ts";
     import type { ILoginHistory, INotificationSettings, IUserData } from "@/types/user.d.ts";
@@ -51,6 +51,17 @@
     const loginHistory = ref<ILoginHistory[]>([]);
     const loadingHistory = ref<boolean>(false);
     const historyError = ref<boolean>(false);
+
+    // Pagination for login history
+    const currentPage = ref<number>(1);
+    const itemsPerPage = ref<number>(10);
+    const paginatedLoginHistory = computed(() => {
+        //@TODO: Add serverside pagination
+        const start = (currentPage.value - 1) * itemsPerPage.value;
+        const end = start + itemsPerPage.value;
+        return loginHistory.value.slice(start, end);
+    });
+    const totalPages = computed(() => Math.ceil(loginHistory.value.length / itemsPerPage.value));
 
     // Form states
     const isEditingName = ref<boolean>(false);
@@ -172,13 +183,10 @@
             }
         })
             .then(() => {
-                //console.log('Profile settings updated');
             })
             .catch((err) => {
-                //console.error('Failed to update profile settings', err);
             });
 
-        //console.log('Profile settings updated:', userData.value.profile_settings);
     };
 
     // Save notification settings
@@ -208,6 +216,7 @@
 
         loadingHistory.value = true;
         historyError.value = false;
+        currentPage.value = 1; // Reset to first page when loading new data
 
         UserService.getLoginHistory()
             .then((data) => {
@@ -221,22 +230,31 @@
     };
 
     // Export user data
+    const exportDataStatus = ref<string>("");
+    const exportDataError = ref<boolean>(false);
+    const exportDataSuccess = ref<boolean>(false);
+    const exportDataLink = ref<string>("");
+
     const exportUserData = () => {
-        UserService.exportUserData(userId)
+        exportDataStatus.value = "";
+        exportDataError.value = false;
+        exportDataSuccess.value = false;
+        exportDataLink.value = "";
+
+        UserService.exportUserData()
             .then((data) => {
-                // Create a download link for the exported data
-                const blob = new Blob([data.content], { type: "application/json" });
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement("a");
-                a.href = url;
-                a.download = `user_data_${userId}.json`;
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-                document.body.removeChild(a);
+                if (data.content) {
+                    exportDataSuccess.value = true;
+                    exportDataStatus.value = t("userDataExport.status.sent");
+                    exportDataLink.value = `/user/download-data`;
+                } else {
+                    exportDataError.value = true;
+                    exportDataStatus.value = t("userDataExport.status.failed");
+                }
             })
-            .catch((err) => {
-                //console.error('Failed to export user data', err);
+            .catch(() => {
+                exportDataError.value = true;
+                exportDataStatus.value = t("userDataExport.status.failed");
             });
     };
 
@@ -247,14 +265,9 @@
         }
     });
 
-    // We no longer automatically save profile settings when they change
-    // Users must click the Save Avatar button to save changes
-
-    // Utility functions
     const timestampToDate = (timestamp: string) => {
         if (!timestamp) return "N/A";
         const date = new Date(timestamp);
-        // Use the current locale from i18n
         const locale = i18n.global.locale.value;
         return date.toLocaleDateString(locale, {
             month: "long",
@@ -420,7 +433,7 @@
                     <div class="bg-gray-800 rounded-lg shadow">
                         <div class="p-4">
                             <h3 class="text-sm font-medium text-gray-400 mb-3">Settings</h3>
-                            <nav>
+                            <nav class="flex flex-col gap-1">
                                 <button
                                     v-for="tab in tabs"
                                     :key="tab.id"
@@ -803,7 +816,7 @@
                                         </tr>
                                         </thead>
                                         <tbody class="divide-y divide-gray-700">
-                                        <tr v-for="(login, index) in loginHistory" :key="index"
+                                        <tr v-for="(login, index) in paginatedLoginHistory" :key="index"
                                             class="hover:bg-gray-700">
                                             <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                                                 {{ timestampToDate(login.performed_at) }}
@@ -823,6 +836,29 @@
                                         </tr>
                                         </tbody>
                                     </table>
+
+                                    <!-- Pagination Controls -->
+                                    <div class="flex items-center justify-between mt-4 px-3 sm:px-6">
+                                        <div class="text-sm text-gray-400">
+                                            {{ t("accountSettingsView.activity.pagination.showing") }} {{ (currentPage - 1) * itemsPerPage + 1 }}-{{ Math.min(currentPage * itemsPerPage, loginHistory.length) }} {{ t("accountSettingsView.activity.pagination.of") }} {{ loginHistory.length }}
+                                        </div>
+                                        <div class="flex space-x-2">
+                                            <button 
+                                                @click="currentPage = Math.max(1, currentPage - 1)" 
+                                                :disabled="currentPage === 1"
+                                                :class="{'opacity-50 cursor-not-allowed': currentPage === 1}"
+                                                class="px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded text-sm text-gray-300 transition-colors">
+                                                {{ t("accountSettingsView.activity.pagination.previous") }}
+                                            </button>
+                                            <button 
+                                                @click="currentPage = Math.min(totalPages, currentPage + 1)" 
+                                                :disabled="currentPage === totalPages"
+                                                :class="{'opacity-50 cursor-not-allowed': currentPage === totalPages}"
+                                                class="px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded text-sm text-gray-300 transition-colors">
+                                                {{ t("accountSettingsView.activity.pagination.next") }}
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -889,18 +925,35 @@
                                 </div>
                             </div>
 
-                            <div class="pt-6 pb-6 border-t border-b border-gray-700"
-                                 v-if="env('VITE_APP_ENABLE_DATA_EXPORT', false)">
+                            <div class="pb-6"
+                                 v-if="env('VITE_APP_ENABLE_DATA_EXPORT', false)">  <!--  pt-6 border-t border-b border-gray-700 -->
                                 <h3 class="text-sm font-medium text-gray-400 mb-2">
                                     {{ t("accountSettingsView.security.dataExport.title") }}</h3>
                                 <p class="text-xs text-gray-400 mb-4">
                                     {{ t("accountSettingsView.security.dataExport.description") }}</p>
+
                                 <button
                                     class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded text-sm font-medium transition-colors cursor-pointer"
                                     @click="exportUserData">
 
                                     {{ t("accountSettingsView.security.dataExport.exportButton") }}
                                 </button>
+
+                                <!-- Export status message -->
+                                <div v-if="exportDataStatus" class="mt-4">
+                                    <div v-if="exportDataSuccess" class="bg-green-900/50 p-3 rounded border border-green-700">
+                                        <p class="text-sm text-green-300 mb-2">{{ exportDataStatus }}</p>
+                                        <router-link 
+                                            v-if="exportDataLink" 
+                                            :to="exportDataLink"
+                                            class="text-sm text-blue-400 hover:text-blue-300 underline cursor-pointer">
+                                            {{ t("userDataExport.downloadOnceReady") }}
+                                        </router-link>
+                                    </div>
+                                    <div v-else-if="exportDataError" class="bg-red-900/50 p-3 rounded border border-red-700">
+                                        <p class="text-sm text-red-300">{{ exportDataStatus }}</p>
+                                    </div>
+                                </div>
                             </div>
 
                             <div :class="env('VITE_APP_ENABLE_DATA_EXPORT', false) && `pt-6 border-t border-gray-700`">

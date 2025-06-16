@@ -9,7 +9,7 @@
     import userDefault from "@/assets/profile/userDefault.png";
     import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
     import { useI18n } from "vue-i18n";
-    import { ExceptionResponse } from "@/types/services/api.js";
+    import { ExceptionResponse } from "@/types/services/api.ts";
 
     const { t, locale } = useI18n();
     const error = ref<boolean>(false);

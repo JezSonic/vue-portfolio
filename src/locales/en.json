@@ -9,6 +9,22 @@
     "dark": "Dark theme",
     "light": "Light theme"
   },
+  "userDataExport": {
+    "download": "Download",
+    "downloadOnceReady": "You can check your data's preparation status and download it from here",
+    "status": {
+      "completed": "Your data is ready for download",
+      "sent": "Your request is being processed",
+      "queued": "Your data is in queue to get prepared for download. Please wait",
+      "processing": "Your data is being prepared for download. Please wait",
+      "failed": "An error encountered while exporting your data. Please try again",
+      "not_found": "The requested data resource was not found or has expired. Please try exporting it again"
+    },
+    "validUntil {datetime}": "Your data will be available to download until {datetime}",
+    "validUntil": {
+      "subtext": "After this time, your exported data will be permanently deleted so you'll need to export it again in case of downloading it again"
+    }
+  },
   "auth": {
     "login": "Login",
     "register": "Register",
@@ -405,6 +421,12 @@
         "loginMethod": "Login Method",
         "location": "Location",
         "device": "Device"
+      },
+      "pagination": {
+        "showing": "Showing",
+        "of": "of",
+        "previous": "Previous",
+        "next": "Next"
       }
     },
     "security": {

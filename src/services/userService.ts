@@ -1,5 +1,11 @@
 import ApiService from "@/services/apiService.ts";
-import type { ILoginHistory, INotificationSettings, IProfileUpdateData, IUserData } from "@/types/user.d.ts";
+import {
+    ILoginHistory,
+    INotificationSettings,
+    IProfileUpdateData,
+    IUserData,
+    UserExportDataStatus
+} from "@/types/user.d.ts";
 import { useUserStore } from "@/stores/userStore.ts";
 
 export default class UserService extends ApiService {
@@ -31,8 +37,12 @@ export default class UserService extends ApiService {
         )
     }
 
-    public static exportUserData(userId: number) {
-        return this.get<{content: string}>(`user/${userId}/export`, {'Authorization': `Bearer ${useUserStore().token}`})
+    public static exportUserData() {
+        return this.get<{content: string}>(`user/export-data`, {'Authorization': `Bearer ${useUserStore().token}`})
+    }
+
+    public static checkUserDataExportStatus(userId: number) {
+        return this.get<{status: UserExportDataStatus, valid_until: number }>(`user/${userId}/export-data/status`)
     }
 
     public static sendVerificationEmail() {

@@ -77,3 +77,11 @@ export interface ILoginHistory {
 export interface IProfileUpdateData extends IProfileSettings {
     name: string
 }
+
+export enum UserExportDataStatus {
+    QUEUED = 'queued',
+    PROCESSING = 'processing',
+    COMPLETED = 'completed',
+    FAILED = 'failed',
+    NOT_FOUND = 'not_found'
+}

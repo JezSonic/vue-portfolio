@@ -8,7 +8,6 @@
     import { useI18n } from "vue-i18n";
     import AuthService from "@/services/authService.ts";
     import router from "@/router/index.ts";
-    import { env } from "@/helpers/app.js";
     const errorText = ref<string|undefined>(undefined);
     const loading = ref<boolean>(true);
     const { t } = useI18n();

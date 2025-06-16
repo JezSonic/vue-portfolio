@@ -17,6 +17,22 @@
     "dark": "Ciemny motyw",
     "light": "Jasny motyw"
   },
+  "userDataExport": {
+    "download": "Pobierz",
+    "downloadOnceReady": "Możesz tutaj sprawdzić status przygotowania danych do pobrania oraz je pobrać",
+    "status": {
+      "completed": "Twoje dane są gotowe do pobrania",
+      "sent": "Twoje zapytanie jest przetwarzane",
+      "queued": "Twoje dane są w kolejce do przygotowania. Prosimy o cierpliwość",
+      "processing": "Twoje dane są przygotowywane do pobrania. Prosimy o cierpliwość",
+      "failed": "Wystąpił błąd podczas przygotowywania twoich danych do pobrania. Prosimy spróbować ponownie",
+      "not_found": "Poszukiwane dane nie zostały znalezione lub straciły ważność. Prosimy wyeksportować je ponownie"
+    },
+    "validUntil {datetime}": "Dane te są dostępne do pobrania do {datetime}",
+    "validUntil": {
+      "subtext": "Po upłynięciu wyznaczonego czasu, zostaną bezpowrotnie usunięte, w wyniku czego trzeba będzie wyeksportować je ponownie"
+    }
+  },
   "authView": {
     "logo": {
       "alt": "Twoja Firma"
@@ -405,6 +421,12 @@
         "loginMethod": "Metoda Logowania",
         "location": "Lokalizacja",
         "device": "Urządzenie"
+      },
+      "pagination": {
+        "showing": "Wyświetlanie",
+        "of": "z",
+        "previous": "Poprzednia",
+        "next": "Następna"
       }
     },
     "security": {

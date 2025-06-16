@@ -12,7 +12,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     name: 'profile',
-    path: '/profile/:id',
+    path: '/user/profile/:id',
     component: () => import('../views/user/UserProfileView.vue'),
     meta: {
       title: 'Profile',
@@ -39,10 +39,19 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     name: 'settings',
-    path: '/settings',
+    path: '/user/settings',
     component: () => import('../views/user/AccountSettingsView.vue'),
     meta: {
       title: 'Settings',
+      requires_backend: true,
+    }
+  },
+  {
+    name: 'download-user-data',
+    path: '/user/download-data',
+    component: () => import('../views/user/DataDownload.vue'),
+    meta: {
+      title: 'Download your user data',
       requires_backend: true,
     }
   },
