@@ -1,5 +1,5 @@
 import ApiService from "@/services/apiService.ts";
-import {
+import type {
     ILoginHistory,
     INotificationSettings,
     IProfileUpdateData,

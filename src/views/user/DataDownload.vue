@@ -35,7 +35,6 @@
                 error.value = true;
             });
     });
-    //@TODO: Write enums for status types
 </script>
 
 <template>

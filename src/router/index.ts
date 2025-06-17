@@ -40,7 +40,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     name: 'settings',
     path: '/user/settings',
-    component: () => import('../views/user/AccountSettingsView.vue'),
+    component: () => import('../views/user/accountSettings/AccountSettingsView.vue'),
     meta: {
       title: 'Settings',
       requires_backend: true,
