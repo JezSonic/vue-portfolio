@@ -4,12 +4,12 @@
     import router from "@/router";
     import type { IUserData } from "@/types/user.d.ts";
     import Loading from "@/components/ui/Loading.vue";
-    import { OAuthProvider } from "@/types/services/auth.d.ts";
+    import { EOAuthProvider } from "@/types/services/auth.d.ts";
     import Badge from "@/components/badges/Badge.vue";
     import userDefault from "@/assets/profile/userDefault.png";
     import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
     import { useI18n } from "vue-i18n";
-    import { ExceptionResponse } from "@/types/services/api.ts";
+    import type { IExceptionResponse } from "@/types/services/api.d.ts";
 
     const { t, locale } = useI18n();
     const error = ref<boolean>(false);
@@ -21,12 +21,12 @@
         .then((data) => {
             userData.value = data;
             if (data.google) {
-                connectedSocialAccounts.value.push(OAuthProvider.Google);
+                connectedSocialAccounts.value.push(EOAuthProvider.Google);
             }
             if (data.github) {
-                connectedSocialAccounts.value.push(OAuthProvider.GitHub);
+                connectedSocialAccounts.value.push(EOAuthProvider.GitHub);
             }
-        }).catch((err: ExceptionResponse) => {
+        }).catch((err: IExceptionResponse) => {
             if (err.message == "private_profile") {
                 isPrivateProfile.value = true;
                 return;
@@ -34,7 +34,7 @@
             error.value = true;
         });
 
-    const connectedSocialAccounts = ref<OAuthProvider[]>([]);
+    const connectedSocialAccounts = ref<EOAuthProvider[]>([]);
 
     const avatarUrl = computed(() => {
         if (userData.value?.github?.avatar_url) {
@@ -92,14 +92,14 @@
                         <h1 class="text-3xl font-bold !text-white mb-2 truncate max-w-full">{{ userData?.name }}</h1>
                         <div class="flex flex-wrap justify-center md:justify-start gap-2 mb-4">
                             <Badge 
-                                v-if="connectedSocialAccounts.includes(OAuthProvider.Google)" 
+                                v-if="connectedSocialAccounts.includes(EOAuthProvider.Google)" 
                                 icon="fa-google" 
                                 text="Google" 
                                 bg_color="rgba(219, 68, 55, 0.2)" 
                                 text_color="#DB4437"
                             />
                             <Badge 
-                                v-if="connectedSocialAccounts.includes(OAuthProvider.GitHub)" 
+                                v-if="connectedSocialAccounts.includes(EOAuthProvider.GitHub)" 
                                 icon="fa-github" 
                                 text="GitHub" 
                                 bg_color="rgba(36, 41, 46, 0.2)" 

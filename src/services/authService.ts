@@ -1,5 +1,14 @@
 import ApiService from "@/services/apiService.ts";
-import type { OAuthProvider } from "@/types/services/auth.d.ts";
+import type { 
+    EOAuthProvider, 
+    IOAuthCallbackRequestBody,
+    IRegisterRequestBody,
+    ILoginRequestBody,
+    IPasswordResetRequestBody,
+    IPasswordResetConfirmRequestBody,
+    IPasswordResetTokenVerifyRequestBody
+} from "@/types/services/auth.d.ts";
+import type { IApiResponse, IApiAuthResponse, IEmptyRequestBody } from "@/types/services/api.d.ts";
 import { useUserStore } from "@/stores/userStore.ts";
 import router from "@/router/index.ts";
 
@@ -9,20 +18,20 @@ export default class AuthService extends ApiService {
     }
 
 
-    public static getOAuthUrl(provider: OAuthProvider): Promise<{ content: string }> {
-        return this.get<{ content: string }>(`auth/${provider}`);
+    public static getOAuthUrl(provider: EOAuthProvider): Promise<IApiResponse<string>> {
+        return this.get<IApiResponse<string>>(`auth/${provider}`);
     }
 
-    public static verifyOAuthCallback(provider: string, ip_address: string): Promise<{ content: number, token: string }> {
+    public static verifyOAuthCallback(provider: string, ip_address: string): Promise<IApiAuthResponse<number>> {
         const url = window.location.search; // remove the ?
-        return this.post<{ content: number, token: string }, {ip_address: string}>(`auth/${provider}/callback` + url, {
+        return this.post<IApiAuthResponse<number>, IOAuthCallbackRequestBody>(`auth/${provider}/callback` + url, {
             ip_address: ip_address
         });
     }
 
     public static logout() {
         const userStore = useUserStore();
-        this.get<{ content: number }>(`auth/logout`, {'Authorization': `Bearer ${userStore.token}`})
+        this.get<IApiResponse<number>>(`auth/logout`, this.getAuthBearerHeader())
             .then(() => {
                 userStore.logout();
                 router.push('/')
@@ -31,41 +40,41 @@ export default class AuthService extends ApiService {
     }
 
     public static register(email: string, name: string, password: string) {
-        return this.post<{ content: number, token: string }, { email: string, password: string, name: string }>("auth/register", {
+        return this.post<IApiAuthResponse<number>, IRegisterRequestBody>("auth/register", {
             email: email,
             name: name,
             password: password
         })
     };
 
-    public static login(email: string, password: string, ip_address: string): Promise<{ content: number, token: string }> {
-        return this.post<{ content: number, token: string }, { email: string, password: string, ip_address: string }>("auth/login", {
+    public static login(email: string, password: string, ip_address: string): Promise<IApiAuthResponse<number>> {
+        return this.post<IApiAuthResponse<number>, ILoginRequestBody>("auth/login", {
                 email: email,
                 password: password,
                 ip_address: ip_address
             })
     }
 
-    public static performOAuth(provider: OAuthProvider) {
+    public static performOAuth(provider: EOAuthProvider) {
         this.getOAuthUrl(provider)
             .then((res) => {
                 window.location.href = res.content;
             });
     };
 
-    public static revokeOAuth(provider: OAuthProvider) {
-        return this.post<{ content: boolean }, {}>(`auth/${provider}/revoke`, {}, {'Authorization': `Bearer ${useUserStore().token}`});
+    public static revokeOAuth(provider: EOAuthProvider) {
+        return this.post<IApiResponse<boolean>, IEmptyRequestBody>(`auth/${provider}/revoke`, {}, this.getAuthBearerHeader());
     }
 
     public static requestPasswordReset(email: string) {
-        return this.post<{ content: boolean }, { email: string }>(`auth/reset-password/request`, { email: email });
+        return this.post<IApiResponse<boolean>, IPasswordResetRequestBody>(`auth/reset-password/request`, { email: email });
     }
 
     public static resetPassword(token: string, password: string) {
-        return this.post<{ content: boolean }, { token: string, password: string }>(`auth/reset-password`, { token: token, password: password });
+        return this.post<IApiResponse<boolean>, IPasswordResetConfirmRequestBody>(`auth/reset-password`, { token: token, password: password });
     }
 
     public static verifyPasswordResetToken(token: string) {
-        return this.post<{ content: boolean }, { token: string }>(`auth/reset-password/verify-token`, { token: token });
+        return this.post<IApiResponse<boolean>, IPasswordResetTokenVerifyRequestBody>(`auth/reset-password/verify-token`, { token: token });
     }
 }

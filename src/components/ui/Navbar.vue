@@ -69,7 +69,7 @@
                     </div>
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
-                            <a v-for="(item, index) in navigation" :key="index" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : '!text-gray-300 hover:bg-gray-700 not-dark:hover:!text-gray-700 hover:text-white', 'rounded-md px-3 py-2 text-sm font-medium']" :aria-current="item.href === currentRoute? 'page' : undefined">{{ t(item.name) }}</a>
+                            <a v-for="(item, index) in navigation" :key="index" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : '!text-gray-300 hover:bg-gray-700 not-dark:hover:!text-gray-700 hover:text-white', 'rounded-md px-3 py-2 text-sm font-medium cursor-pointer']" :aria-current="item.href === currentRoute? 'page' : undefined">{{ t(item.name) }}</a>
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                     <!-- Theme toggle -->
                     <button v-if="env('VITE_APP_ENABLE_THEMES', false)"
                         @click="toggleTheme" 
-                        class="relative flex items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+                        class="relative cursor-pointer flex items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
                     >
                         <font-awesome-icon 
                             :icon="themeStore.actualTheme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon'" 
@@ -88,7 +88,7 @@
 
                     <!-- Language dropdown -->
                     <Menu as="div" class="relative ml-3">
-                        <MenuButton class="relative flex items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
+                        <MenuButton class="relative cursor-pointer flex items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
                             <font-awesome-icon icon="fa-solid fa-language" class="mr-1" />
                             <span class="hidden md:inline">{{ t('common.language') }}</span>
                         </MenuButton>
@@ -114,7 +114,7 @@
                             </MenuButton>
                         </div>
                         <div v-else-if="env('VITE_APP_ENABLE_BACKEND', false)">
-                            <button class="relative flex items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden mr-2" @click="router.push('/auth')">
+                            <button class="relative cursor-pointer flex items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden mr-2" @click="router.push('/auth')">
                                 {{ t('auth.loginRegister') }}
                             </button>
                         </div>

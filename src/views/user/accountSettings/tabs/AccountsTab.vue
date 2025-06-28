@@ -1,60 +1,78 @@
 <script lang="ts" setup>
-import { ref, watch } from "vue";
-import { useUserStore } from "@/stores/userStore.js";
-import { OAuthProvider } from "@/types/services/auth.d.ts";
-import AuthService from "@/services/authService.ts";
-import type { IUserData } from "@/types/user.d.ts";
-import { getSupportedOAuthProviders } from "@/helpers/app.js";
-import { useI18n } from "vue-i18n";
+    import { ref, watch } from "vue";
+    import { useUserStore } from "@/stores/userStore.js";
+    import { EOAuthProvider } from "@/types/services/auth.d.ts";
+    import AuthService from "@/services/authService.ts";
+    import type { IUserData } from "@/types/user.d.ts";
+    import { getSupportedOAuthProviders } from "@/helpers/app.js";
+    import { useI18n } from "vue-i18n";
+    import Button from "@/components/ui/Button.vue";
 
-const props = defineProps<{
-    userData: IUserData | null;
-}>();
+    const props = defineProps<{
+        userData: IUserData | null;
+    }>();
 
-defineEmits<{
-    (e: 'saveProfileSettings'): void;
-}>();
+    defineEmits<{
+        (e: "saveProfileSettings"): void;
+    }>();
 
-const {t} = useI18n();
+    const { t } = useI18n();
+    const googleProviderLoading = ref<boolean>(false);
+    const githubProviderLoading = ref<boolean>(false);
+    // Stores
+    const userStore = useUserStore();
 
-// Stores
-const userStore = useUserStore();
+    // Connected social accounts
+    const connectedSocialAccounts = ref<EOAuthProvider[]>([]);
 
-// Connected social accounts
-const connectedSocialAccounts = ref<OAuthProvider[]>([]);
-
-// Initialize data from props
-watch(() => props.userData, (newUserData) => {
-    if (newUserData) {
-        connectedSocialAccounts.value = [];
-        if (newUserData.google) {
-            connectedSocialAccounts.value.push(OAuthProvider.Google);
+    // Initialize data from props
+    watch(() => props.userData, (newUserData) => {
+        if (newUserData) {
+            connectedSocialAccounts.value = [];
+            if (newUserData.google) {
+                connectedSocialAccounts.value.push(EOAuthProvider.Google);
+            }
+            if (newUserData.github) {
+                connectedSocialAccounts.value.push(EOAuthProvider.GitHub);
+            }
         }
-        if (newUserData.github) {
-            connectedSocialAccounts.value.push(OAuthProvider.GitHub);
-        }
-    }
-}, { immediate: true });
+    }, { immediate: true });
 
-// OAuth functions
-const oauth = (provider: OAuthProvider) => {
-    AuthService.getOAuthUrl(provider)
-        .then((res) => {
-            window.location.href = res.content;
-        });
-};
-
-const toggleSocialAccount = (provider: OAuthProvider) => {
-    const isConnected = connectedSocialAccounts.value.includes(provider);
-    if (isConnected) {
-        AuthService.revokeOAuth(provider)
-            .then(() => {
-                connectedSocialAccounts.value = connectedSocialAccounts.value.filter(p => p !== provider);
+    // OAuth functions
+    const oauth = (provider: EOAuthProvider) => {
+        AuthService.getOAuthUrl(provider)
+            .then((res) => {
+                window.location.href = res.content;
             });
-    } else {
-        oauth(provider);
-    }
-};
+    };
+
+    const toggleSocialAccount = (provider: EOAuthProvider) => {
+        const setLoading = (provider: EOAuthProvider, loading: boolean) => {
+            switch (provider) {
+                case EOAuthProvider.Google:
+                    googleProviderLoading.value = loading;
+                    break;
+                case EOAuthProvider.GitHub:
+                    githubProviderLoading.value = loading;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        setLoading(provider, true)
+        const isConnected = connectedSocialAccounts.value.includes(provider);
+        if (isConnected) {
+            AuthService.revokeOAuth(provider)
+                .then(() => {
+                    connectedSocialAccounts.value = connectedSocialAccounts.value.filter(p => p !== provider);
+                    setLoading(provider, false)
+                });
+        } else {
+            oauth(provider)
+            setLoading(provider, false)
+        }
+    };
 </script>
 
 <template>
@@ -125,7 +143,7 @@ const toggleSocialAccount = (provider: OAuthProvider) => {
                 </div>
             </div>
 
-            <ul class="divide-y divide-gray-700" v-if="getSupportedOAuthProviders().includes(OAuthProvider.Google)">
+            <ul v-if="getSupportedOAuthProviders().includes(EOAuthProvider.Google)" class="divide-y divide-gray-700">
                 <li class="py-4 flex justify-between items-center">
                     <div class="flex items-center">
                         <svg class="h-6 w-6 text-red-500" fill="currentColor" viewBox="0 0 24 24">
@@ -136,22 +154,19 @@ const toggleSocialAccount = (provider: OAuthProvider) => {
                             <p class="text-sm font-medium text-gray-200">
                                 {{ t("accountSettingsView.connectedAccounts.avatarSource.google") }}</p>
                             <p class="text-xs text-gray-400">
-                                {{ connectedSocialAccounts.includes(OAuthProvider.Google) ? t("accountSettingsView.connectedAccounts.status.connected") : t("accountSettingsView.connectedAccounts.status.notConnected") }}
+                                {{ connectedSocialAccounts.includes(EOAuthProvider.Google) ? t("accountSettingsView.connectedAccounts.status.connected") : t("accountSettingsView.connectedAccounts.status.notConnected")
+                                }}
                             </p>
                         </div>
                     </div>
-                    <button
-                        :class="connectedSocialAccounts.includes(OAuthProvider.Google) ?
-                            'bg-red-900 hover:bg-red-800 text-red-300' :
-                            'bg-blue-600 hover:bg-blue-700 text-white'"
-                        class="px-4 py-2 rounded text-sm font-medium transition-colors cursor-pointer"
-                        @click="toggleSocialAccount(OAuthProvider.Google)"
-                    >
-                        {{ connectedSocialAccounts.includes(OAuthProvider.Google) ? t("accountSettingsView.connectedAccounts.buttons.disconnect") : t("accountSettingsView.connectedAccounts.buttons.connect")
+                    <Button :variant="connectedSocialAccounts.includes(EOAuthProvider.Google) ? 'danger' : 'primary'"
+                            size="md" @click="toggleSocialAccount(EOAuthProvider.Google)" :loading="googleProviderLoading">
+                        {{ connectedSocialAccounts.includes(EOAuthProvider.Google) ? t("accountSettingsView.connectedAccounts.buttons.disconnect") : t("accountSettingsView.connectedAccounts.buttons.connect")
                         }}
-                    </button>
+                    </Button>
                 </li>
-                <li class="py-4 flex justify-between items-center" v-if="getSupportedOAuthProviders().includes(OAuthProvider.GitHub)">
+                <li v-if="getSupportedOAuthProviders().includes(EOAuthProvider.GitHub)"
+                    class="py-4 flex justify-between items-center">
                     <div class="flex items-center">
                         <svg class="h-6 w-6 text-gray-300" fill="currentColor" viewBox="0 0 24 24">
                             <path clip-rule="evenodd"
@@ -162,21 +177,16 @@ const toggleSocialAccount = (provider: OAuthProvider) => {
                             <p class="text-sm font-medium text-gray-200">
                                 {{ t("accountSettingsView.connectedAccounts.avatarSource.github") }}</p>
                             <p class="text-xs text-gray-400">
-                                {{ connectedSocialAccounts.includes(OAuthProvider.GitHub) ? t("accountSettingsView.connectedAccounts.status.connected") : t("accountSettingsView.connectedAccounts.status.notConnected")
+                                {{ connectedSocialAccounts.includes(EOAuthProvider.GitHub) ? t("accountSettingsView.connectedAccounts.status.connected") : t("accountSettingsView.connectedAccounts.status.notConnected")
                                 }}
                             </p>
                         </div>
                     </div>
-                    <button
-                        :class="connectedSocialAccounts.includes(OAuthProvider.GitHub) ?
-                            'bg-red-900 hover:bg-red-800 text-red-300' :
-                            'bg-blue-600 hover:bg-blue-700 text-white'"
-                        class="px-4 py-2 rounded text-sm font-medium transition-colors cursor-pointer"
-                        @click="toggleSocialAccount(OAuthProvider.GitHub)"
-                    >
-                        {{ connectedSocialAccounts.includes(OAuthProvider.GitHub) ? t("accountSettingsView.connectedAccounts.buttons.disconnect") : t("accountSettingsView.connectedAccounts.buttons.connect")
+                    <Button :variant="connectedSocialAccounts.includes(EOAuthProvider.GitHub) ? 'danger' : 'primary'"
+                            size="md" @click="toggleSocialAccount(EOAuthProvider.GitHub)" :loading="githubProviderLoading">
+                        {{ connectedSocialAccounts.includes(EOAuthProvider.GitHub) ? t("accountSettingsView.connectedAccounts.buttons.disconnect") : t("accountSettingsView.connectedAccounts.buttons.connect")
                         }}
-                    </button>
+                    </Button>
                 </li>
             </ul>
         </div>

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
     import { ref } from "vue";
-    import { ExceptionResponse } from "@/types/services/api.d";
+    import { IExceptionResponse } from "@/types/services/api.d";
     import router from "@/router";
     import { useUserStore } from "@/stores/userStore.ts";
-    import { OAuthProvider } from "@/types/services/auth.d";
+    import { EOAuthProvider } from "@/types/services/auth.d";
     import AuthService from "@/services/authService.ts";
     import logo from "@/assets/icons/logo.png";
     import Button from "@/components/ui/Button.vue";
@@ -19,156 +19,188 @@
     const userStore = useUserStore();
     const hasAccount = ref<boolean>(true);
     const { t } = useI18n();
+
+    // Loading states
+    const isLoginLoading = ref<boolean>(false);
+    const isRegisterLoading = ref<boolean>(false);
+    const isGoogleLoading = ref<boolean>(false);
+    const isGithubLoading = ref<boolean>(false);
+
     if (userStore.id !== null) {
-        router.push("/settings");
+        router.push("/user/settings");
     }
+
     const login = () => {
+        isLoginLoading.value = true;
         ApiService.getIP().then((data) => {
             AuthService.login(email.value, password.value, data.ip)
                 .then((res) => {
                     success.value = true;
                     userStore.id = res.content;
                     userStore.token = res.token;
-                    router.push("/settings");
+                    router.push("/user/settings");
                 })
-                .catch((e: ExceptionResponse) => {
+                .catch((e: IExceptionResponse) => {
                     errors.value = e.errors;
+                    isLoginLoading.value = false;
                 });
+        }).catch(() => {
+            isLoginLoading.value = false;
         });
     };
 
     const register = () => {
+        isRegisterLoading.value = true;
         AuthService.register(email.value, name.value, password.value).then((data) => {
             success.value = true;
             userStore.token = data.token;
             login();
         })
-            .catch((e: ExceptionResponse) => {
-                errors.value = e.errors;
-            });
+        .catch((e: IExceptionResponse) => {
+            errors.value = e.errors;
+            isRegisterLoading.value = false;
+        });
+    };
+
+    // Override the OAuth method to handle loading states
+    const performOAuth = (provider: EOAuthProvider) => {
+        if (provider === EOAuthProvider.Google) {
+            isGoogleLoading.value = true;
+        } else if (provider === EOAuthProvider.GitHub) {
+            isGithubLoading.value = true;
+        }
+
+        AuthService.performOAuth(provider);
+
+        // Since OAuth redirects to another page, we don't need to handle the "complete" state
+        // The loading spinner will disappear when the page unloads
     };
 </script>
 
 <template>
-    <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img :src="logo" :alt="t('authView.logo.alt')" class="mx-auto h-16 w-auto" />
-            <h2 v-if="hasAccount"
-                class="!text-white mt-10 text-center text-2xl/9 font-bold tracking-tight">{{ t("authView.signIn.title")
-                }}</h2>
-            <h2 v-else class="!text-white mt-10 text-center text-2xl/9 font-bold tracking-tight">
-                {{ t("authView.register.title") }}</h2>
-        </div>
+    <div class="container  px-4 py-12 flex min-h-full flex-1 flex-col justify-center">
+        <div class="bg-gray-800 rounded-lg shadow-lg max-w-lg lg:min-w-lg md:min-w-md mx-auto p-6">
+            <div class="text-center mb-8">
+                <img :src="logo" :alt="t('authView.logo.alt')" class="mx-auto h-16 w-auto mb-6" />
+                <h2 v-if="hasAccount"
+                    class="text-gray-200 text-2xl font-bold">{{ t("authView.signIn.title") }}</h2>
+                <h2 v-else class="text-gray-200 text-2xl font-bold">
+                    {{ t("authView.register.title") }}</h2>
+            </div>
 
-        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <div class="space-y-6">
                 <div>
-                    <label class="!text-white block text-sm/6 font-medium" for="email">{{ t("authView.form.emailLabel")
-                        }}</label>
-                    <div class="mt-2">
-                        <input id="email" v-model="email" :required="true" autocomplete="email"
-                               class="block w-full rounded-md dark:bg-gray-700 bg-white px-3 py-1.5 text-base dark:text-white text-gray-900 outline-1 -outline-offset-1 outline-gray-300 dark:placeholder:text-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"
-                               name="email"
-                               type="email" :placeholder="t('authView.form.emailPlaceholder')" />
-                    </div>
+                    <label class="text-gray-300 block text-sm font-medium mb-1" for="email">
+                        {{ t("authView.form.emailLabel") }}
+                    </label>
+                    <input id="email" v-model="email" :required="true" autocomplete="email"
+                           class="block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                           name="email"
+                           type="email" :placeholder="t('authView.form.emailPlaceholder')" />
                 </div>
 
                 <div v-if="!hasAccount">
-                    <label class="!text-white block text-sm/6 font-medium" for="name">{{ t("authView.form.nameLabel")
-                        }}</label>
-                    <div class="mt-2">
-                        <input id="name" v-model="name" :required="true" autocomplete="name"
-                               class="block w-full rounded-md dark:bg-gray-700 bg-white px-3 py-1.5 text-base dark:text-white text-gray-900 outline-1 -outline-offset-1 outline-gray-300 dark:placeholder:text-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"
-                               name="name"
-                               type="text" :placeholder="t('authView.form.namePlaceholder')" />
-                    </div>
+                    <label class="text-gray-300 block text-sm font-medium mb-1" for="name">
+                        {{ t("authView.form.nameLabel") }}
+                    </label>
+                    <input id="name" v-model="name" :required="true" autocomplete="name"
+                           class="block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                           name="name"
+                           type="text" :placeholder="t('authView.form.namePlaceholder')" />
                 </div>
 
                 <div>
-                    <div class="flex items-center justify-between">
-                        <label class="!text-white block text-sm/6 font-medium"
+                    <div class="flex items-center justify-between mb-1">
+                        <label class="text-gray-300 block text-sm font-medium"
                                for="password">{{ t("authView.form.passwordLabel") }}</label>
                         <label v-if="hasAccount && env('VITE_APP_ENABLE_EMAILING', false)"
-                               class="!text-blue-500 hover:!text-blue-300 block text-sm/6 font-medium cursor-pointer"
+                               class="text-blue-400 hover:text-blue-300 block text-sm font-medium cursor-pointer"
                                for="password"
-                               @click="AuthService.requestPasswordReset(email)">{{ t("authView.form.forgotPasswordLabel")
-                            }}</label>
+                               @click="AuthService.requestPasswordReset(email)">{{ t("authView.form.forgotPasswordLabel") }}</label>
                     </div>
-                    <div class="mt-2">
-                        <input id="password" v-model="password" :placeholder="t('authView.form.passwordPlaceholder')"
-                               :required="true" autocomplete="current-password"
-                               class="block w-full rounded-md dark:bg-gray-700 bg-white px-3 py-1.5 text-base dark:text-white text-gray-900 outline-1 -outline-offset-1 outline-gray-300 dark:placeholder:text-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"
-                               name="password"
-                               type="password" />
-                    </div>
+                    <input id="password" v-model="password" :placeholder="t('authView.form.passwordPlaceholder')"
+                           :required="true" autocomplete="current-password"
+                           class="block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                           name="password"
+                           type="password" />
                 </div>
 
                 <div v-if="hasAccount">
-                    <button
-                        class="cursor-pointer flex w-full justify-center rounded-md bg-blue-600 dark:bg-blue-700 px-3 py-1.5 text-sm/6 font-semibold !text-white shadow-xs hover:bg-blue-500 dark:hover:bg-blue-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                        @click="login">
-                        {{ t("authView.signIn.button") }}
-                    </button>
+                    <Button
+                        variant="primary"
+                        @click="login"
+                        :text="t('authView.signIn.button')"
+                        :loading="isLoginLoading"
+                        :loading-text="t('authView.signIn.loading')"
+                        fullWidth
+                    />
                 </div>
 
                 <div v-else>
-                    <button
-                        class="cursor-pointer flex w-full justify-center rounded-md bg-blue-600 dark:bg-blue-700 px-3 py-1.5 text-sm/6 font-semibold !text-white shadow-xs hover:bg-blue-500 dark:hover:bg-blue-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                        @click="register">
-                        {{ t("authView.register.button") }}
-                    </button>
+                    <Button
+                        variant="primary"
+                        @click="register"
+                        :text="t('authView.register.button')"
+                        :loading="isRegisterLoading"
+                        :loading-text="t('authView.register.loading')"
+                        fullWidth
+                    />
                 </div>
             </div>
 
-            <p v-if="hasAccount" class="mt-10 text-center text-sm/6 !text-gray-400">
-                {{ t("authView.signIn.noAccount") }}&nbsp;
-                <a class="font-semibold !text-blue-400 hover:!text-blue-300" href="#"
-                   @click="hasAccount = false">{{ t("authView.signIn.createAccount") }}</a>
-            </p>
+            <div class="mt-6 pt-4 border-t border-gray-700">
+                <p v-if="hasAccount" class="text-center text-sm text-gray-400">
+                    {{ t("authView.signIn.noAccount") }}&nbsp;
+                    <a class="font-semibold text-blue-400 hover:text-blue-300" href="#"
+                       @click="hasAccount = false">{{ t("authView.signIn.createAccount") }}</a>
+                </p>
 
-            <p v-else class="mt-10 text-center text-sm/6 !text-gray-400">
-                {{ t("authView.register.hasAccount") }}&nbsp;
-                <a class="font-semibold !text-blue-400 hover:!text-blue-300" href="#"
-                   @click="hasAccount = true">{{ t("authView.register.loginInstead") }}</a>
-            </p>
-        </div>
-        <div v-if="getSupportedOAuthProviders().length > 0">
-            <div class="flex justify-between items-center sm:mx-auto sm:w-full sm:max-w-sm mt-5 mb-2">
-                <hr class="dark:text-gray-600 !text-gray-300 w-24" />
-                <h2 class="font-semibold dark:text-white !text-white min-w-fit">{{ t("authView.oauth.title") }}</h2>
-                <hr class="dark:text-gray-600 !text-gray-300 w-24" />
+                <p v-else class="text-center text-sm text-gray-400">
+                    {{ t("authView.register.hasAccount") }}&nbsp;
+                    <a class="font-semibold text-blue-400 hover:text-blue-300" href="#"
+                       @click="hasAccount = true">{{ t("authView.register.loginInstead") }}</a>
+                </p>
             </div>
-            <div class="flex justify-center items-center sm:mx-auto sm:w-full sm:max-w-sm gap-3">
-                <Button :display-loading-text="true" :text="t('authView.oauth.google')" v-if="getSupportedOAuthProviders().includes(OAuthProvider.Google)"
-                        @click="AuthService.performOAuth(OAuthProvider.Google)" class="w-42">
-                    <font-awesome-icon class="mr-2" style="color: #DB4437;" :icon="['fab', 'google']" />
-                </Button>
-                <Button :display-loading-text="true" :text="t('authView.oauth.github')" v-if="getSupportedOAuthProviders().includes(OAuthProvider.GitHub)"
-                        @click="AuthService.performOAuth(OAuthProvider.GitHub)" class="w-42">
-                    <font-awesome-icon class="mr-2" :icon="['fab', 'github']" />
-                </Button>
+
+            <div v-if="getSupportedOAuthProviders().length > 0" class="mt-6">
+                <div class="flex justify-between items-center mb-4">
+                    <hr class="border-gray-700 w-full" />
+                    <span class="px-3 text-gray-400 font-medium text-nowrap">{{ t("authView.oauth.title") }}</span>
+                    <hr class="border-gray-700 w-full" />
+                </div>
+                <div class="flex justify-center items-center gap-4">
+                    <Button 
+                        variant="secondary"
+                        :text="t('authView.oauth.google')" 
+                        v-if="getSupportedOAuthProviders().includes(EOAuthProvider.Google)"
+                        @click="performOAuth(EOAuthProvider.Google)" 
+                        :loading="isGoogleLoading"
+                        :loading-text="t('authView.oauth.loading')"
+                    >
+                        <font-awesome-icon class="mr-2" style="color: #DB4437;" :icon="['fab', 'google']" />
+                    </Button>
+                    <Button 
+                        variant="secondary"
+                        :text="t('authView.oauth.github')" 
+                        v-if="getSupportedOAuthProviders().includes(EOAuthProvider.GitHub)"
+                        @click="performOAuth(EOAuthProvider.GitHub)" 
+                        :loading="isGithubLoading"
+                        :loading-text="t('authView.oauth.loading')"
+                    >
+                        <font-awesome-icon class="mr-2" :icon="['fab', 'github']" />
+                    </Button>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
-    .login-form {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-
-        button {
-            width: 100%;
-        }
-    }
-
     input {
-        min-width: 342px;
-    }
+        transition: all 0.3s ease;
 
-    .social-accounts {
-        display: flex;
-        gap: 12px;
+        &:focus {
+            border-color: #3b82f6;
+        }
     }
 </style>

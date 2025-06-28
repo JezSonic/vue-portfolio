@@ -7,11 +7,11 @@
     import { getApiUrl } from "@/helpers/app.ts";
     import { useI18n } from "vue-i18n";
     import Button from "@/components/ui/Button.vue";
-    import { UserExportDataStatus } from "@/types/user.d.ts";
+    import { EUserExportDataStatus } from "@/types/user.d.ts";
 
     const userStore = useUserStore()
     const isLoading = ref<boolean>(true);
-    const dataStatus = ref<UserExportDataStatus>(UserExportDataStatus.NOT_FOUND);
+    const dataStatus = ref<EUserExportDataStatus>(EUserExportDataStatus.NOT_FOUND);
     const validUntil = ref<number>(0);
     const error = ref<boolean>(false);
 
@@ -28,7 +28,7 @@
             .then((status) => {
                 isLoading.value = false;
                 dataStatus.value = status.status;
-                validUntil.value = status.valid_until;
+                validUntil.value = status.valid_until || 0;
             })
             .catch(() => {
                 isLoading.value = false;
@@ -50,10 +50,10 @@
                 <!-- Status message -->
                 <div class="status-container">
                     <div class="status-icon" :class="dataStatus">
-                        <svg v-if="dataStatus === UserExportDataStatus.COMPLETED" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg v-if="dataStatus === EUserExportDataStatus.COMPLETED" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                         </svg>
-                        <svg v-else-if="dataStatus === UserExportDataStatus.QUEUED || dataStatus === UserExportDataStatus.PROCESSING" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg v-else-if="dataStatus === EUserExportDataStatus.QUEUED || dataStatus === EUserExportDataStatus.PROCESSING" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -66,7 +66,7 @@
                 </div>
 
                 <!-- Valid until information -->
-                <div v-if="validUntil && dataStatus === 'completed'" class="text-center space-y-2 w-full">
+                <div v-if="validUntil && dataStatus === EUserExportDataStatus.COMPLETED" class="text-center space-y-2 w-full">
                     <p class="text-gray-300 text-md">
                         {{ t(`userDataExport.validUntil {datetime}`, {datetime: new Date(validUntil * 1000).toLocaleString()}) }}
                     </p>
@@ -76,7 +76,7 @@
                 </div>
 
                 <!-- Download button -->
-                <div v-if="dataStatus === 'completed'" class="mt-6 w-full flex justify-center">
+                <div v-if="dataStatus === EUserExportDataStatus.COMPLETED" class="mt-6 w-full flex justify-center">
                     <a 
                         download 
                         :href="getApiUrl() + `user/${userStore.id}/export-data/download`"

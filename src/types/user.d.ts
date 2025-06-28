@@ -1,3 +1,8 @@
+import { IGoogleUserData, IGitHubUserData } from "@/types/services/auth.d.ts";
+
+/**
+ * Interface representing user data.
+ */
 export interface IUserData {
     id: number;
     name: string;
@@ -10,48 +15,9 @@ export interface IUserData {
     profile_settings: IProfileSettings;
 }
 
-export interface IGoogleUserData {
-    name: string|null;
-    email: string;
-    nickname: string|null;
-    avatar_url: string|null;
-}
-
-export interface IGitHubUserData {
-    login: string;
-    avatar_url: string|null;
-    gravatar_id: string;
-    url: string;
-    html_url: string;
-    followers_url: string;
-    following_url: string;
-    gists_url: string;
-    stars_url: string;
-    starred_url: string;
-    subscriptions_url: string;
-    organizations_url: string;
-    repos_url: string;
-    events_url: string;
-    received_events_url: string;
-    type: string;
-    user_view_type: string;
-    site_admin: boolean;
-    name: string;
-    company: string;
-    website: string;
-    blog: string;
-    location: string;
-    email: string;
-    hireable: boolean;
-    bio: string;
-    twitter_username: string;
-    notification_email: string;
-    public_repos: number;
-    public_gists: number;
-    followers: number;
-    following: number;
-}
-
+/**
+ * Interface representing user profile settings.
+ */
 export interface IProfileSettings {
     is_public: boolean;
     avatar_source: string;
@@ -60,12 +26,18 @@ export interface IProfileSettings {
     notifications: INotificationSettings;
 }
 
+/**
+ * Interface representing user notification preferences.
+ */
 export interface INotificationSettings {
     email_notifications: boolean;
     email_marketing: boolean;
     email_security_alerts: boolean;
 }
 
+/**
+ * Interface representing a user login history entry.
+ */
 export interface ILoginHistory {
     ip_address: string;
     user_agent: string;
@@ -74,11 +46,18 @@ export interface ILoginHistory {
     performed_at: string;
 }
 
+/**
+ * Interface representing data for updating a user profile.
+ * Extends IProfileSettings with an additional name field.
+ */
 export interface IProfileUpdateData extends IProfileSettings {
     name: string
 }
 
-export enum UserExportDataStatus {
+/**
+ * Enum representing possible statuses for user data export operations.
+ */
+export enum EUserExportDataStatus {
     QUEUED = 'queued',
     PROCESSING = 'processing',
     COMPLETED = 'completed',

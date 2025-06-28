@@ -1,4 +1,4 @@
-import { OAuthProvider } from "@/types/services/auth.d.ts";
+import { EOAuthProvider } from "@/types/services/auth.d.ts";
 
 export const env = (key: string, default_val: any | null = null) => {
     const val = import.meta.env[key];
@@ -19,15 +19,15 @@ export const getApiUrl = () => {
     }
 }
 
-export const getSupportedOAuthProviders = (): OAuthProvider[] => {
+export const getSupportedOAuthProviders = (): EOAuthProvider[] => {
     const arr = env("VITE_APP_ENABLED_OAUTH_PROVIDERS", "").split(",");
-    let _map_arr: OAuthProvider[] = []
+    let _map_arr: EOAuthProvider[] = []
     if (arr.includes('google')) {
-        _map_arr.push(OAuthProvider.Google)
+        _map_arr.push(EOAuthProvider.Google)
     }
 
     if (arr.includes('github')) {
-        _map_arr.push(OAuthProvider.GitHub)
+        _map_arr.push(EOAuthProvider.GitHub)
     }
     return _map_arr;
 }

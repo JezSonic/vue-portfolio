@@ -4,9 +4,10 @@ import type {
     INotificationSettings,
     IProfileUpdateData,
     IUserData,
-    UserExportDataStatus
+    EUserExportDataStatus
 } from "@/types/user.d.ts";
-import { useUserStore } from "@/stores/userStore.ts";
+
+import type { IApiResponse, IApiStatusResponse, IEmptyRequestBody } from "@/types/services/api.d.ts";
 
 export default class UserService extends ApiService {
     constructor() {
@@ -14,7 +15,7 @@ export default class UserService extends ApiService {
     }
 
     public static getUser() {
-        return this.get<IUserData>("user", {'Authorization': `Bearer ${useUserStore().token}`})
+        return this.get<IUserData>("user", this.getAuthBearerHeader())
     }
 
     public static getUserByID(id: number) {
@@ -22,38 +23,38 @@ export default class UserService extends ApiService {
     }
 
     public static update(data: IProfileUpdateData) {
-        return this.patch<{content: boolean}, IProfileUpdateData>(`user`, data, {'Authorization': `Bearer ${useUserStore().token}`})
+        return this.patch<IApiResponse<boolean>, IProfileUpdateData>(`user`, data, this.getAuthBearerHeader())
     }
 
     public static getLoginHistory() {
-        return this.get<{content: ILoginHistory[]}>(`user/activity/login`, {'Authorization': `Bearer ${useUserStore().token}`})
+        return this.get<IApiResponse<ILoginHistory[]>>(`user/activity/login`, this.getAuthBearerHeader())
     }
 
     public static updateNotificationSettings(userId: number, notificationSettings: INotificationSettings) {
-        return this.put<{content: boolean}, INotificationSettings>(
+        return this.put<IApiResponse<boolean>, INotificationSettings>(
             `user/${userId}/notifications`, 
-            notificationSettings, 
-            {'Authorization': `Bearer ${useUserStore().token}`}
+            notificationSettings,
+            this.getAuthBearerHeader()
         )
     }
 
     public static exportUserData() {
-        return this.get<{content: string}>(`user/export-data`, {'Authorization': `Bearer ${useUserStore().token}`})
+        return this.get<IApiResponse<string>>(`user/export-data`, this.getAuthBearerHeader())
     }
 
     public static checkUserDataExportStatus(userId: number) {
-        return this.get<{status: UserExportDataStatus, valid_until: number }>(`user/${userId}/export-data/status`)
+        return this.get<IApiStatusResponse<void, EUserExportDataStatus>>(`user/${userId}/export-data/status`)
     }
 
     public static sendVerificationEmail() {
-        return this.post<{content: boolean}, {}>(`user/verify-email`, {}, {'Authorization': `Bearer ${useUserStore().token}`})
+        return this.post<IApiResponse<boolean>, IEmptyRequestBody>(`user/verify-email`, {}, this.getAuthBearerHeader())
     }
 
     public static verifyEmail(token: string) {
-        return this.post<{ content: boolean }, {}>(`user/verify-email/${token}`, {}, {'Authorization': `Bearer ${useUserStore().token}`});
+        return this.post<IApiResponse<boolean>, IEmptyRequestBody>(`user/verify-email/${token}`, {}, this.getAuthBearerHeader());
     }
 
     public static deleteAccount() {
-        return this.delete<{content: boolean}, {}>(`user`, {'Authorization': `Bearer ${useUserStore().token}`});
+        return this.delete<IApiResponse<boolean>, IEmptyRequestBody>(`user`, this.getAuthBearerHeader());
     }
 }

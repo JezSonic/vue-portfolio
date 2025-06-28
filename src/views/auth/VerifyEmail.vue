@@ -7,7 +7,7 @@
     import { useUserStore } from "@/stores/userStore.ts";
     import UserService from "@/services/userService.ts";
     import Loading from "@/components/ui/Loading.vue";
-    import type { ExceptionResponse } from "@/types/services/api.d.ts";
+    import type { IExceptionResponse } from "@/types/services/api.d.ts";
     const userStore = useUserStore();
     const errorText = ref<string|undefined>(undefined);
     onMounted(() => {

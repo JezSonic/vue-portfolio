@@ -9,6 +9,10 @@ import maszyna_reloaded from '@/assets/projects/maszyna_reloaded.webp'
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
+
+const goTo = (url: string) => {
+    window.location.href = url
+}
 </script>
 
 <template>
@@ -69,10 +73,7 @@ const { t } = useI18n();
                         </div>
                         <p class="!text-gray-300">{{ t('commissionsView.projects.oldWebsite.description') }}</p>
                         <div class="flex justify-end mt-4">
-                            <a href="https://old-newdev.web.app" rel="noopener noreferrer" target="_blank"
-                               class="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-500 !text-white font-medium rounded-lg transition-colors">
-                                {{ t('commissionsView.projects.oldWebsite.viewButton') }}
-                            </a>
+                            <Button @click="goTo('https://old-newdev.web.app')" variant="primary" :text="t('commissionsView.projects.oldWebsite.viewButton')" />
                         </div>
                     </div>
                 </Tile>
@@ -86,10 +87,7 @@ const { t } = useI18n();
                         </div>
                         <p class="!text-gray-300">{{ t('commissionsView.projects.artist.description') }}</p>
                         <div class="flex justify-end mt-4">
-                            <a href="https://artist.com.pl" rel="noopener noreferrer" target="_blank"
-                               class="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-500 !text-white font-medium rounded-lg transition-colors">
-                                {{ t('commissionsView.projects.artist.viewButton') }}
-                            </a>
+                            <Button @click="goTo('https://artist.com.pl')" variant="primary" :text="t('commissionsView.projects.artist.viewButton')" />
                         </div>
                     </div>
                 </Tile>
@@ -105,10 +103,7 @@ const { t } = useI18n();
                         </div>
                         <p class="!text-gray-300">{{ t('commissionsView.projects.maszyna.description') }}</p>
                         <div class="flex justify-end mt-4">
-                            <a href="https://github.com/MaSzyna-Reloaded" rel="noopener noreferrer" target="_blank"
-                               class="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-500 !text-white font-medium rounded-lg transition-colors">
-                                {{ t('commissionsView.projects.maszyna.viewButton') }}
-                            </a>
+                            <Button @click="goTo('https://github.com/MaSzyna-Reloaded')" variant="primary" :text="t('commissionsView.projects.maszyna.viewButton')" />
                         </div>
                     </div>
                 </Tile>
@@ -122,9 +117,7 @@ const { t } = useI18n();
                     {{ t('commissionsView.cta.description') }}
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="/contact" class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-500 !text-white font-medium rounded-lg transition-colors">
-                        {{ t('commissionsView.cta.contactButton') }}
-                    </a>
+                    <Button @click="router.push('/commissions/tos')" variant="primary" :text="t('commissionsView.cta.contactButton')" size="lg"/>
                     <Button @click="router.push('/commissions/tos')" :text="t('commissionsView.cta.tosButton')" />
                 </div>
             </template>

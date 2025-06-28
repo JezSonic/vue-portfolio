@@ -1,4 +1,4 @@
-export enum ExceptionType {
+export enum EExceptionType {
     /**
      * Thrown when body payload is incorrectly formatted.
      */
@@ -10,7 +10,7 @@ export enum ExceptionType {
     /**
      * Thrown when the user has not enough privileges to request the endpoint.
      */
-    AUTHORIZATION_EXCEPTION = 'authentication_exception',
+    AUTHORIZATION_EXCEPTION = 'authorization_exception',
     /**
      * Thrown when requested endpoint was not found
      */
@@ -25,8 +25,11 @@ export enum ExceptionType {
     GENERIC_EXCEPTION = 'generic_exception',
 }
 
-export interface ExceptionResponse {
-    type: ExceptionType;
+/**
+ * Interface representing the structure of an API exception response.
+ */
+export interface IExceptionResponse {
+    type: EExceptionType;
     errors: {
         [key: string]: string[]
     };
@@ -36,7 +39,35 @@ export interface ExceptionResponse {
         file: string,
         line: number,
         message: string;
-        type: ExceptionType;
+        type: EExceptionType;
     }
     code: number
 }
+
+/**
+ * Interface representing a basic API response with a content field.
+ */
+export interface IApiResponse<T> {
+    content: T;
+}
+
+/**
+ * Interface representing an API response with a token.
+ */
+export interface IApiAuthResponse<T> extends IApiResponse<T> {
+    token: string;
+}
+
+/**
+ * Interface representing an API response with a status field.
+ */
+export interface IApiStatusResponse<T, S> {
+    status: S;
+    valid_until?: number;
+}
+
+/**
+ * Interface representing an empty request body.
+ * Used for API endpoints that don't require any parameters.
+ */
+export interface IEmptyRequestBody {}

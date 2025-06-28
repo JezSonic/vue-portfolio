@@ -3,13 +3,15 @@
     import { useRoute } from "vue-router";
     const error = ref<boolean>(false);
     import Loading from "@/components/ui/Loading.vue";
-    import type { ExceptionResponse } from "@/types/services/api.d.ts";
+    import Button from "@/components/ui/Button.vue";
+    import type { IExceptionResponse } from "@/types/services/api.d.ts";
     import logo from "@/assets/icons/logo.png";
     import { useI18n } from "vue-i18n";
     import AuthService from "@/services/authService.ts";
     import router from "@/router/index.ts";
     const errorText = ref<string|undefined>(undefined);
     const loading = ref<boolean>(true);
+    const isResetLoading = ref<boolean>(false);
     const { t } = useI18n();
     const password = ref<string>("");
     const passwordConfirm = ref<string>("");
@@ -27,7 +29,7 @@
                     loading.value = false;
                 }
             })
-            .catch((err: ExceptionResponse) => {
+            .catch((err: IExceptionResponse) => {
                 if (err.message == "invalid_token") {
                     errorText.value = "Invalid email verification token provided";
                 }
@@ -40,15 +42,19 @@
             errorText.value = "Passwords do not match";
             return;
         }
+
+        isResetLoading.value = true;
+
         AuthService.resetPassword(token.value, password.value)
             .then(() => {
                 router.push('/auth')
             })
-            .catch((err: ExceptionResponse) => {
+            .catch((err: IExceptionResponse) => {
                 if (err.message == "invalid_token") {
                     errorText.value = "Invalid password reset token provided";
                 }
                 error.value = true;
+                isResetLoading.value = false;
             })
     }
 </script>
@@ -89,10 +95,14 @@
                     </div>
                 </div>
                 <div>
-                    <button class="cursor-pointer flex w-full justify-center rounded-md bg-blue-600 dark:bg-blue-700 px-3 py-1.5 text-sm/6 font-semibold !text-white shadow-xs hover:bg-blue-500 dark:hover:bg-blue-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                            @click="resetPassword">
-                        {{ t('authView.resetPassword.button') }}
-                    </button>
+                    <Button
+                        variant="primary"
+                        @click="resetPassword"
+                        :text="t('authView.resetPassword.button')"
+                        :loading="isResetLoading"
+                        :loading-text="t('authView.resetPassword.loading')"
+                        fullWidth
+                    />
                 </div>
             </div>
         </div>

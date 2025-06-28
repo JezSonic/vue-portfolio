@@ -5,6 +5,7 @@ import { useUserStore } from "@/stores/userStore.js";
 import { env } from "@/helpers/app.js";
 import type { IUserData } from "@/types/user.d.ts";
 import { useI18n } from "vue-i18n";
+import Button from "@/components/ui/Button.vue";
 
 const { t } = useI18n();
 
@@ -21,15 +22,18 @@ const newPassword = ref<string>("");
 const confirmPassword = ref<string>("");
 const passwordError = ref<string>("");
 const passwordSuccess = ref<string>("");
+const isPasswordUpdateLoading = ref<boolean>(false);
 
 // Account deletion
 const showDeleteConfirm = ref<boolean>(false);
+const isDeleteAccountLoading = ref<boolean>(false);
 
 // Export user data
 const exportDataStatus = ref<string>("");
 const exportDataError = ref<boolean>(false);
 const exportDataSuccess = ref<boolean>(false);
 const exportDataLink = ref<string>("");
+const isExportDataLoading = ref<boolean>(false);
 
 // Update password
 const updatePassword = () => {
@@ -51,6 +55,8 @@ const updatePassword = () => {
         return;
     }
 
+    isPasswordUpdateLoading.value = true;
+
     // Here you would call an API to update the password
     // Example:
     // UserService.updatePassword(currentPassword.value, newPassword.value)
@@ -62,13 +68,19 @@ const updatePassword = () => {
     //     })
     //     .catch((err) => {
     //         passwordError.value = err.message || 'Failed to update password';
+    //     })
+    //     .finally(() => {
+    //         isPasswordUpdateLoading.value = false;
     //     });
 
     // For demo purposes:
-    passwordSuccess.value = t("accountSettingsView.security.changePassword.success");
-    currentPassword.value = "";
-    newPassword.value = "";
-    confirmPassword.value = "";
+    setTimeout(() => {
+        passwordSuccess.value = t("accountSettingsView.security.changePassword.success");
+        currentPassword.value = "";
+        newPassword.value = "";
+        confirmPassword.value = "";
+        isPasswordUpdateLoading.value = false;
+    }, 1000);
 };
 
 // Export user data
@@ -77,6 +89,7 @@ const exportUserData = () => {
     exportDataError.value = false;
     exportDataSuccess.value = false;
     exportDataLink.value = "";
+    isExportDataLoading.value = true;
 
     UserService.exportUserData()
         .then((data) => {
@@ -92,6 +105,9 @@ const exportUserData = () => {
         .catch(() => {
             exportDataError.value = true;
             exportDataStatus.value = t("userDataExport.status.failed");
+        })
+        .finally(() => {
+            isExportDataLoading.value = false;
         });
 };
 
@@ -105,11 +121,13 @@ const cancelDeleteAccount = () => {
 };
 
 const deleteAccount = () => {
+    isDeleteAccountLoading.value = true;
     UserService.deleteAccount()
         .finally(() => {
             userStore.logout();
             // Logout and redirect
             window.location.href = "/";
+            // Note: No need to reset isDeleteAccountLoading since we're redirecting
         });
     showDeleteConfirm.value = false;
 };
@@ -125,7 +143,11 @@ const deleteAccount = () => {
         <div class="p-6">
             <div class="mb-6" v-if="env('VITE_APP_ENABLE_EMAILING', false)">
                 <h3 class="text-sm font-medium text-gray-400 mb-2">
-                    {{ t("accountSettingsView.security.changePassword.title") }}</h3>
+                    {{ t("accountSettingsView.security.changePassword.title") }}
+                    <small class="text-xs text-gray-400 mb-4">
+                        (beta)
+                    </small>
+                </h3>
                 <div v-if="passwordSuccess" class="mb-4 p-3 bg-green-900 text-green-300 rounded">
                     {{ passwordSuccess }}
                 </div>
@@ -166,12 +188,13 @@ const deleteAccount = () => {
                         >
                     </div>
                     <div>
-                        <button
-                            class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded text-sm font-medium transition-colors cursor-pointer"
+                        <Button
+                            variant="primary"
                             @click="updatePassword"
-                        >
-                            {{ t("accountSettingsView.security.changePassword.updateButton") }}
-                        </button>
+                            :text="t('accountSettingsView.security.changePassword.updateButton')"
+                            :loading="isPasswordUpdateLoading"
+                            :loading-text="t('accountSettingsView.security.changePassword.updating')"
+                        />
                     </div>
                 </div>
             </div>
@@ -179,16 +202,21 @@ const deleteAccount = () => {
             <div class="pb-6"
                  v-if="env('VITE_APP_ENABLE_DATA_EXPORT', false)">  <!--  pt-6 border-t border-b border-gray-700 -->
                 <h3 class="text-sm font-medium text-gray-400 mb-2">
-                    {{ t("accountSettingsView.security.dataExport.title") }}</h3>
+                    {{ t("accountSettingsView.security.dataExport.title") }}
+                    <small class="text-xs text-gray-400 mb-4">
+                        (beta)
+                    </small>
+                </h3>
                 <p class="text-xs text-gray-400 mb-4">
                     {{ t("accountSettingsView.security.dataExport.description") }}</p>
 
-                <button
-                    class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded text-sm font-medium transition-colors cursor-pointer"
-                    @click="exportUserData">
-
-                    {{ t("accountSettingsView.security.dataExport.exportButton") }}
-                </button>
+                <Button
+                    variant="primary"
+                    @click="exportUserData"
+                    :text="t('accountSettingsView.security.dataExport.exportButton')"
+                    :loading="isExportDataLoading"
+                    :loading-text="t('accountSettingsView.security.dataExport.exporting')"
+                />
 
                 <!-- Export status message -->
                 <div v-if="exportDataStatus" class="mt-4">
@@ -211,29 +239,30 @@ const deleteAccount = () => {
                 <h3 class="text-sm font-medium text-gray-400 mb-2">
                     {{ t("accountSettingsView.security.dangerZone.title") }}</h3>
                 <div v-if="!showDeleteConfirm">
-                    <button
-                        class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded text-sm font-medium transition-colors cursor-pointer"
-                        @click="confirmDeleteAccount">
-                        {{ t("accountSettingsView.security.dangerZone.deleteButton") }}
-                    </button>
+                    <Button
+                        variant="danger"
+                        @click="confirmDeleteAccount"
+                        :text="t('accountSettingsView.security.dangerZone.deleteButton')"
+                    />
                 </div>
                 <div v-else class="bg-red-900/50 p-4 rounded border border-red-700">
                     <p class="text-sm text-red-300 mb-4">
                         {{ t("accountSettingsView.security.dangerZone.confirmMessage") }}
                     </p>
                     <div class="flex space-x-3">
-                        <button
-                            class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded text-sm font-medium transition-colors cursor-pointer"
+                        <Button
+                            variant="danger"
                             @click="deleteAccount"
-                        >
-                            {{ t("accountSettingsView.security.dangerZone.confirmButton") }}
-                        </button>
-                        <button
-                            class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded text-sm font-medium transition-colors cursor-pointer"
+                            :text="t('accountSettingsView.security.dangerZone.confirmButton')"
+                            :loading="isDeleteAccountLoading"
+                            :loading-text="t('accountSettingsView.security.dangerZone.deleting')"
+                        />
+                        <Button
+                            variant="secondary"
                             @click="cancelDeleteAccount"
-                        >
-                            {{ t("accountSettingsView.security.dangerZone.cancelButton") }}
-                        </button>
+                            :text="t('accountSettingsView.security.dangerZone.cancelButton')"
+                            class="ml-3"
+                        />
                     </div>
                 </div>
             </div>

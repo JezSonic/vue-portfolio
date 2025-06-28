@@ -182,8 +182,11 @@
                         v-if="activeTab === 'profile'" 
                         :userData="userData" 
                         :timestampToDate="timestampToDate"
-                        @update:userData="userData = $event"
-                        @saveProfileSettings="saveProfileSettings"
+                        @update:userData="(data: IUserData | null) => {
+                            console.log('saving...')
+                            userData = data
+                            saveProfileSettings()
+                        }"
                     />
 
                     <!-- Connected Accounts Tab -->

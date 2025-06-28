@@ -5,8 +5,12 @@ import discord_img from '@/assets/img/social/discord.webp'
 import telegram_img from '@/assets/img/social/telegram.webp'
 import img from '@/assets/profile/linkedin_avatar.webp'
 import { useI18n } from "vue-i18n";
+import Button from "@/components/ui/Button.vue";
 
 const { t } = useI18n();
+const goTo = (url: string) => {
+    window.location.href = url
+}
 </script>
 
 <template>
@@ -32,10 +36,9 @@ const { t } = useI18n();
                             <p class="text-gray-300 text-sm sm:text-base">{{ t('contactView.linkedin.company') }}</p>
                         </div>
                     </div>
-                    <a class="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-500 !text-white font-medium rounded-lg transition-colors w-full sm:w-auto text-center"
-                       href="https://pl.linkedin.com/in/karol-tomaszewski-91671423b" target="_blank">
+                    <Button variant="primary" @click="goTo('https://linkedin.com/in/karol-tomaszewski-91671423b')">
                         {{ t('contactView.linkedin.viewProfile') }}
-                    </a>
+                    </Button>
                 </div>
             </Tile>
 
@@ -44,10 +47,9 @@ const { t } = useI18n();
                 <div class="flex flex-col justify-between h-full">
                     <p class="!text-white mb-4">{{ t('contactView.email.description') }}</p>
                     <div class="flex flex-col sm:flex-row items-start sm:items-center">
-                        <a class="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-500 !text-white font-medium rounded-lg transition-colors w-full sm:w-auto text-center"
-                           href="mailto:karoltomaszewskimusic@gmail.com">
+                        <Button variant="primary" @click="goTo('mailto:karoltomaszewskimusic@gmail.com')">
                             {{ t('contactView.email.sendButton') }}
-                        </a>
+                        </Button>
                         <span class="mt-2 sm:mt-0 sm:ml-3 !text-gray-300 break-all">karoltomaszewskimusic@gmail.com</span>
                     </div>
                 </div>
@@ -69,10 +71,9 @@ const { t } = useI18n();
                 <div class="flex flex-col justify-between h-full">
                     <p class="!text-white mb-4">{{ t('contactView.telegram.description') }}</p>
                     <div class="flex flex-col sm:flex-row items-start sm:items-center">
-                        <a class="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-500 !text-white font-medium rounded-lg transition-colors w-full sm:w-auto text-center"
-                           href="https://t.me/Futrzasty" target="_blank">
+                        <Button variant="primary" @click="goTo('https://t.me/Futrzasty')">
                             {{ t('contactView.telegram.messageButton') }}
-                        </a>
+                        </Button>
                         <span class="mt-2 sm:mt-0 sm:ml-3 !text-gray-300">@Futrzasty</span>
                     </div>
                 </div>

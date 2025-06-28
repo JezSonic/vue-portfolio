@@ -2,6 +2,8 @@
 import Tile from "@/components/tiles/Tile.vue";
 import Badge from "@/components/badges/Badge.vue";
 import { useI18n } from 'vue-i18n';
+import Button from "@/components/ui/Button.vue";
+import router from "@/router/index.js";
 
 const { t } = useI18n();
 const currentYear = new Date().getFullYear();
@@ -29,12 +31,12 @@ const yearsOfExperience = Math.round(totalMonths / 12);
                     {{ t('home.hero.description', { years: yearsOfExperience }) }}
                 </p>
                 <div class="flex gap-4">
-                    <a href="/commissions" class="px-6 py-3 bg-blue-600 hover:bg-blue-500 !text-white font-medium rounded-lg transition-colors">
+                    <Button variant="primary" @click="router.push('/commissions')" size="lg">
                         {{ t('home.hero.viewProjects') }}
-                    </a>
-                    <a href="/contact" class="px-6 py-3 border border-blue-600 text-blue-600 hover:bg-blue-600 hover:!text-white font-medium rounded-lg transition-colors">
+                    </Button>
+                    <Button variant="primary" @click="router.push('/contact')" outline size="lg">
                         {{ t('home.hero.contactMe') }}
-                    </a>
+                    </Button>
                 </div>
             </div>
             <div class="md:w-1/2 flex justify-center">
@@ -111,10 +113,10 @@ const yearsOfExperience = Math.round(totalMonths / 12);
                         </div>
                     </div>
                 </div>
-                <div class="mt-6 text-center">
-                    <a href="/commissions" class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-500 !text-white font-medium rounded-lg transition-colors">
+                <div class="mt-6 text-center flex justify-center gap-4">
+                    <Button variant="primary" @click="router.push('/commissions')" size="lg">
                         {{ t('home.projects.viewAll') }}
-                    </a>
+                    </Button>
                 </div>
             </template>
         </Tile>
