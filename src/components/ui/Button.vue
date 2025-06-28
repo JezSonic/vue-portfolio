@@ -77,16 +77,27 @@
         };
 
         // Variant classes
-        const variantClasses = {
-            default: "bg-white dark:bg-gray-600 text-black dark:text-white shadow-xs hover:bg-gray-100 dark:hover:bg-gray-500",
-            primary: "bg-blue-600 text-white shadow-xs hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800",
-            secondary: "bg-gray-200 text-gray-800 shadow-xs hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600",
-            success: "bg-green-600 text-white shadow-xs hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-800",
-            danger: "bg-red-600 text-white shadow-xs hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800",
-            warning: "bg-yellow-500 text-white shadow-xs hover:bg-yellow-600 dark:bg-yellow-600 dark:hover:bg-yellow-700",
-            info: "bg-blue-400 text-white shadow-xs hover:bg-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600",
-            link: "bg-transparent text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 hover:underline p-0"
-        };
+        const variantClasses = props.outline 
+            ? {
+                default: "bg-transparent border border-gray-300 text-gray-700 dark:border-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700",
+                primary: "bg-transparent border border-blue-600 text-blue-600 hover:bg-blue-50 dark:border-blue-500 dark:text-blue-400 dark:hover:bg-blue-900/20",
+                secondary: "bg-transparent border border-gray-500 text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700",
+                success: "bg-transparent border border-green-600 text-green-600 hover:bg-green-50 dark:border-green-500 dark:text-green-400 dark:hover:bg-green-900/20",
+                danger: "bg-transparent border border-red-600 text-red-600 hover:bg-red-50 dark:border-red-500 dark:text-red-400 dark:hover:bg-red-900/20",
+                warning: "bg-transparent border border-yellow-500 text-yellow-600 hover:bg-yellow-50 dark:border-yellow-400 dark:text-yellow-300 dark:hover:bg-yellow-900/20",
+                info: "bg-transparent border border-blue-400 text-blue-400 hover:bg-blue-50 dark:border-blue-300 dark:text-blue-300 dark:hover:bg-blue-900/20",
+                link: "bg-transparent text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 hover:underline p-0"
+            }
+            : {
+                default: "bg-white dark:bg-gray-600 text-black dark:text-white shadow-xs hover:bg-gray-100 dark:hover:bg-gray-500",
+                primary: "bg-blue-600 text-white shadow-xs hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800",
+                secondary: "bg-gray-200 text-gray-800 shadow-xs hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600",
+                success: "bg-green-600 text-white shadow-xs hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-800",
+                danger: "bg-red-600 text-white shadow-xs hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800",
+                warning: "bg-yellow-500 text-white shadow-xs hover:bg-yellow-600 dark:bg-yellow-600 dark:hover:bg-yellow-700",
+                info: "bg-blue-400 text-white shadow-xs hover:bg-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600",
+                link: "bg-transparent text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 hover:underline p-0"
+            };
 
         // Width class
         const widthClass = props.fullWidth ? "w-full" : "";
