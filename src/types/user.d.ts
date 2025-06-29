@@ -10,6 +10,7 @@ export interface IUserData {
     email_verified_at: string|null;
     created_at: string;
     updated_at: string;
+    has_password: boolean;
     google?: IGoogleUserData;
     github?: IGitHubUserData;
     profile_settings: IProfileSettings;

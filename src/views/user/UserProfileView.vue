@@ -65,11 +65,28 @@
 
 <template>
     <div class="w-full h-full">
-        <div v-if="isPrivateProfile" class="loading">
-            <Loading :loading="false" :error="true" :error-text="t('userProfileView.error.privateProfile')" />
+        <div v-if="isPrivateProfile" class="error-container">
+            <div class="error-card">
+                <font-awesome-icon icon="fa-solid fa-lock" class="error-icon text-yellow-500" />
+                <h2 class="error-title">{{ t('userProfileView.error.privateProfile') }}</h2>
+                <p class="error-description">This user has set their profile to private. Only the profile owner can view their information.</p>
+                <button @click="router.push('/')" class="error-button bg-blue-600 hover:bg-blue-700">
+                    <font-awesome-icon icon="fa-solid fa-home" class="mr-2" />
+                    Return to Home
+                </button>
+            </div>
         </div>
-        <div v-else-if="userData == null" class="loading">
-            <Loading :loading="true" :error="error" :error-text="t('userProfileView.error.notFound')" />
+        <div v-else-if="userData == null" class="error-container">
+            <div class="error-card" v-if="error">
+                <font-awesome-icon icon="fa-solid fa-user-slash" class="error-icon text-red-500" />
+                <h2 class="error-title">{{ t('userProfileView.error.notFound') }}</h2>
+                <p class="error-description">We couldn't find the user profile you're looking for. The user may not exist or has been removed.</p>
+                <button @click="router.push('/')" class="error-button bg-blue-600 hover:bg-blue-700">
+                    <font-awesome-icon icon="fa-solid fa-home" class="mr-2" />
+                    Return to Home
+                </button>
+            </div>
+            <Loading v-else :loading="true" :error="false" />
         </div>
         <div v-else class="text-gray-900 dark:text-white w-full max-w-6xl mx-auto px-4 py-8">
             <!-- Profile Header -->
@@ -118,10 +135,7 @@
 
             <!-- Profile Content -->
             <div class="bg-white dark:bg-gray-800 rounded-b-lg shadow-lg overflow-hidden">
-                <h2 v-if="!userData?.profile_settings.is_public" class="text-xl p-6 bg-yellow-600 font-semibold text-gray-800 dark:text-gray-200">You can see your profile only because you are logged in. It is still invisible to everyone else</h2>
-
-                <!-- Profile Information -->
-                <div class="p-6 border-b border-gray-300 dark:border-gray-700">
+               <div class="p-6 border-b border-gray-300 dark:border-gray-700">
                     <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">{{ t('userProfileView.sections.profileInformation') }}</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Account Details -->
@@ -236,6 +250,69 @@
         position: absolute;
         top: 50%; right: 50%;
         transform: translate(50%,-50%);
+    }
+
+    .error-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%; right: 50%;
+        transform: translate(50%,-50%);
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .error-card {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        text-align: center;
+        width: 100%;
+
+        :root.dark & {
+            background-color: #1f2937;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    .error-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+    }
+
+    .error-title {
+        color: #1f2937;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+
+        :root.dark & {
+            color: #f3f4f6;
+        }
+    }
+
+    .error-description {
+        color: #6b7280;
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+
+        :root.dark & {
+            color: #d1d5db;
+        }
+    }
+
+    .error-button {
+        border: none;
+        border-radius: 0.375rem;
+        color: white;
+        cursor: pointer;
+        font-size: 0.875rem;
+        font-weight: 600;
+        padding: 0.625rem 1.25rem;
+        transition: background-color 0.2s ease;
     }
 
     .bg-gray-750 {

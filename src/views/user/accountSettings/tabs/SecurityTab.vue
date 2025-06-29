@@ -6,12 +6,16 @@ import { env } from "@/helpers/app.js";
 import type { IUserData } from "@/types/user.d.ts";
 import { useI18n } from "vue-i18n";
 import Button from "@/components/ui/Button.vue";
+import AuthService from "@/services/authService.js";
 
 const { t } = useI18n();
 
-defineProps<{
-    userData: IUserData | null;
-}>();
+const props = defineProps({
+    userData: {
+        type: Object as () => IUserData | null,
+        required: true
+    }
+})
 
 // User store
 const userStore = useUserStore();
@@ -36,51 +40,10 @@ const exportDataLink = ref<string>("");
 const isExportDataLoading = ref<boolean>(false);
 
 // Update password
-const updatePassword = () => {
-    passwordError.value = "";
-    passwordSuccess.value = "";
-
-    if (!currentPassword.value) {
-        passwordError.value = t("accountSettingsView.security.changePassword.errors.required");
-        return;
+const requestPasswordReset = () => {
+    if (props.userData && props.userData.email) {
+        AuthService.requestPasswordReset(props.userData.email);
     }
-
-    if (newPassword.value.length < 8) {
-        passwordError.value = t("accountSettingsView.security.changePassword.errors.length");
-        return;
-    }
-
-    if (newPassword.value !== confirmPassword.value) {
-        passwordError.value = t("accountSettingsView.security.changePassword.errors.match");
-        return;
-    }
-
-    isPasswordUpdateLoading.value = true;
-
-    // Here you would call an API to update the password
-    // Example:
-    // UserService.updatePassword(currentPassword.value, newPassword.value)
-    //     .then(() => {
-    //         passwordSuccess.value = t('accountSettingsView.security.changePassword.success');
-    //         currentPassword.value = '';
-    //         newPassword.value = '';
-    //         confirmPassword.value = '';
-    //     })
-    //     .catch((err) => {
-    //         passwordError.value = err.message || 'Failed to update password';
-    //     })
-    //     .finally(() => {
-    //         isPasswordUpdateLoading.value = false;
-    //     });
-
-    // For demo purposes:
-    setTimeout(() => {
-        passwordSuccess.value = t("accountSettingsView.security.changePassword.success");
-        currentPassword.value = "";
-        newPassword.value = "";
-        confirmPassword.value = "";
-        isPasswordUpdateLoading.value = false;
-    }, 1000);
 };
 
 // Export user data
@@ -143,6 +106,9 @@ const deleteAccount = () => {
         <div class="p-6">
             <div class="mb-6" v-if="env('VITE_APP_ENABLE_EMAILING', false)">
                 <h3 class="text-sm font-medium text-gray-400 mb-2">
+<!--                    @TODO: In the case of creating a new password, the text should sayt "Create a new password" or something-->
+<!--                    @TODO: User should be informed about receiving email with password update instructions-->
+<!--                    @TODO: There should be error/success message displayed after the request has been sent-->
                     {{ t("accountSettingsView.security.changePassword.title") }}
                     <small class="text-xs text-gray-400 mb-4">
                         (beta)
@@ -156,42 +122,10 @@ const deleteAccount = () => {
                 </div>
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-1"
-                               for="current-password">{{ t("accountSettingsView.security.changePassword.currentPassword")
-                            }}</label>
-                        <input
-                            id="current-password"
-                            v-model="currentPassword"
-                            class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            type="password"
-                        >
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-1" for="new-password">{{ t("accountSettingsView.security.changePassword.newPassword")
-                            }}</label>
-                        <input
-                            id="new-password"
-                            v-model="newPassword"
-                            class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            type="password"
-                        >
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-1"
-                               for="confirm-password">{{ t("accountSettingsView.security.changePassword.confirmPassword")
-                            }}</label>
-                        <input
-                            id="confirm-password"
-                            v-model="confirmPassword"
-                            class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            type="password"
-                        >
-                    </div>
-                    <div>
                         <Button
                             variant="primary"
-                            @click="updatePassword"
-                            :text="t('accountSettingsView.security.changePassword.updateButton')"
+                            @click="requestPasswordReset"
+                            :text="t('accountSettingsView.security.changePassword.resetButton')"
                             :loading="isPasswordUpdateLoading"
                             :loading-text="t('accountSettingsView.security.changePassword.updating')"
                         />
@@ -199,9 +133,9 @@ const deleteAccount = () => {
                 </div>
             </div>
 
-            <div class="pb-6"
-                 v-if="env('VITE_APP_ENABLE_DATA_EXPORT', false)">  <!--  pt-6 border-t border-b border-gray-700 -->
-                <h3 class="text-sm font-medium text-gray-400 mb-2">
+            <div class="pb-6 pt-6 border-t border-b border-gray-700"
+                 v-if="env('VITE_APP_ENABLE_DATA_EXPORT', false)">
+                <h3 class="text-sm font-medium text-gray-400 mb-2 ">
                     {{ t("accountSettingsView.security.dataExport.title") }}
                     <small class="text-xs text-gray-400 mb-4">
                         (beta)

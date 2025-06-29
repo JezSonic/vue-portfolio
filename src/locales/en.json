@@ -437,7 +437,7 @@
         "currentPassword": "Current Password",
         "newPassword": "New Password",
         "confirmPassword": "Confirm New Password",
-        "updateButton": "Update Password",
+        "resetButton": "Reset Password",
         "success": "Password updated successfully",
         "errors": {
           "required": "Current password is required",

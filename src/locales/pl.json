@@ -437,7 +437,7 @@
         "currentPassword": "Obecne Hasło",
         "newPassword": "Nowe Hasło",
         "confirmPassword": "Potwierdź Nowe Hasło",
-        "updateButton": "Aktualizuj Hasło",
+        "": "Zresetuj Hasło",
         "success": "Hasło zostało pomyślnie zaktualizowane",
         "errors": {
           "required": "Wymagane jest obecne hasło",
