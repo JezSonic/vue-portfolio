@@ -1,6 +1,7 @@
 import { env, getApiUrl } from "@/helpers/app.ts";
 import { IExceptionResponse, EExceptionType } from "@/types/services/api.d.ts";
 import { useUserStore } from "@/stores/userStore.js";
+import { cacheService } from "./cacheService"; // Import CacheService
 /**
  * Basic API service inherited by all other API Services
  */
@@ -29,8 +30,77 @@ export default class ApiService {
         return this.fetching<T, D>(url, params, "PUT", extraHeaders, prefix, credentials, removeDefaultHeaders);
     }
 
-    static async get<T>(url: string, extraHeaders: HeadersInit = {}, prefix: boolean = true): Promise<T> {
-        return this.fetching<T, null>(url, null, "GET", extraHeaders, prefix);
+    /**
+     * Performs a GET request.
+     * Supports caching with configurable TTL and cache skipping.
+     * @template T The expected response type.
+     * @param {string} url The endpoint URL.
+     * @param {HeadersInit} [extraHeaders={}] Additional headers for the request.
+     * @param {boolean} [prefix=true] Whether to prefix the URL with the API base URL.
+     * @param {boolean} [skipCache=false] If true, bypasses the cache for reading and writing.
+     * @param {number} [cacheTTL=3600000] Time-To-Live for the cache entry in milliseconds (default: 1 hour).
+     * @returns {Promise<T>} A promise that resolves with the fetched data.
+     */
+    static async get<T>(url: string, extraHeaders: HeadersInit = {}, prefix: boolean = true, skipCache: boolean = false, cacheTTL: number = 3600000): Promise<T> {
+        const cacheKey = `GET:${prefix ? getApiUrl() : ''}${url}`;
+        if (!skipCache) {
+            const cachedData = cacheService.get<T>(cacheKey);
+            if (cachedData !== null) {
+                if (this.isDev) {
+                    console.log(`[ApiService] Cache HIT for ${cacheKey}`);
+                }
+                return Promise.resolve(cachedData);
+            }
+            if (this.isDev) {
+                console.log(`[ApiService] Cache MISS for ${cacheKey}`);
+            }
+        } else if (this.isDev) {
+            console.log(`[ApiService] Skipping cache for ${cacheKey}`);
+        }
+
+        return this.fetching<T, null>(url, null, "GET", extraHeaders, prefix)
+            .then(data => {
+                if (!skipCache) {
+                    cacheService.set(cacheKey, data, cacheTTL);
+                }
+                return data;
+            });
+    }
+
+    /**
+     * Invalidates a specific cache entry for a GET request.
+     * This removes the specified URL's response from the cache.
+     * @param {string} url The URL (path) of the GET request to invalidate (without the API base URL if prefix was used).
+     * @param {boolean} [prefix=true] Whether the API prefix was used for the original cached request.
+     * @returns {void}
+     */
+    public static invalidateCache(url: string, prefix: boolean = true): void {
+        const cacheKey = `GET:${prefix ? getApiUrl() : ''}${url}`;
+        cacheService.delete(cacheKey);
+        if (this.isDev) {
+            console.log(`[ApiService] Invalidated cache for ${cacheKey}`);
+        }
+    }
+
+    /**
+     * Clears the entire API cache for GET requests.
+     * This method iterates through the cache and removes all entries that were stored by ApiService GET requests.
+     * @returns {void}
+     */
+    public static clearApiCache(): void {
+        // We only cache GET requests, so we iterate through cache and remove entries starting with GET:
+        // This is a bit of a workaround as cacheService itself doesn't know about API prefixes.
+        // A more robust solution might involve a dedicated CacheManager that understands API structures.
+        const prefix = `GET:${getApiUrl()}`;
+        const cache = (cacheService as any).cache as Map<string, unknown>; // Access private cache for iteration
+        for (const key of cache.keys()) {
+            if (key.startsWith(prefix) || key.startsWith("GET:")) { // also clear non-prefixed GETs if any
+                 cacheService.delete(key);
+            }
+        }
+        if (this.isDev) {
+            console.log("[ApiService] Cleared the entire API cache for GET requests.");
+        }
     }
 
     static async delete<T, D>(url: string, params: D) {
