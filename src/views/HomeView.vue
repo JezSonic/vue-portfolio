@@ -4,6 +4,17 @@ import Badge from "@/components/badges/Badge.vue";
 import { useI18n } from 'vue-i18n';
 import Button from "@/components/ui/Button.vue";
 import router from "@/router/index.js";
+import { ref } from 'vue';
+import { useLazyLoad } from '@/composables/useLazyLoad';
+
+// Image imports for webpack processing
+import oldWebsitePng from '@/assets/projects/oldwebsite.png';
+import oldWebsiteWebp from '@/assets/projects/oldwebsite.webp';
+import maszynaReloadedWebp from '@/assets/projects/maszyna_reloaded.webp';
+// Assuming you might want a PNG fallback for maszyna_reloaded if it existed, or a generic one
+// For this example, let's assume maszyna_reloaded also has a .png if .webp is not supported
+// If not, you'd only provide the webp source or a different fallback.
+// import maszynaReloadedPng from '@/assets/projects/maszyna_reloaded.png'; // If you had one
 
 const { t } = useI18n();
 const currentYear = new Date().getFullYear();
@@ -18,6 +29,15 @@ const totalMonths = (currentYear - startDate.getFullYear()) * 12 + (currentMonth
 // the same month as the current month but a later day, it doesn't count
 // as a full month yet.
 const yearsOfExperience = Math.round(totalMonths / 12);
+
+// Refs for lazy loading images
+const oldWebsitePicRef = ref<HTMLPictureElement | null>(null);
+const maszynaReloadedPicRef = ref<HTMLPictureElement | null>(null);
+
+// Initialize lazy loading for the picture elements
+useLazyLoad(oldWebsitePicRef);
+useLazyLoad(maszynaReloadedPicRef);
+
 </script>
 
 <template>
@@ -90,7 +110,11 @@ const yearsOfExperience = Math.round(totalMonths / 12);
             <template #default>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                     <div class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
-                        <img src="@/assets/projects/oldwebsite.png" alt="Project Screenshot" class="w-full h-48 object-cover">
+                        <picture ref="oldWebsitePicRef">
+                            <source :data-srcset="oldWebsiteWebp" type="image/webp" sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, calc(0.5 * (100vw - 2rem - 1.5rem))">
+                            <source :data-srcset="oldWebsitePng" type="image/png" sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, calc(0.5 * (100vw - 2rem - 1.5rem))">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" :data-src="oldWebsitePng" alt="Previous Portfolio Screenshot" class="w-full h-48 object-cover" width="1310" height="465" loading="lazy">
+                        </picture>
                         <div class="p-4">
                             <h3 class="text-xl font-semibold text-blue-500 mb-2">{{ t('home.projects.previousPortfolio.title') }}</h3>
                             <p class="text-gray-300 mb-4">{{ t('home.projects.previousPortfolio.description') }}</p>
@@ -101,7 +125,12 @@ const yearsOfExperience = Math.round(totalMonths / 12);
                         </div>
                     </div>
                     <div class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
-                        <img src="@/assets/projects/maszyna_reloaded.webp" alt="Project Screenshot" class="w-full h-48 object-cover">
+                        <picture ref="maszynaReloadedPicRef">
+                            <source :data-srcset="maszynaReloadedWebp" type="image/webp" sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, calc(0.5 * (100vw - 2rem - 1.5rem))">
+                            <!-- Fallback for maszyna_reloaded: Since it's already webp, the img data-src will be webp. -->
+                            <!-- If a png/jpg for this existed, it would be <source :data-srcset="maszynaReloadedPngOrJpg" type="image/png" sizes="..."> -->
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" :data-src="maszynaReloadedWebp" alt="Maszyna Reloaded Screenshot" class="w-full h-48 object-cover" width="1024" height="576" loading="lazy">
+                        </picture>
                         <div class="p-4">
                             <h3 class="text-xl font-semibold text-blue-500 mb-2">{{ t('home.projects.maszynaReloaded.title') }}</h3>
                             <p class="text-gray-300 mb-4">{{ t('home.projects.maszynaReloaded.description') }}</p>
