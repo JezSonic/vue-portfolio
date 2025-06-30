@@ -191,7 +191,7 @@
                 </div>
 
                 <!-- Connected Accounts -->
-                <div class="p-6" v-if="connectedSocialAccounts.length > 0">
+                <div class="p-6" v-if="connectedSocialAccounts.length > 0" style="contain: content;">
                     <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">{{ t('userProfileView.sections.connectedAccounts') }}</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Google Account -->

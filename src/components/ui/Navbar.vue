@@ -67,7 +67,7 @@
             <div class="relative flex h-16 items-center justify-between">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                     <!-- Mobile menu button-->
-                    <DisclosureButton class="relative z-100 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
+                    <DisclosureButton class="relative z-100 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset" :aria-expanded="open">
                         <span class="absolute -inset-0.5" />
                         <span class="sr-only">Open main menu</span>
                         <Bars3Icon v-if="!open" class="block size-6" aria-hidden="true" />
@@ -89,6 +89,7 @@
                     <button v-if="env('VITE_APP_ENABLE_THEMES', false)"
                         @click="toggleTheme" 
                         class="relative cursor-pointer flex items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+                        aria-label="Toggle theme"
                     >
                         <font-awesome-icon 
                             :icon="themeStore.actualTheme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon'" 
@@ -99,7 +100,7 @@
 
                     <!-- Language dropdown -->
                     <Menu as="div" class="relative ml-3">
-                        <MenuButton class="relative cursor-pointer flex items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
+                        <MenuButton class="relative cursor-pointer flex items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden" aria-label="Select language">
                             <font-awesome-icon icon="fa-solid fa-language" class="mr-1" />
                             <span class="hidden md:inline">{{ t('common.language') }}</span>
                         </MenuButton>
