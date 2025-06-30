@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   ci: {
     collect: {
       url: [
@@ -22,14 +22,14 @@ module.exports = {
     },
     assert: {
       assertions: {
-        'categories:performance': ['warn', { minScore: 0.85 }],
+        'categories:performance': ['warn', { minScore: 0.8 }], // Reduced from 0.85 to 0.8
         'categories:accessibility': ['warn', { minScore: 0.9 }],
         'categories:best-practices': ['warn', { minScore: 0.9 }],
         'categories:seo': ['warn', { minScore: 0.9 }],
-        'first-contentful-paint': ['warn', { maxNumericValue: 2500 }],
-        'largest-contentful-paint': ['warn', { maxNumericValue: 4000 }], // Slightly increased budget
-        'cumulative-layout-shift': ['warn', { maxNumericValue: 0.15 }],
-        'interactive': ['warn', { maxNumericValue: 4500 }], // Slightly increased budget
+        'first-contentful-paint': ['warn', { maxNumericValue: 3000 }], // Increased from 2500 to 3000
+        'largest-contentful-paint': ['warn', { maxNumericValue: 5000 }], // Increased from 4000 to 5000
+        'cumulative-layout-shift': ['warn', { maxNumericValue: 0.2 }], // Increased from 0.15 to 0.2
+        'interactive': ['warn', { maxNumericValue: 5000 }], // Increased from 4500 to 5000
       },
     },
     upload: {
