@@ -2,6 +2,7 @@ import "./assets/main.css";
 
 import { createApp } from "vue";
 import App from "./App.vue";
+import { createHead } from "@unhead/vue/client";
 import router from "./router/index.ts";
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createPinia } from "pinia";
@@ -30,11 +31,14 @@ library.add(
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
+const head = createHead()
+
 const app = createApp(App)
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.use(router)
     .use(pinia)
     .use(i18n)
+    .use(head)
     .mount("#app");
 
 // Initialize theme

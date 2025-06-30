@@ -15,7 +15,8 @@ const goTo = (url: string) => {
 
 <template>
     <div class="container mx-auto px-4 py-6 sm:py-8">
-        <Tile :title="t('contactView.getInTouch.title')" class="mb-8">
+        <h1 class="text-3xl sm:text-4xl font-bold text-white mb-6 sm:mb-8 text-center">{{ t('contactView.getInTouch.title') }}</h1>
+        <Tile class="mb-8">
             <p class="text-white text-base sm:text-lg mb-4">
                 {{ t('contactView.getInTouch.paragraph1') }}
             </p>
@@ -61,7 +62,7 @@ const goTo = (url: string) => {
                     <p class="!text-white mb-4">{{ t('contactView.discord.description') }}</p>
                     <div class="!bg-gray-700 p-3 rounded-lg inline-block shrink-0 max-w-max overflow-x-auto">
                         <h3 class="!text-white font-medium">{{ t('contactView.discord.username') }}: dos_cutey</h3>
-                        <h5 class="!text-gray-300 text-sm">{{ t('contactView.discord.previous') }}: DoS#5905</h5>
+                        <h4 class="!text-gray-300 text-sm">{{ t('contactView.discord.previous') }}: DoS#5905</h4>
                     </div>
                 </div>
             </Tile>
