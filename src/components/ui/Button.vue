@@ -111,6 +111,7 @@
 
 <template>
     <button 
+        type="button"
         :class="buttonClasses" 
         @click="handleClick"
         :disabled="disabled || isLoading">
