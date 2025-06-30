@@ -1,8 +1,8 @@
 import "./assets/main.css";
 
 import { createApp } from "vue";
-import { createHead } from "@unhead/vue";
 import App from "./App.vue";
+import { createHead } from "@unhead/vue/client";
 import router from "./router/index.ts";
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createPinia } from "pinia";
