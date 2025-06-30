@@ -62,9 +62,10 @@ const goTo = (url: string) => {
         <div class="mb-8">
             <h2 class="text-2xl font-bold text-blue-600 mb-6">{{ t('commissionsView.projects.title') }}</h2>
             <div class="grid gap-6 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
-                <Tile :title="t('commissionsView.projects.oldWebsite.tileTitle')" :background-image="old_website" hover-shadow-color="#00459280">
+                <Tile :background-image="old_website" hover-shadow-color="#00459280">
+                    <h3 class="text-2xl/7 font-display font-medium text-blue-600 mb-2">{{ t('commissionsView.projects.oldWebsite.tileTitle') }}</h3>
                     <div class="space-y-3">
-                        <h3 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.oldWebsite.title') }}</h3>
+                        <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.oldWebsite.title') }}</h4>
                         <p class="!text-white"><i>{{ t('commissionsView.projects.oldWebsite.subtitle') }}</i></p>
                         <div class="flex flex-wrap gap-2 my-3">
                             <Badge text="Vue" icon="fa-vuejs" bg_color="#42b883" />
@@ -78,9 +79,10 @@ const goTo = (url: string) => {
                     </div>
                 </Tile>
 
-                <Tile :title="t('commissionsView.projects.artist.tileTitle')" :background-image="artist" hover-shadow-color="#f7af3260">
+                <Tile :background-image="artist" hover-shadow-color="#f7af3260">
+                    <h3 class="text-2xl/7 font-display font-medium text-blue-600 mb-2">{{ t('commissionsView.projects.artist.tileTitle') }}</h3>
                     <div class="space-y-3">
-                        <h3 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.artist.title') }}</h3>
+                        <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.artist.title') }}</h4>
                         <p class="!text-white">{{ t('commissionsView.projects.artist.subtitle') }}</p>
                         <div class="flex flex-wrap gap-2 my-3">
                             <Badge text="React" icon="fa-react" bg_color="#61dafb" text_color="#000" />
@@ -92,9 +94,10 @@ const goTo = (url: string) => {
                     </div>
                 </Tile>
 
-                <Tile :title="t('commissionsView.projects.maszyna.tileTitle')" :background-image="maszyna_reloaded" hover-shadow-color="#70685b">
+                <Tile :background-image="maszyna_reloaded" hover-shadow-color="#70685b">
+                    <h3 class="text-2xl/7 font-display font-medium text-blue-600 mb-2">{{ t('commissionsView.projects.maszyna.tileTitle') }}</h3>
                     <div class="space-y-3">
-                        <h3 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.maszyna.title') }}</h3>
+                        <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.maszyna.title') }}</h4>
                         <p class="!text-white">{{ t('commissionsView.projects.maszyna.subtitle') }}</p>
                         <div class="flex flex-wrap gap-2 my-3">
                             <Badge text="C++" icon="fa-code" bg_color="#00599c" />
