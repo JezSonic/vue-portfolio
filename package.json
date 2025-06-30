@@ -12,6 +12,8 @@
         "deploy:beta": "vite build && firebase hosting:channel:deploy beta --expires 14d --project api-9176249411662404922-339889"
     },
     "dependencies": {
+        "@bugsnag/js": "^8.4.0",
+        "@bugsnag/plugin-vue": "^8.4.0",
         "@fortawesome/fontawesome-svg-core": "6.7.2",
         "@fortawesome/free-brands-svg-icons": "6.7.2",
         "@fortawesome/free-solid-svg-icons": "6.7.2",

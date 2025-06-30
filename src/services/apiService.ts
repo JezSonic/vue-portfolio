@@ -1,6 +1,7 @@
 import { env, getApiUrl } from "@/helpers/app.ts";
 import { IExceptionResponse, EExceptionType } from "@/types/services/api.d.ts";
 import { useUserStore } from "@/stores/userStore.js";
+import Bugsnag from "@bugsnag/js";
 /**
  * Basic API service inherited by all other API Services
  */
@@ -53,22 +54,39 @@ export default class ApiService {
             if (contentType && contentType.indexOf("application/json") !== -1) {
                 response.json()
                     .then((data: T) => {
+                        const responseException = this.convertToResponseException(data);
                         if (this.logoutResponseCodes.includes(response.status)) {
-                            if (this.doNotLogOutExceptions.includes(data.type)) {
-                                return reject(this.convertToResponseException(data));
+                            if (this.doNotLogOutExceptions.includes(responseException.type)) {
+                                Bugsnag.notify(responseException);
+                                return reject(responseException);
                             }
-                            return;
+                            // Potentially notify about ignored logout for debugging?
+                            // Bugsnag.notify(new Error(`Logout condition met but ignored for type: ${responseException.type}`));
+                            return; // User will be logged out by other mechanisms or this is an intended non-error path
                         }
 
                         if (response.ok) {
                             return resolve(data);
                         } else {
-                            return reject(this.convertToResponseException(data));
+                            Bugsnag.notify(responseException);
+                            return reject(responseException);
                         }
 
-                    }).catch((data: IExceptionResponse) => {
-                        reject(data)
+                    }).catch((error: any) => { // Catching 'any' as network errors or non-JSON responses might not be IExceptionResponse
+                        // Ensure we're dealing with a structured error if possible, otherwise create a new one
+                        const processedError = error instanceof Error ? error : this.convertToResponseException(error);
+                        Bugsnag.notify(processedError);
+                        reject(processedError);
                 });
+            } else {
+                // Handle cases where response is not JSON (e.g. plain text error from server, or network error)
+                const errorText = await response.text();
+                const error = new Error(`API Error: ${response.status} ${response.statusText} - ${errorText}`);
+                (error as any).status = response.status;
+                (error as any).statusText = response.statusText;
+                (error as any).responseText = errorText;
+                Bugsnag.notify(error);
+                reject(error);
             }
         });
     }
