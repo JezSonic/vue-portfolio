@@ -65,7 +65,7 @@
 
 <template>
     <div class="w-full h-full">
-        <div v-if="isPrivateProfile" class="error-container">
+        <div v-if="isPrivateProfile" class="error-container" v-once>
             <div class="error-card">
                 <font-awesome-icon icon="fa-solid fa-lock" class="error-icon text-yellow-500" />
                 <h2 class="error-title">{{ t('userProfileView.error.privateProfile') }}</h2>
@@ -77,7 +77,7 @@
             </div>
         </div>
         <div v-else-if="userData == null" class="error-container">
-            <div class="error-card" v-if="error">
+            <div class="error-card" v-if="error" v-once>
                 <font-awesome-icon icon="fa-solid fa-user-slash" class="error-icon text-red-500" />
                 <h2 class="error-title">{{ t('userProfileView.error.notFound') }}</h2>
                 <p class="error-description">We couldn't find the user profile you're looking for. The user may not exist or has been removed.</p>
@@ -136,20 +136,20 @@
             <!-- Profile Content -->
             <div class="bg-white dark:bg-gray-800 rounded-b-lg shadow-lg overflow-hidden">
                <div class="p-6 border-b border-gray-300 dark:border-gray-700">
-                    <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">{{ t('userProfileView.sections.profileInformation') }}</h2>
+                    <h2 v-once class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">{{ t('userProfileView.sections.profileInformation') }}</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Account Details -->
                         <div class="bg-gray-750 rounded-lg p-4 shadow-inner">
-                            <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3 flex items-center">
+                            <h3 v-once class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3 flex items-center">
                                 <font-awesome-icon icon="fa-solid fa-user-circle" class="mr-2" />{{ t('userProfileView.sections.accountDetails') }}
                             </h3>
                             <div class="space-y-3">
                                 <div>
-                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ t('userProfileView.fields.fullName') }}</p>
+                                    <p v-once class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ t('userProfileView.fields.fullName') }}</p>
                                     <p class="text-gray-800 dark:text-gray-200 truncate max-w-full">{{ userData?.name }}</p>
                                 </div>
                                 <div>
-                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ t('userProfileView.fields.emailAddress') }}</p>
+                                    <p v-once class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ t('userProfileView.fields.emailAddress') }}</p>
                                     <p class="text-gray-800 dark:text-gray-200 truncate max-w-full">{{ userData?.email }}</p>
                                 </div>
                             </div>
@@ -157,16 +157,16 @@
 
                         <!-- Account Timeline -->
                         <div class="bg-gray-750 rounded-lg p-4 shadow-inner">
-                            <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3 flex items-center">
+                            <h3 v-once class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3 flex items-center">
                                 <font-awesome-icon icon="fa-solid fa-clock" class="mr-2" />{{ t('userProfileView.sections.accountTimeline') }}
                             </h3>
                             <div class="space-y-3">
                                 <div class="flex items-start">
-                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-900 flex items-center justify-center">
+                                    <div v-once class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-900 flex items-center justify-center">
                                         <font-awesome-icon icon="fa-solid fa-plus" class="text-blue-300" />
                                     </div>
                                     <div class="ml-4">
-                                        <p class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ t('userProfileView.fields.accountCreated') }}</p>
+                                        <p v-once class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ t('userProfileView.fields.accountCreated') }}</p>
                                         <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
                                             <font-awesome-icon icon="fa-solid fa-calendar" class="mr-1" />{{ formatDate(userData?.created_at) }}
                                             <font-awesome-icon icon="fa-solid fa-clock" class="ml-3 mr-1" />{{ formatTime(userData?.created_at) }}
@@ -174,11 +174,11 @@
                                     </div>
                                 </div>
                                 <div class="flex items-start">
-                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-900 flex items-center justify-center">
+                                    <div v-once class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-900 flex items-center justify-center">
                                         <font-awesome-icon icon="fa-solid fa-edit" class="text-purple-300" />
                                     </div>
                                     <div class="ml-4">
-                                        <p class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ t('userProfileView.fields.lastUpdated') }}</p>
+                                        <p v-once class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ t('userProfileView.fields.lastUpdated') }}</p>
                                         <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
                                             <font-awesome-icon icon="fa-solid fa-calendar" class="mr-1" />{{ formatDate(userData?.updated_at) }}
                                             <font-awesome-icon icon="fa-solid fa-clock" class="ml-3 mr-1" />{{ formatTime(userData?.updated_at) }}
@@ -192,16 +192,16 @@
 
                 <!-- Connected Accounts -->
                 <div class="p-6" v-if="connectedSocialAccounts.length > 0" style="contain: content;">
-                    <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">{{ t('userProfileView.sections.connectedAccounts') }}</h2>
+                    <h2 v-once class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">{{ t('userProfileView.sections.connectedAccounts') }}</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Google Account -->
                         <div class="bg-gray-750 rounded-lg p-4 shadow-inner" v-if="userData?.google">
                             <div class="flex items-center">
-                                <div class="flex-shrink-0 h-12 w-12 rounded-full bg-white flex items-center justify-center">
+                                <div v-once class="flex-shrink-0 h-12 w-12 rounded-full bg-white flex items-center justify-center">
                                     <font-awesome-icon class="text-2xl" style="color: #DB4437;" :icon="['fab', 'google']" />
                                 </div>
                                 <div class="ml-4 overflow-hidden">
-                                    <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">{{ t('userProfileView.connectedAccounts.google') }}</h3>
+                                    <h3 v-once class="text-lg font-medium text-gray-700 dark:text-gray-300">{{ t('userProfileView.connectedAccounts.google') }}</h3>
                                     <p class="text-sm text-gray-500 dark:text-gray-400 truncate max-w-[400px] sm:max-w-full">{{ userData?.google?.email }}</p>
                                 </div>
                             </div>
@@ -210,11 +210,11 @@
                         <!-- GitHub Account -->
                         <div class="bg-gray-750 rounded-lg p-4 shadow-inner" v-if="userData?.github">
                             <div class="flex items-center">
-                                <div class="flex-shrink-0 h-12 w-12 rounded-full bg-gray-900 flex items-center justify-center">
+                                <div v-once class="flex-shrink-0 h-12 w-12 rounded-full bg-gray-900 flex items-center justify-center">
                                     <font-awesome-icon class="text-2xl text-white" :icon="['fab', 'github']" />
                                 </div>
                                 <div class="ml-4 overflow-hidden">
-                                    <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">{{ t('userProfileView.connectedAccounts.github') }}</h3>
+                                    <h3 v-once class="text-lg font-medium text-gray-700 dark:text-gray-300">{{ t('userProfileView.connectedAccounts.github') }}</h3>
                                     <div class="flex flex-row gap-[6px]">
                                         <p class="text-sm text-gray-500 dark:text-gray-400 truncate !max-w-[200px] sm:max-w-full">{{ userData?.github?.login }}</p>
                                         <p class="text-sm text-gray-500 dark:text-gray-400 truncate !max-w-[200px] sm:max-w-full" v-if="userData?.github?.location">
@@ -226,11 +226,11 @@
                             <div class="mt-4 grid grid-cols-2 gap-2" v-if="userData?.github?.public_repos || userData?.github?.followers">
                                 <div class="bg-gray-200 dark:bg-gray-800 rounded p-2 text-center">
                                     <p class="text-xl font-bold text-gray-800 dark:text-gray-200">{{ userData?.github?.public_repos }}</p>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400">{{ t('userProfileView.connectedAccounts.repositories') }}</p>
+                                    <p v-once class="text-xs text-gray-500 dark:text-gray-400">{{ t('userProfileView.connectedAccounts.repositories') }}</p>
                                 </div>
                                 <div class="bg-gray-200 dark:bg-gray-800 rounded p-2 text-center">
                                     <p class="text-xl font-bold text-gray-800 dark:text-gray-200">{{ userData?.github?.followers }}</p>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400">{{ t('userProfileView.connectedAccounts.followers') }}</p>
+                                    <p v-once class="text-xs text-gray-500 dark:text-gray-400">{{ t('userProfileView.connectedAccounts.followers') }}</p>
                                 </div>
                             </div>
                         </div>

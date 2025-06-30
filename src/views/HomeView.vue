@@ -69,7 +69,7 @@ const yearsOfExperience = Math.round(totalMonths / 12);
                 </p>
             </template>
             <template #badges>
-                <div class="flex flex-wrap gap-3 mt-4">
+                <div v-once class="flex flex-wrap gap-3 mt-4">
                     <Badge text="TypeScript" icon="fa-code" bg_color="#3178c6" />
                     <Badge text="Vue.js" icon="fa-vuejs" bg_color="#42b883" />
                     <Badge text="PHP" icon="fa-php" bg_color="#777bb3" />
@@ -89,7 +89,7 @@ const yearsOfExperience = Math.round(totalMonths / 12);
         <Tile :title="t('home.projects.title')" class="mb-12">
             <template #default>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                    <div class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
+                    <div v-once class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
                         <img src="@/assets/projects/oldwebsite.png" alt="Project Screenshot" class="w-full h-48 object-cover">
                         <div class="p-4">
                             <h3 class="text-xl font-semibold text-blue-500 mb-2">{{ t('home.projects.previousPortfolio.title') }}</h3>
@@ -100,7 +100,7 @@ const yearsOfExperience = Math.round(totalMonths / 12);
                             </div>
                         </div>
                     </div>
-                    <div class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
+                    <div v-once class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
                         <img src="@/assets/projects/maszyna_reloaded.webp" alt="Project Screenshot" class="w-full h-48 object-cover">
                         <div class="p-4">
                             <h3 class="text-xl font-semibold text-blue-500 mb-2">{{ t('home.projects.maszynaReloaded.title') }}</h3>

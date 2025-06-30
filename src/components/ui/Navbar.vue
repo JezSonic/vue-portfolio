@@ -4,7 +4,7 @@
     import router from "@/router";
     import logo from "@/assets/icons/logo.png";
     import userDefault from "@/assets/profile/userDefault.png";
-    import { onMounted, ref } from "vue";
+    import {onMounted, ref, computed } from "vue";
     import { useUserStore } from "@/stores/userStore";
     import { useThemeStore } from "@/stores/themeStore";
     import AuthService from "@/services/authService";
@@ -35,12 +35,12 @@
         themeStore.setTheme(newTheme);
     };
 
-    const navigation: NavigationItem[] = [
+    const navigation = computed<NavigationItem[]>(() => [
         {name: 'navigation.home', href: "/", current: router.currentRoute.value.name === "home"},
         {name: 'navigation.commissions', href: "/commissions", current: router.currentRoute.value.name === "commissions"},
-        {name: 'navigation.privacyPolicy', href: "/privacy-policy", current: currentRoute.value === "/privacy-policy"},
-        {name: 'navigation.contact', href: "/contact", current: currentRoute.value === "/contact"},
-    ]
+        {name: 'navigation.privacyPolicy', href: "/privacy-policy", current: router.currentRoute.value.path === "/privacy-policy"},
+        {name: 'navigation.contact', href: "/contact", current: router.currentRoute.value.path === "/contact"},
+    ]);
 
     const languages: LanguageItem[] = [
         { code: 'en', name: 'common.english' },
@@ -68,19 +68,19 @@
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                     <!-- Mobile menu button-->
                     <DisclosureButton class="relative z-100 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset" :aria-expanded="open">
-                        <span class="absolute -inset-0.5" />
-                        <span class="sr-only">Open main menu</span>
+                        <span v-once class="absolute -inset-0.5" />
+                        <span v-once class="sr-only">Open main menu</span>
                         <Bars3Icon v-if="!open" class="block size-6" aria-hidden="true" />
                         <XMarkIcon v-else class="block size-6" aria-hidden="true" />
                     </DisclosureButton>
                 </div>
                 <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                     <div class="flex shrink-0 items-center">
-                        <img class="h-8 w-auto" :src="logo" @click="router.push('/')" alt="Your Company" />
+                        <img v-once class="h-8 w-auto" :src="logo" @click="router.push('/')" alt="Your Company" />
                     </div>
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
-                            <a v-for="(item, index) in navigation" :key="index" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : '!text-gray-300 hover:bg-gray-700 not-dark:hover:!text-gray-700 hover:text-white', 'rounded-md px-3 py-2 text-sm font-medium cursor-pointer']" :aria-current="item.href === currentRoute? 'page' : undefined">{{ t(item.name) }}</a>
+                            <a v-for="item in navigation" :key="item.href" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : '!text-gray-300 hover:bg-gray-700 not-dark:hover:!text-gray-700 hover:text-white', 'rounded-md px-3 py-2 text-sm font-medium cursor-pointer']" :aria-current="item.href === currentRoute? 'page' : undefined">{{ t(item.name) }}</a>
                         </div>
                     </div>
                 </div>
@@ -150,7 +150,7 @@
 
         <DisclosurePanel class="sm:hidden">
             <div class="space-y-1 px-2 pt-2 pb-3 bg-gray-800">
-                <DisclosureButton v-for="item in navigation" :key="item.name" as="a" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block rounded-md px-3 py-2 text-base font-medium']" :aria-current="item.current ? 'page' : undefined">{{ t(item.name) }}</DisclosureButton>
+                <DisclosureButton v-for="item in navigation" :key="item.href" as="a" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block rounded-md px-3 py-2 text-base font-medium']" :aria-current="item.current ? 'page' : undefined">{{ t(item.name) }}</DisclosureButton>
 
                 <!-- Language selector for mobile -->
                 <div class="mt-3 border-t border-gray-700 pt-3">
