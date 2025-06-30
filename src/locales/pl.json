@@ -51,7 +51,20 @@
     },
     "resetPassword": {
       "title": "Zresetuj hasło do swojego konta",
-      "button": "Zresetuj"
+      "createTitle": "Utwórz hasło do swojego konta",
+      "button": "Zresetuj",
+      "createButton": "Utwórz Hasło",
+      "loading": "Resetowanie...",
+      "createLoading": "Tworzenie...",
+      "success": "Hasło zostało pomyślnie zresetowane!",
+      "createSuccess": "Hasło zostało pomyślnie utworzone!",
+      "redirecting": "Przekierowywanie do strony logowania...",
+      "errors": {
+        "passwordsDoNotMatch": "Hasła nie pasują do siebie",
+        "invalidToken": "Podano nieprawidłowy token",
+        "tokenExpired": "Podany token jest nieaktualny. Poproś o ponowne zresetowanie/utworzenie hasła.",
+        "generic": "Wystąpił błąd. Spróbuj ponownie później."
+      }
     },
     "form": {
       "emailLabel": "Adres email",
@@ -434,15 +447,20 @@
       "subtitle": "Zarządzaj swoim hasłem i bezpieczeństwem konta.",
       "changePassword": {
         "title": "Zmień Hasło",
+        "description": "Otrzymasz e-mail z instrukcjami dotyczącymi resetowania lub utworzenia hasła.",
         "currentPassword": "Obecne Hasło",
         "newPassword": "Nowe Hasło",
         "confirmPassword": "Potwierdź Nowe Hasło",
-        "": "Zresetuj Hasło",
+        "resetButton": "Zresetuj Hasło",
+        "createButton": "Utwórz Hasło",
+        "updating": "Przetwarzanie...",
+        "emailSent": "E-mail z instrukcjami resetowania/utworzenia hasła został wysłany na Twój adres e-mail.",
         "success": "Hasło zostało pomyślnie zaktualizowane",
         "errors": {
           "required": "Wymagane jest obecne hasło",
           "length": "Nowe hasło musi mieć co najmniej 8 znaków",
-          "match": "Hasła nie pasują do siebie"
+          "match": "Hasła nie pasują do siebie",
+          "generic": "Wystąpił błąd. Spróbuj ponownie później."
         }
       },
       "dataExport": {

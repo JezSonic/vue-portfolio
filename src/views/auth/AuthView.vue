@@ -148,7 +148,7 @@
                 </div>
             </div>
 
-            <div class="mt-6 pt-4 border-t border-gray-700">
+            <div class="mt-6 pt-6 border-t border-gray-700">
                 <p v-if="hasAccount" class="text-center text-sm text-gray-400">
                     {{ t("authView.signIn.noAccount") }}&nbsp;
                     <a class="font-semibold text-blue-400 hover:text-blue-300" href="#"

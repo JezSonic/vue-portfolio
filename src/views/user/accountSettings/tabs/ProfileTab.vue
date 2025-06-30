@@ -63,9 +63,26 @@ const cancelEditName = () => {
     isEditingName.value = false;
 };
 
+// Email verification states
+const verificationEmailSent = ref<boolean>(false);
+const verificationEmailError = ref<boolean>(false);
+
 const sendVerificationEmail = () => {
     isVerifyEmailLoading.value = true;
+    verificationEmailSent.value = false;
+    verificationEmailError.value = false;
+
     UserService.sendVerificationEmail()
+        .then((response) => {
+            if (response.content) {
+                verificationEmailSent.value = true;
+            } else {
+                verificationEmailError.value = true;
+            }
+        })
+        .catch(() => {
+            verificationEmailError.value = true;
+        })
         .finally(() => {
             isVerifyEmailLoading.value = false;
         });
@@ -207,18 +224,29 @@ const avatarUrl = () => {
                                 {{ t("accountSettingsView.profile.fields.emailAddress") }}
                             </dt>
                             <dd class="mt-1 text-sm text-gray-300 sm:col-span-2 sm:mt-0">
-                                <div class="flex items-center">
-                                    <span class="truncate max-w-[200px] sm:max-w-[300px] md:max-w-full">{{ userData?.email }}</span>
-                                    <Button class="ml-2"
-                                            v-if="!userData?.email_verified_at && env('VITE_APP_ENABLE_EMAILING', false)"
-                                            text="Verify" 
-                                            @click="sendVerificationEmail"
-                                            :loading="isVerifyEmailLoading"
-                                            :loading-text="t('accountSettingsView.profile.verifying')" />
-                                    <span v-if="userData?.email_verified_at"
-                                          class="ml-2 px-2 py-0.5 bg-green-900 text-green-300 rounded-full text-xs flex-shrink-0">{{ t("userProfileView.emailStatus.verified") }}</span>
-                                    <span v-else
-                                          class="ml-2 px-2 py-0.5 bg-yellow-900 text-yellow-300 rounded-full text-xs flex-shrink-0">{{ t("userProfileView.emailStatus.notVerified") }}</span>
+                                <div class="flex flex-col">
+                                    <div class="flex items-center gap-2">
+                                        <span class="truncate max-w-[200px] sm:max-w-[300px] md:max-w-full">{{ userData?.email }}</span>
+                                        <div class="flex gap-2">
+                                            <Button
+                                                    v-if="!userData?.email_verified_at && env('VITE_APP_ENABLE_EMAILING', false)"
+                                                    :text="t('accountSettingsView.profile.verifyButton')"
+                                                    size="sm"
+                                                    @click="sendVerificationEmail"
+                                                    :loading="isVerifyEmailLoading"
+                                                    :loading-text="t('accountSettingsView.profile.verifying')" />
+                                            <span v-if="userData?.email_verified_at"
+                                                  class="px-2.5 py-1.5 text-xs min-w-20 bg-blue-600 text-center !text-white rounded-lg flex-shrink-0">{{ t("userProfileView.emailStatus.verified") }}</span>
+                                            <span v-else
+                                                  class="px-2.5 py-1.5 text-xs min-w-20 bg-yellow-600 text-center !text-white rounded-lg flex-shrink-0">{{ t("userProfileView.emailStatus.notVerified") }}</span>
+                                        </div>
+                                    </div>
+                                    <div v-if="verificationEmailSent" class="mt-2 text-sm text-green-400">
+                                        {{ t('accountSettingsView.profile.verificationSuccess') }}
+                                    </div>
+                                    <div v-if="verificationEmailError" class="mt-2 text-sm text-red-400">
+                                        {{ t('accountSettingsView.profile.verificationError') }}
+                                    </div>
                                 </div>
                             </dd>
                         </div>

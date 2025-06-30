@@ -69,8 +69,8 @@
                     setLoading(provider, false)
                 });
         } else {
+            setLoading(provider, true)
             oauth(provider)
-            setLoading(provider, false)
         }
     };
 </script>
@@ -166,7 +166,7 @@
                     </Button>
                 </li>
                 <li v-if="getSupportedOAuthProviders().includes(EOAuthProvider.GitHub)"
-                    class="py-4 flex justify-between items-center">
+                    class="pt-4 flex justify-between items-center">
                     <div class="flex items-center">
                         <svg class="h-6 w-6 text-gray-300" fill="currentColor" viewBox="0 0 24 24">
                             <path clip-rule="evenodd"
@@ -177,15 +177,13 @@
                             <p class="text-sm font-medium text-gray-200">
                                 {{ t("accountSettingsView.connectedAccounts.avatarSource.github") }}</p>
                             <p class="text-xs text-gray-400">
-                                {{ connectedSocialAccounts.includes(EOAuthProvider.GitHub) ? t("accountSettingsView.connectedAccounts.status.connected") : t("accountSettingsView.connectedAccounts.status.notConnected")
-                                }}
+                                {{ connectedSocialAccounts.includes(EOAuthProvider.GitHub) ? t("accountSettingsView.connectedAccounts.status.connected") : t("accountSettingsView.connectedAccounts.status.notConnected") }}
                             </p>
                         </div>
                     </div>
                     <Button :variant="connectedSocialAccounts.includes(EOAuthProvider.GitHub) ? 'danger' : 'primary'"
                             size="md" @click="toggleSocialAccount(EOAuthProvider.GitHub)" :loading="githubProviderLoading">
-                        {{ connectedSocialAccounts.includes(EOAuthProvider.GitHub) ? t("accountSettingsView.connectedAccounts.buttons.disconnect") : t("accountSettingsView.connectedAccounts.buttons.connect")
-                        }}
+                        {{ connectedSocialAccounts.includes(EOAuthProvider.GitHub) ? t("accountSettingsView.connectedAccounts.buttons.disconnect") : t("accountSettingsView.connectedAccounts.buttons.connect") }}
                     </Button>
                 </li>
             </ul>

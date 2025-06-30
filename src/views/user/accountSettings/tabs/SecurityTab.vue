@@ -42,7 +42,20 @@ const isExportDataLoading = ref<boolean>(false);
 // Update password
 const requestPasswordReset = () => {
     if (props.userData && props.userData.email) {
-        AuthService.requestPasswordReset(props.userData.email);
+        isPasswordUpdateLoading.value = true;
+        passwordError.value = "";
+        passwordSuccess.value = "";
+
+        AuthService.requestPasswordReset(props.userData.email)
+            .then(() => {
+                passwordSuccess.value = t("accountSettingsView.security.changePassword.emailSent");
+            })
+            .catch(() => {
+                passwordError.value = t("accountSettingsView.security.changePassword.errors.generic");
+            })
+            .finally(() => {
+                isPasswordUpdateLoading.value = false;
+            });
     }
 };
 
@@ -106,14 +119,14 @@ const deleteAccount = () => {
         <div class="p-6">
             <div class="mb-6" v-if="env('VITE_APP_ENABLE_EMAILING', false)">
                 <h3 class="text-sm font-medium text-gray-400 mb-2">
-<!--                    @TODO: In the case of creating a new password, the text should sayt "Create a new password" or something-->
-<!--                    @TODO: User should be informed about receiving email with password update instructions-->
-<!--                    @TODO: There should be error/success message displayed after the request has been sent-->
-                    {{ t("accountSettingsView.security.changePassword.title") }}
+                    {{ t(props.userData?.has_password ? 'accountSettingsView.security.changePassword.resetButton' : 'accountSettingsView.security.changePassword.createButton') }}
                     <small class="text-xs text-gray-400 mb-4">
                         (beta)
                     </small>
                 </h3>
+                <p class="text-xs text-gray-400 mb-4">
+                    {{ t("accountSettingsView.security.changePassword.description") }}
+                </p>
                 <div v-if="passwordSuccess" class="mb-4 p-3 bg-green-900 text-green-300 rounded">
                     {{ passwordSuccess }}
                 </div>
@@ -125,7 +138,7 @@ const deleteAccount = () => {
                         <Button
                             variant="primary"
                             @click="requestPasswordReset"
-                            :text="t('accountSettingsView.security.changePassword.resetButton')"
+                            :text="t(props.userData?.has_password ? 'accountSettingsView.security.changePassword.resetButton' : 'accountSettingsView.security.changePassword.createButton')"
                             :loading="isPasswordUpdateLoading"
                             :loading-text="t('accountSettingsView.security.changePassword.updating')"
                         />

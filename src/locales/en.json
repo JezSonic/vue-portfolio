@@ -45,7 +45,20 @@
     },
     "resetPassword": {
       "title": "Reset password for your account",
-      "button": "Reset"
+      "createTitle": "Create a password for your account",
+      "button": "Reset",
+      "createButton": "Create Password",
+      "loading": "Resetting...",
+      "createLoading": "Creating...",
+      "success": "Password has been reset successfully!",
+      "createSuccess": "Password has been created successfully!",
+      "redirecting": "Redirecting to login page...",
+      "errors": {
+        "passwordsDoNotMatch": "Passwords do not match",
+        "invalidToken": "Invalid token provided",
+        "tokenExpired": "Provided token is outdated. Please request the password reset/creation again.",
+        "generic": "An error occurred. Please try again later."
+      }
     },
     "register": {
       "title": "Create your account",
@@ -357,6 +370,10 @@
       "title": "Profile Information",
       "avatarHelp": "To change your avatar, connect a social account or select a different avatar source in the Connected Accounts section.",
       "saveButton": "Save",
+      "verifyButton": "Verify",
+      "verifying": "Verifying...",
+      "verificationSuccess": "Verification email sent successfully!",
+      "verificationError": "Failed to send verification email. Please try again.",
       "fields": {
         "fullName": "Full name",
         "emailAddress": "Email address",
@@ -434,15 +451,20 @@
       "subtitle": "Manage your password and account security.",
       "changePassword": {
         "title": "Change Password",
+        "description": "You will receive an email with instructions on how to reset or create your password.",
         "currentPassword": "Current Password",
         "newPassword": "New Password",
         "confirmPassword": "Confirm New Password",
         "resetButton": "Reset Password",
+        "createButton": "Create Password",
+        "updating": "Processing...",
+        "emailSent": "Email with password reset/create instructions has been sent to your email address.",
         "success": "Password updated successfully",
         "errors": {
           "required": "Current password is required",
           "length": "New password must be at least 8 characters",
-          "match": "Passwords do not match"
+          "match": "Passwords do not match",
+          "generic": "An error occurred. Please try again later."
         }
       },
       "dataExport": {

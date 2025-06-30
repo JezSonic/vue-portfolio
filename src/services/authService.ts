@@ -1,12 +1,12 @@
 import ApiService from "@/services/apiService.ts";
-import type { 
-    EOAuthProvider, 
+import type {
+    EOAuthProvider,
     IOAuthCallbackRequestBody,
     IRegisterRequestBody,
     ILoginRequestBody,
     IPasswordResetRequestBody,
     IPasswordResetConfirmRequestBody,
-    IPasswordResetTokenVerifyRequestBody
+    IPasswordResetTokenVerifyRequestBody, IVerifyTokenResponse
 } from "@/types/services/auth.d.ts";
 import type { IApiResponse, IApiAuthResponse, IEmptyRequestBody } from "@/types/services/api.d.ts";
 import { useUserStore } from "@/stores/userStore.ts";
@@ -75,6 +75,6 @@ export default class AuthService extends ApiService {
     }
 
     public static verifyPasswordResetToken(token: string) {
-        return this.post<IApiResponse<boolean>, IPasswordResetTokenVerifyRequestBody>(`auth/reset-password/verify-token`, { token: token });
+        return this.post<IVerifyTokenResponse, IPasswordResetTokenVerifyRequestBody>(`auth/reset-password/verify-token`, { token: token });
     }
 }

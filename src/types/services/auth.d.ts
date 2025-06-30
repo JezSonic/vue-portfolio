@@ -100,3 +100,8 @@ export interface IPasswordResetConfirmRequestBody {
 export interface IPasswordResetTokenVerifyRequestBody {
     token: string;
 }
+
+export interface IVerifyTokenResponse {
+    content: boolean;
+    creating_password: boolean
+}

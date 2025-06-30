@@ -1,5 +1,10 @@
-<script setup lang="ts">
-   defineProps({
+<script lang="ts" setup>
+    defineProps({
+        centered: {
+            type: Boolean,
+            required: false,
+            default: true
+        },
         loading: {
             type: Boolean,
             required: false,
@@ -19,24 +24,36 @@
 </script>
 
 <template>
-    <div class="loading-container" v-if="loading || error">
+    <div v-if="loading || error" :class="`loading-container${centered ? '__centered' : ''}`">
         <div v-if="loading && !error" class="loading-spinner border-t-blue-500 border-t-5 border-5 border-white" />
         <Transition name="fade">
-        <div v-if="error" class="error-message">
-            <h1 class="text-white">{{errorText || "Oops! Something went wrong"}}</h1>
-            <p class="text-white">Please, try again in a while or if the issue persists, report it to me via the <a class="font-semibold text-blue-600 hover:text-blue-500" href="/contact">Contact page</a></p>
-        </div>
+            <div v-if="error" class="error-message">
+                <h1 class="text-white">{{ errorText || "Oops! Something went wrong" }}</h1>
+                <p class="text-white">Please, try again in a while or if the issue persists, report it to me via the <a
+                    class="font-semibold text-blue-600 hover:text-blue-500" href="/contact">Contact page</a></p>
+            </div>
         </Transition>
     </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
     .loading-container {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         padding: 20px;
+
+        &__centered {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 50%;
+            right: 50%;
+            transform: translate(50%, -50%);
+        }
     }
 
     .loading-spinner {

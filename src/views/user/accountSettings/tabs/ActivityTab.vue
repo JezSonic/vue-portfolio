@@ -64,7 +64,7 @@ watch(() => props.activeTab, (newTab) => {
         </div>
         <div class="p-6">
             <div v-if="loadingHistory" class="flex justify-center py-8">
-                <Loading :loading="true" />
+                <Loading :loading="true" :centered="false" />
             </div>
             <div v-else-if="historyError" class="text-center py-8 text-red-400">
                 {{ t("accountSettingsView.activity.loadError") }}
