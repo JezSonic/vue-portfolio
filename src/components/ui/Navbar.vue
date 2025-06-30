@@ -11,6 +11,7 @@
     import { env } from "@/helpers/app.js";
     import { useI18n } from 'vue-i18n';
     import { setLanguage } from '@/i18n';
+    import HeaderSocials from './HeaderSocials.vue';
 
     const { t, locale } = useI18n();
     const currentRoute = ref(router.currentRoute.value.path)
@@ -74,6 +75,9 @@
                     </div>
                 </div>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <!-- Social Icons -->
+                    <HeaderSocials class="mr-3" />
+
                     <!-- Theme toggle -->
                     <button v-if="env('VITE_APP_ENABLE_THEMES', false)"
                         @click="toggleTheme" 
