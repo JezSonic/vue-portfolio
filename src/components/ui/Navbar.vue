@@ -1,46 +1,57 @@
-<script setup>
+<script setup lang="ts">
     import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
     import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
     import router from "@/router";
     import logo from "@/assets/icons/logo.png";
     import userDefault from "@/assets/profile/userDefault.png";
     import { onMounted, ref } from "vue";
-    import { useUserStore } from "@/stores/userStore.js";
+    import { useUserStore } from "@/stores/userStore";
     import { useThemeStore } from "@/stores/themeStore";
-    import AuthService from "@/services/authService.js";
-    import { env } from "@/helpers/app.js";
+    import AuthService from "@/services/authService";
+    import { env } from "@/helpers/app";
     import { useI18n } from 'vue-i18n';
     import { setLanguage } from '@/i18n';
 
+    interface NavigationItem {
+        name: string;
+        href: string;
+        current: boolean;
+    }
+
+    interface LanguageItem {
+        code: string;
+        name: string;
+    }
+
     const { t, locale } = useI18n();
-    const currentRoute = ref(router.currentRoute.value.path)
-    const transparent = ref(true);
+    const currentRoute = ref<string>(router.currentRoute.value.path)
+    const transparent = ref<boolean>(true);
     const userStore = useUserStore();
     const themeStore = useThemeStore();
 
     // Toggle between light and dark theme
-    const toggleTheme = () => {
+    const toggleTheme = (): void => {
         const newTheme = themeStore.actualTheme === 'dark' ? 'light' : 'dark';
         themeStore.setTheme(newTheme);
     };
 
-    const navigation = [
+    const navigation: NavigationItem[] = [
         {name: 'navigation.home', href: "/", current: router.currentRoute.value.name === "home"},
         {name: 'navigation.commissions', href: "/commissions", current: router.currentRoute.value.name === "commissions"},
         {name: 'navigation.privacyPolicy', href: "/privacy-policy", current: currentRoute.value === "/privacy-policy"},
         {name: 'navigation.contact', href: "/contact", current: currentRoute.value === "/contact"},
     ]
 
-    const languages = [
+    const languages: LanguageItem[] = [
         { code: 'en', name: 'common.english' },
         { code: 'pl', name: 'common.polish' },
     ];
 
-    const changeLanguage = (langCode) => {
+    const changeLanguage = (langCode: string): void => {
         setLanguage(langCode);
     };
 
-    const onDocumentScroll = () => {
+    const onDocumentScroll = (): void => {
         transparent.value = (window.scrollY === 0);
     };
 

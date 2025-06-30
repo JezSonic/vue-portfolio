@@ -1,32 +1,44 @@
-<script setup lang="ts">
-    const { icon, text, bg_color, text_color } = defineProps({
-        icon: { default: "link" },
-        text: { default: "Badge" },
-        bg_color: { default: "rgba(255, 255, 255, .1)" },
-        text_color: { default: "white" }
+<script lang="ts" setup>
+    defineProps({
+        icon: { default: "link", type: String },
+        text: { default: "Badge", type: String },
+        bg_color: { default: "rgba(255, 255, 255, .1)", type: String },
+        text_color: { default: "white", type: String },
+        link: { default: null, type: String }
     });
 
     // Convert icon string to FontAwesome format
-    const getIconArray = (iconName: string) => {
+    const getIconArray = (iconName: string): string[] => {
         // Remove 'fa-' prefix if present
-        const name = iconName.startsWith('fa-') ? iconName.substring(3) : iconName;
+        const name = iconName.startsWith("fa-") ? iconName.substring(3) : iconName;
 
         // Determine if it's a brand icon or a solid icon
-        const prefix = ['vuejs', 'php', 'laravel', 'node-js', 'docker', 'sass', 'js', 'html5', 'css3-alt', 'git-alt', 'wordpress', 'react', 'google', 'github'].includes(name)
-            ? 'fab' 
-            : 'fas';
+        const prefix = ["vuejs", "php", "laravel", "node-js", "docker", "sass", "js", "html5", "css3-alt", "git-alt", "wordpress", "react", "google", "github"].includes(name)
+            ? "fab"
+            : "fas";
 
         return [prefix, name];
     };
 </script>
 
 <template>
-    <p :style="{ backgroundColor: bg_color, color: text_color }">
-        <font-awesome-icon :icon="getIconArray(icon)" /> {{ text }}
+    <a v-if="link" :href="link" class="badge-link" rel="noopener noreferrer" target="_blank">
+        <p :style="{ backgroundColor: bg_color, color: text_color }">
+            <font-awesome-icon :icon="getIconArray(icon)" />
+            {{ text }}
+        </p>
+    </a>
+    <p v-else :style="{ backgroundColor: bg_color, color: text_color }">
+        <font-awesome-icon :icon="getIconArray(icon)" />
+        {{ text }}
     </p>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
+    .badge-link {
+        text-decoration: none;
+    }
+
     p {
         display: inline;
         padding: 2px 5px;

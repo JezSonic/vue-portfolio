@@ -1,25 +1,16 @@
 <script lang="ts" setup>
-    defineProps({
-        centered: {
-            type: Boolean,
-            required: false,
-            default: true
-        },
-        loading: {
-            type: Boolean,
-            required: false,
-            default: false
-        },
-        error: {
-            type: Boolean,
-            required: false,
-            default: false
-        },
-        errorText: {
-            type: String,
-            required: false,
-            default: "Oops! Something went wrong"
-        }
+    interface Props {
+        centered?: boolean;
+        loading?: boolean;
+        error?: boolean;
+        errorText?: string;
+    }
+
+    withDefaults(defineProps<Props>(), {
+        centered: true,
+        loading: false,
+        error: false,
+        errorText: "Oops! Something went wrong"
     });
 </script>
 

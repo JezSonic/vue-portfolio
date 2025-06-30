@@ -1,10 +1,12 @@
 <script setup lang="ts">
     import { onMounted, ref, onUnmounted } from "vue";
 
-    const { height, width } = defineProps({
-        height: { default: 200 },
-        width: { default: 300 }
-    });
+    interface Props {
+        height?: number;
+        width?: number;
+    }
+
+    const { height = 200, width = 300 } = defineProps<Props>();
 
     const x = ref(0);
     const y = ref(0);
