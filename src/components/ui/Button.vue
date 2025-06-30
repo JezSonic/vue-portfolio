@@ -124,8 +124,10 @@
 
 <style scoped>
 /* Additional animation for focus */
-button:focus {
-    animation: pulse 1s;
+@media (min-width: 640px) {
+    button:focus {
+        animation: pulse 1s;
+    }
 }
 
 @keyframes pulse {
