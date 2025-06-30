@@ -1,6 +1,11 @@
 <script setup lang="ts">
-    const { stars } = defineProps(["stars"]);
     import Badge from "./Badge.vue";
+
+    interface Props {
+        stars: number | string; // Allow string in case it comes from an API like that, template literal will handle it
+    }
+
+    const { stars } = defineProps<Props>();
 </script>
 
 <template>

@@ -1,13 +1,28 @@
 <script setup lang="ts">
-    const { icon, text, bg_color, text_color } = defineProps({
-        icon: { default: "link" },
-        text: { default: "Badge" },
-        bg_color: { default: "rgba(255, 255, 255, .1)" },
-        text_color: { default: "white" }
+    interface Props {
+        icon?: string;
+        text?: string;
+        bg_color?: string;
+        text_color?: string;
+        link?: string; // Added link prop
+    }
+
+    const {
+        icon = "link",
+        text = "Badge",
+        bg_color = "rgba(255, 255, 255, .1)",
+        text_color = "white",
+        link
+    } = withDefaults(defineProps<Props>(), {
+        icon: "link",
+        text: "Badge",
+        bg_color: "rgba(255, 255, 255, .1)",
+        text_color: "white",
+        link: undefined // Default to undefined
     });
 
     // Convert icon string to FontAwesome format
-    const getIconArray = (iconName: string) => {
+    const getIconArray = (iconName: string): string[] => {
         // Remove 'fa-' prefix if present
         const name = iconName.startsWith('fa-') ? iconName.substring(3) : iconName;
 
@@ -21,12 +36,21 @@
 </script>
 
 <template>
-    <p :style="{ backgroundColor: bg_color, color: text_color }">
+    <a v-if="link" :href="link" target="_blank" rel="noopener noreferrer" class="badge-link">
+        <p :style="{ backgroundColor: bg_color, color: text_color }">
+            <font-awesome-icon :icon="getIconArray(icon)" /> {{ text }}
+        </p>
+    </a>
+    <p v-else :style="{ backgroundColor: bg_color, color: text_color }">
         <font-awesome-icon :icon="getIconArray(icon)" /> {{ text }}
     </p>
 </template>
 
 <style scoped lang="scss">
+    .badge-link {
+        text-decoration: none;
+    }
+
     p {
         display: inline;
         padding: 2px 5px;

@@ -52,35 +52,77 @@ export default class ApiService {
             const contentType = response.headers.get("Content-Type");
             if (contentType && contentType.indexOf("application/json") !== -1) {
                 response.json()
-                    .then((data: T) => {
+                    .then((data: T | IExceptionResponse) => { // Can be T on success or IExceptionResponse on error
                         if (this.logoutResponseCodes.includes(response.status)) {
-                            if (this.doNotLogOutExceptions.includes(data.type)) {
+                            // Assuming data is IExceptionResponse here due to error status codes
+                            if (this.doNotLogOutExceptions.includes((data as IExceptionResponse).type)) {
                                 return reject(this.convertToResponseException(data));
                             }
-                            return;
-                        }
-
-                        if (response.ok) {
-                            return resolve(data);
-                        } else {
+                            // Potentially logout user or handle differently
+                            // For now, if it's not an exception we explicitly don't log out for,
+                            // and it's an error status, we still reject with the converted exception.
+                            // This part might need review based on intended logout logic.
                             return reject(this.convertToResponseException(data));
                         }
 
-                    }).catch((data: IExceptionResponse) => {
-                        reject(data)
+                        if (response.ok) {
+                            return resolve(data as T); // data should be T here
+                        } else {
+                             // data should be IExceptionResponse here
+                            return reject(this.convertToResponseException(data));
+                        }
+
+                    }).catch((error: unknown) => { // Catch network errors or non-JSON responses
+                        // Create a generic error response or handle differently
+                        const genericError: IExceptionResponse = {
+                            type: EExceptionType.UNHANDLED_REJECTION,
+                            message: "An unexpected error occurred. Failed to parse JSON response or network error.",
+                            code: response.status,
+                            errors: error instanceof Error ? { general: [error.message] } : { general: ["Unknown error"] }
+                        };
+                        reject(genericError);
                 });
+            } else {
+                // Handle non-JSON responses
+                response.text().then(text => {
+                    const errorResponse: IExceptionResponse = {
+                        type: EExceptionType.INVALID_RESPONSE_EXCEPTION,
+                        message: `Expected JSON response but received ${contentType}. Response body: ${text.substring(0, 100)}...`,
+                        code: response.status,
+                        errors: { general: [`Server returned non-JSON response with status ${response.status}`] }
+                    };
+                    reject(errorResponse);
+                }).catch(textError => {
+                     const errorResponse: IExceptionResponse = {
+                        type: EExceptionType.INVALID_RESPONSE_EXCEPTION,
+                        message: `Expected JSON response but received ${contentType}. Failed to read response body.`,
+                        code: response.status,
+                        errors: { general: [`Server returned non-JSON response with status ${response.status}. Error reading text: ${textError.message}`] }
+                    };
+                    reject(errorResponse);
+                })
             }
         });
     }
 
-    private static convertToResponseException(data: any): IExceptionResponse {
-        return {
-            type: data.type,
-            errors: data.errors,
-            code: data.code,
-            message: data.message,
-            debug: data.debug
+    private static convertToResponseException(data: unknown): IExceptionResponse {
+        if (typeof data === 'object' && data !== null) {
+            const potentialError = data as Partial<IExceptionResponse>;
+            return {
+                type: potentialError.type || EExceptionType.UNKNOWN_EXCEPTION,
+                errors: potentialError.errors || { general: ["Unknown error details"] },
+                code: potentialError.code || 0,
+                message: potentialError.message || "An unknown error occurred.",
+                debug: potentialError.debug
+            };
         }
+        // If data is not an object or is null, return a default error structure
+        return {
+            type: EExceptionType.INVALID_RESPONSE_EXCEPTION,
+            message: "Received non-object error data from API.",
+            code: 0, // Or some other default/error code
+            errors: { general: ["Invalid error structure received from API."] }
+        };
     }
 
     public static async getIP(): Promise<{ip: string}> {

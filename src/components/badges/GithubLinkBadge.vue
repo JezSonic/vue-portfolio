@@ -1,6 +1,11 @@
 <script setup lang="ts">
-    const { url } = defineProps(["url"]);
     import Badge from "./Badge.vue";
+
+    interface Props {
+        url: string;
+    }
+
+    const { url } = defineProps<Props>();
 </script>
 
 <template>
