@@ -17,7 +17,7 @@ export default defineConfig({
                 skipWaiting: true,
                 runtimeCaching: [
                     {
-                        urlPattern: /\.(?:png|gif|jpg|jpeg|svg)$/,
+                        urlPattern: /\.(?:png|gif|jpg|jpeg|svg|webm|webp)$/,
                         handler: 'CacheFirst',
                         options: {
                             cacheName: 'images',
