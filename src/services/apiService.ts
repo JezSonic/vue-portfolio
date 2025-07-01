@@ -1,6 +1,7 @@
 import { env, getApiUrl } from "@/helpers/app.ts";
 import { IExceptionResponse, EExceptionType } from "@/types/services/api.d.ts";
 import { useUserStore } from "@/stores/userStore.js";
+import AuthService from "@/services/authService.ts";
 /**
  * Basic API service inherited by all other API Services
  */
@@ -37,7 +38,7 @@ export default class ApiService {
         return this.fetching<T, D>(url, params, "DELETE");
     }
 
-    private static async fetching<T, D>(url: string, params: D|null = null, method: string = "GET", extraHeaders: HeadersInit = {}, prefix: boolean = true, credentialsMode: RequestCredentials|null = null, removeDefaultHeaders: boolean = false): Promise<T> {
+    private static async fetching<T, D>(url: string, params: D|null = null, method: string = "GET", extraHeaders: HeadersInit = {}, prefix: boolean = true, credentialsMode: RequestCredentials|null = null, removeDefaultHeaders: boolean = false, isRetry: boolean = false): Promise<T> {
         return new Promise<T>(async (resolve, reject) => {
             const defaultHeaders: HeadersInit = removeDefaultHeaders ? {} : { "Content-Type": "application/json" };
             const target = prefix ? getApiUrl() + url : url;
@@ -48,27 +49,53 @@ export default class ApiService {
                 credentials: credentialsMode || "include"
             };
 
-            const response = await fetch(target, options);
-            const contentType = response.headers.get("Content-Type");
-            if (contentType && contentType.indexOf("application/json") !== -1) {
-                response.json()
-                    .then((data: T) => {
-                        if (this.logoutResponseCodes.includes(response.status)) {
-                            if (this.doNotLogOutExceptions.includes(data.type)) {
-                                return reject(this.convertToResponseException(data));
-                            }
-                            return;
-                        }
+            try {
+                const response = await fetch(target, options);
+                const contentType = response.headers.get("Content-Type");
 
-                        if (response.ok) {
-                            return resolve(data);
-                        } else {
+                if (contentType && contentType.indexOf("application/json") !== -1) {
+                    const data = await response.json();
+
+                    // Handle token expiration
+                    if (response.status === 401 && data.type === EExceptionType.EXPIRED_EXCEPTION && !isRetry) {
+                        try {
+                            // Try to refresh the token
+                            await AuthService.refreshToken();
+
+                            // If refresh successful, retry the original request with new token
+                            if (url !== 'auth/refresh-token') {
+                                // Retry the original request with the new token
+                                return this.fetching<T, D>(
+                                    url, 
+                                    params, 
+                                    method, 
+                                    extraHeaders, 
+                                    prefix, 
+                                    credentialsMode, 
+                                    removeDefaultHeaders, 
+                                    true // Mark as a retry to prevent infinite loops
+                                ).then(resolve).catch(reject);
+                            }
+                        } catch (refreshError) {
+                            AuthService.logout();
+                            // If refresh fails, reject with the original error
                             return reject(this.convertToResponseException(data));
                         }
+                    } else if (this.logoutResponseCodes.includes(response.status)) {
+                        if (this.doNotLogOutExceptions.includes(data.type)) {
+                            return reject(this.convertToResponseException(data));
+                        }
+                        return;
+                    }
 
-                    }).catch((data: IExceptionResponse) => {
-                        reject(data)
-                });
+                    if (response.ok) {
+                        return resolve(data);
+                    } else {
+                        return reject(this.convertToResponseException(data));
+                    }
+                }
+            } catch (error) {
+                reject(error);
             }
         });
     }

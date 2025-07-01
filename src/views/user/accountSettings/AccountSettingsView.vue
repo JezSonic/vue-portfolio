@@ -14,6 +14,9 @@
     import ActivityTab from "@/views/user/accountSettings/tabs/ActivityTab.vue";
     import NotificationsTab from "@/views/user/accountSettings/tabs/NotificationsTab.vue";
     import SecurityTab from "@/views/user/accountSettings/tabs/SecurityTab.vue";
+    import router from "@/router/index.js";
+    import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+    import AuthService from "@/services/authService.js";
 
     const { t } = useI18n();
 
@@ -35,30 +38,37 @@
     const isMobileMenuOpen = ref<boolean>(false);
 
 
-    // Load user data
-    UserService.getUser()
-        .then((data) => {
-            if (data.profile_settings == undefined) {
-                data.profile_settings = {
-                    is_public: true,
-                    avatar_source: "auto",
-                    theme: "dark",
-                    language: "en",
-                    notifications: {
-                        email_notifications: false,
-                        email_marketing: false,
-                        email_security_alerts: false
+    onMounted(() => {
+        if (userStore.isLoggedIn()) {
+            // Load user data
+            UserService.getUser()
+                .then((data) => {
+                    if (data.profile_settings == undefined) {
+                        data.profile_settings = {
+                            is_public: true,
+                            avatar_source: "auto",
+                            theme: "dark",
+                            language: "en",
+                            notifications: {
+                                email_notifications: false,
+                                email_marketing: false,
+                                email_security_alerts: false
+                            }
+                        };
                     }
-                };
-            }
 
-            userData.value = data;
-            loading.value = false;
-        }).catch(() => {
-            userStore.logout();
-            error.value = true;
-            loading.value = false;
-        });
+                    userData.value = data;
+                    loading.value = false;
+                }).catch(() => {
+                AuthService.logout();
+                error.value = true;
+                loading.value = false;
+            });
+        } else {
+            AuthService.logout(); //assure to clear all leftover data
+            router.push('/');
+        }
+    })
 
     // Save profile settings when changed
     const saveProfileSettings = () => {
@@ -105,8 +115,19 @@
 <template>
     <div class="w-full h-full">
         <div v-if="userData == null" class="loading">
-            <Loading :error="error" :loading="loading"
+            <Loading :loading="loading"
                      :error-text="t('accountSettingsView.error.notFound')" />
+            <div class="error-container" v-if="error">
+                <div class="error-card">
+                    <font-awesome-icon :icon="['fas', 'user-slash']" class="error-icon text-red-500" />
+                    <h2 class="error-title">{{ t('userProfileView.error.notFound') }}</h2>
+                    <p class="error-description">We couldn't find the user profile you're looking for. The user may not exist or has been removed.</p>
+                    <button @click="router.push('/')" class="error-button bg-blue-600 hover:bg-blue-700">
+                        <font-awesome-icon :icon="['fas', 'house']" class="mr-2" />
+                        Return to Home
+                    </button>
+                </div>
+            </div>
         </div>
         <div v-else class="!text-white w-full max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
             <div class="mb-8">

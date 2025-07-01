@@ -36,8 +36,9 @@
             AuthService.login(email.value, password.value, data.ip)
                 .then((res) => {
                     success.value = true;
-                    userStore.id = res.content;
-                    userStore.token = res.token;
+                    userStore.id = res.id;
+                    userStore.token = res.access_token;
+                    userStore.refreshToken = res.refresh_token;
                     router.push("/user/settings");
                 })
                 .catch((e: IExceptionResponse) => {
@@ -53,7 +54,8 @@
         isRegisterLoading.value = true;
         AuthService.register(email.value, name.value, password.value).then((data) => {
             success.value = true;
-            userStore.token = data.token;
+            userStore.token = data.access_token;
+            userStore.refreshToken = data.refresh_token;
             login();
         })
         .catch((e: IExceptionResponse) => {

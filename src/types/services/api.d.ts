@@ -52,10 +52,12 @@ export interface IApiResponse<T> {
 }
 
 /**
- * Interface representing an API response with a token.
+ * Interface representing an API response with authentication tokens.
  */
-export interface IApiAuthResponse<T> extends IApiResponse<T> {
-    token: string;
+export interface IApiAuthResponse {
+    id: number;
+    access_token: string;
+    refresh_token: string;
 }
 
 /**
