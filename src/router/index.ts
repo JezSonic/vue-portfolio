@@ -1,11 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import { env } from "@/helpers/app.ts";
-import { useHead } from "@unhead/vue";
-
-// Default meta values
-const DEFAULT_DESCRIPTION = "JezSonic's portfolio website showcasing projects and skills.";
-const DEFAULT_KEYWORDS = "JezSonic, portfolio, web developer, vue, typescript, javascript, projects";
-const BASE_TITLE = "JezSonic";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -153,23 +147,6 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const pageTitle = to.meta.title ? `${BASE_TITLE} - ${to.meta.title}` : BASE_TITLE;
-  const description = (to.meta.description as string) || DEFAULT_DESCRIPTION;
-  const keywords = (to.meta.keywords as string) || DEFAULT_KEYWORDS;
-
-  useHead({
-    title: pageTitle,
-    meta: [
-      { name: 'description', content: description },
-      { name: 'keywords', content: keywords },
-      // Basic Open Graph Tags
-      { property: 'og:title', content: pageTitle },
-      { property: 'og:description', content: description },
-      { property: 'og:type', content: 'website' },
-      // Add more OG tags as needed, e.g., og:image, og:url
-    ],
-  });
-
   if (to.meta.requires_backend && env("VITE_APP_ENABLE_BACKEND", false)) {
     next()
   } else {
