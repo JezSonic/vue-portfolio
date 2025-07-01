@@ -8,9 +8,11 @@ import { ref } from 'vue';
 import { useLazyLoad } from '@/composables/useLazyLoad';
 
 // Image imports for webpack processing
-import oldWebsitePng from '@/assets/projects/oldwebsite.png';
 import oldWebsiteWebp from '@/assets/projects/oldwebsite.webp';
 import maszynaReloadedWebp from '@/assets/projects/maszyna_reloaded.webp';
+import LinkedInWebp from "@/assets/profile/linkedin_avatar.webp";
+import VLazyImage from "v-lazy-image";
+
 // Assuming you might want a PNG fallback for maszyna_reloaded if it existed, or a generic one
 // For this example, let's assume maszyna_reloaded also has a .png if .webp is not supported
 // If not, you'd only provide the webp source or a different fallback.
@@ -60,7 +62,7 @@ useLazyLoad(maszynaReloadedPicRef);
                 </div>
             </div>
             <div class="md:w-1/2 flex justify-center">
-                <img src="@/assets/profile/linkedin_avatar.webp" alt="Karol - Web Developer" class="rounded-full w-64 h-64 object-cover border-4 border-blue-600 shadow-lg">
+                <v-lazy-image :src="LinkedInWebp" alt="Karol - Web Developer" class="rounded-full w-64 h-64 object-cover border-4 border-blue-600 shadow-lg"/>
             </div>
         </div>
 
@@ -110,11 +112,7 @@ useLazyLoad(maszynaReloadedPicRef);
             <template #default>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                     <div class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
-                        <picture ref="oldWebsitePicRef">
-                            <source :data-srcset="oldWebsiteWebp" type="image/webp" sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, calc(0.5 * (100vw - 2rem - 1.5rem))">
-                            <source :data-srcset="oldWebsitePng" type="image/png" sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, calc(0.5 * (100vw - 2rem - 1.5rem))">
-                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" :data-src="oldWebsitePng" alt="Previous Portfolio Screenshot" class="w-full h-48 object-cover" width="1310" height="465" loading="lazy">
-                        </picture>
+                        <v-lazy-image :src="oldWebsiteWebp" class="w-full h-48 object-cover" alt="Previous Portfolio Screenshot"/>
                         <div class="p-4">
                             <h3 class="text-xl font-semibold text-blue-500 mb-2">{{ t('home.projects.previousPortfolio.title') }}</h3>
                             <p class="text-gray-300 mb-4">{{ t('home.projects.previousPortfolio.description') }}</p>
@@ -125,12 +123,7 @@ useLazyLoad(maszynaReloadedPicRef);
                         </div>
                     </div>
                     <div class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
-                        <picture ref="maszynaReloadedPicRef">
-                            <source :data-srcset="maszynaReloadedWebp" type="image/webp" sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, calc(0.5 * (100vw - 2rem - 1.5rem))">
-                            <!-- Fallback for maszyna_reloaded: Since it's already webp, the img data-src will be webp. -->
-                            <!-- If a png/jpg for this existed, it would be <source :data-srcset="maszynaReloadedPngOrJpg" type="image/png" sizes="..."> -->
-                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" :data-src="maszynaReloadedWebp" alt="Maszyna Reloaded Screenshot" class="w-full h-48 object-cover" width="1024" height="576" loading="lazy">
-                        </picture>
+                        <v-lazy-image :src="maszynaReloadedWebp" class="w-full h-48 object-cover" alt="Maszyna Reloaded Screenshot"/>
                         <div class="p-4">
                             <h3 class="text-xl font-semibold text-blue-500 mb-2">{{ t('home.projects.maszynaReloaded.title') }}</h3>
                             <p class="text-gray-300 mb-4">{{ t('home.projects.maszynaReloaded.description') }}</p>
