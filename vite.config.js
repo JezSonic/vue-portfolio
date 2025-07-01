@@ -35,14 +35,14 @@ export default defineConfig({
                         },
                     },
                     {
-                        urlPattern: /^https:\/\/api\.example\.com\/.*/,
+                        urlPattern: /^https:\/\/server\.newdev\.pl\/.*/,
                         handler: 'NetworkFirst',
                         options: {
                             cacheName: 'api-cache',
                             networkTimeoutSeconds: 10,
                             expiration: {
                                 maxEntries: 50,
-                                maxAgeSeconds: 60 * 60 * 24, // 1 Day
+                                maxAgeSeconds: 60 * 5, // 5 minutes
                             },
                             cacheableResponse: {
                                 statuses: [0, 200],
