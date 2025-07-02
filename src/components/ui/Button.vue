@@ -1,54 +1,35 @@
 <script lang="ts" setup>
     import { ref, computed, watch } from "vue";
 
-    type size = 'sm' | 'md' | 'lg';
-    type variant = 'default' | 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'link';
+    type Size = 'sm' | 'md' | 'lg';
+    type Variant = 'default' | 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'link';
 
-    const props = defineProps({
-        text: {
-            type: String,
-            required: false
-        },
-        displayLoadingText: {
-            type: Boolean,
-            required: false,
-            default: false
-        },
-        outline: {
-            type: Boolean,
-            required: false,
-            default: false
-        },
-        variant: {
-            type: Object () as () => variant,
-            required: false,
-            default: 'default',
-            validator: (value: string) => ['default', 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'link'].includes(value)
-        },
-        size: {
-            type: Object () as () => size,
-            required: false,
-            default: 'md',
-            validator: (value: string) => ['sm', 'md', 'lg'].includes(value)
-        },
-        fullWidth: {
-            type: Boolean,
-            required: false,
-            default: false
-        },
-        disabled: {
-            type: Boolean,
-            required: false,
-            default: false
-        },
-        loading: {
-            type: Boolean,
-            required: false,
-            default: false
-        }
+    interface Props {
+        text?: string | null;
+        displayLoadingText?: boolean;
+        outline?: boolean;
+        variant?: Variant;
+        size?: Size;
+        fullWidth?: boolean;
+        disabled?: boolean;
+        loading?: boolean;
+    }
+
+    const props = withDefaults(defineProps<Props>(), {
+        text: null,
+        displayLoadingText: false,
+        outline: false,
+        variant: 'default',
+        size: 'md',
+        fullWidth: false,
+        disabled: false,
+        loading: false,
     });
 
-    const emit = defineEmits(['click']);
+    const emit = defineEmits<{
+        (e: 'click', event: MouseEvent): void;
+    }>();
+
     const isLoading = ref<boolean>(props.loading);
 
     // Watch for external loading prop changes
@@ -56,7 +37,7 @@
         isLoading.value = newValue;
     });
 
-    const handleClick = (event: MouseEvent) => {
+    const handleClick = (event: MouseEvent): void => {
         if (props.disabled || isLoading.value) return;
 
         if (props.displayLoadingText) {
@@ -111,6 +92,7 @@
 
 <template>
     <button 
+        type="button"
         :class="buttonClasses" 
         @click="handleClick"
         :disabled="disabled || isLoading">
@@ -124,8 +106,10 @@
 
 <style scoped>
 /* Additional animation for focus */
-button:focus {
-    animation: pulse 1s;
+@media (min-width: 640px) {
+    button:focus {
+        animation: pulse 1s;
+    }
 }
 
 @keyframes pulse {

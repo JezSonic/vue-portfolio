@@ -6,7 +6,7 @@ const { t } = useI18n();
 
 <template>
     <div class="text-center">
-        <h3 class="sm:text-3xl font-semibold text-blue-600">{{ t('errors.notFound.code') }}</h3>
+        <h2 class="sm:text-3xl font-semibold text-blue-600">{{ t('errors.notFound.code') }}</h2>
         <h1 class="mt-4 text-5xl font-semibold tracking-tight text-balance !text-white sm:text-7xl">{{ t('errors.notFound.title') }}</h1>
         <p class="mt-6 text-lg font-medium text-pretty !text-white sm:text-xl/8">{{ t('errors.notFound.message') }}</p>
         <div class="mt-10 flex items-center justify-center gap-x-6">

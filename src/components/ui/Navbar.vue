@@ -1,46 +1,57 @@
-<script setup>
+<script setup lang="ts">
     import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
     import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
     import router from "@/router";
     import logo from "@/assets/icons/logo.png";
     import userDefault from "@/assets/profile/userDefault.png";
     import { onMounted, ref } from "vue";
-    import { useUserStore } from "@/stores/userStore.js";
+    import { useUserStore } from "@/stores/userStore";
     import { useThemeStore } from "@/stores/themeStore";
-    import AuthService from "@/services/authService.js";
-    import { env } from "@/helpers/app.js";
+    import AuthService from "@/services/authService";
+    import { env } from "@/helpers/app";
     import { useI18n } from 'vue-i18n';
     import { setLanguage } from '@/i18n';
 
+    interface NavigationItem {
+        name: string;
+        href: string;
+        current: boolean;
+    }
+
+    interface LanguageItem {
+        code: string;
+        name: string;
+    }
+
     const { t, locale } = useI18n();
-    const currentRoute = ref(router.currentRoute.value.path)
-    const transparent = ref(true);
+    const currentRoute = ref<string>(router.currentRoute.value.path)
+    const transparent = ref<boolean>(true);
     const userStore = useUserStore();
     const themeStore = useThemeStore();
 
     // Toggle between light and dark theme
-    const toggleTheme = () => {
+    const toggleTheme = (): void => {
         const newTheme = themeStore.actualTheme === 'dark' ? 'light' : 'dark';
         themeStore.setTheme(newTheme);
     };
 
-    const navigation = [
+    const navigation: NavigationItem[] = [
         {name: 'navigation.home', href: "/", current: router.currentRoute.value.name === "home"},
         {name: 'navigation.commissions', href: "/commissions", current: router.currentRoute.value.name === "commissions"},
         {name: 'navigation.privacyPolicy', href: "/privacy-policy", current: currentRoute.value === "/privacy-policy"},
         {name: 'navigation.contact', href: "/contact", current: currentRoute.value === "/contact"},
     ]
 
-    const languages = [
+    const languages: LanguageItem[] = [
         { code: 'en', name: 'common.english' },
         { code: 'pl', name: 'common.polish' },
     ];
 
-    const changeLanguage = (langCode) => {
+    const changeLanguage = (langCode: string): void => {
         setLanguage(langCode);
     };
 
-    const onDocumentScroll = () => {
+    const onDocumentScroll = (): void => {
         transparent.value = (window.scrollY === 0);
     };
 
@@ -56,7 +67,7 @@
             <div class="relative flex h-16 items-center justify-between">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                     <!-- Mobile menu button-->
-                    <DisclosureButton class="relative z-100 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
+                    <DisclosureButton class="relative z-100 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset" :aria-expanded="open">
                         <span class="absolute -inset-0.5" />
                         <span class="sr-only">Open main menu</span>
                         <Bars3Icon v-if="!open" class="block size-6" aria-hidden="true" />
@@ -78,6 +89,7 @@
                     <button v-if="env('VITE_APP_ENABLE_THEMES', false)"
                         @click="toggleTheme" 
                         class="relative cursor-pointer flex items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+                        aria-label="Toggle theme"
                     >
                         <font-awesome-icon 
                             :icon="themeStore.actualTheme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon'" 
@@ -88,7 +100,7 @@
 
                     <!-- Language dropdown -->
                     <Menu as="div" class="relative ml-3">
-                        <MenuButton class="relative cursor-pointer flex items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
+                        <MenuButton class="relative cursor-pointer flex items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden" aria-label="Select language">
                             <font-awesome-icon icon="fa-solid fa-language" class="mr-1" />
                             <span class="hidden md:inline">{{ t('common.language') }}</span>
                         </MenuButton>

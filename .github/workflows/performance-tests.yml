@@ -1,0 +1,73 @@
+name: Performance and E2E Tests
+
+on:
+  push:
+    branches: [main, master] # Adjust branch names as needed
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write # To comment on PRs if using GitHub App for LHCI
+      checks: write # To create status checks
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Or your project's Node.js version
+
+      - name: Install dependencies
+        run: npm i && npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium # Install only chromium for CI, or list all needed
+
+      - name: Build the project
+        run: npm run build
+
+      # Run Playwright E2E tests (optional but good to have before performance)
+      - name: Run Playwright E2E tests
+        run: npm run test:e2e
+        continue-on-error: false # Fail the workflow if E2E tests fail
+
+      # Run Lighthouse CI
+      # The `lhci autorun` command will automatically:
+      # 1. Start your server (if `startServerCommand` is set in lighthouserc.js)
+      # 2. Run Lighthouse using the puppeteerScript for navigation
+      # 3. Assert against budgets
+      # 4. Upload results (if configured)
+      - name: Run Lighthouse CI
+        run: npm run test:perf
+        # To use the Lighthouse GitHub App for PR comments and status checks,
+        # you'd typically add `lhci autorun --upload.target=lhci --upload.serverBaseUrl=https://lhci.YOUR_SERVER.com`
+        # and configure the LHCI_GITHUB_APP_TOKEN secret.
+        # For temporary-public-storage, no extra token is needed for upload itself,
+        # but for PR comments/checks, the app is better.
+        # If budgets fail, lhci autorun will exit with a non-zero code, failing the step.
+        continue-on-error: false # Fail the workflow if performance budgets are not met
+
+      # Optional: Upload Playwright test results
+      - name: Upload Playwright report
+        if: always() # Upload report even if tests fail
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
+      # Optional: Upload Lighthouse results (if not using an LHCI server or GitHub App for storage)
+      # The .lighthouseci directory is created by `lhci autorun`
+      - name: Upload Lighthouse report artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/
+          retention-days: 7
