@@ -22,13 +22,13 @@
 </script>
 
 <template>
-    <a v-if="link" :href="link" class="badge-link" rel="noopener noreferrer" target="_blank">
+    <a v-if="link" :href="link" class="badge-link" rel="noopener noreferrer" target="_blank" v-once>
         <p :style="{ backgroundColor: bg_color, color: text_color }">
             <font-awesome-icon :icon="getIconArray(icon)" />
             {{ text }}
         </p>
     </a>
-    <p v-else :style="{ backgroundColor: bg_color, color: text_color }">
+    <p v-else :style="{ backgroundColor: bg_color, color: text_color }" v-once>
         <font-awesome-icon :icon="getIconArray(icon)" />
         {{ text }}
     </p>
