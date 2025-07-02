@@ -28,6 +28,8 @@
 
     if (userStore.id !== null) {
         router.push("/user/settings");
+    } else {
+        userStore.logout();
     }
 
     const login = () => {
