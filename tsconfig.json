@@ -15,8 +15,6 @@
     "useDefineForClassFields": true,
     "noEmit": true,
     "exactOptionalPropertyTypes": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,

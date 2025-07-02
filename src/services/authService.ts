@@ -1,14 +1,16 @@
 import ApiService from "@/services/apiService.ts";
 import type {
     EOAuthProvider,
-    IOAuthCallbackRequestBody,
-    IRegisterRequestBody,
     ILoginRequestBody,
-    IPasswordResetRequestBody,
+    IOAuthCallbackRequestBody,
     IPasswordResetConfirmRequestBody,
-    IPasswordResetTokenVerifyRequestBody, IVerifyTokenResponse
+    IPasswordResetRequestBody,
+    IPasswordResetTokenVerifyRequestBody,
+    IRefreshTokenRequestBody,
+    IRegisterRequestBody,
+    IVerifyTokenResponse
 } from "@/types/services/auth.d.ts";
-import type { IApiResponse, IApiAuthResponse, IEmptyRequestBody } from "@/types/services/api.d.ts";
+import type { IApiAuthResponse, IApiResponse, IEmptyRequestBody } from "@/types/services/api.d.ts";
 import { useUserStore } from "@/stores/userStore.ts";
 import router from "@/router/index.ts";
 
@@ -22,37 +24,41 @@ export default class AuthService extends ApiService {
         return this.get<IApiResponse<string>>(`auth/${provider}`);
     }
 
-    public static verifyOAuthCallback(provider: string, ip_address: string): Promise<IApiAuthResponse<number>> {
+    public static async verifyOAuthCallback(provider: string, ip_address: string): Promise<IApiAuthResponse> {
         const url = window.location.search; // remove the ?
-        return this.post<IApiAuthResponse<number>, IOAuthCallbackRequestBody>(`auth/${provider}/callback` + url, {
+        let response = await this.post<IApiAuthResponse, IOAuthCallbackRequestBody>(`auth/${provider}/callback` + url, {
             ip_address: ip_address
         });
+        const userStore = useUserStore();
+        userStore.refreshToken = response.refresh_token;
+        return response;
     }
 
     public static logout() {
         const userStore = useUserStore();
         this.get<IApiResponse<number>>(`auth/logout`, this.getAuthBearerHeader())
             .then(() => {
+                router.push("/");
+            }).finally(() => {
                 userStore.logout();
-                router.push('/')
-            })
+            });
         return;
     }
 
-    public static register(email: string, name: string, password: string) {
-        return this.post<IApiAuthResponse<number>, IRegisterRequestBody>("auth/register", {
+    public static register(email: string, name: string, password: string): Promise<IApiAuthResponse> {
+        return this.post<IApiAuthResponse, IRegisterRequestBody>("auth/register", {
             email: email,
             name: name,
             password: password
-        })
+        });
     };
 
-    public static login(email: string, password: string, ip_address: string): Promise<IApiAuthResponse<number>> {
-        return this.post<IApiAuthResponse<number>, ILoginRequestBody>("auth/login", {
-                email: email,
-                password: password,
-                ip_address: ip_address
-            })
+    public static login(email: string, password: string, ip_address: string): Promise<IApiAuthResponse> {
+        return this.post<IApiAuthResponse, ILoginRequestBody>("auth/login", {
+            email: email,
+            password: password,
+            ip_address: ip_address
+        });
     }
 
     public static performOAuth(provider: EOAuthProvider) {
@@ -71,10 +77,34 @@ export default class AuthService extends ApiService {
     }
 
     public static resetPassword(token: string, password: string) {
-        return this.post<IApiResponse<boolean>, IPasswordResetConfirmRequestBody>(`auth/reset-password`, { token: token, password: password });
+        return this.post<IApiResponse<boolean>, IPasswordResetConfirmRequestBody>(`auth/reset-password`, {
+            token: token,
+            password: password
+        });
     }
 
     public static verifyPasswordResetToken(token: string) {
         return this.post<IVerifyTokenResponse, IPasswordResetTokenVerifyRequestBody>(`auth/reset-password/verify-token`, { token: token });
+    }
+
+    /**
+     * Refreshes the access token using the refresh token
+     * @returns Promise with the new tokens
+     */
+    public static async refreshToken(): Promise<IApiAuthResponse> {
+        const userStore = useUserStore();
+
+        if (!userStore.refreshToken) {
+            this.logout();
+            return Promise.reject(new Error("No refresh token available"));
+        }
+
+        let response = await this.post<IApiAuthResponse, IRefreshTokenRequestBody>(
+            "auth/refresh-token",
+            { refresh_token: userStore.refreshToken }
+        );
+        userStore.token = response.access_token;
+        userStore.refreshToken = response.refresh_token;
+        return response;
     }
 }
