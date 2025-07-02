@@ -67,24 +67,24 @@
     <div class="w-full h-full">
         <div v-if="isPrivateProfile" class="error-container" v-once>
             <div class="error-card">
-                <font-awesome-icon icon="fa-solid fa-lock" class="error-icon text-yellow-500" />
+                <font-awesome-icon :icon="['fas', 'lock']" class="error-icon text-yellow-500" />
                 <h2 class="error-title">{{ t('userProfileView.error.privateProfile') }}</h2>
                 <p class="error-description">This user has set their profile to private. Only the profile owner can view their information.</p>
                 <button @click="router.push('/')" class="error-button bg-blue-600 hover:bg-blue-700">
-                    <font-awesome-icon icon="fa-solid fa-home" class="mr-2" />
+                    <font-awesome-icon :icon="['fas', 'house']" class="mr-2" />
                     Return to Home
                 </button>
             </div>
         </div>
         <div v-else-if="userData == null" class="error-container">
             <div class="error-card" v-if="error" v-once>
-                <font-awesome-icon icon="fa-solid fa-user-slash" class="error-icon text-red-500" />
-                <h2 class="error-title">{{ t('userProfileView.error.notFound') }}</h2>
-                <p class="error-description">We couldn't find the user profile you're looking for. The user may not exist or has been removed.</p>
-                <button @click="router.push('/')" class="error-button bg-blue-600 hover:bg-blue-700">
-                    <font-awesome-icon icon="fa-solid fa-home" class="mr-2" />
-                    Return to Home
-                </button>
+                    <font-awesome-icon :icon="['fas', 'user-slash']" class="error-icon text-red-500" />
+                    <h2 class="error-title">{{ t('userProfileView.error.notFound') }}</h2>
+                    <p class="error-description">We couldn't find the user profile you're looking for. The user may not exist or has been removed.</p>
+                    <button @click="router.push('/')" class="error-button bg-blue-600 hover:bg-blue-700">
+                        <font-awesome-icon :icon="['fas', 'house']" class="mr-2" />
+                        Return to Home
+                    </button>
             </div>
             <Loading v-else :loading="true" :error="false" />
         </div>

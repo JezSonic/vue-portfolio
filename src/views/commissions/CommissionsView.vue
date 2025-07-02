@@ -3,9 +3,9 @@ import Tile from "@/components/tiles/Tile.vue";
 import Button from "@/components/ui/Button.vue";
 import router from "@/router";
 import Badge from "@/components/badges/Badge.vue";
-import artist from '@/assets/projects/artist.png'
-import old_website from '@/assets/projects/oldwebsite.png'
-import maszyna_reloaded from '@/assets/projects/maszyna_reloaded.webp'
+import old_website from '@/assets/projects/oldwebsite.webp';
+import maszyna_reloaded from '@/assets/projects/maszyna_reloaded.webp';
+import artist from '@/assets/projects/artist.webp';
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
