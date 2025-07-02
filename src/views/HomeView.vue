@@ -8,9 +8,9 @@ import { ref } from 'vue';
 import { useLazyLoad } from '@/composables/useLazyLoad';
 
 // Image imports for webpack processing
-import oldWebsiteWebp from '@/assets/projects/oldwebsite.webp';
-import maszynaReloadedWebp from '@/assets/projects/maszyna_reloaded.webp';
-import LinkedInWebp from "@/assets/profile/linkedin_avatar.webp";
+import old_website from '@/assets/projects/oldwebsite.webp';
+import maszyna_reloaded from '@/assets/projects/maszyna_reloaded.webp';
+import linked_in from "@/assets/profile/linkedin_avatar.webp";
 import VLazyImage from "v-lazy-image";
 
 // Assuming you might want a PNG fallback for maszyna_reloaded if it existed, or a generic one
@@ -62,7 +62,7 @@ useLazyLoad(maszynaReloadedPicRef);
                 </div>
             </div>
             <div class="md:w-1/2 flex justify-center">
-                <v-lazy-image :src="LinkedInWebp" alt="Karol - Web Developer" class="rounded-full w-64 h-64 object-cover border-4 border-blue-600 shadow-lg"/>
+                <v-lazy-image :src="linked_in" alt="Karol - Web Developer" class="rounded-full w-64 h-64 object-cover border-4 border-blue-600 shadow-lg"/>
             </div>
         </div>
 
@@ -91,7 +91,7 @@ useLazyLoad(maszynaReloadedPicRef);
                 </p>
             </template>
             <template #badges>
-                <div class="flex flex-wrap gap-3 mt-4">
+                <div v-once class="flex flex-wrap gap-3 mt-4">
                     <Badge text="TypeScript" icon="fa-code" bg_color="#3178c6" />
                     <Badge text="Vue.js" icon="fa-vuejs" bg_color="#42b883" />
                     <Badge text="PHP" icon="fa-php" bg_color="#777bb3" />
@@ -111,8 +111,8 @@ useLazyLoad(maszynaReloadedPicRef);
         <Tile :title="t('home.projects.title')" class="mb-12">
             <template #default>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                    <div class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
-                        <v-lazy-image :src="oldWebsiteWebp" class="w-full h-48 object-cover" alt="Previous Portfolio Screenshot"/>
+                    <div v-once class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
+                        <v-lazy-image :src="old_website" class="w-full h-48 object-cover" alt="Previous Portfolio Screenshot"/>
                         <div class="p-4">
                             <h3 class="text-xl font-semibold text-blue-500 mb-2">{{ t('home.projects.previousPortfolio.title') }}</h3>
                             <p class="text-gray-300 mb-4">{{ t('home.projects.previousPortfolio.description') }}</p>
@@ -122,8 +122,8 @@ useLazyLoad(maszynaReloadedPicRef);
                             </div>
                         </div>
                     </div>
-                    <div class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
-                        <v-lazy-image :src="maszynaReloadedWebp" class="w-full h-48 object-cover" alt="Maszyna Reloaded Screenshot"/>
+                    <div v-once class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
+                        <v-lazy-image :src="maszyna_reloaded" class="w-full h-48 object-cover" alt="Maszyna Reloaded Screenshot"/>
                         <div class="p-4">
                             <h3 class="text-xl font-semibold text-blue-500 mb-2">{{ t('home.projects.maszynaReloaded.title') }}</h3>
                             <p class="text-gray-300 mb-4">{{ t('home.projects.maszynaReloaded.description') }}</p>
