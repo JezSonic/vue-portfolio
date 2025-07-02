@@ -70,7 +70,10 @@ export default class ApiService {
                     }
 
                     if (response.ok) {
-                        useUserStore().token = response.headers.get("X-New-Access-Token");
+                        const newAccessToken = response.headers.get("X-New-Access-Token");
+                        if (newAccessToken !== null) {
+                            useUserStore().token = newAccessToken;
+                        }
                         return resolve(data);
                     } else {
                         return reject(this.convertToResponseException(data));
