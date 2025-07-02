@@ -3,6 +3,7 @@
     import MouseAura from "@/components/ui/MouseAura.vue";
     import router from "@/router";
     import { useHead } from "@unhead/vue";
+    import Loading from "@/components/ui/Loading.vue";
 
     // Default / Fallback meta tags + global tags
     useHead({
@@ -63,7 +64,14 @@
     <Navbar v-if="router.currentRoute.value.name !== 'error_404'"/>
     <main class="min-h-full place-items-center px-6 py-6 pt-16 h-[100vh]">
         <router-view v-slot="{ Component }">
-            <component :is="Component" />
+            <Suspense>
+                <template #default>
+                    <component :is="Component" />
+                </template>
+                <template #fallback>
+                    <Loading :loading="true" />
+                </template>
+            </Suspense>
         </router-view>
     </main>
 </template>
