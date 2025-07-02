@@ -105,3 +105,10 @@ export interface IVerifyTokenResponse {
     content: boolean;
     creating_password: boolean
 }
+
+/**
+ * Interface for token refresh request body.
+ */
+export interface IRefreshTokenRequestBody {
+    refresh_token: string;
+}

@@ -67,24 +67,24 @@
     <div class="w-full h-full">
         <div v-if="isPrivateProfile" class="error-container">
             <div class="error-card">
-                <font-awesome-icon icon="fa-solid fa-lock" class="error-icon text-yellow-500" />
+                <font-awesome-icon :icon="['fas', 'lock']" class="error-icon text-yellow-500" />
                 <h2 class="error-title">{{ t('userProfileView.error.privateProfile') }}</h2>
                 <p class="error-description">This user has set their profile to private. Only the profile owner can view their information.</p>
                 <button @click="router.push('/')" class="error-button bg-blue-600 hover:bg-blue-700">
-                    <font-awesome-icon icon="fa-solid fa-home" class="mr-2" />
+                    <font-awesome-icon :icon="['fas', 'house']" class="mr-2" />
                     Return to Home
                 </button>
             </div>
         </div>
         <div v-else-if="userData == null" class="error-container">
             <div class="error-card" v-if="error">
-                <font-awesome-icon icon="fa-solid fa-user-slash" class="error-icon text-red-500" />
-                <h2 class="error-title">{{ t('userProfileView.error.notFound') }}</h2>
-                <p class="error-description">We couldn't find the user profile you're looking for. The user may not exist or has been removed.</p>
-                <button @click="router.push('/')" class="error-button bg-blue-600 hover:bg-blue-700">
-                    <font-awesome-icon icon="fa-solid fa-home" class="mr-2" />
-                    Return to Home
-                </button>
+                    <font-awesome-icon :icon="['fas', 'user-slash']" class="error-icon text-red-500" />
+                    <h2 class="error-title">{{ t('userProfileView.error.notFound') }}</h2>
+                    <p class="error-description">We couldn't find the user profile you're looking for. The user may not exist or has been removed.</p>
+                    <button @click="router.push('/')" class="error-button bg-blue-600 hover:bg-blue-700">
+                        <font-awesome-icon :icon="['fas', 'house']" class="mr-2" />
+                        Return to Home
+                    </button>
             </div>
             <Loading v-else :loading="true" :error="false" />
         </div>
@@ -240,87 +240,3 @@
         </div>
     </div>
 </template>
-
-<style lang="scss" scoped>
-    .error-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        top: 50%; right: 50%;
-        transform: translate(50%,-50%);
-        width: 100%;
-        max-width: 500px;
-    }
-
-    .error-card {
-        background-color: white;
-        border-radius: 12px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        padding: 2rem;
-        text-align: center;
-        width: 100%;
-
-        :root.dark & {
-            background-color: #1f2937;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        }
-    }
-
-    .error-icon {
-        font-size: 4rem;
-        margin-bottom: 1rem;
-    }
-
-    .error-title {
-        color: #1f2937;
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 0.75rem;
-
-        :root.dark & {
-            color: #f3f4f6;
-        }
-    }
-
-    .error-description {
-        color: #6b7280;
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
-
-        :root.dark & {
-            color: #d1d5db;
-        }
-    }
-
-    .error-button {
-        border: none;
-        border-radius: 0.375rem;
-        color: white;
-        cursor: pointer;
-        font-size: 0.875rem;
-        font-weight: 600;
-        padding: 0.625rem 1.25rem;
-        transition: background-color 0.2s ease;
-    }
-
-    .bg-gray-750 {
-        background-color: rgba(229, 231, 235, 0.5);
-    }
-
-    :root.dark .bg-gray-750 {
-        background-color: rgba(31, 41, 55, 0.5);
-    }
-
-    /* Add subtle hover effects */
-    .bg-gray-750:hover {
-        background-color: rgba(229, 231, 235, 0.7);
-        transition: background-color 0.3s ease;
-    }
-
-    :root.dark .bg-gray-750:hover {
-        background-color: rgba(31, 41, 55, 0.7);
-        transition: background-color 0.3s ease;
-    }
-</style>
