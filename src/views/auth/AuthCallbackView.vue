@@ -14,8 +14,8 @@
         ApiService.getIP().then((data) => {
             AuthService.verifyOAuthCallback(driver, data.ip)
                 .then((res) => {
-                    userStore.id = res.content;
-                    userStore.token = res.token;
+                    userStore.id = res.id;
+                    userStore.token = res.access_token;
                     router.push(`/user/settings`);
                 }).catch(() => {
                     userStore.logout();
