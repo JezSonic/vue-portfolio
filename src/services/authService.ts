@@ -1,16 +1,16 @@
 import ApiService from "@/services/apiService.ts";
 import type {
     EOAuthProvider,
-    IOAuthCallbackRequestBody,
-    IRegisterRequestBody,
     ILoginRequestBody,
-    IPasswordResetRequestBody,
+    IOAuthCallbackRequestBody,
     IPasswordResetConfirmRequestBody,
-    IPasswordResetTokenVerifyRequestBody, 
-    IVerifyTokenResponse,
-    IRefreshTokenRequestBody
+    IPasswordResetRequestBody,
+    IPasswordResetTokenVerifyRequestBody,
+    IRefreshTokenRequestBody,
+    IRegisterRequestBody,
+    IVerifyTokenResponse
 } from "@/types/services/auth.d.ts";
-import type { IApiResponse, IApiAuthResponse, IEmptyRequestBody } from "@/types/services/api.d.ts";
+import type { IApiAuthResponse, IApiResponse, IEmptyRequestBody } from "@/types/services/api.d.ts";
 import { useUserStore } from "@/stores/userStore.ts";
 import router from "@/router/index.ts";
 
@@ -38,9 +38,10 @@ export default class AuthService extends ApiService {
         const userStore = useUserStore();
         this.get<IApiResponse<number>>(`auth/logout`, this.getAuthBearerHeader())
             .then(() => {
+                router.push("/");
+            }).finally(() => {
                 userStore.logout();
-                router.push('/')
-            })
+            });
         return;
     }
 
@@ -49,15 +50,15 @@ export default class AuthService extends ApiService {
             email: email,
             name: name,
             password: password
-        })
+        });
     };
 
     public static login(email: string, password: string, ip_address: string): Promise<IApiAuthResponse> {
         return this.post<IApiAuthResponse, ILoginRequestBody>("auth/login", {
-                email: email,
-                password: password,
-                ip_address: ip_address
-            })
+            email: email,
+            password: password,
+            ip_address: ip_address
+        });
     }
 
     public static performOAuth(provider: EOAuthProvider) {
@@ -76,7 +77,10 @@ export default class AuthService extends ApiService {
     }
 
     public static resetPassword(token: string, password: string) {
-        return this.post<IApiResponse<boolean>, IPasswordResetConfirmRequestBody>(`auth/reset-password`, { token: token, password: password });
+        return this.post<IApiResponse<boolean>, IPasswordResetConfirmRequestBody>(`auth/reset-password`, {
+            token: token,
+            password: password
+        });
     }
 
     public static verifyPasswordResetToken(token: string) {
@@ -91,7 +95,7 @@ export default class AuthService extends ApiService {
         const userStore = useUserStore();
 
         if (!userStore.refreshToken) {
-            this.logout()
+            this.logout();
             return Promise.reject(new Error("No refresh token available"));
         }
 

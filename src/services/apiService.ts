@@ -1,7 +1,8 @@
 import { env, getApiUrl } from "@/helpers/app.ts";
-import { IExceptionResponse, EExceptionType } from "@/types/services/api.d.ts";
+import { EExceptionType, IExceptionResponse } from "@/types/services/api.d.ts";
 import { useUserStore } from "@/stores/userStore.js";
 import AuthService from "@/services/authService.ts";
+
 /**
  * Basic API service inherited by all other API Services
  */
@@ -52,43 +53,24 @@ export default class ApiService {
             try {
                 const response = await fetch(target, options);
                 const contentType = response.headers.get("Content-Type");
-
                 if (contentType && contentType.indexOf("application/json") !== -1) {
                     const data = await response.json();
 
                     // Handle token expiration
-                    if (response.status === 401 && data.type === EExceptionType.EXPIRED_EXCEPTION && !isRetry) {
-                        try {
-                            // Try to refresh the token
-                            await AuthService.refreshToken();
+                    if (!response.ok && data.type === EExceptionType.REFRESH_TOKEN_EXCEPTION) {
+                        AuthService.logout();
+                        return reject(this.convertToResponseException(data));
+                    }
 
-                            // If refresh successful, retry the original request with new token
-                            if (url !== 'auth/refresh-token') {
-                                // Retry the original request with the new token
-                                return this.fetching<T, D>(
-                                    url, 
-                                    params, 
-                                    method, 
-                                    extraHeaders, 
-                                    prefix, 
-                                    credentialsMode, 
-                                    removeDefaultHeaders, 
-                                    true // Mark as a retry to prevent infinite loops
-                                ).then(resolve).catch(reject);
-                            }
-                        } catch (refreshError) {
-                            AuthService.logout();
-                            // If refresh fails, reject with the original error
-                            return reject(this.convertToResponseException(data));
-                        }
-                    } else if (this.logoutResponseCodes.includes(response.status)) {
+                    if (this.logoutResponseCodes.includes(response.status)) {
                         if (this.doNotLogOutExceptions.includes(data.type)) {
                             return reject(this.convertToResponseException(data));
                         }
-                        return;
+                        AuthService.logout();
                     }
 
                     if (response.ok) {
+                        useUserStore().token = response.headers.get("X-New-Access-Token");
                         return resolve(data);
                     } else {
                         return reject(this.convertToResponseException(data));
@@ -120,7 +102,8 @@ export default class ApiService {
 		});
 	}
 
-    protected static getAuthBearerHeader(): {Authorization: string} {
-       return {'Authorization': `Bearer ${useUserStore().token}`}
+    protected static getAuthBearerHeader(): {[key: string]: string } {
+        const userStore = useUserStore()
+       return {'Authorization': `Bearer ${userStore.token}`, 'X-Refresh-Token': userStore.refreshToken || ""}
     }
 }

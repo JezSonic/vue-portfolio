@@ -12,13 +12,21 @@ export enum EExceptionType {
      */
     AUTHORIZATION_EXCEPTION = 'authorization_exception',
     /**
-     * Thrown when requested endpoint was not found
+     * Thrown when a user account exists but is only connected to OAuth login providers and has no password set up
+     */
+    OAUTH_NO_PASSWORD = 'oauth_no_password',
+    /**
+     * Thrown when the requested endpoint was not found
      */
     NOT_FOUND_HTTP_EXCEPTION = 'not_found_http_exception',
     /**
-     * Thrown when session token is expired
+     * Thrown when the session access token is invalid
      */
-    EXPIRED_EXCEPTION = 'expired_exception',
+    ACCESS_TOKEN_EXCEPTION = 'invalid_token',
+    /**
+     * Thrown when the session access token is invalid
+     */
+    REFRESH_TOKEN_EXCEPTION = 'invalid_refresh_token',
     /**
      * Generic code exception
      */
