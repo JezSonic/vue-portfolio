@@ -1,9 +1,9 @@
 <script setup lang="ts">
     import Navbar from "@/components/ui/Navbar.vue";
     import MouseAura from "@/components/ui/MouseAura.vue";
-    import LoadingSpinner from "@/components/ui/LoadingSpinner.vue"; // Import the new loading spinner
     import router from "@/router";
     import { useHead } from "@unhead/vue";
+    import Loading from "@/components/ui/Loading.vue";
 
     // Default / Fallback meta tags + global tags
     useHead({
@@ -69,7 +69,7 @@
                     <component :is="Component" />
                 </template>
                 <template #fallback>
-                    <LoadingSpinner />
+                    <Loading :loading="true" />
                 </template>
             </Suspense>
         </router-view>
