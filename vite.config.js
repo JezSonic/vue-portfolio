@@ -47,13 +47,6 @@ export default defineConfig({
                             },
                         },
                     },
-                    {
-                        urlPattern: /\.(?:js|css)$/,
-                        handler: 'StaleWhileRevalidate',
-                        options: {
-                            cacheName: 'static-resources',
-                        },
-                    },
                 ],
             },
             devOptions: {
