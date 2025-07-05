@@ -54,21 +54,6 @@ export default defineConfig({
                             cacheName: 'static-resources',
                         },
                     },
-                    {
-                        urlPattern: /^https:\/\/server\.newdev\.pl\/.*/,
-                        handler: 'NetworkFirst',
-                        options: {
-                            cacheName: 'api-cache',
-                            networkTimeoutSeconds: 10,
-                            expiration: {
-                                maxEntries: 50,
-                                maxAgeSeconds: 60 * 5, // 5 minutes
-                            },
-                            cacheableResponse: {
-                                statuses: [0, 200],
-                            },
-                        },
-                    },
                 ],
             },
             devOptions: {

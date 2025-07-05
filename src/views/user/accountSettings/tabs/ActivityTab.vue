@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, computed, watch } from "vue";
+import { ref, watch } from "vue";
 import Loading from "@/components/ui/Loading.vue";
 import UserService from "@/services/userService.ts";
 import type { ILoginHistory, IUserData } from "@/types/user.d.ts";
@@ -20,15 +20,9 @@ const historyError = ref<boolean>(false);
 
 // Pagination for login history
 const currentPage = ref<number>(1);
-const itemsPerPage = ref<number>(10);
-const paginatedLoginHistory = computed(() => {
-    //@TODO: Add serverside pagination
-    const start = (currentPage.value - 1) * itemsPerPage.value;
-    const end = start + itemsPerPage.value;
-    return loginHistory.value.slice(start, end);
-});
-const totalPages = computed(() => Math.ceil(loginHistory.value.length / itemsPerPage.value));
-
+const itemsPerPage = ref<number>(2);
+const totalPages = ref<number>(0);
+const totalItems = ref<number>(0);
 
 // Load login history
 const loadLoginHistory = () => {
@@ -36,11 +30,12 @@ const loadLoginHistory = () => {
 
     loadingHistory.value = true;
     historyError.value = false;
-    currentPage.value = 1; // Reset to first page when loading new data
 
-    UserService.getLoginHistory()
+    UserService.getLoginHistory(currentPage.value, itemsPerPage.value)
         .then((data) => {
-            loginHistory.value = data.content;
+            loginHistory.value = data.data;
+            totalPages.value = data.total_pages;
+            totalItems.value = data.total;
             loadingHistory.value = false;
         })
         .catch(() => {
@@ -51,9 +46,15 @@ const loadLoginHistory = () => {
 // Load login history when tab becomes active
 watch(() => props.activeTab, (newTab) => {
     if (newTab === "activity") {
+        currentPage.value = 1; // Reset to first page when loading new data
         loadLoginHistory();
     }
 }, { immediate: true });
+
+const setPage = (page: number) => {
+    currentPage.value = page;
+    loadLoginHistory();
+}
 </script>
 
 <template>
@@ -97,7 +98,7 @@ watch(() => props.activeTab, (newTab) => {
                         </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-700">
-                        <tr v-for="(login, index) in paginatedLoginHistory" :key="index"
+                        <tr v-for="(login, index) in loginHistory" :key="index"
                             class="hover:bg-gray-700">
                             <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                                 {{ timestampToDate(login.performed_at) }}
@@ -121,18 +122,18 @@ watch(() => props.activeTab, (newTab) => {
                     <!-- Pagination Controls -->
                     <div class="flex items-center justify-between mt-4 px-3 sm:px-6">
                         <div class="text-sm text-gray-400">
-                            {{ t("accountSettingsView.activity.pagination.showing") }} {{ (currentPage - 1) * itemsPerPage + 1 }}-{{ Math.min(currentPage * itemsPerPage, loginHistory.length) }} {{ t("accountSettingsView.activity.pagination.of") }} {{ loginHistory.length }}
+                            {{ t("accountSettingsView.activity.pagination.showing") }} {{ (currentPage - 1) * itemsPerPage + 1 }}-{{ ((currentPage - 1) * itemsPerPage + 1) + (itemsPerPage - 1)}} {{ t("accountSettingsView.activity.pagination.of") }} {{ totalItems }}
                         </div>
                         <div class="flex space-x-2">
                             <button 
-                                @click="currentPage = Math.max(1, currentPage - 1)" 
+                                @click="setPage(Math.max(1, currentPage - 1))"
                                 :disabled="currentPage === 1"
                                 :class="{'opacity-50 cursor-not-allowed': currentPage === 1}"
                                 class="px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded text-sm text-gray-300 transition-colors">
                                 {{ t("accountSettingsView.activity.pagination.previous") }}
                             </button>
                             <button 
-                                @click="currentPage = Math.min(totalPages, currentPage + 1)" 
+                                @click="setPage(Math.min(totalPages, currentPage + 1))"
                                 :disabled="currentPage === totalPages"
                                 :class="{'opacity-50 cursor-not-allowed': currentPage === totalPages}"
                                 class="px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded text-sm text-gray-300 transition-colors">

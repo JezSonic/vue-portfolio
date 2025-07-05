@@ -81,3 +81,11 @@ export interface IApiStatusResponse<T, S> {
  * Used for API endpoints that don't require any parameters.
  */
 export interface IEmptyRequestBody {}
+
+export interface IPaginatedResponse<T> {
+    data: T[],
+    total: number,
+    current_page: number,
+    per_page: number,
+    total_pages: number
+}

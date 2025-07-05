@@ -7,7 +7,12 @@ import type {
     EUserExportDataStatus
 } from "@/types/user.d.ts";
 
-import type { IApiResponse, IApiStatusResponse, IEmptyRequestBody } from "@/types/services/api.d.ts";
+import type {
+    IApiResponse,
+    IApiStatusResponse,
+    IEmptyRequestBody,
+    IPaginatedResponse
+} from "@/types/services/api.d.ts";
 
 export default class UserService extends ApiService {
     constructor() {
@@ -26,8 +31,8 @@ export default class UserService extends ApiService {
         return this.patch<IApiResponse<boolean>, IProfileUpdateData>(`user`, data, this.getAuthBearerHeader())
     }
 
-    public static getLoginHistory() {
-        return this.get<IApiResponse<ILoginHistory[]>>(`user/activity/login`, this.getAuthBearerHeader())
+    public static getLoginHistory(page: number = 1, per_page: number = 10) {
+        return this.post<IPaginatedResponse<ILoginHistory>, {page: number, per_page: number}>(`user/activity/login`, {page: page, per_page: per_page},this.getAuthBearerHeader())
     }
 
     public static updateNotificationSettings(userId: number, notificationSettings: INotificationSettings) {
