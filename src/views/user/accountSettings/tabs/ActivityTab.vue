@@ -4,6 +4,7 @@ import Loading from "@/components/ui/Loading.vue";
 import UserService from "@/services/userService.ts";
 import type { ILoginHistory, IUserData } from "@/types/user.d.ts";
 import { useI18n } from "vue-i18n";
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 
 const props = defineProps<{
     userData: IUserData | null;
@@ -20,9 +21,19 @@ const historyError = ref<boolean>(false);
 
 // Pagination for login history
 const currentPage = ref<number>(1);
-const itemsPerPage = ref<number>(2);
+const itemsPerPage = ref<number>(10);
 const totalPages = ref<number>(0);
 const totalItems = ref<number>(0);
+
+// Items per page options
+const itemsPerPageOptions = [2, 5, 10, 25, 50];
+
+// Set items per page
+const setItemsPerPage = (items: number) => {
+    itemsPerPage.value = items;
+    currentPage.value = 1; // Reset to first page when changing items per page
+    loadLoginHistory();
+};
 
 // Load login history
 const loadLoginHistory = () => {
@@ -122,9 +133,28 @@ const setPage = (page: number) => {
                     <!-- Pagination Controls -->
                     <div class="flex items-center justify-between mt-4 px-3 sm:px-6">
                         <div class="text-sm text-gray-400">
-                            {{ t("accountSettingsView.activity.pagination.showing") }} {{ (currentPage - 1) * itemsPerPage + 1 }}-{{ ((currentPage - 1) * itemsPerPage + 1) + (itemsPerPage - 1)}} {{ t("accountSettingsView.activity.pagination.of") }} {{ totalItems }}
+                            {{ t("accountSettingsView.activity.pagination.showing") }} {{ (currentPage - 1) * itemsPerPage + 1 }}-{{ Math.min(((currentPage - 1) * itemsPerPage + 1) + (itemsPerPage - 1), totalItems) }} {{ t("accountSettingsView.activity.pagination.of") }} {{ totalItems }}
                         </div>
-                        <div class="flex space-x-2">
+                        <div class="flex space-x-2 items-center">
+                            <!-- Items per page dropdown -->
+                            <div class="dropdown-container">
+                                <Menu as="div" class="relative mr-2">
+                                    <MenuButton class="relative cursor-pointer flex items-center rounded-md bg-gray-700 px-3 py-1 text-sm text-gray-300 hover:bg-gray-600 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden transition-colors">
+                                        {{ itemsPerPage }} items per page
+                                    </MenuButton>
+                                    <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+                                        <MenuItems class="fixed right-auto z-50 mt-2 w-44 origin-top-right rounded-md bg-gray-700 py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden">
+                                            <MenuItem v-for="option in itemsPerPageOptions" :key="option" v-slot="{ active }">
+                                                <a href="#" @click.prevent="setItemsPerPage(option)" :class="[active || itemsPerPage === option ? 'bg-gray-600 outline-hidden' : '', 'block px-4 py-2 text-sm text-gray-300']">
+                                                    {{ option }} items per page
+                                                    <span v-if="itemsPerPage === option" class="ml-2">✓</span>
+                                                </a>
+                                            </MenuItem>
+                                        </MenuItems>
+                                    </transition>
+                                </Menu>
+                            </div>
+
                             <button 
                                 @click="setPage(Math.max(1, currentPage - 1))"
                                 :disabled="currentPage === 1"
@@ -146,3 +176,14 @@ const setPage = (page: number) => {
         </div>
     </div>
 </template>
+
+<style scoped>
+.dropdown-container {
+    position: static;
+}
+
+.dropdown-container .absolute {
+    position: fixed;
+    transform: translateY(2.5rem);
+}
+</style>
