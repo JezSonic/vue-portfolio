@@ -40,6 +40,7 @@
                     success.value = true;
                     userStore.id = res.id;
                     userStore.token = res.access_token;
+                    userStore.tokenExpiration = new Date().getTime() + res.expires_in * 1000;
                     userStore.refreshToken = res.refresh_token;
                     router.push("/user/settings");
                 })

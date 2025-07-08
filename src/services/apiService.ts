@@ -107,6 +107,6 @@ export default class ApiService {
 
     protected static getAuthBearerHeader(): {[key: string]: string } {
         const userStore = useUserStore()
-       return {'Authorization': `Bearer ${userStore.token}`, 'X-Refresh-Token': userStore.refreshToken || ""}
+        return {'Authorization': `Bearer ${userStore.token}`, 'X-Refresh-Token': userStore.refreshToken || ""}
     }
 }

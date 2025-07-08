@@ -148,7 +148,7 @@ const setPage = (page: number) => {
 <!--                                        {{ itemsPerPage }} items per page-->
 <!--                                    </MenuButton>-->
 <!--                                    <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">-->
-<!--                                        <MenuItems class="absolute z-50 w-full origin-top-right rounded-md bg-gray-700 py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden">-->
+<!--                                        <MenuItems class="fixed right-auto z-50 mt-2 w-44 origin-top-right rounded-md bg-gray-700 py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden">-->
 <!--                                            <MenuItem v-for="option in itemsPerPageOptions" :key="option" v-slot="{ active }">-->
 <!--                                                <a href="#" @click.prevent="setItemsPerPage(option)" :class="[active || itemsPerPage === option ? 'bg-gray-600 outline-hidden' : '', 'block px-4 py-2 text-sm text-gray-300']">-->
 <!--                                                    {{ option }} items per page-->
@@ -237,7 +237,7 @@ const setPage = (page: number) => {
                                         {{ itemsPerPage }} items per page
                                     </MenuButton>
                                     <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-                                        <MenuItems class="absolute z-50 w-44 origin-top-right rounded-md bg-gray-700 py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden">
+                                        <MenuItems class="fixed right-auto z-50 mt-2 w-44 origin-top-right rounded-md bg-gray-700 py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden">
                                             <MenuItem v-for="option in itemsPerPageOptions" :key="option" v-slot="{ active }">
                                                 <a href="#" @click.prevent="setItemsPerPage(option)" :class="[active || itemsPerPage === option ? 'bg-gray-600 outline-hidden' : '', 'block px-4 py-2 text-sm text-gray-300']">
                                                     {{ option }} items per page
@@ -275,15 +275,11 @@ const setPage = (page: number) => {
 
 <style scoped>
 .dropdown-container {
-    position: relative;
+    position: static;
 }
 
-.dropdown-container .fixed {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin-top: 0.5rem;
-    width: 100%;
-    z-index: 50;
+.dropdown-container .absolute {
+    position: fixed;
+    transform: translateY(2.5rem);
 }
 </style>

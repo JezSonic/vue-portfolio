@@ -30,6 +30,8 @@ export default class AuthService extends ApiService {
             ip_address: ip_address
         });
         const userStore = useUserStore();
+        userStore.token = response.access_token;
+        userStore.tokenExpiration = new Date().getTime() + response.expires_in * 1000;
         userStore.refreshToken = response.refresh_token;
         return response;
     }
