@@ -2,17 +2,14 @@
 import { ref, watch } from "vue";
 import type { IUserData } from "@/types/user.d.ts";
 import UserService from "@/services/userService.ts";
-import { useUserStore } from "@/stores/userStore.ts";
 import { useI18n } from "vue-i18n";
+import Button from "@/components/ui/Button.vue";
 
 const props = defineProps<{
     userData: IUserData | null;
 }>();
 
-// User store
-const userStore = useUserStore();
-const userId = userStore.id || -1;
-
+const isSaving = ref<boolean>(false);
 // Notification settings
 const emailNotifications = ref<boolean>(true);
 const marketingEmails = ref<boolean>(false);
@@ -32,14 +29,14 @@ watch(() => props.userData, (newUserData) => {
 // Save notification settings
 const saveNotificationSettings = () => {
     if (!props.userData) return;
-
+    isSaving.value = true;
     const notificationSettings = {
         email_notifications: emailNotifications.value,
         email_marketing: marketingEmails.value,
         email_security_alerts: securityAlerts.value
     };
 
-    UserService.updateNotificationSettings(userId, notificationSettings)
+    UserService.updateNotificationSettings(notificationSettings)
         .then(() => {
             if (props.userData && props.userData.profile_settings) {
                 props.userData.profile_settings.notifications = notificationSettings;
@@ -47,7 +44,10 @@ const saveNotificationSettings = () => {
         })
         .catch((err) => {
             //console.error('Failed to update notification settings', err);
-        });
+        })
+    .finally(() => {
+        isSaving.value = false;
+    });
 };
 </script>
 
@@ -105,12 +105,7 @@ const saveNotificationSettings = () => {
                 </div>
 
                 <div class="mt-6">
-                    <button
-                        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded text-sm font-medium transition-colors cursor-pointer"
-                        @click="saveNotificationSettings"
-                    >
-                        {{ t("accountSettingsView.notifications.saveButton") }}
-                    </button>
+                    <Button variant="primary" :loading="isSaving" size="md" @click="saveNotificationSettings">{{ t("accountSettingsView.notifications.saveButton") }}</Button>
                 </div>
             </div>
         </div>

@@ -7,6 +7,10 @@
     import { getSupportedOAuthProviders } from "@/helpers/app.js";
     import { useI18n } from "vue-i18n";
     import Button from "@/components/ui/Button.vue";
+    import { useAuthStore } from "@/stores/authStore.ts";
+    import router from "@/router/index.ts";
+    import { useThemeStore } from "@/stores/themeStore.js";
+    import { GoogleLogin } from "vue3-google-login";
 
     const props = defineProps<{
         userData: IUserData | null;
@@ -73,6 +77,12 @@
             oauth(provider)
         }
     };
+
+    const callback = (response: any) => {
+        response.credential
+        useAuthStore().oneTapToken = response.credential;
+        router.push('/auth/google-one-tap/callback')
+    }
 </script>
 
 <template>
@@ -159,10 +169,11 @@
                             </p>
                         </div>
                     </div>
-                    <Button :variant="connectedSocialAccounts.includes(EOAuthProvider.Google) ? 'danger' : 'primary'"
+                    <GoogleLogin v-if="!connectedSocialAccounts.includes(EOAuthProvider.Google)" popup-type="token" :callback="callback" :id-configuration="{use_fedcm_for_button: true}" :button-config="{text: 'continue_with', theme: useThemeStore().theme == 'dark' ? 'filled_black' : 'filled_white'}"/>
+
+                    <Button variant="danger" v-else
                             size="md" @click="toggleSocialAccount(EOAuthProvider.Google)" :loading="googleProviderLoading">
-                        {{ connectedSocialAccounts.includes(EOAuthProvider.Google) ? t("accountSettingsView.connectedAccounts.buttons.disconnect") : t("accountSettingsView.connectedAccounts.buttons.connect")
-                        }}
+                        {{ t("accountSettingsView.connectedAccounts.buttons.disconnect") }}
                     </Button>
                 </li>
                 <li v-if="getSupportedOAuthProviders().includes(EOAuthProvider.GitHub)"
@@ -190,3 +201,4 @@
         </div>
     </div>
 </template>
+0

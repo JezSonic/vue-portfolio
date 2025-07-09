@@ -1,5 +1,5 @@
 import ApiService from "@/services/apiService.ts";
-import type {
+import {
     EOAuthProvider,
     ILoginRequestBody,
     IOAuthCallbackRequestBody,
@@ -24,16 +24,18 @@ export default class AuthService extends ApiService {
         return this.get<IApiResponse<string>>(`auth/${provider}`);
     }
 
-    public static async verifyOAuthCallback(provider: string, ip_address: string): Promise<IApiAuthResponse> {
-        const url = window.location.search; // remove the ?
-        let response = await this.post<IApiAuthResponse, IOAuthCallbackRequestBody>(`auth/${provider}/callback` + url, {
-            ip_address: ip_address
-        });
-        const userStore = useUserStore();
-        userStore.token = response.access_token;
-        userStore.tokenExpiration = new Date().getTime() + response.expires_in * 1000;
-        userStore.refreshToken = response.refresh_token;
-        return response;
+    public static async verifyOAuthCallback(provider: string, ip_address: string, token?: string): Promise<IApiAuthResponse> {
+        if (provider == EOAuthProvider.GoogleOneTap) {
+            return await this.post<IApiAuthResponse, IOAuthCallbackRequestBody>(`auth/${provider}/callback`, {
+                ip_address: ip_address,
+                token: token,
+            });
+        } else {
+            const url = window.location.search; // remove the ?
+            return await this.post<IApiAuthResponse, IOAuthCallbackRequestBody>(`auth/${provider}/callback` + url, {
+                ip_address: ip_address
+            });
+        }
     }
 
     public static logout() {

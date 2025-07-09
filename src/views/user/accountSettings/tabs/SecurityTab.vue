@@ -162,7 +162,6 @@ const deleteAccount = () => {
                     @click="exportUserData"
                     :text="t('accountSettingsView.security.dataExport.exportButton')"
                     :loading="isExportDataLoading"
-                    :loading-text="t('accountSettingsView.security.dataExport.exporting')"
                 />
 
                 <!-- Export status message -->

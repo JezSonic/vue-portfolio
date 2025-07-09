@@ -154,7 +154,6 @@ const avatarUrl = () => {
                             class="mt-5"
                             :text="t('accountSettingsView.profile.saveButton')"
                             :loading="isSaveLoading"
-                            :loading-text="t('accountSettingsView.profile.saving')"
                         />
                     </div>
                 </div>

@@ -35,9 +35,9 @@ export default class UserService extends ApiService {
         return this.post<IPaginatedResponse<ILoginHistory>, {page: number, per_page: number}>(`user/activity/login`, {page: page, per_page: per_page},this.getAuthBearerHeader())
     }
 
-    public static updateNotificationSettings(userId: number, notificationSettings: INotificationSettings) {
+    public static updateNotificationSettings(notificationSettings: INotificationSettings) {
         return this.put<IApiResponse<boolean>, INotificationSettings>(
-            `user/${userId}/notifications`, 
+            `user/notifications`,
             notificationSettings,
             this.getAuthBearerHeader()
         )

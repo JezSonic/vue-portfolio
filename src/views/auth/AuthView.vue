@@ -10,6 +10,10 @@
     import { useI18n } from "vue-i18n";
     import ApiService from "@/services/apiService";
     import { env, getSupportedOAuthProviders } from "@/helpers/app.ts";
+    import { GoogleLogin } from "vue3-google-login";
+    import { useThemeStore } from "@/stores/themeStore.ts";
+    import { useAuthStore } from "@/stores/authStore.ts";
+
 
     const password = ref<string>("");
     const email = ref<string>("");
@@ -25,6 +29,7 @@
     const isRegisterLoading = ref<boolean>(false);
     const isGoogleLoading = ref<boolean>(false);
     const isGithubLoading = ref<boolean>(false);
+
 
     if (userStore.id !== null) {
         router.push("/user/settings");
@@ -77,10 +82,13 @@
         }
 
         AuthService.performOAuth(provider);
-
-        // Since OAuth redirects to another page, we don't need to handle the "complete" state
-        // The loading spinner will disappear when the page unloads
     };
+
+    const callback = (response: any) => {
+        response.credential
+        useAuthStore().oneTapToken = response.credential;
+        router.push('/auth/google-one-tap/callback')
+    }
 </script>
 
 <template>
@@ -174,19 +182,12 @@
                     <span class="px-3 text-gray-400 font-medium text-nowrap">{{ t("authView.oauth.title") }}</span>
                     <hr class="border-gray-700 w-full" />
                 </div>
-                <div class="flex justify-center items-center gap-4">
+                <div class="flex justify-center items-center gap-4 flex-col" >
+                    <GoogleLogin popup-type="token" :callback="callback" :id-configuration="{use_fedcm_for_button: true}" :button-config="{text: 'continue_with', theme: useThemeStore().theme == 'dark' ? 'filled_black' : 'filled_white'}"/>
                     <Button 
                         variant="secondary"
-                        :text="t('authView.oauth.google')" 
-                        v-if="getSupportedOAuthProviders().includes(EOAuthProvider.Google)"
-                        @click="performOAuth(EOAuthProvider.Google)" 
-                        :loading="isGoogleLoading"
-                        :loading-text="t('authView.oauth.loading')"
-                    >
-                        <font-awesome-icon class="mr-2" style="color: #DB4437;" :icon="['fab', 'google']" />
-                    </Button>
-                    <Button 
-                        variant="secondary"
+                        full-width
+                        class="max-w-[290px]"
                         :text="t('authView.oauth.github')" 
                         v-if="getSupportedOAuthProviders().includes(EOAuthProvider.GitHub)"
                         @click="performOAuth(EOAuthProvider.GitHub)" 

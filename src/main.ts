@@ -8,13 +8,33 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createPinia } from "pinia";
 import i18n from './i18n/index.ts';
 import { useThemeStore } from "./stores/themeStore.ts";
+import vue3GoogleLogin from 'vue3-google-login'
 
 // Import FontAwesome core
 import { library } from '@fortawesome/fontawesome-svg-core'
 // Import FontAwesome component
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // Import specific icons
-import { faCode, faLink, faDatabase, faGamepad, faLock, faHouse, faUserSlash, faEnvelope, faLanguage, faSun, faMoon, faUserCircle, faPlus, faEdit, faCalendar, faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons'
+import {
+    faCode,
+    faLink,
+    faDatabase,
+    faGamepad,
+    faLock,
+    faHouse,
+    faUserSlash,
+    faEnvelope,
+    faLanguage,
+    faSun,
+    faMoon,
+    faUserCircle,
+    faPlus,
+    faEdit,
+    faCalendar,
+    faMapMarkerAlt,
+    faClock,
+    faCircleExclamation
+} from "@fortawesome/free-solid-svg-icons";
 import { 
     faVuejs, faPhp, faLaravel, faNodeJs, faDocker,
     faSass, faJs, faHtml5, faCss3Alt, faGitAlt, faGoogle, faReact, faWordpress, faDiscord, faLinkedin, faTelegram, faGithub
@@ -22,7 +42,7 @@ import {
 
 // Add icons to the library
 library.add(
-    faCode, faLink, faVuejs, faPhp, faLaravel, 
+    faCode, faLink, faVuejs, faPhp, faLaravel, faCircleExclamation,
     faNodeJs, faDocker, faSass, faJs, faHtml5, faHouse, faUserSlash, faLock,
     faCss3Alt, faGitAlt, faGoogle, faReact, faWordpress, faDatabase, faGamepad, faDiscord, faLinkedin, faEnvelope, faTelegram, faGithub, faLanguage,
     faSun, faMoon, faUserCircle, faPlus, faEdit, faCalendar, faMapMarkerAlt, faClock
@@ -38,7 +58,9 @@ app.component('font-awesome-icon', FontAwesomeIcon)
 app.use(router)
     .use(pinia)
     .use(i18n)
-    .use(head)
+    .use(head).use(vue3GoogleLogin, {
+        clientId: '1073018353526-nga46h9i2ssfhc81vc9dffttk42sjeoe.apps.googleusercontent.com'
+    })
     .mount("#app");
 
 // Initialize theme

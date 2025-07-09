@@ -3,7 +3,8 @@
  */
 export enum EOAuthProvider {
     Google = 'google',
-    GitHub = 'github'
+    GitHub = 'github',
+    GoogleOneTap = 'google-one-tap'
 }
 
 /**
@@ -59,6 +60,7 @@ export interface IGitHubUserData {
  */
 export interface IOAuthCallbackRequestBody {
     ip_address: string;
+    token?: string;
 }
 
 /**
