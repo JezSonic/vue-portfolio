@@ -58,6 +58,7 @@
         AuthService.register(email.value, name.value, password.value).then((data) => {
             success.value = true;
             userStore.token = data.access_token;
+            userStore.tokenExpiration = new Date().getTime() + data.expires_in * 1000;
             userStore.refreshToken = data.refresh_token;
             login();
         })

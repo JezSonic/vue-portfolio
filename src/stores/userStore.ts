@@ -14,7 +14,12 @@ export const useUserStore = defineStore('user', () =>{
             return false;
         }
 
-        return id.value !== null && token.value !== null && refreshToken.value !== null;
+        if (id.value == null || token.value == null || refreshToken.value == null) {
+            logout();
+            return false;
+        }
+
+        return true;
     }
 
     const logout = () => {
