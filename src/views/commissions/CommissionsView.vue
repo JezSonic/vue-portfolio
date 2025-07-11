@@ -120,7 +120,7 @@ const goTo = (url: string) => {
                     {{ t('commissionsView.cta.description') }}
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <Button @click="router.push('/commissions/tos')" variant="primary" :text="t('commissionsView.cta.contactButton')" size="lg"/>
+                    <Button @click="router.push('/contact')" variant="primary" :text="t('commissionsView.cta.contactButton')" size="lg"/>
                     <Button @click="router.push('/commissions/tos')" :text="t('commissionsView.cta.tosButton')" />
                 </div>
             </template>

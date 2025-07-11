@@ -92,7 +92,7 @@
 </script>
 
 <template>
-    <div class="container  px-4 py-12 flex min-h-full flex-1 flex-col justify-center">
+    <div class="container px-1 py-12 flex min-h-full flex-1 flex-col justify-center">
         <div class="bg-gray-800 rounded-lg shadow-lg max-w-lg lg:min-w-lg md:min-w-md mx-auto p-6">
             <div class="text-center mb-8">
                 <img :src="logo" :alt="t('authView.logo.alt')" class="mx-auto h-16 w-auto mb-6" />
@@ -192,8 +192,7 @@
                         v-if="getSupportedOAuthProviders().includes(EOAuthProvider.GitHub)"
                         @click="performOAuth(EOAuthProvider.GitHub)" 
                         :loading="isGithubLoading"
-                        :loading-text="t('authView.oauth.loading')"
-                    >
+                        :loading-text="t('authView.oauth.loading')">
                         <font-awesome-icon class="mr-2" :icon="['fab', 'github']" />
                     </Button>
                 </div>

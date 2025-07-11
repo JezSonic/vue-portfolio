@@ -88,20 +88,19 @@
                     <!-- Theme toggle -->
                     <button v-if="env('VITE_APP_ENABLE_THEMES', false)"
                         @click="toggleTheme" 
-                        class="relative cursor-pointer flex items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+                        class="relative cursor-pointer flex gap-2 items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
                         aria-label="Toggle theme"
                     >
                         <font-awesome-icon 
-                            :icon="themeStore.actualTheme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon'" 
-                            class="mr-1" 
+                            :icon="themeStore.actualTheme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon'"
                         />
                         <span class="hidden md:inline">{{ themeStore.actualTheme === 'dark' ? t("theme.light") : t("theme.dark") }}</span>
                     </button>
 
                     <!-- Language dropdown -->
                     <Menu as="div" class="relative ml-3">
-                        <MenuButton class="relative cursor-pointer flex items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden" aria-label="Select language">
-                            <font-awesome-icon icon="fa-solid fa-language" class="mr-1" />
+                        <MenuButton class="relative cursor-pointer flex gap-2 items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden" aria-label="Select language">
+                            <font-awesome-icon icon="fa-solid fa-language" />
                             <span class="hidden md:inline">{{ t('common.language') }}</span>
                         </MenuButton>
                         <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
