@@ -33,16 +33,17 @@ import {
     faCalendar,
     faMapMarkerAlt,
     faClock,
-    faCircleExclamation
+    faCircleExclamation, faSignInAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { 
     faVuejs, faPhp, faLaravel, faNodeJs, faDocker,
     faSass, faJs, faHtml5, faCss3Alt, faGitAlt, faGoogle, faReact, faWordpress, faDiscord, faLinkedin, faTelegram, faGithub
 } from '@fortawesome/free-brands-svg-icons'
+import { env } from "@/helpers/app.js";
 
 // Add icons to the library
 library.add(
-    faCode, faLink, faVuejs, faPhp, faLaravel, faCircleExclamation,
+    faCode, faLink, faVuejs, faPhp, faLaravel, faCircleExclamation, faSignInAlt,
     faNodeJs, faDocker, faSass, faJs, faHtml5, faHouse, faUserSlash, faLock,
     faCss3Alt, faGitAlt, faGoogle, faReact, faWordpress, faDatabase, faGamepad, faDiscord, faLinkedin, faEnvelope, faTelegram, faGithub, faLanguage,
     faSun, faMoon, faUserCircle, faPlus, faEdit, faCalendar, faMapMarkerAlt, faClock
@@ -59,7 +60,7 @@ app.use(router)
     .use(pinia)
     .use(i18n)
     .use(head).use(vue3GoogleLogin, {
-        clientId: '1073018353526-nga46h9i2ssfhc81vc9dffttk42sjeoe.apps.googleusercontent.com'
+        clientId: env('VITE_APP_GOOGLE_CLIENT_ID') as string
     })
     .mount("#app");
 

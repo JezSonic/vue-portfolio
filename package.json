@@ -20,6 +20,8 @@
         "@fortawesome/vue-fontawesome": "3.0.8",
         "@headlessui/vue": "1.7.23",
         "@heroicons/vue": "2.2.0",
+        "@jamescoyle/vue-icon": "0.1.2",
+        "@mdi/js": "7.4.47",
         "@tailwindcss/vite": "4.1.11",
         "@unhead/vue": "2.0.12",
         "google-auth-library": "^10.1.0",

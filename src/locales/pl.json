@@ -8,14 +8,14 @@
   "auth": {
     "login": "Logowanie",
     "register": "Rejestracja",
-    "loginRegister": "Logowanie / Rejestracja",
+    "loginRegister": "Logowanie",
     "profile": "Twój Profil",
     "settings": "Ustawienia",
     "signOut": "Wyloguj"
   },
   "theme": {
-    "dark": "Ciemny motyw",
-    "light": "Jasny motyw"
+    "dark": "Ciemny",
+    "light": "Jasny"
   },
   "userDataExport": {
     "download": "Pobierz",

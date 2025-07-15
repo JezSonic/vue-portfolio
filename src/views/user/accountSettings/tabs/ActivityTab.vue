@@ -1,10 +1,12 @@
 <script lang="ts" setup>
-import { ref, watch } from "vue";
+import { ref, watch, computed, onUnmounted } from "vue";
 import Loading from "@/components/ui/Loading.vue";
 import UserService from "@/services/userService.ts";
 import type { ILoginHistory, IUserData } from "@/types/user.d.ts";
 import { useI18n } from "vue-i18n";
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
+import { formatLoginMethod, parseUserAgent } from "@/helpers/activity.ts";
+import SvgIcon from '@jamescoyle/vue-icon';
 
 const props = defineProps<{
     userData: IUserData | null;
@@ -12,7 +14,7 @@ const props = defineProps<{
     activeTab: string;
 }>();
 
-const {t} = useI18n();
+const { t } = useI18n();
 
 // Login history
 const loginHistory = ref<ILoginHistory[]>([]);
@@ -28,8 +30,40 @@ const totalItems = ref<number>(0);
 // Items per page options
 const itemsPerPageOptions = [2, 5, 10, 25, 50];
 
+// Computed properties for pagination
+const startItem = computed(() => (currentPage.value - 1) * itemsPerPage.value + 1);
+const endItem = computed(() => Math.min(startItem.value + itemsPerPage.value - 1, totalItems.value));
+const paginationText = computed(() => 
+    `${t("accountSettingsView.activity.pagination.showing")} ${startItem.value}-${endItem.value} ${t("accountSettingsView.activity.pagination.of")} ${totalItems.value}`
+);
+const isPrevDisabled = computed(() => currentPage.value === 1);
+const isNextDisabled = computed(() => currentPage.value === totalPages.value);
+const itemsPerPageText = computed(() => `${itemsPerPage.value} items per page`);
+
+// Debounce timer for API calls
+let loadTimer: number | null = null;
+
+// Debounced load function
+const debouncedLoad = (fn: Function, delay: number = 300) => {
+    if (loadTimer !== null) {
+        clearTimeout(loadTimer);
+    }
+    loadTimer = setTimeout(() => {
+        fn();
+        loadTimer = null;
+    }, delay) as unknown as number;
+};
+
+// Clean up timer on component unmount
+onUnmounted(() => {
+    if (loadTimer !== null) {
+        clearTimeout(loadTimer);
+    }
+});
+
 // Set items per page
 const setItemsPerPage = (items: number) => {
+    if (items === itemsPerPage.value) return;
     itemsPerPage.value = items;
     currentPage.value = 1; // Reset to first page when changing items per page
     loadLoginHistory();
@@ -42,18 +76,22 @@ const loadLoginHistory = () => {
     loadingHistory.value = true;
     historyError.value = false;
 
-    UserService.getLoginHistory(currentPage.value, itemsPerPage.value)
-        .then((data) => {
-            loginHistory.value = data.data;
-            totalPages.value = data.total_pages;
-            totalItems.value = data.total;
-            loadingHistory.value = false;
-        })
-        .catch(() => {
-            historyError.value = true;
-            loadingHistory.value = false;
-        });
+    // Use debounced loading for better performance
+    debouncedLoad(() => {
+        UserService.getLoginHistory(currentPage.value, itemsPerPage.value)
+            .then((data) => {
+                loginHistory.value = data.data;
+                totalPages.value = data.total_pages;
+                totalItems.value = data.total;
+                loadingHistory.value = false;
+            })
+            .catch(() => {
+                historyError.value = true;
+                loadingHistory.value = false;
+            });
+    });
 };
+
 // Load login history when tab becomes active
 watch(() => props.activeTab, (newTab) => {
     if (newTab === "activity") {
@@ -62,10 +100,15 @@ watch(() => props.activeTab, (newTab) => {
     }
 }, { immediate: true });
 
+// Navigation methods
 const setPage = (page: number) => {
+    if (page < 1 || page > totalPages.value || page === currentPage.value) return;
     currentPage.value = page;
     loadLoginHistory();
-}
+};
+
+const goToPrevPage = () => setPage(currentPage.value - 1);
+const goToNextPage = () => setPage(currentPage.value + 1);
 </script>
 
 <template>
@@ -112,8 +155,9 @@ const setPage = (page: number) => {
                                 <div class="text-xs font-medium text-gray-400 uppercase">
                                     {{ t("accountSettingsView.activity.table.loginMethod") }}
                                 </div>
-                                <div class="text-sm text-gray-300 mt-1 truncate">
-                                    {{ login.login_method }}
+                                <div class="text-sm text-gray-300 mt-1 flex items-center">
+                                    <SvgIcon type="mdi" :path="formatLoginMethod(login.login_method).icon" :size="16" class="mr-1.5 flex-shrink-0" />
+                                    <span class="truncate">{{ formatLoginMethod(login.login_method).label }}</span>
                                 </div>
                             </div>
                             <div class="mb-2">
@@ -128,8 +172,18 @@ const setPage = (page: number) => {
                                 <div class="text-xs font-medium text-gray-400 uppercase">
                                     {{ t("accountSettingsView.activity.table.device") }}
                                 </div>
-                                <div class="text-sm text-gray-300 mt-1 break-words">
-                                    {{ login.user_agent }}
+                                <div class="text-sm text-gray-300 mt-1">
+                                    <div class="flex items-center mb-1">
+                                        <SvgIcon type="mdi" :path="parseUserAgent(login.user_agent).deviceType" :size="16" class="mr-1.5 flex-shrink-0" />
+                                        <span>{{ parseUserAgent(login.user_agent).fullInfo }}</span>
+                                    </div>
+                                    <div class="text-xs text-gray-400 mt-1 cursor-pointer hover:text-gray-300 transition-colors" 
+                                         @click="$event.target.nextElementSibling.classList.toggle('hidden')">
+                                        Show technical details
+                                    </div>
+                                    <div class="text-xs text-gray-400 mt-1 break-words hidden">
+                                        {{ login.user_agent }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -138,40 +192,21 @@ const setPage = (page: number) => {
                     <!-- Mobile Pagination Controls -->
                     <div class="flex flex-col mt-4 space-y-3">
                         <div class="text-sm text-gray-400 text-center">
-                            {{ t("accountSettingsView.activity.pagination.showing") }} {{ (currentPage - 1) * itemsPerPage + 1 }}-{{ Math.min(((currentPage - 1) * itemsPerPage + 1) + (itemsPerPage - 1), totalItems) }} {{ t("accountSettingsView.activity.pagination.of") }} {{ totalItems }}
+                            {{ paginationText }}
                         </div>
                         <div class="flex flex-col space-y-2 items-center">
-                            <!-- Items per page dropdown -->
-<!--                            <div class="dropdown-container w-full">-->
-<!--                                <Menu as="div" class="relative w-full">-->
-<!--                                    <MenuButton class="relative cursor-pointer flex items-center justify-center rounded-md bg-gray-700 px-3 py-2 text-sm text-gray-300 hover:bg-gray-600 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden transition-colors w-full">-->
-<!--                                        {{ itemsPerPage }} items per page-->
-<!--                                    </MenuButton>-->
-<!--                                    <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">-->
-<!--                                        <MenuItems class="fixed right-auto z-50 mt-2 w-44 origin-top-right rounded-md bg-gray-700 py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden">-->
-<!--                                            <MenuItem v-for="option in itemsPerPageOptions" :key="option" v-slot="{ active }">-->
-<!--                                                <a href="#" @click.prevent="setItemsPerPage(option)" :class="[active || itemsPerPage === option ? 'bg-gray-600 outline-hidden' : '', 'block px-4 py-2 text-sm text-gray-300']">-->
-<!--                                                    {{ option }} items per page-->
-<!--                                                    <span v-if="itemsPerPage === option" class="ml-2">✓</span>-->
-<!--                                                </a>-->
-<!--                                            </MenuItem>-->
-<!--                                        </MenuItems>-->
-<!--                                    </transition>-->
-<!--                                </Menu>-->
-<!--                            </div>-->
-
                             <div class="flex space-x-2 w-full justify-center">
                                 <button 
-                                    @click="setPage(Math.max(1, currentPage - 1))"
-                                    :disabled="currentPage === 1"
-                                    :class="{'opacity-50 cursor-not-allowed': currentPage === 1}"
+                                    @click="goToPrevPage"
+                                    :disabled="isPrevDisabled"
+                                    :class="{'opacity-50 cursor-not-allowed': isPrevDisabled}"
                                     class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded text-sm text-gray-300 transition-colors flex-1">
                                     {{ t("accountSettingsView.activity.pagination.previous") }}
                                 </button>
                                 <button 
-                                    @click="setPage(Math.min(totalPages, currentPage + 1))"
-                                    :disabled="currentPage === totalPages"
-                                    :class="{'opacity-50 cursor-not-allowed': currentPage === totalPages}"
+                                    @click="goToNextPage"
+                                    :disabled="isNextDisabled"
+                                    :class="{'opacity-50 cursor-not-allowed': isNextDisabled}"
                                     class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded text-sm text-gray-300 transition-colors flex-1">
                                     {{ t("accountSettingsView.activity.pagination.next") }}
                                 </button>
@@ -211,14 +246,27 @@ const setPage = (page: number) => {
                             <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-[80px] sm:max-w-[150px] truncate">
                                 {{ login.ip_address }}
                             </td>
-                            <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-[80px] sm:max-w-[150px] truncate">
-                                {{ login.login_method }}
+                            <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-[80px] sm:max-w-[150px]">
+                                <div class="flex items-center">
+                                    <SvgIcon type="mdi" :path="formatLoginMethod(login.login_method).icon" :size="16" class="mr-1.5 flex-shrink-0" />
+                                    <span class="truncate">{{ formatLoginMethod(login.login_method).label }}</span>
+                                </div>
                             </td>
                             <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-[80px] sm:max-w-[150px] truncate">
                                 {{ login.location || "Unknown location" }}
                             </td>
-                            <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-[100px] sm:max-w-[200px] md:max-w-[300px] truncate">
-                                {{ login.user_agent }}
+                            <td class="px-3 sm:px-6 py-4 text-sm text-gray-300 max-w-[100px] sm:max-w-[200px] md:max-w-[300px]">
+                                <div class="flex items-center">
+                                    <SvgIcon type="mdi" :path="parseUserAgent(login.user_agent).deviceType" :size="16" class="mr-1.5 flex-shrink-0" />
+                                    <span class="truncate">{{ parseUserAgent(login.user_agent).fullInfo }}</span>
+                                </div>
+                                <div class="text-xs text-gray-400 mt-1 cursor-pointer hover:text-gray-300 transition-colors" 
+                                     @click="$event.target.nextElementSibling.classList.toggle('hidden')">
+                                    Show technical details
+                                </div>
+                                <div class="text-xs text-gray-400 mt-1 break-words hidden">
+                                    {{ login.user_agent }}
+                                </div>
                             </td>
                         </tr>
                         </tbody>
@@ -227,14 +275,14 @@ const setPage = (page: number) => {
                     <!-- Pagination Controls -->
                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-4 px-3 sm:px-6 space-y-3 sm:space-y-0">
                         <div class="text-sm text-gray-400 text-center sm:text-left">
-                            {{ t("accountSettingsView.activity.pagination.showing") }} {{ (currentPage - 1) * itemsPerPage + 1 }}-{{ Math.min(((currentPage - 1) * itemsPerPage + 1) + (itemsPerPage - 1), totalItems) }} {{ t("accountSettingsView.activity.pagination.of") }} {{ totalItems }}
+                            {{ paginationText }}
                         </div>
                         <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 items-center">
                             <!-- Items per page dropdown -->
                             <div class="dropdown-container w-full sm:w-auto">
                                 <Menu as="div" class="relative w-full sm:w-auto">
                                     <MenuButton class="relative cursor-pointer flex items-center justify-center sm:justify-start rounded-md bg-gray-700 px-3 py-2 text-sm text-gray-300 hover:bg-gray-600 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden transition-colors w-full sm:w-auto">
-                                        {{ itemsPerPage }} items per page
+                                        {{ itemsPerPageText }}
                                     </MenuButton>
                                     <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
                                         <MenuItems class="fixed right-auto z-50 mt-2 w-44 origin-top-right rounded-md bg-gray-700 py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden">
@@ -251,16 +299,16 @@ const setPage = (page: number) => {
 
                             <div class="flex space-x-2 w-full sm:w-auto justify-center">
                                 <button 
-                                    @click="setPage(Math.max(1, currentPage - 1))"
-                                    :disabled="currentPage === 1"
-                                    :class="{'opacity-50 cursor-not-allowed': currentPage === 1}"
+                                    @click="goToPrevPage"
+                                    :disabled="isPrevDisabled"
+                                    :class="{'opacity-50 cursor-not-allowed': isPrevDisabled}"
                                     class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded text-sm text-gray-300 transition-colors flex-1 sm:flex-none">
                                     {{ t("accountSettingsView.activity.pagination.previous") }}
                                 </button>
                                 <button 
-                                    @click="setPage(Math.min(totalPages, currentPage + 1))"
-                                    :disabled="currentPage === totalPages"
-                                    :class="{'opacity-50 cursor-not-allowed': currentPage === totalPages}"
+                                    @click="goToNextPage"
+                                    :disabled="isNextDisabled"
+                                    :class="{'opacity-50 cursor-not-allowed': isNextDisabled}"
                                     class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded text-sm text-gray-300 transition-colors flex-1 sm:flex-none">
                                     {{ t("accountSettingsView.activity.pagination.next") }}
                                 </button>

@@ -6,8 +6,8 @@
     "contact": "Contact"
   },
   "theme": {
-    "dark": "Dark theme",
-    "light": "Light theme"
+    "dark": "Dark",
+    "light": "Light"
   },
   "userDataExport": {
     "download": "Download",
@@ -28,7 +28,7 @@
   "auth": {
     "login": "Login",
     "register": "Register",
-    "loginRegister": "Login / Register",
+    "loginRegister": "Login",
     "profile": "Your Profile",
     "settings": "Settings",
     "signOut": "Sign out"

@@ -57,6 +57,7 @@
                         };
                     }
 
+                    userStore.userData = data;
                     userData.value = data;
                     loading.value = false;
                 }).catch(() => {
