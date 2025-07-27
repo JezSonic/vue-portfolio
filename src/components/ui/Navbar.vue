@@ -19,6 +19,7 @@
     import { env } from "@/helpers/app";
     import { useI18n } from "vue-i18n";
     import { setLanguage } from "@/i18n";
+    import { Lang } from "@/types/utils.js";
 
     interface NavigationItem {
         name: string;
@@ -64,7 +65,7 @@
     ];
 
     const changeLanguage = (langCode: string): void => {
-        setLanguage(langCode);
+        setLanguage(langCode as Lang);
     };
 
     const onDocumentScroll = (): void => {
@@ -117,8 +118,7 @@
                             :icon="themeStore.actualTheme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon'"
                         />
                         <span
-                            class="hidden md:inline">{{ themeStore.actualTheme === "dark" ? t("theme.light") : t("theme.dark")
-                            }}</span>
+                            class="hidden md:inline">{{ themeStore.actualTheme === "dark" ? t("theme.light") : t("theme.dark") }}</span>
                     </button>
 
                     <!-- Language dropdown -->

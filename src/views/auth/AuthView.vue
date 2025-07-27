@@ -191,8 +191,7 @@
                         :text="t('authView.oauth.github')" 
                         v-if="getSupportedOAuthProviders().includes(EOAuthProvider.GitHub)"
                         @click="performOAuth(EOAuthProvider.GitHub)" 
-                        :loading="isGithubLoading"
-                        :loading-text="t('authView.oauth.loading')">
+                        :loading="isGithubLoading">
                         <font-awesome-icon class="mr-2" :icon="['fab', 'github']" />
                     </Button>
                 </div>
