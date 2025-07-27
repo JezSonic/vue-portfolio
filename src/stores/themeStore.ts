@@ -12,7 +12,7 @@ export const useThemeStore = defineStore('theme', () => {
   
   // Function to update the theme
   const setTheme = (newTheme: ThemeMode) => {
-    if (!env('VITE_APP_ENABLE_THEMES', false)) {
+    if (!env('ENABLE_THEMES')) {
       theme.value = 'dark'
     } else {
       theme.value = newTheme

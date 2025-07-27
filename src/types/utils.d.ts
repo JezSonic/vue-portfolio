@@ -1,3 +1,5 @@
+import { EOAuthProvider } from "@/types/services/auth.js";
+
 /**
  * Represents a type for supported languages.
  *
@@ -31,3 +33,21 @@ export type Theme = "light" | "dark"
  * - `dark`: Always use dark theme
  */
 export type ThemeMode = "system" | "light" | "dark"
+
+export enum EEnvironment {
+    Local,
+    Production
+}
+
+export interface IEnv {
+    ENABLE_BACKEND: boolean
+    GOOGLE_CLIENT_ID: string
+    API_URL: string
+    API_URL_PROD: string
+    APP_ENV: EEnvironment
+    ENABLE_LOCALIZATION: boolean
+    ENABLE_THEMES: boolean
+    ENABLE_EMAILING: boolean
+    ENABLE_DATA_EXPORT: boolean
+    ENABLED_OAUTH_PROVIDERS: EOAuthProvider[]
+}

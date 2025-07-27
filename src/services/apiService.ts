@@ -1,13 +1,14 @@
 import { env, getApiUrl } from "@/helpers/app.ts";
 import { EExceptionType, IExceptionResponse } from "@/types/services/api.d.ts";
-import { useUserStore } from "@/stores/userStore.js";
+import { useUserStore } from "@/stores/userStore.ts";
 import AuthService from "@/services/authService.ts";
+import { EEnvironment } from "@/types/utils.d.ts";
 
 /**
  * Basic API service inherited by all other API Services
  */
 export default class ApiService {
-    private static isDev = env("VITE_APP_APP_ENV") == "local" || env("VITE_APP_APP_ENV") == "baremetal";
+    private static isDev = env("APP_ENV") == EEnvironment.Local;
     private static logoutResponseCodes = this.isDev ? [] : [400, 401, 403];
     private static doNotLogOutExceptions = [EExceptionType.NOT_FOUND_HTTP_EXCEPTION, EExceptionType.AUTHENTICATION_EXCEPTION, EExceptionType.VALIDATION_EXCEPTION];
     /**

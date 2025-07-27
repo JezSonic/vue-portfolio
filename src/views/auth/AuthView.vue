@@ -127,7 +127,7 @@
                     <div class="flex items-center justify-between mb-1">
                         <label class="text-gray-300 block text-sm font-medium"
                                for="password">{{ t("authView.form.passwordLabel") }}</label>
-                        <label v-if="hasAccount && env('VITE_APP_ENABLE_EMAILING', false)"
+                        <label v-if="hasAccount && env('ENABLE_EMAILING')"
                                class="text-blue-400 hover:text-blue-300 block text-sm font-medium cursor-pointer"
                                for="password"
                                @click="AuthService.requestPasswordReset(email)">{{ t("authView.form.forgotPasswordLabel") }}</label>

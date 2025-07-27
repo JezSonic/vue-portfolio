@@ -11,7 +11,8 @@
         "deploy": "vite build && firebase deploy --only hosting --project api-9176249411662404922-339889",
         "deploy:beta": "vite build && firebase hosting:channel:deploy beta --expires 14d --project api-9176249411662404922-339889",
         "test:e2e": "playwright test",
-        "test:perf": "lhci autorun"
+        "test:perf": "lhci autorun",
+        "postinstall": "node scripts/env-check.cjs"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "7.0.0",

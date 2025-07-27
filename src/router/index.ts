@@ -147,7 +147,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.requires_backend && env("VITE_APP_ENABLE_BACKEND", false)) {
+  if (to.meta.requires_backend && env("ENABLE_BACKEND")) {
     next()
   } else {
     if (!to.meta.requires_backend) {

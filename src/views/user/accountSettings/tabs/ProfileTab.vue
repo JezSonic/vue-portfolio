@@ -228,7 +228,7 @@ const avatarUrl = () => {
                                         <span class="truncate max-w-[200px] sm:max-w-[300px] md:max-w-full">{{ userData?.email }}</span>
                                         <div class="flex gap-2">
                                             <Button
-                                                    v-if="!userData?.email_verified_at && env('VITE_APP_ENABLE_EMAILING', false)"
+                                                    v-if="!userData?.email_verified_at && env('ENABLE_EMAILING')"
                                                     :text="t('accountSettingsView.profile.verifyButton')"
                                                     size="sm"
                                                     @click="sendVerificationEmail"

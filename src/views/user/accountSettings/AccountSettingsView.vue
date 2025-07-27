@@ -107,7 +107,7 @@
     };
 
     onMounted(() => {
-        if (env("VITE_APP_ENABLE_EMAILING", false)) {
+        if (env("ENABLE_EMAILING")) {
             tabs.value = tabs.value.toSpliced(2, 0, { id: "notifications", label: "accountSettingsView.tabs.notifications" });
         }
     });

@@ -108,7 +108,7 @@
                 </div>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                     <!-- Theme toggle -->
-                    <button v-if="env('VITE_APP_ENABLE_THEMES', false)"
+                    <button v-if="env('ENABLE_THEMES')"
                             @click="toggleTheme"
                             class="relative cursor-pointer flex gap-2 items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
                             aria-label="Toggle theme"
@@ -122,7 +122,7 @@
                     </button>
 
                     <!-- Language dropdown -->
-                    <Menu as="div" class="relative ml-3">
+                    <Menu as="div" class="relative ml-3" v-if="env('ENABLE_LOCALIZATION')">
                         <MenuButton
                             class="relative cursor-pointer flex gap-2 items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
                             aria-label="Select language">
@@ -150,7 +150,7 @@
 
                     <!-- Profile dropdown -->
                     <Menu as="div" class="relative ml-3">
-                        <div v-if="userStore.isLoggedIn() && env('VITE_APP_ENABLE_BACKEND', false)">
+                        <div v-if="userStore.isLoggedIn() && env('ENABLE_BACKEND')">
                             <MenuButton
                                 class="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
                                 <span class="absolute -inset-1.5" />
@@ -159,7 +159,7 @@
                                      alt="" />
                             </MenuButton>
                         </div>
-                        <div v-else-if="env('VITE_APP_ENABLE_BACKEND', false)">
+                        <div v-else-if="env('ENABLE_BACKEND')">
                             <button
                                 class="relative cursor-pointer flex gap-2 items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden mr-2"
                                 @click="router.push('/auth')">
@@ -214,7 +214,7 @@
                     </DisclosureButton>
 
                     <!-- Theme toggle for mobile -->
-                    <div v-if="env('VITE_APP_ENABLE_THEMES', false)" class="mt-3 border-t border-gray-700 pt-3">
+                    <div v-if="env('ENABLE_THEMES')" class="mt-3 border-t border-gray-700 pt-3">
                         <button
                             @click="toggleTheme"
                             class="w-full text-left text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
@@ -228,7 +228,7 @@
                     </div>
 
                     <!-- Language selector for mobile -->
-                    <div class="mt-3 border-t border-gray-700 pt-3">
+                    <div v-if="env('ENABLE_LOCALIZATION')" class="mt-3 border-t border-gray-700 pt-3">
                         <div class="text-gray-400 px-3 py-1 text-sm">{{ t("common.language") }}</div>
                         <div class="mt-1">
                             <a
@@ -245,7 +245,7 @@
                     </div>
 
                     <!-- Login/Register button for mobile -->
-                    <div v-if="!userStore.isLoggedIn() && env('VITE_APP_ENABLE_BACKEND', false)"
+                    <div v-if="!userStore.isLoggedIn() && env('ENABLE_BACKEND')"
                          class="mt-3 border-t border-gray-700 pt-3">
                         <a
                             href="/auth"
@@ -257,7 +257,7 @@
                     </div>
 
                     <!-- User profile options for mobile -->
-                    <div v-if="userStore.isLoggedIn() && env('VITE_APP_ENABLE_BACKEND', false)"
+                    <div v-if="userStore.isLoggedIn() && env('ENABLE_BACKEND')"
                          class="mt-3 border-t border-gray-700 pt-3">
                         <div class="flex items-center px-3 py-2">
                             <img class="size-8 rounded-full mr-2" :src="userStore.avatarSourceUrl || userDefault"
