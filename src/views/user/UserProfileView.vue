@@ -36,7 +36,6 @@
                 if (err.message == "private_profile") {
                     isPrivateProfile.value = true;
                 }
-                console.log(isPrivateProfile.value);
         });
     });
 

@@ -19,7 +19,7 @@
     import { env } from "@/helpers/app";
     import { useI18n } from "vue-i18n";
     import { setLanguage } from "@/i18n";
-    import { Lang } from "@/types/utils.js";
+    import { Lang } from "@/types/utils.d.ts";
 
     interface NavigationItem {
         name: string;

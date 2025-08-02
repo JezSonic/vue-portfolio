@@ -1,5 +1,5 @@
-import { EEnvironment, IEnv } from "./src/types/utils";
-import { EOAuthProvider } from "./src/types/services/auth";
+import { EEnvironment, type IEnv } from "@/types/utils.d.ts";
+import { EOAuthProvider } from "@/types/services/auth.d.ts";
 
 /**
  * Configuration settings for the application environment.

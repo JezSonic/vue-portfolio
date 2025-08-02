@@ -1,5 +1,5 @@
-import { EOAuthProvider } from "@/types/services/auth.d.ts";
-import { EEnvironment, IEnv } from "@/types/utils.d.ts";
+import type { EOAuthProvider } from "@/types/services/auth.d.ts";
+import { EEnvironment, type IEnv } from "@/types/utils.d.ts";
 import { config } from "../../config.ts";
 
 export const env = <K extends keyof IEnv>(key: K): IEnv[K] => {

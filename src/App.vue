@@ -12,10 +12,6 @@
         { name: 'description', content: "JezSonic's portfolio website showcasing projects, skills, and commission information." },
         { name: 'keywords', content: "JezSonic, portfolio, web developer, vue, typescript, javascript, projects, commissions, JezSonic" },
         { property: 'og:site_name', content: 'JezSonic Portfolio' },
-        // Example: { property: 'og:image', content: 'https://jezsonic.dev/default-og-image.png' },
-        { name: 'twitter:card', content: 'summary_large_image' },
-        // Example: { name: 'twitter:site', content: '@JezSonic' },
-        // Example: { name: 'twitter:creator', content: '@JezSonic' },
       ],
       link: [
         { rel: 'canonical', href: () => window.location.origin + window.location.pathname }
@@ -23,39 +19,6 @@
       htmlAttrs: {
         lang: 'en'
       },
-      script: [
-        {
-          type: 'application/ld+json',
-          children: () => JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebSite',
-            'name': 'JezSonic Portfolio',
-            'url': window.location.origin,
-            // If the site has search functionality, you can add PotentialAction for Sitelinks Search Box
-            // 'potentialAction': {
-            //   '@type': 'SearchAction',
-            //   'target': `${window.location.origin}/search?q={search_term_string}`,
-            //   'query-input': 'required name=search_term_string'
-            // }
-          }),
-        },
-        {
-          type: 'application/ld+json',
-          children: () => JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Person',
-            'name': 'JezSonic', // Replace with actual name if different or preferred
-            'url': window.location.origin,
-            // Add other relevant Person properties like sameAs for social media profiles
-            // 'sameAs': [
-            //   'https://github.com/JezSonic',
-            //   'https://www.linkedin.com/in/jezsonic/' // Example
-            // ]
-            // 'jobTitle': 'Web Developer', // Example
-            // 'image': 'url_to_profile_picture.jpg' // Example
-          }),
-        }
-      ]
     });
 </script>
 
