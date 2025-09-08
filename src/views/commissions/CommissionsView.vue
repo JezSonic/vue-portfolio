@@ -85,7 +85,7 @@ const goTo = (url: string) => {
                         <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.artist.title') }}</h4>
                         <p class="!text-white">{{ t('commissionsView.projects.artist.subtitle') }}</p>
                         <div class="flex flex-wrap gap-2 my-3">
-                            <Badge text="React" icon="fa-react" bg_color="#61dafb" text_color="#000" />
+                            <Badge text="Next.js" icon="fa-react" bg_color="#61dafb" text_color="#000" />
                         </div>
                         <p class="!text-gray-300">{{ t('commissionsView.projects.artist.description') }}</p>
                         <div class="flex justify-end mt-4">

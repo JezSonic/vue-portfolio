@@ -81,17 +81,16 @@
 <template>
     <Disclosure as="nav" v-slot="{ open }"
                 :class="[!transparent ? 'bg-transparent shadow-sm backdrop-blur-xs transparent' : 'z-100', 'top-0', 'left-0', 'fixed', 'w-full']">
-        <div :class="`mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ${open ? ' bg-gray-800' : ''}`"
-             :style="open ? 'background-color: #1f2937;' : ''">
+        <div :class="`mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ${open && 'bg-gray-800'}`">
             <div class="relative flex h-16 items-center justify-between">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                     <!-- Mobile menu button-->
                     <DisclosureButton
-                        class="relative z-50 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
+                        class="relative z-50 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 light:bg-gray-white hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
                         :aria-expanded="open">
                         <span v-once class="absolute -inset-0.5" />
                         <span v-once class="sr-only">Open main menu</span>
-                        <Bars3Icon v-if="!open" class="block size-6" aria-hidden="true" />
+                        <Bars3Icon v-if="!open" class="block size-6 !text-white" aria-hidden="true" />
                         <XMarkIcon v-else class="block size-6" aria-hidden="true" />
                     </DisclosureButton>
                 </div>

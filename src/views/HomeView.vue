@@ -8,35 +8,20 @@ import { ref } from 'vue';
 import { useLazyLoad } from '@/composables/useLazyLoad';
 
 // Image imports for webpack processing
-import old_website from '@/assets/projects/oldwebsite.webp';
+import artist from '@/assets/projects/artist.webp';
 import maszyna_reloaded from '@/assets/projects/maszyna_reloaded.webp';
 import linked_in from "@/assets/profile/linkedin_avatar.webp";
 import VLazyImage from "v-lazy-image";
-
-// Assuming you might want a PNG fallback for maszyna_reloaded if it existed, or a generic one
-// For this example, let's assume maszyna_reloaded also has a .png if .webp is not supported
-// If not, you'd only provide the webp source or a different fallback.
-// import maszynaReloadedPng from '@/assets/projects/maszyna_reloaded.png'; // If you had one
 
 const { t } = useI18n();
 const currentYear = new Date().getFullYear();
 const currentMonth = new Date().getMonth(); // 0-indexed
 const startDate = new Date(2023, 3, 1); // Month 3 is April (0-indexed)
-
-// Calculate total months since start date
 const totalMonths = (currentYear - startDate.getFullYear()) * 12 + (currentMonth - startDate.getMonth());
-
-// Convert total months to years, accounting for partial years
-// We add 1 day to the current date to ensure that if the start date is
-// the same month as the current month but a later day, it doesn't count
-// as a full month yet.
 const yearsOfExperience = Math.round(totalMonths / 12);
-
-// Refs for lazy loading images
 const oldWebsitePicRef = ref<HTMLPictureElement | null>(null);
 const maszynaReloadedPicRef = ref<HTMLPictureElement | null>(null);
 
-// Initialize lazy loading for the picture elements
 useLazyLoad(oldWebsitePicRef);
 useLazyLoad(maszynaReloadedPicRef);
 
@@ -112,20 +97,23 @@ useLazyLoad(maszynaReloadedPicRef);
             <template #default>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                     <div v-once class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
-                        <v-lazy-image :src="old_website" class="w-full h-48 object-cover" alt="Previous Portfolio Screenshot"/>
+                        <v-lazy-image :src="artist" class="w-full h-48 object-cover" alt="Previous Portfolio Screenshot"/>
                         <div class="p-4">
-                            <h3 class="text-xl font-semibold text-blue-500 mb-2">{{ t('home.projects.previousPortfolio.title') }}</h3>
-                            <p class="text-gray-300 mb-4">{{ t('home.projects.previousPortfolio.description') }}</p>
+                            <a href="https://artist.com.pl" class="text-xl font-semibold text-blue-500 mb-2">
+                                {{ t('commissionsView.projects.artist.title') }}
+                            </a>
+                            <p class="text-gray-300 mb-4">{{ t('commissionsView.projects.artist.description') }}</p>
                             <div class="flex gap-2 flex-wrap">
-                                <Badge text="Vue.js" icon="fa-vuejs" bg_color="#42b883" />
-                                <Badge text="CSS" icon="fa-css3-alt" bg_color="#264de4" />
+                                <Badge text="Next.js" icon="fa-react" bg_color="#61dafb" text_color="#000" />
                             </div>
                         </div>
                     </div>
                     <div v-once class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
                         <v-lazy-image :src="maszyna_reloaded" class="w-full h-48 object-cover" alt="Maszyna Reloaded Screenshot"/>
                         <div class="p-4">
-                            <h3 class="text-xl font-semibold text-blue-500 mb-2">{{ t('home.projects.maszynaReloaded.title') }}</h3>
+                            <a href="https://github.com/MaSzyna-Reloaded" class="text-xl font-semibold text-blue-500 mb-2">
+                                {{ t('home.projects.maszynaReloaded.title') }}
+                            </a>
                             <p class="text-gray-300 mb-4">{{ t('home.projects.maszynaReloaded.description') }}</p>
                             <div class="flex gap-2 flex-wrap">
                                 <Badge text="C++" icon="fa-code" bg_color="#00599c" />
