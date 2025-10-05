@@ -145,7 +145,7 @@
                         @click="login"
                         :text="t('authView.signIn.button')"
                         :loading="isLoginLoading"
-                        :loading-text="t('authView.signIn.loading')"
+                        :loading-text="t('common.loading')"
                         fullWidth
                     />
                 </div>
@@ -156,7 +156,7 @@
                         @click="register"
                         :text="t('authView.register.button')"
                         :loading="isRegisterLoading"
-                        :loading-text="t('authView.register.loading')"
+                        :loading-text="t('common.loading')"
                         fullWidth
                     />
                 </div>
@@ -182,8 +182,18 @@
                     <span class="px-3 text-gray-400 font-medium text-nowrap">{{ t("authView.oauth.title") }}</span>
                     <hr class="border-gray-700 w-full" />
                 </div>
-                <div class="flex justify-center items-center gap-4 flex-col" >
-                    <GoogleLogin popup-type="token" :callback="callback" :id-configuration="{use_fedcm_for_button: true}" :button-config="{text: 'continue_with', theme: useThemeStore().theme == 'dark' ? 'filled_black' : 'filled_white'}"/>
+                <div class="flex justify-center items-center gap-4 flex-col">
+                    <Button
+                        variant="secondary"
+                        full-width
+                        class="max-w-[290px]"
+                        :text="t('authView.oauth.google')"
+                        v-if="getSupportedOAuthProviders().includes(EOAuthProvider.Google)"
+                        @click="performOAuth(EOAuthProvider.Google)"
+                        :loading="isGithubLoading">
+                        <font-awesome-icon class="mr-2" :icon="['fab', 'google']" />
+                    </Button>
+                    <GoogleLogin v-if="getSupportedOAuthProviders().includes(EOAuthProvider.GoogleOneTap)" :callback="callback" :id-configuration="{use_fedcm_for_button: true}" :button-config="{text: 'continue_with', theme: useThemeStore().theme == 'dark' ? 'filled_black' : 'filled_white'}"/>
                     <Button 
                         variant="secondary"
                         full-width

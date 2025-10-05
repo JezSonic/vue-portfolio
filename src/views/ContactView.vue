@@ -15,7 +15,7 @@ const goTo = (url: string) => {
 
 <template>
     <div class="container mx-auto px-4 py-6 sm:py-8">
-        <h1 class="text-3xl sm:text-4xl font-bold text-white mb-6 sm:mb-8 text-center">{{ t('contactView.getInTouch.title') }}</h1>
+        <h1 class="text-3xl sm:text-4xl font-bold !text-white mb-6 sm:mb-8 text-center">{{ t('contactView.getInTouch.title') }}</h1>
         <Tile class="mb-8">
             <p class="text-white text-base sm:text-lg mb-4">
                 {{ t('contactView.getInTouch.paragraph1') }}

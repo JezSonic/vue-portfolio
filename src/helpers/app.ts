@@ -6,15 +6,21 @@ export const env = <K extends keyof IEnv>(key: K): IEnv[K] => {
     return config[key]
 }
 
+const ensureTrailingSlash = (url: string): string => {
+    if (!url.endsWith('/')) {
+        return url + '/';
+    }
+    return url;
+}
+
 export const getApiUrl = (): string => {
-    //Can add custom logic there :)
     const appEnv = env("APP_ENV");
     if (appEnv === EEnvironment.Local) {
-        return env("API_URL");
+        return ensureTrailingSlash(env("API_URL"));
     } else if (appEnv === EEnvironment.Production) {
-        return env("API_URL_PROD");
+        return ensureTrailingSlash(env("API_URL_PROD"));
     }
-    return env("API_URL"); // Default fallback
+    return ensureTrailingSlash(env("API_URL")); // Default fallback
 }
 
 export const getSupportedOAuthProviders = (): EOAuthProvider[] => {

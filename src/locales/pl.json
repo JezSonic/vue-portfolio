@@ -86,6 +86,7 @@
     }
   },
   "common": {
+    "loading": "Ładowanie...",
     "language": "Język",
     "english": "Angielski",
     "polish": "Polski"
@@ -94,13 +95,13 @@
     "hero": {
       "greeting": "Cześć, jestem Karol",
       "title": "Full-Stack Web Developer",
-      "description": "Pasjonat programowania z około {years}-letnim doświadczeniem zawodowym, tworzący strony i aplikacje internetowe łączące funkcjonalność z eleganckim designem.",
+      "description": "Pasjonat programowania z {years}-letnim doświadczeniem zawodowym, tworzący strony i aplikacje internetowe łączące funkcjonalność z eleganckim designem.",
       "viewProjects": "Zobacz Projekty",
       "contactMe": "Kontakt"
     },
     "aboutMe": {
       "title": "O Mnie",
-      "paragraph1": "Jestem junior full-stack web developerem z pasją do projektowania stron i aplikacji internetowych dopasowanych do każdego gustu. Chociaż mam około {years} lat(a) doświadczenia zawodowego, programuję front-end znacznie dłużej i ciągle chętnie uczę się nowych technologii.",
+      "paragraph1": "Jestem junior full-stack web developerem z pasją do projektowania stron i aplikacji internetowych dopasowanych do każdego gustu. Chociaż mam {years} lat(a) doświadczenia zawodowego, programuję front-end znacznie dłużej i ciągle chętnie uczę się nowych technologii.",
       "paragraph2": "Moje doświadczenie obejmuje zarówno rozwój front-end, jak i back-end, co widać po stosie technologicznym, który zawarłem na tej stronie. Chociaż tworzenie stron internetowych jest moim głównym zajęciem, lubię także tworzyć gry i mam kilka projektów gier na GitHubie pod nazwą użytkownika JezSonic.",
       "paragraph3": "Ta strona internetowa jest platformą do prezentacji moich umiejętności i doświadczenia. Znajdziesz tu przykłady moich projektów webowych, a nawet gier, nad którymi pracowałem."
     },
@@ -137,7 +138,7 @@
     "linkedin": {
       "title": "LinkedIn",
       "name": "Karol Tomaszewski",
-      "school": "Uczeń Zespołu Szkół nr 4 im. Mikołaja Kopernika W Dębicy",
+      "school": "Full-stack Junior Web Developer w Kenja K. K.",
       "company": "Kenja K.K.",
       "viewProfile": "Zobacz profil LinkedIn"
     },

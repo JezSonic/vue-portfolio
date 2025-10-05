@@ -36,10 +36,12 @@
 
 <style lang="scss" scoped>
     .badge-link {
+        user-select: none;
         text-decoration: none;
     }
 
     p {
+        user-select: none;
         display: inline;
         padding: 2px 5px;
         border-radius: 5px;

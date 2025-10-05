@@ -49,5 +49,6 @@ export interface IEnv {
     ENABLE_THEMES: boolean
     ENABLE_EMAILING: boolean
     ENABLE_DATA_EXPORT: boolean
+    ENABLE_2FA: boolean
     ENABLED_OAUTH_PROVIDERS: EOAuthProvider[]
 }
