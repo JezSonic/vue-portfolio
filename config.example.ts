@@ -11,7 +11,7 @@ export const config: IEnv = {
     API_URL_PROD: "",
     APP_ENV: EEnvironment.Local,
     ENABLED_OAUTH_PROVIDERS: [
-        EOAuthProvider.Google,
+        EOAuthProvider.Google, //Only Google or GoogleOneTap may be enabled at the same time
         EOAuthProvider.GitHub,
     ],
     ENABLE_BACKEND: false,

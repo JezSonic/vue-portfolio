@@ -14,6 +14,7 @@ export interface IUserData {
     google?: IGoogleUserData;
     github?: IGitHubUserData;
     profile_settings: IProfileSettings;
+    has_two_factor_enabled: boolean;
 }
 
 /**

@@ -1,6 +1,6 @@
 import ApiService from "@/services/apiService.ts";
-import { I2FACode, I2FAPrepareResponse } from "@/types/services/2fa";
-import { IApiResponse } from "@/types/services/api";
+import { I2FACode, I2FAConfirmResponse, I2FAPrepareResponse, I2FARecoveryCode } from "@/types/services/2fa";
+import { IApiResponse, IEmptyRequestBody } from "@/types/services/api";
 
 export default class TwoFactorAuthService extends ApiService {
     constructor() {
@@ -12,6 +12,14 @@ export default class TwoFactorAuthService extends ApiService {
     }
 
     public static confirm2FA(code: number) {
-        return this.post<IApiResponse<boolean>, I2FACode>('auth/2fa/confirm', {code: code})
+        return this.post<I2FAConfirmResponse, I2FACode>('auth/2fa/confirm', {code: code})
+    }
+
+    public static disable2FA() {
+        return this.post<IApiResponse<boolean>, IEmptyRequestBody>('auth/2fa/disable', {})
+    }
+
+    public static showRecoveryCodes() {
+        return this.get<{recovery_codes: I2FARecoveryCode[]}>('auth/2fa/recovery-codes')
     }
 }

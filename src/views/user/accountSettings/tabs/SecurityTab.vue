@@ -1,14 +1,17 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import UserService from "@/services/userService.ts";
-import { useUserStore } from "@/stores/userStore.js";
-import { env } from "@/helpers/app.js";
+import { useUserStore } from "@/stores/userStore.ts";
+import { env } from "@/helpers/app.ts";
 import type { IUserData } from "@/types/user.d.ts";
 import { useI18n } from "vue-i18n";
 import Button from "@/components/ui/Button.vue";
-import AuthService from "@/services/authService.js";
+import AuthService from "@/services/authService.ts";
 import TwoFactorAuthService from "@/services/2faService.ts";
-import type { I2FAPrepareResponse } from "@/types/services/2fa";
+import { I2FAPrepareResponse, I2FAConfirmResponse, I2FARecoveryCode } from "@/types/services/2fa";
+import TwoFactorRecoveryCodesModal from "@/components/modals/TwoFactorRecoveryCodesModal.vue";
+import TwoFactorSetupModal from "@/components/modals/TwoFactorSetupModal.vue";
+import { configureModal, type ModalController } from "@/services/modalService.ts";
 
 const { t } = useI18n();
 
@@ -19,13 +22,12 @@ const props = defineProps({
     }
 })
 
+// Events to notify parent to refresh user data after 2FA changes
+const emit = defineEmits(["refreshUserData"])
+
 // User store
 const userStore = useUserStore();
 
-// Password change
-const currentPassword = ref<string>("");
-const newPassword = ref<string>("");
-const confirmPassword = ref<string>("");
 const passwordError = ref<string>("");
 const passwordSuccess = ref<string>("");
 const isPasswordUpdateLoading = ref<boolean>(false);
@@ -43,66 +45,166 @@ const isExportDataLoading = ref<boolean>(false);
 
 // 2FA state
 const isPreparing2FA = ref<boolean>(false);
-const show2FAModal = ref<boolean>(false);
+let setupModalCtrl: ModalController | null = null;
+let recoveryModalCtrl: ModalController | null = null;
 const qrSvg = ref<string>("");
 const twoFACode = ref<string>("");
 const isConfirming2FA = ref<boolean>(false);
-const twoFAError = ref<string>("");
-const twoFASuccess = ref<string>("");
+const twoFASetupError = ref<boolean>(false);
+const recoveryCodes = ref<I2FARecoveryCode[]>([]);
 
-const open2FAModal = () => {
-    show2FAModal.value = true;
-};
-const close2FAModal = () => {
-    show2FAModal.value = false;
+const isDisabling2FA = ref<boolean>(false);
+const isShowing2FARecoveryCodes = ref<boolean>(false);
+
+const disable2FA = () => {
+    isDisabling2FA.value = true;
+    TwoFactorAuthService.disable2FA()
+        .then(() => {
+            // After disabling 2FA, refresh the user data
+            emit('refreshUserData');
+        })
+        .finally(() => {
+            isDisabling2FA.value = false;
+        });
+}
+
+const show2FARecoveryCodes = () => {
+    isShowing2FARecoveryCodes.value = true;
+    TwoFactorAuthService.showRecoveryCodes()
+        .then((res) => {
+            recoveryCodes.value = res.recovery_codes;
+            if (recoveryModalCtrl) {
+                recoveryModalCtrl.close();
+                recoveryModalCtrl = null;
+            }
+            recoveryModalCtrl = configureModal(TwoFactorRecoveryCodesModal, {
+                recoveryCodes: recoveryCodes.value,
+                onClose: () => {
+                    if (recoveryModalCtrl) {
+                        recoveryModalCtrl.close();
+                        recoveryModalCtrl = null;
+                    }
+                }
+            });
+            recoveryModalCtrl.open();
+        })
+        .finally(() => {
+            isShowing2FARecoveryCodes.value = false;
+        });
+}
+
+const cleanup2FAFlow = () => {
     qrSvg.value = "";
     twoFACode.value = "";
-    twoFAError.value = "";
-    twoFASuccess.value = "";
+    twoFASetupError.value = false;
 };
 
 const prepare2FA = () => {
     isPreparing2FA.value = true;
-    twoFAError.value = "";
     TwoFactorAuthService.prepare2FA()
         .then((res: I2FAPrepareResponse) => {
             qrSvg.value = res.qr_code;
-            open2FAModal();
-        })
-        .catch(() => {
-            twoFAError.value = "Failed to prepare 2FA. Please try again.";
+            twoFASetupError.value = false;
+
+            if (setupModalCtrl) {
+                setupModalCtrl.close();
+                setupModalCtrl = null;
+            }
+
+            setupModalCtrl = configureModal(TwoFactorSetupModal, {
+                qrSvg: qrSvg.value,
+                error: twoFASetupError.value,
+                onConfirm: (code: string) => confirm2FA(code),
+                onClose: () => {
+                    if (setupModalCtrl) {
+                        setupModalCtrl.close();
+                        setupModalCtrl = null;
+                    }
+                    cleanup2FAFlow();
+                },
+            });
+            setupModalCtrl.open();
         })
         .finally(() => {
             isPreparing2FA.value = false;
         });
 }
 
-const confirm2FA = () => {
-    twoFAError.value = "";
-    twoFASuccess.value = "";
+const confirm2FA = (code: string) => {
     // sanitize code (digits only)
-    const numeric = twoFACode.value.replace(/\D/g, "");
-    if (numeric.length < 6) {
-        twoFAError.value = "Please enter the 6-digit code from your authenticator app.";
-        return;
-    }
+    const numeric = code.replace(/\D/g, "");
     isConfirming2FA.value = true;
     TwoFactorAuthService.confirm2FA(Number(numeric))
-        .then((resp) => {
-            // API returns IApiResponse<boolean>
-            const ok = (resp && (resp as any).content === true) || (resp === true);
+        .then((resp: I2FAConfirmResponse) => {
+            const ok = resp && resp.recovery_codes && resp.recovery_codes.length > 0;
             if (ok) {
-                twoFASuccess.value = "Two-factor authentication enabled.";
-                // Close modal after a short delay
-                setTimeout(() => {
-                    close2FAModal();
-                }, 600);
+                recoveryCodes.value = resp.recovery_codes;
+
+                if (setupModalCtrl) {
+                    setupModalCtrl.close();
+                    setupModalCtrl = null;
+                }
+                if (recoveryModalCtrl) {
+                    recoveryModalCtrl.close();
+                    recoveryModalCtrl = null;
+                }
+
+                recoveryModalCtrl = configureModal(TwoFactorRecoveryCodesModal, {
+                recoveryCodes: recoveryCodes.value,
+                onClose: () => {
+                    if (recoveryModalCtrl) {
+                        recoveryModalCtrl.close();
+                        recoveryModalCtrl = null;
+                    }
+                    cleanup2FAFlow();
+                    // After enabling 2FA and handling recovery codes, refresh user data
+                    emit('refreshUserData');
+                },
+            });
+                recoveryModalCtrl.open();
+
+                // Clear the code input now that it's confirmed
+                twoFACode.value = "";
             } else {
-                twoFAError.value = "Invalid code. Please try again.";
+                twoFASetupError.value = true;
+                if (setupModalCtrl) {
+                    setupModalCtrl.close();
+                    setupModalCtrl = null;
+                }
+                setupModalCtrl = configureModal(TwoFactorSetupModal, {
+                    qrSvg: qrSvg.value,
+                    error: true,
+                    onConfirm: (code: string) => confirm2FA(code),
+                    onClose: () => {
+                        if (setupModalCtrl) {
+                            setupModalCtrl.close();
+                            setupModalCtrl = null;
+                        }
+                        cleanup2FAFlow();
+                    },
+                });
+                setupModalCtrl.open();
             }
         })
         .catch(() => {
-            twoFAError.value = "Invalid code. Please try again.";
+            twoFASetupError.value = true;
+            if (setupModalCtrl) {
+                setupModalCtrl.close();
+                setupModalCtrl = null;
+            }
+            setupModalCtrl = configureModal(TwoFactorSetupModal, {
+                qrSvg: qrSvg.value,
+                error: true,
+                onConfirm: (code: string) => confirm2FA(code),
+                onClose: () => {
+                    if (setupModalCtrl) {
+                        setupModalCtrl.close();
+                        setupModalCtrl = null;
+                    }
+                    cleanup2FAFlow();
+                },
+            });
+            setupModalCtrl.open();
         })
         .finally(() => {
             isConfirming2FA.value = false;
@@ -218,57 +320,39 @@ const deleteAccount = () => {
 
             <div class="pb-6 pt-6 border-t border-b border-gray-700"
                  v-if="env('ENABLE_2FA')">
-                <h3 class="text-sm font-medium text-gray-400 mb-2 ">
+                <h3 class="text-sm font-medium text-gray-400 mb-2">
                     Two-factor authentication
                     <small class="text-xs text-gray-400 mb-4">
                         (beta)
                     </small>
-                    <Button
-                        variant="primary"
-                        @click="prepare2FA"
-                        text="Enable"
-                        :loading="isPreparing2FA"
-                    />
                 </h3>
-                <p v-if="twoFAError" class="text-xs text-red-400 mt-2">{{ twoFAError }}</p>
-            </div>
+                <p class="text-xs text-gray-400 mb-4">Manage your 2FA-related settings</p>
+                <Button v-if="!userData?.has_two_factor_enabled"
+                    variant="primary"
+                    @click="prepare2FA"
+                    text="Enable"
+                    :loading="isPreparing2FA"
+                />
+                <div v-else class="flex gap-3">
+                    <Button
+                        variant="danger"
+                        @click="disable2FA"
+                        text="Disable"
+                        :loading="isDisabling2FA"
+                    />
 
-            <!-- 2FA Modal -->
-            <div v-if="show2FAModal" class="fixed inset-0 z-50 flex items-center justify-center">
-                <div class="absolute inset-0 bg-black/60" @click="close2FAModal"></div>
-                <div class="relative bg-gray-900 text-gray-200 rounded-lg shadow-xl w-full max-w-md mx-4 p-6 border border-gray-700">
-                    <div class="flex items-center justify-between mb-4">
-                        <h4 class="text-lg font-semibold">Enable Two‑Factor Authentication</h4>
-                        <button class="text-gray-400 hover:text-gray-200" @click="close2FAModal">✕</button>
-                    </div>
-                    <p class="text-sm text-gray-400 mb-4">Scan this QR code with your authenticator app (e.g., Google Authenticator, Authy), then enter the 6‑digit code to confirm.</p>
-                    <div class="flex items-center justify-center mb-4">
-                        <div v-html="qrSvg" class="bg-white p-3 rounded"></div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="block text-sm text-gray-300 mb-1">Confirmation Code</label>
-                        <input
-                            v-model="twoFACode"
-                            type="text"
-                            inputmode="numeric"
-                            pattern="[0-9]*"
-                            maxlength="6"
-                            placeholder="123456"
-                            class="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                        />
-                        <p v-if="twoFAError" class="text-xs text-red-400 mt-2">{{ twoFAError }}</p>
-                        <p v-if="twoFASuccess" class="text-xs text-green-400 mt-2">{{ twoFASuccess }}</p>
-                    </div>
-                    <div class="flex justify-end gap-2 mt-4">
-                        <Button variant="secondary" @click="close2FAModal" text="Cancel" />
-                        <Button variant="primary" :loading="isConfirming2FA" @click="confirm2FA" text="Confirm" />
-                    </div>
+                    <Button
+                        variant="secondary"
+                        @click="show2FARecoveryCodes"
+                        text="Generate recovery codes"
+                        :loading="isShowing2FARecoveryCodes"
+                    />
                 </div>
             </div>
 
             <div class="pb-6 pt-6 border-t border-b border-gray-700"
                  v-if="env('ENABLE_DATA_EXPORT')">
-                <h3 class="text-sm font-medium text-gray-400 mb-2 ">
+                <h3 class="text-sm font-medium text-gray-400 mb-2">
                     {{ t("accountSettingsView.security.dataExport.title") }}
                     <small class="text-xs text-gray-400 mb-4">
                         (beta)

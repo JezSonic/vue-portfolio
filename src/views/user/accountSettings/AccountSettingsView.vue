@@ -38,37 +38,41 @@
     const isMobileMenuOpen = ref<boolean>(false);
 
 
-    onMounted(() => {
-        if (userStore.isLoggedIn()) {
-            // Load user data
-            UserService.getUser()
-                .then((data) => {
-                    if (data.profile_settings == undefined) {
-                        data.profile_settings = {
-                            is_public: true,
-                            avatar_source: "auto",
-                            theme: "dark",
-                            language: "en",
-                            notifications: {
-                                email_notifications: false,
-                                email_marketing: false,
-                                email_security_alerts: false
-                            }
-                        };
-                    }
+    const refreshUser = () => {
+        if (!userStore.isLoggedIn()) {
+            AuthService.logout(); // assure to clear all leftover data
+            router.push('/');
+            return;
+        }
+        // Load user data
+        return UserService.getUser()
+            .then((data) => {
+                if (data.profile_settings == undefined) {
+                    data.profile_settings = {
+                        is_public: true,
+                        avatar_source: "auto",
+                        theme: "dark",
+                        language: "en",
+                        notifications: {
+                            email_notifications: false,
+                            email_marketing: false,
+                            email_security_alerts: false
+                        }
+                    };
+                }
 
-                    userStore.userData = data;
-                    userData.value = data;
-                    loading.value = false;
-                }).catch(() => {
+                userStore.userData = data;
+                userData.value = data;
+                loading.value = false;
+            }).catch(() => {
                 AuthService.logout();
                 error.value = true;
                 loading.value = false;
             });
-        } else {
-            AuthService.logout(); //assure to clear all leftover data
-            router.push('/');
-        }
+    }
+
+    onMounted(() => {
+        refreshUser();
     })
 
     // Save profile settings when changed
@@ -87,7 +91,7 @@
             .then(() => {
                 // Success handling if needed
             })
-            .catch((err) => {
+            .catch(() => {
                 // Error handling if needed
             });
     };
@@ -147,7 +151,6 @@
                         <svg
                             :class="{ 'transform rotate-180': isMobileMenuOpen }"
                             class="h-5 w-5 text-gray-400"
-                            fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
                         >
@@ -236,6 +239,7 @@
                     <SecurityTab 
                         v-if="activeTab === 'security'" 
                         :userData="userData"
+                        @refreshUserData="refreshUser"
                     />
                 </div>
             </div>

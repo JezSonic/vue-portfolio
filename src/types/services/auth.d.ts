@@ -79,6 +79,7 @@ export interface ILoginRequestBody {
     email: string;
     password: string;
     ip_address: string;
+    two_factor_code: string|null;
 }
 
 /**

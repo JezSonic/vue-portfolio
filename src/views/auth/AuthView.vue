@@ -23,6 +23,8 @@
     const userStore = useUserStore();
     const hasAccount = ref<boolean>(true);
     const { t } = useI18n();
+    const twoFactorCode = ref<string>("");
+    const showTwoFAModal = ref<boolean>(false);
 
     // Loading states
     const isLoginLoading = ref<boolean>(false);
@@ -51,12 +53,39 @@
                 })
                 .catch((e: IExceptionResponse) => {
                     errors.value = e.errors;
+                    if (e.message == "2fa_required") {
+                        showTwoFAModal.value = true;
+                        twoFactorCode.value = "";
+                    }
                     isLoginLoading.value = false;
                 });
         }).catch(() => {
             isLoginLoading.value = false;
         });
     };
+
+    const login2FA = () => {
+        isLoginLoading.value = true;
+        ApiService.getIP().then((data) => {
+            AuthService.login(email.value, password.value, data.ip, twoFactorCode.value)
+                .then((res) => {
+                    success.value = true;
+                    userStore.id = res.id;
+                    userStore.token = res.access_token;
+                    userStore.tokenExpiration = new Date().getTime() + res.expires_in * 1000;
+                    userStore.refreshToken = res.refresh_token;
+                    router.push("/user/settings");
+                })
+                .catch((e: IExceptionResponse) => {
+                    errors.value = e.errors;
+                    // Keep the modal open; show errors for invalid code
+                    showTwoFAModal.value = true;
+                    isLoginLoading.value = false;
+                });
+        }).catch(() => {
+            isLoginLoading.value = false;
+        });
+    }
 
     const register = () => {
         isRegisterLoading.value = true;
@@ -205,6 +234,38 @@
                         <font-awesome-icon class="mr-2" :icon="['fab', 'github']" />
                     </Button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2FA Modal -->
+    <div v-if="showTwoFAModal" class="fixed inset-0 z-50 flex items-center justify-center">
+        <div class="absolute inset-0 bg-black/50"></div>
+        <div class="relative bg-gray-800 border border-gray-700 rounded-lg shadow-xl w-full max-w-md mx-4 p-6">
+            <h3 class="text-lg font-semibold text-gray-200 mb-2">Two-factor authentication</h3>
+            <p class="text-sm text-gray-400 mb-4">
+                Enter the 2FA code from your authenticator app or a recovery code.
+            </p>
+            <div class="space-y-3">
+                <label class="text-gray-300 block text-sm font-medium" for="twofa-code">Code</label>
+                <input id="twofa-code"
+                       v-model="twoFactorCode"
+                       type="text"
+                       placeholder="123456 or recovery-code"
+                       class="block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       @keydown.enter="login2FA"
+                />
+                <div v-if="errors && (errors['two_factor_code'] || errors['2fa'] || errors['code'])" class="text-red-400 text-sm">
+                    <div v-for="(msgs, key) in errors" :key="key">
+                        <div v-if="key === 'two_factor_code' || key === '2fa' || key === 'code'">
+                            <div v-for="(msg, i) in msgs" :key="i">{{ msg }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 flex gap-3 justify-end">
+                <Button variant="secondary" :text="'Cancel'" @click="showTwoFAModal = false; isLoginLoading = false" />
+                <Button variant="primary" :text="'Verify'" :loading="isLoginLoading" :loading-text="t('common.loading')" @click="login2FA" />
             </div>
         </div>
     </div>

@@ -57,11 +57,12 @@ export default class AuthService extends ApiService {
         });
     };
 
-    public static login(email: string, password: string, ip_address: string): Promise<IApiAuthResponse> {
+    public static login(email: string, password: string, ip_address: string, two_factor_code: string|null = null): Promise<IApiAuthResponse> {
         return this.post<IApiAuthResponse, ILoginRequestBody>("auth/login", {
             email: email,
             password: password,
-            ip_address: ip_address
+            ip_address: ip_address,
+            two_factor_code: two_factor_code
         });
     }
 
