@@ -23,6 +23,7 @@
     const { t } = useI18n();
     const googleProviderLoading = ref<boolean>(false);
     const githubProviderLoading = ref<boolean>(false);
+    const supportedProviders = getSupportedOAuthProviders();
     // Stores
     const userStore = useUserStore();
 
@@ -78,6 +79,7 @@
         }
     };
 
+    //@TODO: Make it reflect on enabled oauth providers. add pure-google logic
     const callback = (response: any) => {
         response.credential
         useAuthStore().oneTapToken = response.credential;
@@ -153,8 +155,8 @@
                 </div>
             </div>
 
-            <ul v-if="getSupportedOAuthProviders().includes(EOAuthProvider.Google)" class="divide-y divide-gray-700">
-                <li class="py-4 flex justify-between items-center">
+            <ul class="divide-y divide-gray-700">
+                <li v-if="supportedProviders.includes(EOAuthProvider.Google) || supportedProviders.includes(EOAuthProvider.GoogleOneTap)" class="py-4 flex justify-between items-center">
                     <div class="flex items-center">
                         <svg class="h-6 w-6 text-red-500" fill="currentColor" viewBox="0 0 24 24">
                             <path
@@ -169,14 +171,18 @@
                             </p>
                         </div>
                     </div>
-                    <GoogleLogin v-if="!connectedSocialAccounts.includes(EOAuthProvider.Google)" popup-type="token" :callback="callback" :id-configuration="{use_fedcm_for_button: true}" :button-config="{text: 'continue_with', theme: useThemeStore().theme == 'dark' ? 'filled_black' : 'filled_white'}"/>
+                    <GoogleLogin v-if="!connectedSocialAccounts.includes(EOAuthProvider.Google) && supportedProviders.includes(EOAuthProvider.GoogleOneTap)" popup-type="token" :callback="callback" :id-configuration="{use_fedcm_for_button: true}" :button-config="{text: 'continue_with', theme: useThemeStore().theme == 'dark' ? 'filled_black' : 'filled_white'}"/>
 
-                    <Button variant="danger" v-else
+                    <Button variant="primary" v-if="!connectedSocialAccounts.includes(EOAuthProvider.Google) && supportedProviders.includes(EOAuthProvider.Google)"
                             size="md" @click="toggleSocialAccount(EOAuthProvider.Google)" :loading="googleProviderLoading">
-                        {{ t("accountSettingsView.connectedAccounts.buttons.disconnect") }}
+                        {{t("accountSettingsView.connectedAccounts.buttons.connect")}}
+                    </Button>
+
+                    <Button variant="danger" size="md" @click="toggleSocialAccount(EOAuthProvider.Google)" :loading="googleProviderLoading" v-if="(supportedProviders.includes(EOAuthProvider.Google) || supportedProviders.includes(EOAuthProvider.GoogleOneTap)) && connectedSocialAccounts.includes(EOAuthProvider.Google)">
+                        {{t("accountSettingsView.connectedAccounts.buttons.disconnect")}}
                     </Button>
                 </li>
-                <li v-if="getSupportedOAuthProviders().includes(EOAuthProvider.GitHub)"
+                <li v-if="supportedProviders.includes(EOAuthProvider.GitHub)"
                     class="pt-4 flex justify-between items-center">
                     <div class="flex items-center">
                         <svg class="h-6 w-6 text-gray-300" fill="currentColor" viewBox="0 0 24 24">

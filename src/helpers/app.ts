@@ -1,4 +1,4 @@
-import type { EOAuthProvider } from "@/types/services/auth.d.ts";
+import { EOAuthProvider } from "@/types/services/auth.d.ts";
 import { EEnvironment, type IEnv } from "@/types/utils.d.ts";
 import { config } from "../../config.ts";
 
@@ -24,5 +24,11 @@ export const getApiUrl = (): string => {
 }
 
 export const getSupportedOAuthProviders = (): EOAuthProvider[] => {
-    return env("ENABLED_OAUTH_PROVIDERS");
+    const providers = env("ENABLED_OAUTH_PROVIDERS");
+    if (providers.includes(EOAuthProvider.GoogleOneTap) && providers.includes(EOAuthProvider.Google)) {
+        throw Error(`Google and GoogleOneTap cannot be enabled simultaneously. Check your config.ts and make proper adjustments`, {
+            cause: "config.ts has improper ENABLED_OAUTH_PROVIDERS configuration"
+        })
+    }
+    return providers;
 }

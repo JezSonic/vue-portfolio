@@ -22,6 +22,7 @@ export function configureModal(component: Component, props: Record<string, any> 
 
     /**
      * Closes the component, unmounting it from the application and removing it from the DOM.
+     * After a successful close, if an `onClosed` callback was provided via props, it will be invoked.
      */
     const close = () => {
         if (!mounted) return;
@@ -32,6 +33,13 @@ export function configureModal(component: Component, props: Record<string, any> 
         }
         if (container.parentNode) {
             container.parentNode.removeChild(container);
+        }
+        // Notify external logic that the modal has been fully closed
+        try {
+            const cb = (props && typeof props.onClosed === 'function') ? props.onClosed : null;
+            if (cb) cb();
+        } catch {
+            // noop; avoid throwing during close path
         }
     };
 

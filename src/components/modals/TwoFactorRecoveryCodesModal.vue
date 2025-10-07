@@ -27,7 +27,7 @@ const copyRecoveryCodes = async () => {
     <BaseModal :close="props.close">
         <div class="flex items-center justify-between mb-4">
             <h4 class="text-lg font-semibold">Save your recovery codes</h4>
-            <button class="text-gray-400 hover:text-gray-200" @click="() => emit('close')">✕</button>
+            <button class="text-gray-400 hover:text-gray-200" @click="() => props.close && props.close()">✕</button>
         </div>
         <div>
             <p class="text-xs text-yellow-300 bg-yellow-900/30 border border-yellow-700 rounded p-2 mb-3">
@@ -42,7 +42,7 @@ const copyRecoveryCodes = async () => {
             </div>
             <div class="flex items-center justify-between mt-6 gap-2">
                 <Button variant="secondary" @click="copyRecoveryCodes" :text="copied ? 'Copy codes' : 'Copy'" />
-                <Button variant="primary" @click="() => emit('close')" text="I saved them" />
+                <Button variant="primary" @click="() => props.close && props.close()" text="I saved them" />
             </div>
         </div>
     </BaseModal>

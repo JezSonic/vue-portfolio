@@ -36,7 +36,7 @@ const confirm2FA = () => {
 <BaseModal :close="props.close">
     <div class="flex items-center justify-between mb-4">
         <h4 class="text-lg font-semibold">Enable Two‑Factor Authentication</h4>
-        <button class="text-gray-400 hover:text-gray-200" @click="() => emit('close')">✕</button>
+        <button class="text-gray-400 hover:text-gray-200" @click="() => props.close && props.close()">✕</button>
     </div>
 
     <p class="text-sm text-gray-400 mb-4">Scan this QR code with your authenticator app (e.g., Google Authenticator, Authy), then enter the 6‑digit code to confirm.</p>
@@ -57,7 +57,7 @@ const confirm2FA = () => {
         <p v-if="error || codeInvalidLength" class="text-xs text-red-400 mt-2">{{codeInvalidLength ? "This code has invalid format. Please enter the 6-digit code from your authenticator app." : "Invalid code. Please try again."}}</p>
     </div>
     <div class="flex justify-end gap-2 mt-4">
-        <Button variant="secondary" @click="emit('close')" text="Cancel" />
+        <Button variant="secondary" @click="() => props.close && props.close()" text="Cancel" />
         <Button variant="primary" :loading="isConfirming2FA && !(error || codeInvalidLength)" @click="confirm2FA" text="Confirm" />
     </div>
 </BaseModal>

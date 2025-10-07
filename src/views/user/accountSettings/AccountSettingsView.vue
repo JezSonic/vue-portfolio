@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { onMounted, ref } from "vue";
+    import { onMounted, ref, watch } from "vue";
     import UserService from "@/services/userService.ts";
     import type { IUserData } from "@/types/user.d.ts";
     import Loading from "@/components/ui/Loading.vue";
@@ -17,6 +17,7 @@
     import router from "@/router/index.js";
     import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
     import AuthService from "@/services/authService.js";
+    import { useRoute } from "vue-router";
 
     const { t } = useI18n();
 
@@ -36,6 +37,49 @@
 
     const activeTab = ref<string>("profile");
     const isMobileMenuOpen = ref<boolean>(false);
+
+    // Sync active tab with URL (?tab=...)
+    const route = useRoute();
+
+    const getValidTabIds = () => tabs.value.map(t => t.id);
+
+    const syncTabFromRoute = () => {
+        const raw = route.query.tab as string | string[] | undefined;
+        const tabFromRoute = Array.isArray(raw) ? raw[0] : raw;
+        const valid = getValidTabIds();
+        if (tabFromRoute && valid.includes(tabFromRoute)) {
+            activeTab.value = tabFromRoute;
+        }
+    };
+
+    const navigateToTab = (id: string) => {
+        const valid = getValidTabIds();
+        const target = valid.includes(id) ? id : 'profile';
+        if (activeTab.value !== target) {
+            activeTab.value = target;
+        }
+        // Update URL without adding to history stack unnecessarily
+        const current = Array.isArray(route.query.tab) ? route.query.tab[0] : route.query.tab;
+        if (current !== target) {
+            router.replace({ name: 'settings', query: { ...route.query, tab: target } });
+        }
+        isMobileMenuOpen.value = false;
+    };
+
+    // Watch route query to update active tab (deep link support)
+    watch(() => route.query.tab, () => {
+        syncTabFromRoute();
+    }, { immediate: true });
+
+    // When the list of tabs changes (e.g., notifications injected), re-sync
+    watch(tabs, () => {
+        syncTabFromRoute();
+        // Ensure URL has a valid tab if it was invalid before
+        const valid = getValidTabIds();
+        if (!valid.includes(activeTab.value)) {
+            navigateToTab('profile');
+        }
+    });
 
 
     const refreshUser = () => {
@@ -114,6 +158,8 @@
         if (env("ENABLE_EMAILING")) {
             tabs.value = tabs.value.toSpliced(2, 0, { id: "notifications", label: "accountSettingsView.tabs.notifications" });
         }
+        // After potential tab changes, re-sync from route
+        syncTabFromRoute();
     });
 </script>
 
@@ -167,7 +213,7 @@
                                 :key="tab.id"
                                 :class="{ 'bg-gray-700': activeTab === tab.id }"
                                 class="w-full text-left px-4 py-2 text-sm text-gray-200 hover:bg-gray-700"
-                                @click="activeTab = tab.id; isMobileMenuOpen = false"
+                                @click="navigateToTab(tab.id)"
                             >
                                 {{ t(tab.label) }}
                             </button>
@@ -191,7 +237,7 @@
                                         'bg-gray-700 text-white' :
                                         'text-gray-300 hover:bg-gray-700 hover:text-white'"
                                     class="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer"
-                                    @click="activeTab = tab.id"
+                                    @click="navigateToTab(tab.id)"
                                 >
                                     {{ t(tab.label) }}
                                 </button>
