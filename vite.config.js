@@ -35,6 +35,7 @@ export default defineConfig({
         }),
         VitePWA({
             registerType: 'autoUpdate',
+            disable: true,
             workbox: {
                 clientsClaim: true,
                 skipWaiting: true,

@@ -30,7 +30,9 @@ jobs:
         run: npx playwright install --with-deps chromium # Install only chromium for CI, or list all needed
 
       - name: Build the project
-        run: npm run build
+        run: |
+          npm install -D sass-embedded
+          npm run build
 
       # Run Playwright E2E tests (optional but good to have before performance)
       - name: Run Playwright E2E tests
