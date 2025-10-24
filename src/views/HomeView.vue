@@ -99,7 +99,7 @@ useLazyLoad(maszynaReloadedPicRef);
                     <div v-once class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
                         <v-lazy-image :src="artist" class="w-full h-48 object-cover" alt="Previous Portfolio Screenshot"/>
                         <div class="p-4">
-                            <a href="https://artist.com.pl" class="text-xl font-semibold text-blue-500 mb-2">
+                            <a href="https://artist.com.pl" target="_blank" rel="noopener" class="text-xl font-semibold text-blue-500 mb-2">
                                 {{ t('commissionsView.projects.artist.title') }}
                             </a>
                             <p class="text-gray-300 mb-4">{{ t('commissionsView.projects.artist.description') }}</p>
@@ -111,7 +111,7 @@ useLazyLoad(maszynaReloadedPicRef);
                     <div v-once class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
                         <v-lazy-image :src="maszyna_reloaded" class="w-full h-48 object-cover" alt="Maszyna Reloaded Screenshot"/>
                         <div class="p-4">
-                            <a href="https://github.com/MaSzyna-Reloaded" class="text-xl font-semibold text-blue-500 mb-2">
+                            <a href="https://github.com/MaSzyna-Reloaded" target="_blank" rel="noopener" class="text-xl font-semibold text-blue-500 mb-2">
                                 {{ t('home.projects.maszynaReloaded.title') }}
                             </a>
                             <p class="text-gray-300 mb-4">{{ t('home.projects.maszynaReloaded.description') }}</p>
@@ -138,17 +138,17 @@ useLazyLoad(maszynaReloadedPicRef);
                     {{ t('home.contact.description') }}
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="/contact"
+                    <a href="/contact" target="_blank" rel="noopener"
                        class="flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors">
                         <font-awesome-icon icon="fa-brands fa-discord" class="w-6 h-6 text-white" />
                         <span class="text-white">{{ t('home.contact.discord') }}</span>
                     </a>
-                    <a href="/contact"
+                    <a href="/contact" target="_blank" rel="noopener"
                        class="flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors">
                         <font-awesome-icon icon="fa-solid fa-envelope" class="w-6 h-6 text-white" />
                         <span class="text-white">{{ t('home.contact.email') }}</span>
                     </a>
-                    <a href="/contact"
+                    <a href="/contact" target="_blank" rel="noopener"
                        class="flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors">
                         <font-awesome-icon icon="fa-brands fa-linkedin" class="w-6 h-6 text-white" />
                         <span class="text-white">{{ t('home.contact.linkedin') }}</span>

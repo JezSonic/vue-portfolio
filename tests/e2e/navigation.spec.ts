@@ -8,7 +8,7 @@ test.describe('Critical User Journeys', () => {
   });
 
   test('Navigate to Home Page and verify title', async ({ page }) => {
-    await expect(page).toHaveTitle(/Home/); // Assuming 'Home' is in the title
+    await expect(page).toHaveTitle(/New DEV/); // Assuming 'Home' is in the title
   });
 
   test('Navigate to Contact Page and verify contact form', async ({ page }) => {

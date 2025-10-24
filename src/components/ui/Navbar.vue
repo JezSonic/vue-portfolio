@@ -178,17 +178,17 @@
                                 class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden"
                                 v-if="userStore.isLoggedIn()">
                                 <MenuItem v-slot="{ active }">
-                                    <a :href="`/user/profile/${userStore.id}`"
+                                    <a :href="`/user/profile/${userStore.id}`" target="_blank" rel="noopener"
                                        :class="[active ? 'bg-gray-100 outline-hidden' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ t("auth.profile")
                                         }}</a>
                                 </MenuItem>
                                 <MenuItem v-slot="{ active }">
-                                    <a href="/user/settings"
+                                    <a href="/user/settings" target="_blank" rel="noopener"
                                        :class="[active ? 'bg-gray-100 outline-hidden' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ t("auth.settings")
                                         }}</a>
                                 </MenuItem>
                                 <MenuItem v-slot="{ active }">
-                                    <a href="#" @click="AuthService.logout()"
+                                    <a href="#" @click="AuthService.logout()" target="_blank" rel="noopener"
                                        :class="[active ? 'bg-red-100 outline-hidden' : '', 'block px-4 py-2 text-sm text-red-700']">{{ t("auth.signOut")
                                         }}</a>
                                 </MenuItem>
@@ -263,15 +263,15 @@
                                  alt="" />
                             <span class="text-white font-medium">{{ userStore.userData?.name }}</span>
                         </div>
-                        <a :href="`/user/profile/${userStore.id}`"
+                        <a :href="`/user/profile/${userStore.id}`" target="_blank" rel="noopener"
                            class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
                             {{ t("auth.profile") }}
                         </a>
-                        <a href="/user/settings"
+                        <a href="/user/settings" target="_blank" rel="noopener"
                            class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
                             {{ t("auth.settings") }}
                         </a>
-                        <a href="#" @click="AuthService.logout()"
+                        <a href="#" @click="AuthService.logout()" target="_blank" rel="noopener"
                            class="text-red-500 hover:bg-gray-700 hover:text-red-300 block rounded-md px-3 py-2 text-base font-medium">
                             {{ t("auth.signOut") }}
                         </a>
