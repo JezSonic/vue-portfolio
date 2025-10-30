@@ -10,7 +10,7 @@
     } from "@headlessui/vue";
     import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline";
     import router from "@/router";
-    import logo from "@/assets/icons/logo.png";
+    import logo from "@/assets/icons/logo.webp";
     import userDefault from "@/assets/profile/userDefault.png";
     import { onMounted, ref, computed } from "vue";
     import { useUserStore } from "@/stores/userStore";
@@ -96,7 +96,7 @@
                 </div>
                 <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                     <div class="flex shrink-0 items-center">
-                        <img v-once class="h-8 w-auto" :src="logo" @click="router.push('/')" alt="Your Company" />
+                        <img v-once class="h-8 w-auto" :src="logo" @click="router.push('/')" alt="Your Company" width="426" height="475"/>
                     </div>
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">

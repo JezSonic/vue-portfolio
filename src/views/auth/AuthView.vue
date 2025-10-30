@@ -5,13 +5,12 @@
     import { useUserStore } from "@/stores/userStore.ts";
     import { EOAuthProvider } from "@/types/services/auth.d";
     import AuthService from "@/services/authService.ts";
-    import logo from "@/assets/icons/logo.png";
+    import logo from "@/assets/icons/logo.webp";
     import Button from "@/components/ui/Button.vue";
     import { useI18n } from "vue-i18n";
     import ApiService from "@/services/apiService";
     import { env, getSupportedOAuthProviders } from "@/helpers/app.ts";
     import { GoogleLogin } from "vue3-google-login";
-    import { useThemeStore } from "@/stores/themeStore.ts";
     import { useAuthStore } from "@/stores/authStore.ts";
 
 

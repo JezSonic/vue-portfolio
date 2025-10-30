@@ -8,7 +8,7 @@
     import Loading from "@/components/ui/Loading.vue";
     import Button from "@/components/ui/Button.vue";
     import type { IExceptionResponse } from "@/types/services/api.d.ts";
-    import logo from "@/assets/icons/logo.png";
+    import logo from "@/assets/icons/logo.webp";
     import { useI18n } from "vue-i18n";
     const userStore = useUserStore();
     const errorText = ref<string|undefined>(undefined);

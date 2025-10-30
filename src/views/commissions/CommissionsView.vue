@@ -6,6 +6,7 @@ import Badge from "@/components/badges/Badge.vue";
 import old_website from '@/assets/projects/oldwebsite.webp';
 import maszyna_reloaded from '@/assets/projects/maszyna_reloaded.webp';
 import artist from '@/assets/projects/artist.webp';
+import irenka from "@/assets/projects/irenka.webp"
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
@@ -62,6 +63,21 @@ const goTo = (url: string) => {
         <div class="mb-8">
             <h2 class="text-2xl font-bold text-blue-600 mb-6">{{ t('commissionsView.projects.title') }}</h2>
             <div class="grid gap-6 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
+                <Tile :background-image="irenka" hover-shadow-color="#70685b" v-once>
+                    <h3 class="text-2xl/7 font-display font-medium text-blue-600 mb-2">{{ t('commissionsView.projects.irenka.tileTitle') }}</h3>
+                    <div class="space-y-3">
+                        <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.irenka.title') }}</h4>
+                        <p class="!text-white">{{ t('commissionsView.projects.irenka.subtitle') }}</p>
+                        <div class="flex flex-wrap gap-2 my-3">
+                            <Badge text="Next.js" icon="fa-react" bg_color="#61dafb" text_color="#000" />
+                            <Badge text="TypeScript" icon="fa-code" bg_color="#3178c6" />
+                        </div>
+                        <p class="!text-gray-300">{{ t('commissionsView.projects.irenka.description') }}</p>
+                        <div class="flex justify-end mt-4">
+                            <Button @click="goTo('https://irenka-511e7.web.app/')" variant="primary" :text="t('commissionsView.projects.irenka.viewButton')" />
+                        </div>
+                    </div>
+                </Tile>
                 <Tile :background-image="old_website" hover-shadow-color="#00459280" v-once>
                     <h3 class="text-2xl/7 font-display font-medium text-blue-600 mb-2">{{ t('commissionsView.projects.oldWebsite.tileTitle') }}</h3>
                     <div class="space-y-3">

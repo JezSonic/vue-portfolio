@@ -200,6 +200,13 @@
         "description": "Profesjonalna strona internetowa dla biura tłumaczeń i szkoły językowej zbudowana w Next.js na podstawie projektu Klienta.",
         "viewButton": "Zobacz Projekt"
       },
+      "irenka": {
+        "tileTitle": "IVU v.2.0.0",
+        "title": "Irenka v2",
+        "subtitle": "Demo aplikacja ułatwiająca pracę maszynistom",
+        "description": "Demo aplikacja która pozwala maszynistom przeglądać alerty i informacje o ich zmianach takie jak załoga pociągu czy przypisany pojazd. Posiada również wbudowaną wyszukiwarkę pociągów firmy która pozwala zobaczyć ich szczegółowe informacje",
+        "viewButton": "Zobacz Projekt"
+      },
       "maszyna": {
         "tileTitle": "MaSzyna: Reloaded",
         "title": "Symulator Pociągów",

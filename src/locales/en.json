@@ -200,6 +200,13 @@
         "description": "A professional website for a translation and language school business built in Next.js based on the Client's design.",
         "viewButton": "View Project"
       },
+      "irenka": {
+        "tileTitle": "IVU v.2.0.0",
+        "title": "Irenka v2",
+        "subtitle": "Demo app for train drivers to help them do their job",
+        "description": "Demo app for train drivers allowing to see notifications from Company dispatchers/staff and see their shifts along with details such as crew information and vehicle information. It also comes with a built-in search for trains which allows the driver to see their details",
+        "viewButton": "View Project"
+      },
       "maszyna": {
         "tileTitle": "MaSzyna: Reloaded",
         "title": "Train Simulator",
