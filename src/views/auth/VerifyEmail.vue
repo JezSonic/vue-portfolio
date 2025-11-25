@@ -6,15 +6,12 @@
     import { useUserStore } from "@/stores/userStore.ts";
     import UserService from "@/services/userService.ts";
     import Loading from "@/components/ui/Loading.vue";
-    import Button from "@/components/ui/Button.vue";
     import type { IExceptionResponse } from "@/types/services/api.d.ts";
-    import logo from "@/assets/icons/logo.webp";
-    import { useI18n } from "vue-i18n";
+    import logo from "@/assets/img/logo.webp";
     const userStore = useUserStore();
     const errorText = ref<string|undefined>(undefined);
     const isInvalidToken = ref<boolean>(false);
     const loading = ref<boolean>(true);
-    const { t } = useI18n();
 
     onMounted(() => {
         const token: string = useRoute().params.token as string;
