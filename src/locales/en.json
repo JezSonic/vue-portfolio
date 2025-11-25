@@ -1,7 +1,7 @@
 {
   "navigation": {
     "home": "Home",
-    "commissions": "Commissions",
+    "commissions": "Projects",
     "privacyPolicy": "Privacy Policy",
     "contact": "Contact"
   },
@@ -101,9 +101,9 @@
     },
     "aboutMe": {
       "title": "About Me",
-      "paragraph1": "I'm a junior full-stack web developer with a passion for designing websites and web applications to fit any taste. While I have {years} years of professional experience, I've been coding front-end for much longer and am constantly eager to learn new technologies.",
-      "paragraph2": "My background includes experience with both front-end and back-end development, as evidenced by the technology stack I've included on this page. While web development is my primary focus, I enjoy game development and have some game projects on GitHub under the username JezSonic.",
-      "paragraph3": "This website is a platform for me to showcase my abilities and experience. Here, you'll find examples of my web development projects and even games that I've worked on."
+      "paragraph1": "I'm a software developer with passion for designing websites, web applications, and videogames. I have 6 years of programming experience with 3 years in corporate settings.",
+      "paragraph2": "My experience includes frontend and backend development, game development, light devops, and design. You can check my projects",
+      "paragraph3": "Feel free to take a look at some of my projects listed below:"
     },
     "skills": {
       "title": "My Skills",
@@ -185,7 +185,7 @@
       }
     },
     "projects": {
-      "title": "Featured Projects",
+      "title": "Projects",
       "oldWebsite": {
         "tileTitle": "Old website",
         "title": "Previous Portfolio",

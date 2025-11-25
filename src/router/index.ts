@@ -77,27 +77,27 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    name: 'commissions',
-    path: '/commissions',
+    name: 'projects',
+    path: '/projects',
     component: () => import('../views/commissions/CommissionsView.vue'),
     meta: {
-      title: 'Commissions',
-      description: 'Information about my commission services.',
-      keywords: 'commissions, services, pricing, freelance',
+      title: 'Projects',
+      description: 'Information about my projects.',
+      keywords: 'projects, services, pricing, freelance',
       requires_backend: false,
     }
   },
-  {
-    name: 'commissions-tos',
-    path: '/commissions/tos',
-    component: () => import('../views/commissions/TosView.vue'),
-    meta: {
-      title: 'Commissions - Terms of Service',
-      description: 'Terms of Service for my commission work.',
-      keywords: 'tos, terms of service, commissions, legal',
-      requires_backend: false,
-    }
-  },
+  // {
+  //   name: 'commissions-tos',
+  //   path: '/commissions/tos',
+  //   component: () => import('../views/commissions/TosView.vue'),
+  //   meta: {
+  //     title: 'Commissions - Terms of Service',
+  //     description: 'Terms of Service for my commission work.',
+  //     keywords: 'tos, terms of service, commissions, legal',
+  //     requires_backend: false,
+  //   }
+  // },
   {
     name: 'privacy-policy',
     path: '/privacy-policy',

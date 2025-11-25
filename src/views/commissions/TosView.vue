@@ -191,7 +191,7 @@ const { t } = useI18n();
                 </p>
                 <p class="text-white text-lg">
                     {{ t('tosView.dataSecurity.personalData.moreInfo') }} 
-                    <a class="font-semibold text-blue-600 hover:text-blue-500" href="/privacy-policy/">{{ t('tosView.dataSecurity.personalData.privacyPolicy') }}</a>.
+                    <a class="font-semibold" href="/privacy-policy/">{{ t('tosView.dataSecurity.personalData.privacyPolicy') }}</a>.
                 </p>
             </div>
         </Tile>

@@ -15,6 +15,14 @@
   --info-color: #3b82f6;
 }
 
+/*a {*/
+/*  color: var(--accent-color);*/
+/*}*/
+
+/*a:hover {*/
+/*  color: var(--accent-hover);*/
+/*}*/
+
 /* Dark theme variables */
 .dark {
   --bg-primary: #111827;

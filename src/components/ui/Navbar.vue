@@ -10,7 +10,7 @@
     } from "@headlessui/vue";
     import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline";
     import router from "@/router";
-    import logo from "@/assets/icons/logo.webp";
+    import logo from "@/assets/img/logo.webp";
     import userDefault from "@/assets/profile/userDefault.png";
     import { onMounted, ref, computed } from "vue";
     import { useUserStore } from "@/stores/userStore";
@@ -48,8 +48,8 @@
         { name: "navigation.home", href: "/", current: router.currentRoute.value.name === "home" },
         {
             name: "navigation.commissions",
-            href: "/commissions",
-            current: router.currentRoute.value.name === "commissions"
+            href: "/projects",
+            current: router.currentRoute.value.path === "/projects"
         },
         {
             name: "navigation.privacyPolicy",
@@ -95,7 +95,7 @@
                     </DisclosureButton>
                 </div>
                 <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                    <div class="flex shrink-0 items-center">
+                    <div class="flex shrink-0 items-center cursor-pointer">
                         <img v-once class="h-8 w-auto" :src="logo" @click="router.push('/')" alt="Your Company" width="426" height="475"/>
                     </div>
                     <div class="hidden sm:ml-6 sm:block">

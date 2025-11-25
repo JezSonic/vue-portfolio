@@ -35,16 +35,32 @@ import {
     faClock,
     faCircleExclamation, faSignInAlt
 } from "@fortawesome/free-solid-svg-icons";
-import { 
-    faVuejs, faPhp, faLaravel, faNodeJs, faDocker,
-    faSass, faJs, faHtml5, faCss3Alt, faGitAlt, faGoogle, faReact, faWordpress, faDiscord, faLinkedin, faTelegram, faGithub
-} from '@fortawesome/free-brands-svg-icons'
+import {
+    faVuejs,
+    faPhp,
+    faLaravel,
+    faNodeJs,
+    faDocker,
+    faSass,
+    faJs,
+    faHtml5,
+    faCss3Alt,
+    faGitAlt,
+    faGoogle,
+    faReact,
+    faWordpress,
+    faDiscord,
+    faLinkedin,
+    faTelegram,
+    faGithub,
+    faUnity, faCss
+} from "@fortawesome/free-brands-svg-icons";
 import { env } from "@/helpers/app.js";
 
 // Add icons to the library
 library.add(
-    faCode, faLink, faVuejs, faPhp, faLaravel, faCircleExclamation, faSignInAlt,
-    faNodeJs, faDocker, faSass, faJs, faHtml5, faHouse, faUserSlash, faLock,
+    faCode, faLink, faVuejs, faPhp, faLaravel, faCircleExclamation, faSignInAlt, faCss,
+    faNodeJs, faDocker, faSass, faJs, faHtml5, faHouse, faUserSlash, faLock, faUnity,
     faCss3Alt, faGitAlt, faGoogle, faReact, faWordpress, faDatabase, faGamepad, faDiscord, faLinkedin, faEnvelope, faTelegram, faGithub, faLanguage,
     faSun, faMoon, faUserCircle, faPlus, faEdit, faCalendar, faMapMarkerAlt, faClock
 )

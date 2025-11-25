@@ -13,7 +13,7 @@
         const name = iconName.startsWith("fa-") ? iconName.substring(3) : iconName;
 
         // Determine if it's a brand icon or a solid icon
-        const prefix = ["vuejs", "php", "laravel", "node-js", "docker", "sass", "js", "html5", "css3-alt", "git-alt", "wordpress", "react", "google", "github"].includes(name)
+        const prefix = ["vuejs", "css", "php", "laravel", "node-js", "docker", "sass", "js", "html5", "css3-alt", "git-alt", "wordpress", "react", "google", "github", "unity"].includes(name)
             ? "fab"
             : "fas";
 
@@ -22,7 +22,7 @@
 </script>
 
 <template>
-    <a v-if="link" :href="link" class="badge-link" rel="noopener noreferrer" target="_blank" v-once>
+    <a v-if="link" :href="link" class="badge-link cursor-pointer" rel="noopener noreferrer" target="_blank" v-once>
         <p :style="{ backgroundColor: bg_color, color: text_color }">
             <font-awesome-icon :icon="getIconArray(icon)" />
             {{ text }}
@@ -52,7 +52,7 @@
         margin-right: 5px;
     }
 
-    a {
-        cursor: pointer;
+    a > p {
+        display: inline-block;
     }
 </style>
