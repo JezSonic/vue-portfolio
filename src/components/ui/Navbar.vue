@@ -51,11 +51,11 @@
             href: "/projects",
             current: router.currentRoute.value.path === "/projects"
         },
-        {
-            name: "navigation.privacyPolicy",
-            href: "/privacy-policy",
-            current: router.currentRoute.value.path === "/privacy-policy"
-        },
+        // {
+        //     name: "navigation.privacyPolicy",
+        //     href: "/privacy-policy",
+        //     current: router.currentRoute.value.path === "/privacy-policy"
+        // },
         { name: "navigation.contact", href: "/contact", current: router.currentRoute.value.path === "/contact" }
     ]);
 

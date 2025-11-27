@@ -98,17 +98,17 @@ const routes: Array<RouteRecordRaw> = [
   //     requires_backend: false,
   //   }
   // },
-  {
-    name: 'privacy-policy',
-    path: '/privacy-policy',
-    component: () => import('../views/PrivacyPolicyView.vue'),
-    meta: {
-      title: 'Privacy Policy',
-      description: 'Read the Privacy Policy for this website.',
-      keywords: 'privacy, policy, data, security, legal',
-      requires_backend: false,
-    }
-  },
+  // {
+  //   name: 'privacy-policy',
+  //   path: '/privacy-policy',
+  //   component: () => import('../views/PrivacyPolicyView.vue'),
+  //   meta: {
+  //     title: 'Privacy Policy',
+  //     description: 'Read the Privacy Policy for this website.',
+  //     keywords: 'privacy, policy, data, security, legal',
+  //     requires_backend: false,
+  //   }
+  // },
   {
     name: 'auth',
     path: '/auth',
