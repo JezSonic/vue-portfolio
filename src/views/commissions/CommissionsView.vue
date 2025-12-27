@@ -56,8 +56,7 @@ const goTo = (url: string) => {
         <div class="mb-8">
             <h2 class="text-2xl font-bold text-blue-600 mb-6">{{ t('commissionsView.projects.title') }}</h2>
             <div class="grid gap-6 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
-                <Tile :background-image="irenka" hover-shadow-color="#70685b" v-once>
-                    <h3 class="text-2xl/7 font-display font-medium text-blue-600 mb-2">{{ t('commissionsView.projects.irenka.tileTitle') }}</h3>
+                <Tile :background-image="irenka" hover-shadow-color="#70685b" v-once :title="t('commissionsView.projects.irenka.tileTitle')">
                     <div class="space-y-3">
                         <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.irenka.title') }}</h4>
                         <p class="!text-white">{{ t('commissionsView.projects.irenka.subtitle') }}</p>
@@ -72,25 +71,25 @@ const goTo = (url: string) => {
                         </div>
                     </div>
                 </Tile>
-                <Tile :background-image="old_website" hover-shadow-color="#00459280" v-once>
-                    <h3 class="text-2xl/7 font-display font-medium text-blue-600 mb-2">{{ t('commissionsView.projects.oldWebsite.tileTitle') }}</h3>
-                    <div class="space-y-3">
-                        <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.oldWebsite.title') }}</h4>
-                        <p class="!text-white"><i>{{ t('commissionsView.projects.oldWebsite.subtitle') }}</i></p>
-                        <div class="flex flex-wrap gap-2 my-3">
-                            <Badge text="Vue.js" icon="fa-vuejs" bg_color="#42b883" link="https://vuejs.org/" />
-                            <Badge text="SCSS" icon="fa-sass" bg_color="#cd6799" link="https://sass-lang.com/" />
-                            <Badge text="TypeScript" icon="fa-code" bg_color="#3178c6" link="https://www.typescriptlang.org/" />
+                <Tile :background-image="old_website" hover-shadow-color="#00459280" v-once text-class="h-full" :title="t('commissionsView.projects.oldWebsite.tileTitle')">
+                    <div class="flex flex-col justify-between h-full pb-6">
+                        <div class="space-y-3">
+                            <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.oldWebsite.title') }}</h4>
+                            <p class="!text-white"><i>{{ t('commissionsView.projects.oldWebsite.subtitle') }}</i></p>
+                            <div class="flex flex-wrap gap-2 my-3">
+                                <Badge text="Vue.js" icon="fa-vuejs" bg_color="#42b883" link="https://vuejs.org/" />
+                                <Badge text="SCSS" icon="fa-sass" bg_color="#cd6799" link="https://sass-lang.com/" />
+                                <Badge text="TypeScript" icon="fa-code" bg_color="#3178c6" link="https://www.typescriptlang.org/" />
+                            </div>
+                            <p class="!text-gray-300">{{ t('commissionsView.projects.oldWebsite.description') }}</p>
                         </div>
-                        <p class="!text-gray-300">{{ t('commissionsView.projects.oldWebsite.description') }}</p>
                         <div class="flex justify-end mt-4">
                             <Button @click="goTo('https://old-newdev.web.app')" variant="primary" :text="t('commissionsView.projects.oldWebsite.viewButton')" />
                         </div>
                     </div>
                 </Tile>
 
-                <Tile :background-image="artist" hover-shadow-color="#f7af3260" v-once>
-                    <h3 class="text-2xl/7 font-display font-medium text-blue-600 mb-2">{{ t('commissionsView.projects.artist.tileTitle') }}</h3>
+                <Tile :background-image="artist" hover-shadow-color="#f7af3260" v-once :title="t('commissionsView.projects.artist.tileTitle')">
                     <div class="space-y-3">
                         <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.artist.title') }}</h4>
                         <p class="!text-white">{{ t('commissionsView.projects.artist.subtitle') }}</p>
@@ -105,8 +104,7 @@ const goTo = (url: string) => {
                     </div>
                 </Tile>
 
-                <Tile :background-image="maszyna_reloaded" hover-shadow-color="#70685b" v-once>
-                    <h3 class="text-2xl/7 font-display font-medium text-blue-600 mb-2">{{ t('commissionsView.projects.maszyna.tileTitle') }}</h3>
+                <Tile :background-image="maszyna_reloaded" hover-shadow-color="#70685b" v-once :title="t('commissionsView.projects.maszyna.tileTitle') ">
                     <div class="space-y-3">
                         <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.maszyna.title') }}</h4>
                         <p class="!text-white">{{ t('commissionsView.projects.maszyna.subtitle') }}</p>
@@ -127,9 +125,8 @@ const goTo = (url: string) => {
         <div class="mb-8">
             <h2 class="text-2xl font-bold text-blue-600 mb-6">Unfinished projects</h2>
             <div class="grid gap-6 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
-                <Tile hover-shadow-color="#70685b" v-once>
+                <Tile hover-shadow-color="#70685b" v-once title="Foxy Adventure">
                     <div class="space-y-3">
-                        <h4 class="text-xl font-semibold text-blue-500">Foxy Adventure</h4>
                         <div class="flex flex-wrap gap-2 my-3">
                             <Badge text="Godot Engine" icon="fa-gamepad" bg_color="#4d9fdc" link="https://godotengine.org/" />
                         </div>
@@ -142,8 +139,7 @@ const goTo = (url: string) => {
                     </div>
                 </Tile>
 
-                <Tile hover-shadow-color="#70685b" v-once>
-                    <h3 class="text-2xl/7 font-display font-medium text-blue-600 mb-2">RCKU Stories</h3>
+                <Tile hover-shadow-color="#70685b" v-once title="RCKU Stories">
                     <div class="space-y-3">
                         <div class="flex flex-wrap gap-2 my-3">
                             <Badge text="Godot Engine" icon="fa-gamepad" bg_color="#4d9fdc" link="https://godotengine.org/" />
@@ -155,8 +151,7 @@ const goTo = (url: string) => {
                     </div>
                 </Tile>
 
-                <Tile hover-shadow-color="#00459280" v-once>
-                    <h3 class="text-2xl/7 font-display font-medium text-blue-600 mb-2">Super Duper Disco</h3>
+                <Tile hover-shadow-color="#00459280" v-once title="Super Duper Disco">
                     <div class="space-y-3">
                         <p class="!text-white">Small game made for <a class="text-blue-500 hover:text-blue-400 font-semibold" href="https://itch.io/jam/godocikowy-dzem-4">Godocikowy Dżem #4</a></p>
                         <div class="flex flex-wrap gap-2 my-3">
@@ -169,8 +164,7 @@ const goTo = (url: string) => {
                     </div>
                 </Tile>
 
-                <Tile hover-shadow-color="#f7af3260" v-once>
-                    <h3 class="text-2xl/7 font-display font-medium text-blue-600 mb-2">Furry Potato</h3>
+                <Tile hover-shadow-color="#f7af3260" v-once title="Furry Potato">
                     <div class="space-y-3">
                         <p class="!text-white">Small game made for <a class="text-blue-500 hover:text-blue-400 font-semibold" href="https://itch.io/jam/godocikowy-dzem-5">Godocikowy Dżem #5</a></p>
                         <div class="flex flex-wrap gap-2 my-3">
