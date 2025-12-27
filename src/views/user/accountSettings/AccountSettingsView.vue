@@ -30,7 +30,6 @@
     // Tab management
     const tabs = ref([
         { id: "profile", label: "accountSettingsView.tabs.profile" },
-        { id: "accounts", label: "accountSettingsView.tabs.accounts" },
         { id: "activity", label: "accountSettingsView.tabs.activity" },
         { id: "security", label: "accountSettingsView.tabs.security" }
     ]);
@@ -116,6 +115,9 @@
     }
 
     onMounted(() => {
+        if (env('ENABLED_OAUTH_PROVIDERS')?.length > 0) {
+            tabs.value.push({ id: "accounts", label: "accountSettingsView.tabs.accounts" });
+        }
         refreshUser();
     })
 
@@ -180,10 +182,10 @@
                 </div>
             </div>
         </div>
-        <div v-else class="!text-white w-full max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div v-else class="text-white! w-full max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
             <div class="mb-8">
-                <h1 class="text-2xl font-bold !text-gray-100">{{ t("accountSettingsView.title") }}</h1>
-                <p class="mt-2 text-sm !text-gray-400">{{ t("accountSettingsView.subtitle") }}</p>
+                <h1 class="text-2xl font-bold text-gray-100!">{{ t("accountSettingsView.title") }}</h1>
+                <p class="mt-2 text-sm text-gray-400!">{{ t("accountSettingsView.subtitle") }}</p>
             </div>
 
             <!-- Mobile Tab Dropdown -->

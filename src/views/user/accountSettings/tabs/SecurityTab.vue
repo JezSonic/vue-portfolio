@@ -123,8 +123,8 @@ const deleteAccount = () => {
                 {{ t("accountSettingsView.security.title") }}</h2>
             <p class="mt-1 text-sm text-gray-400">{{ t("accountSettingsView.security.subtitle") }}</p>
         </div>
-        <div class="p-6">
-            <div class="mb-6" v-if="env('ENABLE_EMAILING')">
+        <div class="p-6 flex flex-col gap-4">
+            <div class="not-last:border-b pb-4 border-gray-700" v-if="env('ENABLE_EMAILING')">
                 <h3 class="text-sm font-medium text-gray-400 mb-2">
                     {{ t(props.userData?.has_password ? 'accountSettingsView.security.changePassword.resetButton' : 'accountSettingsView.security.changePassword.createButton') }}
                     <small class="text-xs text-gray-400 mb-4">
@@ -152,14 +152,10 @@ const deleteAccount = () => {
                     </div>
                 </div>
             </div>
-
-            <div class="pb-6 pt-6 border-t border-b border-gray-700"
-                 v-if="env('ENABLE_2FA')">
+            <div class="not-last:border-b pb-4 border-gray-700" v-if="env('ENABLE_2FA')">
                 <SecurityTwoFactorSection :userData="userData" @refreshUserData="forwardRefresh" />
             </div>
-
-            <div class="pb-6 pt-6 border-t border-b border-gray-700"
-                 v-if="env('ENABLE_DATA_EXPORT')">
+            <div class="not-last:border-b pb-4 border-gray-700" v-if="env('ENABLE_DATA_EXPORT')">
                 <h3 class="text-sm font-medium text-gray-400 mb-2">
                     {{ t("accountSettingsView.security.dataExport.title") }}
                     <small class="text-xs text-gray-400 mb-4">
@@ -192,8 +188,7 @@ const deleteAccount = () => {
                     </div>
                 </div>
             </div>
-
-            <div :class="env('ENABLE_DATA_EXPORT') && `pt-6 border-t border-gray-700`">
+            <div class="not-last:border-b pb-4 border-gray-700">
                 <h3 class="text-sm font-medium text-gray-400 mb-2">
                     {{ t("accountSettingsView.security.dangerZone.title") }}</h3>
                 <div v-if="!showDeleteConfirm">
