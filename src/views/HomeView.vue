@@ -32,10 +32,7 @@ useLazyLoad(maszynaReloadedPicRef);
         <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
             <div class="md:w-1/2">
                 <h1 class="text-4xl md:text-5xl font-bold text-blue-600 mb-4">{{ t('home.hero.greeting') }}</h1>
-                <h2 class="text-2xl md:text-3xl font-medium !text-gray-200 mb-6">{{ t('home.hero.title') }}</h2>
-<!--                <p class="text-lg !not-dark:text-white !text-gray-300 mb-6">-->
-<!--                    {{ t('home.hero.description', { years: yearsOfExperience }) }}-->
-<!--                </p>-->
+                <h2 class="text-2xl md:text-3xl font-medium text-gray-200! mb-6">{{ t('home.hero.title') }}</h2>
                 <div class="flex gap-4">
                     <Button variant="primary" @click="router.push('/projects')" size="lg">
                         {{ t('home.hero.viewProjects') }}

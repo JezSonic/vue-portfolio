@@ -227,7 +227,7 @@
             <!-- Desktop and Mobile Layout -->
             <div class="flex flex-col md:flex-row gap-6">
                 <!-- Desktop Tab Navigation (Left Side) -->
-                <div class="hidden md:block w-64 flex-shrink-0">
+                <div class="hidden md:block w-64 shrink-0">
                     <div class="bg-gray-800 rounded-lg shadow">
                         <div class="p-4">
                             <h3 class="text-sm font-medium text-gray-400 mb-3">Settings</h3>

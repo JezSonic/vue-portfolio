@@ -26,7 +26,7 @@
 </script>
 
 <template>
-    <div :class="`contain-content rounded-xl p-6 shadow-sm ${props.backgroundImage == null ? 'bg-gray-800' : 'background-image'}`">
+    <div :class="`contain-content rounded-xl p-6 shadow-sm ${props.backgroundImage == null ? 'bg-gray-800' : 'background-image bg-blend-darken'}`">
         <div :class="`${props.badges ? 'text__badges' : 'text'} ${props.textClass}`">
             <h2 class="text-2xl/7 font-display font-medium text-blue-600 mb-2">{{ props.title }}</h2>
             <slot name="default" />
@@ -39,8 +39,6 @@
 
 <style scoped lang="scss">
     .background-image {
-        background-blend-mode: darken;
         background: rgba(0, 0, 0, .6) v-bind("`url('${backgroundImage}')`") no-repeat 50% 50% / cover;
     }
-
 </style>

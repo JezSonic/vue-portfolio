@@ -25,7 +25,7 @@
 <template>
     <MouseAura />
     <Navbar v-if="router.currentRoute.value.name !== 'error_404'"/>
-    <main class="min-h-full place-items-center px-6 py-6 pt-16 h-[100vh]">
+    <main class="min-h-full place-items-center px-6 py-6 pt-16 h-screen">
         <router-view v-slot="{ Component }">
             <Suspense>
                 <template #default>

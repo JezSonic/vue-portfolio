@@ -60,6 +60,7 @@
       "createSuccess": "Hasło zostało pomyślnie utworzone!",
       "redirecting": "Przekierowywanie do strony logowania...",
       "errors": {
+        "accountNotFound": "Konto nie zostało znalezione. Sprawdź swój e-mail lub utwórz nowe konto.",
         "passwordsDoNotMatch": "Hasła nie pasują do siebie",
         "invalidToken": "Podano nieprawidłowy token",
         "tokenExpired": "Podany token jest nieaktualny. Poproś o ponowne zresetowanie/utworzenie hasła.",

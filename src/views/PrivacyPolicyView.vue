@@ -10,7 +10,7 @@ const { t } = useI18n();
         <!-- Header Section -->
         <div class="mb-6 sm:mb-8 text-center">
             <h1 class="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">{{ t('privacyPolicy.title') }}</h1>
-            <p class="!text-gray-400">{{ t('privacyPolicy.lastUpdated') }}</p>
+            <p class="text-gray-400!">{{ t('privacyPolicy.lastUpdated') }}</p>
         </div>
 
         <!-- Introduction -->
@@ -36,54 +36,54 @@ const { t } = useI18n();
             <div class="bg-gray-700 rounded-lg p-4 sm:p-6">
                 <ul class="space-y-4">
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-[160px] sm:max-w-[160px]">{{ t('privacyPolicy.interpretationDefinitions.definitions.account') }}:</span>
+                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.account') }}:</span>
                         <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.accountDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-[160px] sm:max-w-[160px]">{{ t('privacyPolicy.interpretationDefinitions.definitions.company') }}:</span>
+                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.company') }}:</span>
                         <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.companyDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-[160px] sm:max-w-[160px]">{{ t('privacyPolicy.interpretationDefinitions.definitions.cookies') }}:</span>
+                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.cookies') }}:</span>
                         <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.cookiesDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-[160px] sm:max-w-[160px]">{{ t('privacyPolicy.interpretationDefinitions.definitions.country') }}:</span>
+                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.country') }}:</span>
                         <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.countryDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-[160px] sm:max-w-[160px]">{{ t('privacyPolicy.interpretationDefinitions.definitions.device') }}:</span>
+                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.device') }}:</span>
                         <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.deviceDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-[160px] sm:max-w-[160px]">{{ t('privacyPolicy.interpretationDefinitions.definitions.personalData') }}:</span>
+                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.personalData') }}:</span>
                         <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.personalDataDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-[160px] sm:max-w-[160px]">{{ t('privacyPolicy.interpretationDefinitions.definitions.service') }}:</span>
+                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.service') }}:</span>
                         <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.serviceDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-[160px] sm:max-w-[160px]">{{ t('privacyPolicy.interpretationDefinitions.definitions.serviceProvider') }}:</span>
+                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.serviceProvider') }}:</span>
                         <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.serviceProviderDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-[160px] sm:max-w-[160px]">{{ t('privacyPolicy.interpretationDefinitions.definitions.thirdPartySocialMedia') }}:</span>
+                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.thirdPartySocialMedia') }}:</span>
                         <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.thirdPartySocialMediaDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-[160px] sm:max-w-[160px]">{{ t('privacyPolicy.interpretationDefinitions.definitions.usageData') }}:</span>
+                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.usageData') }}:</span>
                         <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.usageDataDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-[160px] sm:max-w-[160px]">{{ t('privacyPolicy.interpretationDefinitions.definitions.website') }}:</span>
+                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.website') }}:</span>
                         <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.websiteDesc') }} 
                             <a class="font-semibold text-blue-600 hover:text-blue-500" href="https://newdev.web.app/">https://newdev.web.app/</a> and 
                             <a class="font-semibold text-blue-600 hover:text-blue-500" href="https://newdev.pl/">https://newdev.pl/</a>
                         </span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-[160px] sm:max-w-[160px]">{{ t('privacyPolicy.interpretationDefinitions.definitions.you') }}:</span>
+                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.you') }}:</span>
                         <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.youDesc') }}</span>
                     </li>
                 </ul>

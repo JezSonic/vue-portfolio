@@ -97,7 +97,7 @@
         <Loading v-if="isLoading && !error" :loading="true" />
         <div v-else-if="userData != null" class="text-gray-900 dark:text-white w-full max-w-6xl mx-auto px-4 py-8">
             <!-- Profile Header -->
-            <div class="bg-gradient-to-r from-blue-900 to-purple-900 rounded-t-lg p-6 shadow-lg">
+            <div class="bg-linear-to-r from-blue-900 to-purple-900 rounded-t-lg p-6 shadow-lg">
                 <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
                     <div class="relative z-0">
                         <img
@@ -118,7 +118,7 @@
                         </div>
                     </div>
                     <div class="text-center md:text-left">
-                        <h1 class="text-3xl font-bold !text-white mb-2 truncate max-w-full">{{ userData?.name }}</h1>
+                        <h1 class="text-3xl font-bold text-white! mb-2 truncate max-w-full">{{ userData?.name }}</h1>
                         <div class="flex flex-wrap justify-center md:justify-start gap-2 mb-4">
                             <Badge
                                 v-if="connectedSocialAccounts.includes(EOAuthProvider.Google)"
@@ -135,15 +135,15 @@
                                 text_color="#ffffff"
                             />
                         </div>
-                        <p class="!text-gray-100 flex items-center flex-wrap">
-                            <font-awesome-icon icon="fa-solid fa-envelope" class="flex-shrink-0 mr-2" />
-                            <span class="truncate max-w-[200px] sm:max-w-[300px] md:max-w-[400px]">{{ userData?.email
+                        <p class="text-gray-100! flex items-center flex-wrap">
+                            <font-awesome-icon icon="fa-solid fa-envelope" class="shrink-0 mr-2" />
+                            <span class="truncate max-w-50 sm:max-w-75 md:max-w-100">{{ userData?.email
                                 }}</span>
                             <span v-if="userData?.email_verified_at"
-                                  class="ml-2 px-2 py-0.5 bg-green-900 text-green-300 rounded-full text-xs flex-shrink-0">{{ t("userProfileView.emailStatus.verified")
+                                  class="ml-2 px-2 py-0.5 bg-green-900 text-green-300 rounded-full text-xs shrink-0">{{ t("userProfileView.emailStatus.verified")
                                 }}</span>
                             <span v-else
-                                  class="ml-2 px-2 py-0.5 bg-yellow-900 text-yellow-300 rounded-full text-xs flex-shrink-0">{{ t("userProfileView.emailStatus.notVerified")
+                                  class="ml-2 px-2 py-0.5 bg-yellow-900 text-yellow-300 rounded-full text-xs shrink-0">{{ t("userProfileView.emailStatus.notVerified")
                                 }}</span>
                         </p>
                     </div>
@@ -189,7 +189,7 @@
                             <div class="space-y-3">
                                 <div class="flex items-start">
                                     <div v-once
-                                         class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-900 flex items-center justify-center">
+                                         class="shrink-0 h-10 w-10 rounded-full bg-blue-900 flex items-center justify-center">
                                         <font-awesome-icon icon="fa-solid fa-plus" class="text-blue-300" />
                                     </div>
                                     <div class="ml-4">
@@ -205,7 +205,7 @@
                                 </div>
                                 <div class="flex items-start">
                                     <div v-once
-                                         class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-900 flex items-center justify-center">
+                                         class="shrink-0 h-10 w-10 rounded-full bg-purple-900 flex items-center justify-center">
                                         <font-awesome-icon icon="fa-solid fa-edit" class="text-purple-300" />
                                     </div>
                                     <div class="ml-4">
@@ -233,14 +233,14 @@
                         <div class="bg-gray-750 rounded-lg p-4 shadow-inner" v-if="userData?.google">
                             <div class="flex items-center">
                                 <div v-once
-                                     class="flex-shrink-0 h-12 w-12 rounded-full bg-white flex items-center justify-center">
+                                     class="shrink-0 h-12 w-12 rounded-full bg-white flex items-center justify-center">
                                     <font-awesome-icon class="text-2xl" style="color: #DB4437;"
                                                        :icon="['fab', 'google']" />
                                 </div>
                                 <div class="ml-4 overflow-hidden">
                                     <h3 v-once class="text-lg font-medium text-gray-700 dark:text-gray-300">
                                         {{ t("userProfileView.connectedAccounts.google") }}</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400 truncate max-w-[400px] sm:max-w-full">
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 truncate max-w-100 sm:max-w-full">
                                         {{ userData?.google?.email }}</p>
                                 </div>
                             </div>
@@ -250,19 +250,19 @@
                         <div class="bg-gray-750 rounded-lg p-4 shadow-inner" v-if="userData?.github">
                             <div class="flex items-center">
                                 <div v-once
-                                     class="flex-shrink-0 h-12 w-12 rounded-full bg-gray-900 flex items-center justify-center">
+                                     class="shrink-0 h-12 w-12 rounded-full bg-gray-900 flex items-center justify-center">
                                     <font-awesome-icon class="text-2xl text-white" :icon="['fab', 'github']" />
                                 </div>
                                 <div class="ml-4 overflow-hidden">
                                     <h3 v-once class="text-lg font-medium text-gray-700 dark:text-gray-300">
                                         {{ t("userProfileView.connectedAccounts.github") }}</h3>
-                                    <div class="flex flex-row gap-[6px]">
-                                        <p class="text-sm text-gray-500 dark:text-gray-400 truncate !max-w-[200px] sm:max-w-full">
+                                    <div class="flex flex-row gap-1.5">
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 truncate max-w-50! sm:max-w-full">
                                             {{ userData?.github?.login }}</p>
-                                        <p class="text-sm text-gray-500 dark:text-gray-400 truncate !max-w-[200px] sm:max-w-full"
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 truncate max-w-50! sm:max-w-full"
                                            v-if="userData?.github?.location">
                                             <font-awesome-icon icon="fa-solid fa-map-marker-alt"
-                                                               class="mr-1 flex-shrink-0" />
+                                                               class="mr-1 shrink-0" />
                                             {{ userData?.github?.location }}
                                         </p>
                                     </div>

@@ -62,7 +62,3 @@ const confirm2FA = () => {
     </div>
 </BaseModal>
 </template>
-
-<style scoped lang="scss">
-
-</style>

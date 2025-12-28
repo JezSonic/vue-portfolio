@@ -33,6 +33,8 @@ import {
     faCalendar,
     faMapMarkerAlt,
     faClock,
+    faEye,
+    faEyeSlash,
     faCircleExclamation, faSignInAlt
 } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -62,7 +64,7 @@ library.add(
     faCode, faLink, faVuejs, faPhp, faLaravel, faCircleExclamation, faSignInAlt, faCss,
     faNodeJs, faDocker, faSass, faJs, faHtml5, faHouse, faUserSlash, faLock, faUnity,
     faCss3Alt, faGitAlt, faGoogle, faReact, faWordpress, faDatabase, faGamepad, faDiscord, faLinkedin, faEnvelope, faTelegram, faGithub, faLanguage,
-    faSun, faMoon, faUserCircle, faPlus, faEdit, faCalendar, faMapMarkerAlt, faClock
+    faSun, faMoon, faUserCircle, faPlus, faEdit, faCalendar, faMapMarkerAlt, faClock, faEye, faEyeSlash
 )
 
 const pinia = createPinia()

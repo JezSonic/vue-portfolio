@@ -34,10 +34,6 @@
                 loading.value = false;
             })
     })
-
-    const goToSettings = () => {
-        router.push('/user/settings');
-    }
 </script>
 
 <template>

@@ -156,7 +156,7 @@ const goToNextPage = () => setPage(currentPage.value + 1);
                                     {{ t("accountSettingsView.activity.table.loginMethod") }}
                                 </div>
                                 <div class="text-sm text-gray-300 mt-1 flex items-center">
-                                    <SvgIcon type="mdi" :path="formatLoginMethod(login.login_method).icon" :size="16" class="mr-1.5 flex-shrink-0" />
+                                    <SvgIcon type="mdi" :path="formatLoginMethod(login.login_method).icon" :size="16" class="mr-1.5 shrink-0" />
                                     <span class="truncate">{{ formatLoginMethod(login.login_method).label }}</span>
                                 </div>
                             </div>
@@ -174,14 +174,14 @@ const goToNextPage = () => setPage(currentPage.value + 1);
                                 </div>
                                 <div class="text-sm text-gray-300 mt-1">
                                     <div class="flex items-center mb-1">
-                                        <SvgIcon type="mdi" :path="parseUserAgent(login.user_agent).deviceType" :size="16" class="mr-1.5 flex-shrink-0" />
+                                        <SvgIcon type="mdi" :path="parseUserAgent(login.user_agent).deviceType" :size="16" class="mr-1.5 shrink-0" />
                                         <span>{{ parseUserAgent(login.user_agent).fullInfo }}</span>
                                     </div>
                                     <div class="text-xs text-gray-400 mt-1 cursor-pointer hover:text-gray-300 transition-colors" 
                                          @click="$event.target.nextElementSibling.classList.toggle('hidden')">
                                         Show technical details
                                     </div>
-                                    <div class="text-xs text-gray-400 mt-1 break-words hidden">
+                                    <div class="text-xs text-gray-400 mt-1 wrap-break-word hidden">
                                         {{ login.user_agent }}
                                     </div>
                                 </div>
@@ -243,28 +243,28 @@ const goToNextPage = () => setPage(currentPage.value + 1);
                             <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                                 {{ timestampToDate(login.performed_at) }}
                             </td>
-                            <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-[80px] sm:max-w-[150px] truncate">
+                            <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-20 sm:max-w-37.5 truncate">
                                 {{ login.ip_address }}
                             </td>
-                            <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-[80px] sm:max-w-[150px]">
+                            <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-20 sm:max-w-37.5">
                                 <div class="flex items-center">
-                                    <SvgIcon type="mdi" :path="formatLoginMethod(login.login_method).icon" :size="16" class="mr-1.5 flex-shrink-0" />
+                                    <SvgIcon type="mdi" :path="formatLoginMethod(login.login_method).icon" :size="16" class="mr-1.5 shrink-0" />
                                     <span class="truncate">{{ formatLoginMethod(login.login_method).label }}</span>
                                 </div>
                             </td>
-                            <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-[80px] sm:max-w-[150px] truncate">
+                            <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-20 sm:max-w-37.5 truncate">
                                 {{ login.location || "Unknown location" }}
                             </td>
-                            <td class="px-3 sm:px-6 py-4 text-sm text-gray-300 max-w-[100px] sm:max-w-[200px] md:max-w-[300px]">
+                            <td class="px-3 sm:px-6 py-4 text-sm text-gray-300 max-w-25 sm:max-w-50 md:max-w-75">
                                 <div class="flex items-center">
-                                    <SvgIcon type="mdi" :path="parseUserAgent(login.user_agent).deviceType" :size="16" class="mr-1.5 flex-shrink-0" />
+                                    <SvgIcon type="mdi" :path="parseUserAgent(login.user_agent).deviceType" :size="16" class="mr-1.5 shrink-0" />
                                     <span class="truncate">{{ parseUserAgent(login.user_agent).fullInfo }}</span>
                                 </div>
                                 <div class="text-xs text-gray-400 mt-1 cursor-pointer hover:text-gray-300 transition-colors" 
                                      @click="$event.target.nextElementSibling.classList.toggle('hidden')">
                                     Show technical details
                                 </div>
-                                <div class="text-xs text-gray-400 mt-1 break-words hidden">
+                                <div class="text-xs text-gray-400 mt-1 wrap-break-word hidden">
                                     {{ login.user_agent }}
                                 </div>
                             </td>

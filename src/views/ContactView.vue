@@ -46,12 +46,12 @@ const goTo = (url: string) => {
             <!-- Email Card -->
             <Tile :title="t('contactView.email.title')" text-class="flex flex-col h-full" hover-shadow-color="#92550066" :background-image="mail_img">
                 <div class="flex flex-col justify-between h-full">
-                    <p class="!text-white mb-4">{{ t('contactView.email.description') }}</p>
+                    <p class="text-white! mb-4">{{ t('contactView.email.description') }}</p>
                     <div class="flex flex-col sm:flex-row items-start sm:items-center">
                         <Button variant="primary" @click="goTo('mailto:karoltomaszewskimusic@gmail.com')">
                             {{ t('contactView.email.sendButton') }}
                         </Button>
-                        <span class="mt-2 sm:mt-0 sm:ml-3 !text-gray-300 break-all">karoltomaszewskimusic@gmail.com</span>
+                        <span class="mt-2 sm:mt-0 sm:ml-3 text-gray-300! break-all">karoltomaszewskimusic@gmail.com</span>
                     </div>
                 </div>
             </Tile>
@@ -59,10 +59,10 @@ const goTo = (url: string) => {
             <!-- Discord Card -->
             <Tile :title="t('contactView.discord.title')" text-class="flex flex-col h-full" :background-image="discord_img" hover-shadow-color="#00459280">
                 <div class="flex flex-col justify-between h-full">
-                    <p class="!text-white mb-4">{{ t('contactView.discord.description') }}</p>
-                    <div class="!bg-gray-700 p-3 rounded-lg inline-block shrink-0 max-w-max overflow-x-auto">
-                        <h3 class="!text-white font-medium">{{ t('contactView.discord.username') }}: dos_cutey</h3>
-                        <h4 class="!text-gray-300 text-sm">{{ t('contactView.discord.previous') }}: DoS#5905</h4>
+                    <p class="text-white! mb-4">{{ t('contactView.discord.description') }}</p>
+                    <div class="bg-gray-700! p-3 rounded-lg inline-block shrink-0 max-w-max overflow-x-auto">
+                        <h3 class="text-white! font-medium">{{ t('contactView.discord.username') }}: dos_cutey</h3>
+                        <h4 class="text-gray-300! text-sm">{{ t('contactView.discord.previous') }}: DoS#5905</h4>
                     </div>
                 </div>
             </Tile>
@@ -70,12 +70,12 @@ const goTo = (url: string) => {
             <!-- Telegram Card -->
             <Tile :title="t('contactView.telegram.title')" text-class="flex flex-col h-full" hover-shadow-color="#92550066" :background-image="telegram_img">
                 <div class="flex flex-col justify-between h-full">
-                    <p class="!text-white mb-4">{{ t('contactView.telegram.description') }}</p>
+                    <p class="text-white! mb-4">{{ t('contactView.telegram.description') }}</p>
                     <div class="flex flex-col sm:flex-row items-start sm:items-center">
                         <Button variant="primary" @click="goTo('https://t.me/Futrzasty')">
                             {{ t('contactView.telegram.messageButton') }}
                         </Button>
-                        <span class="mt-2 sm:mt-0 sm:ml-3 !text-gray-300">@Futrzasty</span>
+                        <span class="mt-2 sm:mt-0 sm:ml-3 text-gray-300!">@Futrzasty</span>
                     </div>
                 </div>
             </Tile>

@@ -12,6 +12,7 @@
     import { env, getSupportedOAuthProviders } from "@/helpers/app.ts";
     import { GoogleLogin } from "vue3-google-login";
     import { useAuthStore } from "@/stores/authStore.ts";
+    import { useThemeStore } from "@/stores/themeStore.ts";
 
     const password = ref<string>("");
     const email = ref<string>("");
@@ -29,6 +30,8 @@
     const isRegisterLoading = ref<boolean>(false);
     const isGoogleLoading = ref<boolean>(false);
     const isGithubLoading = ref<boolean>(false);
+    const showPassword = ref<boolean>(false);
+    const accountNotFound = ref<boolean>(false);
 
 
     if (userStore.id !== null) {
@@ -39,6 +42,7 @@
 
     const login = () => {
         isLoginLoading.value = true;
+        accountNotFound.value = false;
         ApiService.getIP().then((data) => {
             AuthService.login(email.value, password.value, data.ip)
                 .then((res) => {
@@ -54,6 +58,8 @@
                     if (e.message == "2fa_required") {
                         showTwoFAModal.value = true;
                         twoFactorCode.value = "";
+                    } else if (e.message == "account_not_found") {
+                        accountNotFound.value = true;
                     }
                     isLoginLoading.value = false;
                 });
@@ -130,6 +136,13 @@
             </div>
 
             <div class="space-y-6">
+                <div v-if="accountNotFound" class="bg-red-500/20 border border-red-500/50 rounded-md p-3 mb-4">
+                    <div class="flex items-center">
+                        <font-awesome-icon :icon="['fas', 'circle-exclamation']" class="text-red-400 mr-2" />
+                        <p class="text-red-200 text-sm">{{ t("authView.resetPassword.errors.accountNotFound") }}</p>
+                    </div>
+                </div>
+
                 <div>
                     <label class="text-gray-300 block text-sm font-medium mb-1" for="email">
                         {{ t("authView.form.emailLabel") }}
@@ -159,11 +172,20 @@
                                for="password"
                                @click="AuthService.requestPasswordReset(email)">{{ t("authView.form.forgotPasswordLabel") }}</label>
                     </div>
-                    <input id="password" v-model="password" :placeholder="t('authView.form.passwordPlaceholder')"
-                           :required="true" autocomplete="current-password"
-                           class="block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           name="password"
-                           type="password" />
+                    <div class="relative">
+                        <input id="password" v-model="password" :placeholder="t('authView.form.passwordPlaceholder')"
+                               :required="true" autocomplete="current-password"
+                               class="block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 pr-10 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               name="password"
+                               :type="showPassword ? 'text' : 'password'" />
+                        <button
+                            type="button"
+                            @click="showPassword = !showPassword"
+                            class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-500 focus:outline-none"
+                        >
+                            <font-awesome-icon :icon="['fas', showPassword ? 'eye-slash' : 'eye']" />
+                        </button>
+                    </div>
                 </div>
 
                 <div v-if="hasAccount">
@@ -203,7 +225,7 @@
                 </p>
             </div>
 
-            <div v-if="getSupportedOAuthProviders().length > 0" class="mt-6">
+            <div v-if="getSupportedOAuthProviders()?.length > 0 || false" class="mt-6">
                 <div class="flex justify-between items-center mb-4">
                     <hr class="border-gray-700 w-full" />
                     <span class="px-3 text-gray-400 font-medium text-nowrap">{{ t("authView.oauth.title") }}</span>
@@ -213,20 +235,20 @@
                     <Button
                         variant="secondary"
                         full-width
-                        class="max-w-[290px]"
+                        class="max-w-72.5"
                         :text="t('authView.oauth.google')"
-                        v-if="getSupportedOAuthProviders().includes(EOAuthProvider.Google)"
+                        v-if="getSupportedOAuthProviders()?.includes(EOAuthProvider.Google) || false"
                         @click="performOAuth(EOAuthProvider.Google)"
                         :loading="isGithubLoading">
                         <font-awesome-icon class="mr-2" :icon="['fab', 'google']" />
                     </Button>
-                    <GoogleLogin v-if="getSupportedOAuthProviders().includes(EOAuthProvider.GoogleOneTap)" :callback="callback" :id-configuration="{use_fedcm_for_button: true}" :button-config="{text: 'continue_with', theme: useThemeStore().theme == 'dark' ? 'filled_black' : 'filled_white'}"/>
+                    <GoogleLogin v-if="getSupportedOAuthProviders()?.includes(EOAuthProvider.GoogleOneTap) || false" :callback="callback" :id-configuration="{use_fedcm_for_button: true}" :button-config="{text: 'continue_with', theme: useThemeStore().theme == 'dark' ? 'filled_black' : 'filled_white'}"/>
                     <Button 
                         variant="secondary"
                         full-width
-                        class="max-w-[290px]"
+                        class="max-w-72.5"
                         :text="t('authView.oauth.github')" 
-                        v-if="getSupportedOAuthProviders().includes(EOAuthProvider.GitHub)"
+                        v-if="getSupportedOAuthProviders()?.includes(EOAuthProvider.GitHub) || false"
                         @click="performOAuth(EOAuthProvider.GitHub)" 
                         :loading="isGithubLoading">
                         <font-awesome-icon class="mr-2" :icon="['fab', 'github']" />

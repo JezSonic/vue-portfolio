@@ -48,7 +48,7 @@
     };
 
     const buttonClasses = computed(() => {
-        const baseClasses = "rounded-md font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 cursor-pointer flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95";
+        const baseClasses = "rounded-md font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 !cursor-pointer flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95";
 
         // Size classes
         const sizeClasses = {

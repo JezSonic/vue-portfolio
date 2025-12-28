@@ -145,7 +145,7 @@ const avatarUrl = () => {
                             :alt="t('userProfileView.alt.profilePicture')"
                             class="w-28 h-28 rounded-full object-cover border-4 border-gray-700"
                         >
-                        <p class="mt-4 text-xs text-gray-400 text-center max-w-[200px]">
+                        <p class="mt-4 text-xs text-gray-400 text-center max-w-50">
                             {{ t("accountSettingsView.profile.avatarHelp") }}
                         </p>
                         <Button
@@ -165,11 +165,11 @@ const avatarUrl = () => {
                             </dt>
                             <dd class="mt-1 text-sm text-gray-300 sm:col-span-2 sm:mt-0">
                                 <div v-if="!isEditingName" class="flex items-center">
-                                    <span class="truncate max-w-[200px] sm:max-w-[300px] md:max-w-full">{{ userData?.name }}</span>
+                                    <span class="truncate max-w-50 sm:max-w-75 md:max-w-full">{{ userData?.name }}</span>
                                     <Button 
                                         variant="link" 
                                         size="sm" 
-                                        class="ml-2 flex-shrink-0" 
+                                        class="ml-2 shrink-0"
                                         @click="startEditName"
                                     >
                                         <svg class="h-4 w-4" fill="none"
@@ -225,7 +225,7 @@ const avatarUrl = () => {
                             <dd class="mt-1 text-sm text-gray-300 sm:col-span-2 sm:mt-0">
                                 <div class="flex flex-col">
                                     <div class="flex items-center gap-2">
-                                        <span class="truncate max-w-[200px] sm:max-w-[300px] md:max-w-full">{{ userData?.email }}</span>
+                                        <span class="truncate max-w-50 sm:max-w-75 md:max-w-full">{{ userData?.email }}</span>
                                         <div class="flex gap-2">
                                             <Button
                                                     v-if="!userData?.email_verified_at && env('ENABLE_EMAILING')"
@@ -235,9 +235,9 @@ const avatarUrl = () => {
                                                     :loading="isVerifyEmailLoading"
                                                     :loading-text="t('accountSettingsView.profile.verifying')" />
                                             <span v-if="userData?.email_verified_at"
-                                                  class="px-2.5 py-1.5 text-xs min-w-20 bg-blue-600 text-center !text-white rounded-lg flex-shrink-0">{{ t("userProfileView.emailStatus.verified") }}</span>
+                                                  class="px-2.5 py-1.5 text-xs min-w-20 bg-blue-600 text-center text-white! rounded-lg shrink-0">{{ t("userProfileView.emailStatus.verified") }}</span>
                                             <span v-else
-                                                  class="px-2.5 py-1.5 text-xs min-w-20 bg-yellow-600 text-center !text-white rounded-lg flex-shrink-0">{{ t("userProfileView.emailStatus.notVerified") }}</span>
+                                                  class="px-2.5 py-1.5 text-xs min-w-20 bg-yellow-600 text-center text-white! rounded-lg shrink-0">{{ t("userProfileView.emailStatus.notVerified") }}</span>
                                         </div>
                                     </div>
                                     <div v-if="verificationEmailSent" class="mt-2 text-sm text-green-400">
@@ -275,7 +275,7 @@ const avatarUrl = () => {
                                         <input v-model="showProfilePublicly" class="sr-only peer"
                                                type="checkbox">
                                         <div
-                                            :class="`relative w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:!ring-blue-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all ${themeStore.theme == 'light' ? ' peer-checked:!bg-blue-500' : ' peer-checked:!bg-blue-600'}`"></div>
+                                            :class="`relative w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500! rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all ${themeStore.theme == 'light' ? ' peer-checked:bg-blue-500!' : ' peer-checked:bg-blue-600!'}`"></div>
                                         <span
                                             class="ml-3 text-sm font-medium text-gray-300">{{ showProfilePublicly ? t("accountSettingsView.profile.visibility.public") : t("accountSettingsView.profile.visibility.private") }}</span>
                                     </label>

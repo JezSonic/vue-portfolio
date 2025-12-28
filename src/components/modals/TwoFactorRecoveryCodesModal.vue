@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { I2FARecoveryCode } from "@/types/services/2fa";
+import Button from "@/components/ui/Button.vue";
+import BaseModal from "@/components/modals/BaseModal.vue";
+import { ref } from "vue";
 
 const props = defineProps({
     recoveryCodes: {
@@ -9,10 +12,6 @@ const props = defineProps({
     close: { type: Function as import('vue').PropType<() => void>, required: false }
 })
 
-const emit = defineEmits(["close"])
-import Button from "@/components/ui/Button.vue";
-import BaseModal from "@/components/modals/BaseModal.vue";
-import { ref } from "vue";
 
 const copied = ref<boolean>(false)
 const copyRecoveryCodes = async () => {
