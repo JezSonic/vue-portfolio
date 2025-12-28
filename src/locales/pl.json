@@ -399,7 +399,6 @@
       "avatarSource": {
         "title": "Źródło Awatara",
         "description": "Wybierz, które połączone konto ma być używane jako awatar profilu.",
-        "auto": "Automatycznie (użyj pierwszego dostępnego)",
         "google": "Google",
         "github": "GitHub",
         "default": "Domyślny awatar",

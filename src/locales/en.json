@@ -403,7 +403,6 @@
       "avatarSource": {
         "title": "Avatar Source",
         "description": "Select, which connected account to use for your profile avatar.",
-        "auto": "Automatic (use first available)",
         "google": "Google",
         "github": "GitHub",
         "default": "Default avatar",

@@ -93,7 +93,7 @@
                 if (data.profile_settings == undefined) {
                     data.profile_settings = {
                         is_public: true,
-                        avatar_source: "auto",
+                        avatar_source: "default",
                         theme: "dark",
                         language: "en",
                         notifications: {

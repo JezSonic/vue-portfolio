@@ -117,10 +117,6 @@ const avatarUrl = () => {
         val = props.userData.google.avatar_url;
     } else if (userStore.avatarSource === "github" && props.userData?.github?.avatar_url) {
         val = props.userData.github.avatar_url;
-    } else if (userStore.avatarSource === "auto") {
-        val = props.userData?.google?.avatar_url ||
-            props.userData?.github?.avatar_url ||
-            userDefault;
     } else {
         val = userDefault;
     }

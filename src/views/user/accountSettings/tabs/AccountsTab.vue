@@ -103,16 +103,6 @@
                     {{ t("accountSettingsView.connectedAccounts.avatarSource.description") }}</p>
 
                 <div class="space-y-2">
-                    <label class="flex items-center space-x-3">
-                        <input v-model="userStore.avatarSource"
-                               class="form-radio h-4 w-4 text-blue-600 bg-gray-700 border-gray-600 focus:ring-blue-500"
-                               type="radio"
-                               value="auto">
-                        <span
-                            class="text-sm text-gray-300">{{ t("accountSettingsView.connectedAccounts.avatarSource.auto")
-                            }}</span>
-                    </label>
-
                     <label :class="{'opacity-50': !userData?.google?.avatar_url}"
                            class="flex items-center space-x-3">
                         <input v-model="userStore.avatarSource"
