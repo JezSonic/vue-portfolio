@@ -8,7 +8,6 @@
         MenuItem,
         MenuItems
     } from "@headlessui/vue";
-    import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline";
     import router from "@/router";
     import logo from "@/assets/img/logo.webp";
     import userDefault from "@/assets/profile/userDefault.png";
@@ -20,6 +19,7 @@
     import { useI18n } from "vue-i18n";
     import { setLanguage } from "@/i18n";
     import { Lang } from "@/types/utils.d.ts";
+    import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
     interface NavigationItem {
         name: string;
@@ -90,8 +90,8 @@
                         :aria-expanded="open">
                         <span v-once class="absolute -inset-0.5" />
                         <span v-once class="sr-only">Open main menu</span>
-                        <Bars3Icon v-if="!open" class="block size-6 !text-white" aria-hidden="true" />
-                        <XMarkIcon v-else class="block size-6" aria-hidden="true" />
+                        <font-awesome-icon v-if="!open" icon="fa-solid fa-bars" class="block size-6 text-white!" aria-hidden="true"/>
+                        <font-awesome-icon v-else icon="fa-solid fa-times" class="block size-6 text-white!" aria-hidden="true"/>
                     </DisclosureButton>
                 </div>
                 <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
@@ -101,7 +101,7 @@
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
                             <a v-for="item in navigation" :key="item.href" :href="item.href"
-                               :class="[item.current ? 'bg-gray-900 text-white' : '!text-gray-300 hover:bg-gray-700 not-dark:hover:!text-gray-700 hover:text-white', 'rounded-md px-3 py-2 text-sm font-medium cursor-pointer']"
+                               :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300! hover:bg-gray-700 not-dark:hover:text-gray-700! hover:text-white', 'rounded-md px-3 py-2 text-sm font-medium cursor-pointer']"
                                :aria-current="item.href === currentRoute? 'page' : undefined">{{ t(item.name) }}</a>
                         </div>
                     </div>

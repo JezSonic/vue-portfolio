@@ -6,7 +6,7 @@ import type { ILoginHistory, IUserData } from "@/types/user.d.ts";
 import { useI18n } from "vue-i18n";
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 import { formatLoginMethod, parseUserAgent } from "@/helpers/activity.ts";
-import SvgIcon from '@jamescoyle/vue-icon';
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 const props = defineProps<{
     userData: IUserData | null;
@@ -155,9 +155,9 @@ const goToNextPage = () => setPage(currentPage.value + 1);
                                 <div class="text-xs font-medium text-gray-400 uppercase">
                                     {{ t("accountSettingsView.activity.table.loginMethod") }}
                                 </div>
-                                <div class="text-sm text-gray-300 mt-1 flex items-center">
-                                    <SvgIcon type="mdi" :path="formatLoginMethod(login.login_method).icon" :size="16" class="mr-1.5 shrink-0" />
-                                    <span class="truncate">{{ formatLoginMethod(login.login_method).label }}</span>
+                                <div class="text-sm text-gray-300 mt-1 flex items-center gap-2 ">
+                                    <font-awesome-icon :icon="formatLoginMethod(login.login_method).icon" class="shrink-0 pb-0.5" />
+                                    <span class="truncate inline-flex items-center align-middle">{{ formatLoginMethod(login.login_method).label }}</span>
                                 </div>
                             </div>
                             <div class="mb-2">
@@ -173,8 +173,8 @@ const goToNextPage = () => setPage(currentPage.value + 1);
                                     {{ t("accountSettingsView.activity.table.device") }}
                                 </div>
                                 <div class="text-sm text-gray-300 mt-1">
-                                    <div class="flex items-center mb-1">
-                                        <SvgIcon type="mdi" :path="parseUserAgent(login.user_agent).deviceType" :size="16" class="mr-1.5 shrink-0" />
+                                    <div class="flex items-center mb-1 gap-2">
+                                        <font-awesome-icon :icon="parseUserAgent(login.user_agent).deviceType" class="shrink-0 pb-0.5" />
                                         <span>{{ parseUserAgent(login.user_agent).fullInfo }}</span>
                                     </div>
                                     <div class="text-xs text-gray-400 mt-1 cursor-pointer hover:text-gray-300 transition-colors" 
@@ -247,17 +247,17 @@ const goToNextPage = () => setPage(currentPage.value + 1);
                                 {{ login.ip_address }}
                             </td>
                             <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-20 sm:max-w-37.5">
-                                <div class="flex items-center">
-                                    <SvgIcon type="mdi" :path="formatLoginMethod(login.login_method).icon" :size="16" class="mr-1.5 shrink-0" />
-                                    <span class="truncate">{{ formatLoginMethod(login.login_method).label }}</span>
+                                <div class="flex items-center gap-2 justify-center">
+                                    <font-awesome-icon :icon="formatLoginMethod(login.login_method).icon" class="shrink-0 pb-0.5" />
+                                    <span class="truncate inline-flex items-center align-middle">{{ formatLoginMethod(login.login_method).label }}</span>
                                 </div>
                             </td>
                             <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-300 max-w-20 sm:max-w-37.5 truncate">
                                 {{ login.location || "Unknown location" }}
                             </td>
                             <td class="px-3 sm:px-6 py-4 text-sm text-gray-300 max-w-25 sm:max-w-50 md:max-w-75">
-                                <div class="flex items-center">
-                                    <SvgIcon type="mdi" :path="parseUserAgent(login.user_agent).deviceType" :size="16" class="mr-1.5 shrink-0" />
+                                <div class="flex items-center gap-2">
+                                    <font-awesome-icon :icon="parseUserAgent(login.user_agent).deviceType" class="shrink-0 pb-0.5" />
                                     <span class="truncate">{{ parseUserAgent(login.user_agent).fullInfo }}</span>
                                 </div>
                                 <div class="text-xs text-gray-400 mt-1 cursor-pointer hover:text-gray-300 transition-colors" 
