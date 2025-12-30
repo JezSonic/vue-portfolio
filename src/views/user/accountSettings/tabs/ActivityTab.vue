@@ -4,7 +4,6 @@ import Loading from "@/components/ui/Loading.vue";
 import UserService from "@/services/userService.ts";
 import type { ILoginHistory, IUserData } from "@/types/user.d.ts";
 import { useI18n } from "vue-i18n";
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 import { formatLoginMethod, parseUserAgent } from "@/helpers/activity.ts";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -39,7 +38,7 @@ const paginationText = computed(() =>
 const isPrevDisabled = computed(() => currentPage.value === 1);
 const isNextDisabled = computed(() => currentPage.value === totalPages.value);
 const itemsPerPageText = computed(() => `${itemsPerPage.value} items per page`);
-
+const itemsPerPageOpen = ref<boolean>(false);
 // Debounce timer for API calls
 let loadTimer: number | null = null;
 
@@ -279,22 +278,22 @@ const goToNextPage = () => setPage(currentPage.value + 1);
                         </div>
                         <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 items-center">
                             <!-- Items per page dropdown -->
-                            <div class="dropdown-container w-full sm:w-auto">
-                                <Menu as="div" class="relative w-full sm:w-auto">
-                                    <MenuButton class="relative cursor-pointer flex items-center justify-center sm:justify-start rounded-md bg-gray-700 px-3 py-2 text-sm text-gray-300 hover:bg-gray-600 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden transition-colors w-full sm:w-auto">
+                            <div class="static w-full sm:w-auto">
+                                <div class="relative w-full sm:w-auto">
+                                    <div @click="itemsPerPageOpen = !itemsPerPageOpen" class="relative cursor-pointer flex items-center justify-center sm:justify-start rounded-md bg-gray-700 px-3 py-2 text-sm text-gray-300 hover:bg-gray-600 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden transition-colors w-full sm:w-auto">
                                         {{ itemsPerPageText }}
-                                    </MenuButton>
+                                    </div>
                                     <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-                                        <MenuItems class="fixed right-auto z-50 mt-2 w-44 origin-top-right rounded-md bg-gray-700 py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden">
-                                            <MenuItem v-for="option in itemsPerPageOptions" :key="option" v-slot="{ active }">
-                                                <a href="#" @click.prevent="setItemsPerPage(option)" :class="[active || itemsPerPage === option ? 'bg-gray-600 outline-hidden' : '', 'block px-4 py-2 text-sm text-gray-300']">
+                                        <div v-if="itemsPerPageOpen" class="fixed right-auto z-50 mt-2 w-44 origin-top-right rounded-md bg-gray-700 py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden">
+                                            <div v-for="option in itemsPerPageOptions" :key="option">
+                                                <a href="#" @click.prevent="setItemsPerPage(option)" :class="[itemsPerPage === option ? 'bg-gray-600 outline-hidden' : '', 'block px-4 py-2 text-sm text-gray-300']">
                                                     {{ option }} items per page
                                                     <span v-if="itemsPerPage === option" class="ml-2">✓</span>
                                                 </a>
-                                            </MenuItem>
-                                        </MenuItems>
+                                            </div>
+                                        </div>
                                     </transition>
-                                </Menu>
+                                </div>
                             </div>
 
                             <div class="flex space-x-2 w-full sm:w-auto justify-center">
@@ -321,13 +320,3 @@ const goToNextPage = () => setPage(currentPage.value + 1);
     </div>
 </template>
 
-<style scoped>
-.dropdown-container {
-    position: static;
-}
-
-.dropdown-container .absolute {
-    position: fixed;
-    transform: translateY(2.5rem);
-}
-</style>

@@ -19,7 +19,6 @@
         "@fortawesome/free-brands-svg-icons": "7.1.0",
         "@fortawesome/free-solid-svg-icons": "7.1.0",
         "@fortawesome/vue-fontawesome": "3.1.2",
-        "@headlessui/vue": "1.7.23",
         "@tailwindcss/vite": "4.1.18",
         "google-auth-library": "10.5.0",
         "pinia": "3.0.4",
