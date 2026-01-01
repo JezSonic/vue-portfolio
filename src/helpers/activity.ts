@@ -3,7 +3,6 @@ export const formatLoginMethod = (method: string) => {
     const methodLower = method.toLowerCase();
     let icon = ['fas', 'circle-question'];
     let label = method;
-    console.log(methodLower);
     if (methodLower.includes('google')) {
         icon = ['fab', 'google'];
         label = 'Google';
