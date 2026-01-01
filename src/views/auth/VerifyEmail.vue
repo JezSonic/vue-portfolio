@@ -24,7 +24,7 @@
                 router.push(`/user/settings`)
             })
             .catch((err: IExceptionResponse) => {
-                if (err.message == "invalid_token") {
+                if (err.content.message == "invalid_token") {
                     errorText.value = "Invalid token";
                     isInvalidToken.value = true;
                 } else {
@@ -63,13 +63,3 @@
         </div>
     </div>
 </template>
-
-<style lang="scss" scoped>
-    input {
-        transition: all 0.3s ease;
-
-        &:focus {
-            border-color: #3b82f6;
-        }
-    }
-</style>

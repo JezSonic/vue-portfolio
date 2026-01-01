@@ -34,7 +34,7 @@
                 }
             })
             .catch((err: IExceptionResponse) => {
-                if (err.message == "invalid_token") {
+                if (err.content.message == "invalid_token") {
                     errorText.value = t('authView.resetPassword.errors.invalidToken');
                     isInvalidToken.value = true;
                 }
@@ -66,7 +66,7 @@
                     }, 2000);}
             })
             .catch((err: IExceptionResponse) => {
-                if (err.message == "invalid_token") {
+                if (err.content.message == "invalid_token") {
                     errorText.value = t('authView.resetPassword.errors.invalidToken');
                     isInvalidToken.value = true;
                 } else {
@@ -113,7 +113,7 @@
                     <label class="text-gray-300 block text-sm font-medium mb-1" 
                            for="newPassword">{{ t('authView.form.newPasswordLabel') }}</label>
                     <input id="newPassword" v-model="password" :placeholder="t('authView.form.newPasswordPlaceholder')" :required="true"
-                           class="block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                           class="transition-all duration-300 ease-in-out block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                            name="password" type="password" />
                 </div>
 
@@ -121,7 +121,7 @@
                     <label class="text-gray-300 block text-sm font-medium mb-1"
                            for="confirmNewPassword">{{ t('authView.form.confirmNewPasswordLabel') }}</label>
                     <input id="confirmNewPassword" v-model="passwordConfirm" :placeholder="t('authView.form.confirmNewPasswordPlaceholder')" :required="true"
-                           class="block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                           class="transition-all duration-300 ease-in-out block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                            name="password" type="password" />
                 </div>
                 <div v-if="!isInvalidToken">
@@ -141,7 +141,7 @@
                     <label class="text-gray-300 block text-sm font-medium mb-1"
                            for="newPassword">{{ t('authView.form.newPasswordLabel') }}</label>
                     <input id="newPassword" v-model="password" :placeholder="t('authView.form.newPasswordPlaceholder')" :required="true"
-                           class="block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                           class="transition-all duration-300 ease-in-out block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                            name="password" type="password" />
                 </div>
 
@@ -149,7 +149,7 @@
                     <label class="text-gray-300 block text-sm font-medium mb-1"
                            for="confirmNewPassword">{{ t('authView.form.confirmNewPasswordLabel') }}</label>
                     <input id="confirmNewPassword" v-model="passwordConfirm" :placeholder="t('authView.form.confirmNewPasswordPlaceholder')" :required="true"
-                           class="block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                           class="transition-all duration-300 ease-in-out block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                            name="password" type="password" />
                 </div>
                 <div>
@@ -166,13 +166,3 @@
         </div>
     </div>
 </template>
-
-<style lang="scss" scoped>
-    input {
-        transition: all 0.3s ease;
-
-        &:focus {
-            border-color: #3b82f6;
-        }
-    }
-</style>

@@ -2,8 +2,22 @@
  * Enum representing supported OAuth providers.
  */
 export enum EOAuthProvider {
+
+    /**
+     * Google OAuth provider.
+     */
     Google = 'google',
+
+    /**
+     * GitHub OAuth provider.
+     */
     GitHub = 'github',
+
+    /**
+     * Experimental Google One-Tap provider.
+     *
+     * Warning: GoogleOneTap is experimental and may not work on all browsers and may not work locally
+     */
     GoogleOneTap = 'google-one-tap'
 }
 

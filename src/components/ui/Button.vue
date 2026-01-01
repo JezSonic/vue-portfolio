@@ -48,7 +48,7 @@
     };
 
     const buttonClasses = computed(() => {
-        const baseClasses = "rounded-md font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 !cursor-pointer flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95";
+        const baseClasses = "sm:focus:animate-pulse rounded-md font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 !cursor-pointer flex items-center justify-center transition-all duration-300 ease-in-out transform hover:scale-102 active:scale-95";
 
         // Size classes
         const sizeClasses = {
@@ -93,51 +93,13 @@
 <template>
     <button 
         type="button"
-        :class="buttonClasses" 
+        :class="buttonClasses"
         @click="handleClick"
         :disabled="disabled || isLoading">
-            <div v-if="isLoading" class="spinner mr-2"></div>
+            <div v-if="isLoading" class="inline-block w-4 h-4 rounded-[50%] border-t-white border-2 border-b-gray-500 animate-spin mr-2"></div>
             <slot v-if="!isLoading"></slot>
             <span v-if="props.text !== null && !isLoading">{{ props.text }}</span>
             <span v-if="props.text == null && !isLoading"><slot name="text" class="button-text"/></span>
             <span v-if="isLoading">Loading...</span>
     </button>
 </template>
-
-<style scoped>
-/* Additional animation for focus */
-@media (min-width: 640px) {
-    button:focus {
-        animation: pulse 1s;
-    }
-}
-
-@keyframes pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5);
-    }
-    70% {
-        box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
-    }
-}
-
-/* Loading spinner */
-.spinner {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    border-top-color: #fff;
-    animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-</style>

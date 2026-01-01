@@ -15,8 +15,7 @@ const goTo = (url: string) => {
 
 <template>
     <div class="container mx-auto px-4 py-6 sm:py-8">
-        <h1 class="text-3xl sm:text-4xl font-bold !text-white mb-6 sm:mb-8 text-center">{{ t('contactView.getInTouch.title') }}</h1>
-        <Tile class="mb-8">
+        <Tile class="mb-8" :title="t('contactView.getInTouch.title')">
             <p class="text-white text-base sm:text-lg mb-4">
                 {{ t('contactView.getInTouch.paragraph1') }}
             </p>
@@ -25,7 +24,7 @@ const goTo = (url: string) => {
             </p>
         </Tile>
 
-        <div class="contact-grid">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
             <!-- LinkedIn Card -->
             <Tile :title="t('contactView.linkedin.title')" text-class="flex flex-col h-full" hover-shadow-color="#0a66c280">
                 <div class="flex flex-col justify-between h-full">
@@ -82,20 +81,3 @@ const goTo = (url: string) => {
         </div>
     </div>
 </template>
-
-<style scoped lang="scss">
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-
-    @media (min-width: 768px) {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (min-width: 1024px) {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-    }
-}
-</style>

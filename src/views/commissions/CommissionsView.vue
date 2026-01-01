@@ -17,7 +17,7 @@ const goTo = (url: string) => {
 </script>
 
 <template>
-    <div class="container mx-auto px-4 py-8">
+    <div class="max-w-7xl mx-auto px-4 py-8">
         <!-- Hero Section -->
         <div class="mb-12 text-center">
             <h1 class="text-4xl md:text-5xl font-bold text-blue-600 mb-4">{{ t('commissionsView.hero.title') }}</h1>
@@ -192,9 +192,3 @@ const goTo = (url: string) => {
         </Tile>
     </div>
 </template>
-
-<style scoped>
-.container {
-    max-width: 1200px;
-}
-</style>

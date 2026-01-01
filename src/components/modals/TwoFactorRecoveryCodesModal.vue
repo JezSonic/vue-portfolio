@@ -46,7 +46,3 @@ const copyRecoveryCodes = async () => {
         </div>
     </BaseModal>
 </template>
-
-<style scoped lang="scss">
-
-</style>

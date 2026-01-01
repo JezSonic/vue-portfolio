@@ -85,7 +85,7 @@ app.use(router)
     .use(pinia)
     .use(i18n)
     .use(vue3GoogleLogin, {
-        clientId: env('GOOGLE_CLIENT_ID') as string
+        clientId: env('GOOGLE_CLIENT_ID')
     })
     .mount("#app");
 

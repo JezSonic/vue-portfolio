@@ -33,7 +33,7 @@
             }).catch((err: IExceptionResponse) => {
                 isLoading.value = false;
                 error.value = true;
-                if (err.message == "private_profile") {
+                if (err.content.message == "private_profile") {
                     isPrivateProfile.value = true;
                 }
         });

@@ -37,19 +37,21 @@ export enum EExceptionType {
  * Interface representing the structure of an API exception response.
  */
 export interface IExceptionResponse {
-    type: EExceptionType;
-    errors: {
-        [key: string]: string[]
-    };
-    message: string;
-    debug: {
-        code: number,
-        file: string,
-        line: number,
-        message: string;
+    content: {
         type: EExceptionType;
+        errors: {
+            [key: string]: string[]
+        };
+        message: string;
+        debug: {
+            code: number,
+            file: string,
+            line: number,
+            message: string;
+            type: EExceptionType;
+        }
+        code: number
     }
-    code: number
 }
 
 /**

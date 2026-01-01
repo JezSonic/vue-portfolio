@@ -256,7 +256,6 @@
                         :userData="userData" 
                         :timestampToDate="timestampToDate"
                         @update:userData="(data: IUserData | null) => {
-                            console.log('saving...')
                             userData = data
                             saveProfileSettings()
                         }"

@@ -23,25 +23,13 @@
 
 <template>
     <a v-if="link" :href="link" class="select-none decoration-0 cursor-pointer" rel="noopener noreferrer" target="_blank" v-once>
-        <p class="inline-block rounded-md select-none"  :style="{ backgroundColor: bg_color, color: text_color }">
+        <p class="py-0.5 px-1.5 shadow-xs inline-block rounded-md select-none"  :style="{ backgroundColor: bg_color, color: text_color }">
             <font-awesome-icon :icon="getIconArray(icon)" class="mr-1.5" />
             {{ text }}
         </p>
     </a>
-    <p v-else class="inline rounded-md select-none" :style="{ backgroundColor: bg_color, color: text_color }" v-once>
+    <p v-else class="py-0.5 px-1.5 shadow-xs inline rounded-md select-none" :style="{ backgroundColor: bg_color, color: text_color }" v-once>
         <font-awesome-icon :icon="getIconArray(icon)" />
         {{ text }}
     </p>
 </template>
-
-<style lang="scss" scoped>
-
-    p {
-        padding: 2px 5px;
-        box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.5);
-    }
-
-    a > p {
-        display: inline-block;
-    }
-</style>

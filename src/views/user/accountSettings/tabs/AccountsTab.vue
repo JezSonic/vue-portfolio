@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { ref, watch } from "vue";
+    import { computed, ref, watch } from "vue";
     import { useUserStore } from "@/stores/userStore.js";
     import { EOAuthProvider } from "@/types/services/auth.d.ts";
     import AuthService from "@/services/authService.ts";
@@ -81,10 +81,12 @@
 
     //@TODO: Make it reflect on enabled oauth providers. add pure-google logic
     const callback = (response: any) => {
-        response.credential
         useAuthStore().oneTapToken = response.credential;
         router.push('/auth/google-one-tap/callback')
     }
+
+    const isGoogleEnabled = computed(() => supportedProviders.includes(EOAuthProvider.Google) || supportedProviders.includes(EOAuthProvider.GoogleOneTap))
+    const isGoogleConnected = computed(() => connectedSocialAccounts.value.includes(EOAuthProvider.Google) || connectedSocialAccounts.value.includes(EOAuthProvider.GoogleOneTap))
 </script>
 
 <template>
@@ -103,7 +105,7 @@
                     {{ t("accountSettingsView.connectedAccounts.avatarSource.description") }}</p>
 
                 <div class="space-y-2">
-                    <label :class="{'opacity-50': !userData?.google?.avatar_url}"
+                    <label :class="{'opacity-50': !userData?.google?.avatar_url}" v-if="isGoogleEnabled"
                            class="flex items-center space-x-3">
                         <input v-model="userStore.avatarSource"
                                :disabled="!userData?.google?.avatar_url"
@@ -118,7 +120,7 @@
                             }}</span>
                     </label>
 
-                    <label :class="{'opacity-50': !userData?.github?.avatar_url}"
+                    <label :class="{'opacity-50': !userData?.github?.avatar_url}" v-if="supportedProviders.includes(EOAuthProvider.GitHub)"
                            class="flex items-center space-x-3">
                         <input v-model="userStore.avatarSource"
                                :disabled="!userData?.github?.avatar_url"
@@ -145,8 +147,8 @@
                 </div>
             </div>
 
-            <ul class="divide-y divide-gray-700">
-                <li v-if="supportedProviders.includes(EOAuthProvider.Google) || supportedProviders.includes(EOAuthProvider.GoogleOneTap)" class="py-4 flex justify-between items-center">
+            <ul>
+                <li v-if="isGoogleEnabled" class="py-4 last:pb-0! flex justify-between items-center">
                     <div class="flex items-center">
                         <svg class="h-6 w-6 text-red-500" fill="currentColor" viewBox="0 0 24 24">
                             <path
@@ -156,14 +158,14 @@
                             <p class="text-sm font-medium text-gray-200">
                                 {{ t("accountSettingsView.connectedAccounts.avatarSource.google") }}</p>
                             <p class="text-xs text-gray-400">
-                                {{ connectedSocialAccounts.includes(EOAuthProvider.Google) ? t("accountSettingsView.connectedAccounts.status.connected") : t("accountSettingsView.connectedAccounts.status.notConnected")
+                                {{ isGoogleConnected ? t("accountSettingsView.connectedAccounts.status.connected") : t("accountSettingsView.connectedAccounts.status.notConnected")
                                 }}
                             </p>
                         </div>
                     </div>
                     <GoogleLogin v-if="!connectedSocialAccounts.includes(EOAuthProvider.Google) && supportedProviders.includes(EOAuthProvider.GoogleOneTap)" popup-type="token" :callback="callback" :id-configuration="{use_fedcm_for_button: true}" :button-config="{text: 'continue_with', theme: useThemeStore().theme == 'dark' ? 'filled_black' : 'filled_white'}"/>
 
-                    <Button variant="primary" v-if="!connectedSocialAccounts.includes(EOAuthProvider.Google) && supportedProviders.includes(EOAuthProvider.Google)"
+                    <Button variant="primary" v-if="!isGoogleConnected && isGoogleEnabled"
                             size="md" @click="toggleSocialAccount(EOAuthProvider.Google)" :loading="googleProviderLoading">
                         {{t("accountSettingsView.connectedAccounts.buttons.connect")}}
                     </Button>
@@ -173,7 +175,7 @@
                     </Button>
                 </li>
                 <li v-if="supportedProviders.includes(EOAuthProvider.GitHub)"
-                    class="pt-4 flex justify-between items-center">
+                    class="py-4 last:pb-0! flex justify-between items-center">
                     <div class="flex items-center">
                         <svg class="h-6 w-6 text-gray-300" fill="currentColor" viewBox="0 0 24 24">
                             <path clip-rule="evenodd"

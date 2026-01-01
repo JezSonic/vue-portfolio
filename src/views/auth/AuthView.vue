@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { ref } from "vue";
+    import { computed, ref } from "vue";
     import { IExceptionResponse } from "@/types/services/api.d";
     import router from "@/router";
     import { useUserStore } from "@/stores/userStore.ts";
@@ -40,6 +40,8 @@
         userStore.logout();
     }
 
+    const ui_theme = computed(() => useThemeStore().theme)
+
     const login = () => {
         isLoginLoading.value = true;
         accountNotFound.value = false;
@@ -54,11 +56,11 @@
                     router.push("/user/settings");
                 })
                 .catch((e: IExceptionResponse) => {
-                    errors.value = e.errors;
-                    if (e.message == "2fa_required") {
+                    errors.value = e.content.errors;
+                    if (e.content.message == "2fa_required") {
                         showTwoFAModal.value = true;
                         twoFactorCode.value = "";
-                    } else if (e.message == "account_not_found") {
+                    } else if (e.content.message == "account_not_found") {
                         accountNotFound.value = true;
                     }
                     isLoginLoading.value = false;
@@ -81,7 +83,7 @@
                     router.push("/user/settings");
                 })
                 .catch((e: IExceptionResponse) => {
-                    errors.value = e.errors;
+                    errors.value = e.content.errors;
                     // Keep the modal open; show errors for invalid code
                     showTwoFAModal.value = true;
                     isLoginLoading.value = false;
@@ -101,7 +103,7 @@
             login();
         })
         .catch((e: IExceptionResponse) => {
-            errors.value = e.errors;
+            errors.value = e.content.errors;
             isRegisterLoading.value = false;
         });
     };
@@ -148,7 +150,7 @@
                         {{ t("authView.form.emailLabel") }}
                     </label>
                     <input id="email" v-model="email" :required="true" autocomplete="email"
-                           class="block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                           class="transition-all duration-300 ease-in-out block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                            name="email"
                            type="email" :placeholder="t('authView.form.emailPlaceholder')" />
                 </div>
@@ -158,7 +160,7 @@
                         {{ t("authView.form.nameLabel") }}
                     </label>
                     <input id="name" v-model="name" :required="true" autocomplete="name"
-                           class="block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                           class="transition-all duration-300 ease-in-out block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                            name="name"
                            type="text" :placeholder="t('authView.form.namePlaceholder')" />
                 </div>
@@ -175,7 +177,7 @@
                     <div class="relative">
                         <input id="password" v-model="password" :placeholder="t('authView.form.passwordPlaceholder')"
                                :required="true" autocomplete="current-password"
-                               class="block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 pr-10 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               class="transition-all duration-300 ease-in-out block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 pr-10 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                name="password"
                                :type="showPassword ? 'text' : 'password'" />
                         <button
@@ -242,7 +244,7 @@
                         :loading="isGithubLoading">
                         <font-awesome-icon class="mr-2" :icon="['fab', 'google']" />
                     </Button>
-                    <GoogleLogin v-if="getSupportedOAuthProviders()?.includes(EOAuthProvider.GoogleOneTap) || false" :callback="callback" :id-configuration="{use_fedcm_for_button: true}" :button-config="{text: 'continue_with', theme: useThemeStore().theme == 'dark' ? 'filled_black' : 'filled_white'}"/>
+                    <GoogleLogin v-if="getSupportedOAuthProviders()?.includes(EOAuthProvider.GoogleOneTap) || false" :callback="callback" :id-configuration="{use_fedcm_for_button: true}" :button-config="{text: 'continue_with', theme: ui_theme === 'dark' ? 'filled_black' : 'filled_white'}"/>
                     <Button 
                         variant="secondary"
                         full-width
@@ -272,7 +274,7 @@
                        v-model="twoFactorCode"
                        type="text"
                        placeholder="123456 or recovery-code"
-                       class="block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       class="transition-all duration-300 ease-in-out block w-full rounded-md bg-gray-700 border border-gray-600 px-3 py-2 text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                        @keydown.enter="login2FA"
                 />
                 <div v-if="errors && (errors['two_factor_code'] || errors['2fa'] || errors['code'])" class="text-red-400 text-sm">
@@ -290,13 +292,3 @@
         </div>
     </div>
 </template>
-
-<style lang="scss" scoped>
-    input {
-        transition: all 0.3s ease;
-
-        &:focus {
-            border-color: #3b82f6;
-        }
-    }
-</style>

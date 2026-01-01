@@ -27,7 +27,7 @@ useLazyLoad(maszynaReloadedPicRef);
 </script>
 
 <template>
-    <div class="container mx-auto px-4 py-8">
+    <div class="max-w-7xl mx-auto px-4 py-8">
         <!-- Hero Section -->
         <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
             <div class="md:w-1/2">
@@ -158,9 +158,3 @@ useLazyLoad(maszynaReloadedPicRef);
         </Tile>
     </div>
 </template>
-
-<style scoped>
-.container {
-    max-width: 1200px;
-}
-</style>

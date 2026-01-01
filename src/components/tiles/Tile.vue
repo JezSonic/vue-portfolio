@@ -37,7 +37,7 @@
     </div>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
     .background-image {
         background: rgba(0, 0, 0, .6) v-bind("`url('${backgroundImage}')`") no-repeat 50% 50% / cover;
     }
