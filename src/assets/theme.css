@@ -153,9 +153,36 @@
   --tw-ring-color: rgba(0, 0, 0, 0.05);
 }
 
-/* Navbar specific styles for light theme */
-.light .transparent {
-  background-color: rgba(255, 255, 255, 0.8);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1);
+/* Status colors overrides */
+.light .bg-green-900 {
+  background-color: rgba(16, 185, 129, 0.2);
 }
+
+.light .bg-yellow-900 {
+  background-color: rgba(245, 158, 11, 0.2);
+}
+
+.light .bg-red-900 {
+  background-color: rgba(239, 68, 68, 0.2);
+}
+
+.light .text-green-300 {
+  color: var(--success-color);
+}
+
+.light .text-yellow-300 {
+  color: var(--warning-color);
+}
+
+.light .text-red-300 {
+  color: var(--error-color);
+}
+
+.light .bg-red-900\/50 {
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.light .border-red-700 {
+  border-color: var(--error-color);
+}
+

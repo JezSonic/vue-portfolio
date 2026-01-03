@@ -167,15 +167,15 @@
 
 <template>
     <div class="w-full h-full">
-        <div v-if="userData == null" class="loading">
+        <div v-if="userData == null">
             <Loading :loading="loading"
                      :error-text="t('accountSettingsView.error.notFound')" />
-            <div class="error-container" v-if="error">
-                <div class="error-card">
-                    <font-awesome-icon :icon="['fas', 'user-slash']" class="error-icon text-red-500" />
-                    <h2 class="error-title">{{ t('userProfileView.error.notFound') }}</h2>
-                    <p class="error-description">We couldn't find the user profile you're looking for. The user may not exist or has been removed.</p>
-                    <button @click="router.push('/')" class="error-button bg-blue-600 hover:bg-blue-700">
+            <div class="flex flex-col items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-125" v-if="error">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_25px_rgba(0,0,0,0.3)] p-8 text-center w-full">
+                    <font-awesome-icon :icon="['fas', 'user-slash']" class="text-[4rem] mb-4 text-red-500" />
+                    <h2 class="text-gray-900 dark:text-gray-100 text-2xl font-bold mb-3">{{ t('userProfileView.error.notFound') }}</h2>
+                    <p class="text-gray-500 dark:text-gray-400 text-base mb-6">We couldn't find the user profile you're looking for. The user may not exist or has been removed.</p>
+                    <button @click="router.push('/')" class="bg-blue-600 hover:bg-blue-700 border-none rounded-md text-white cursor-pointer text-sm font-semibold px-5 py-2.5 transition-colors duration-200">
                         <font-awesome-icon :icon="['fas', 'house']" class="mr-2" />
                         Return to Home
                     </button>
@@ -293,41 +293,3 @@
         </div>
     </div>
 </template>
-
-<style lang="scss" scoped>
-
-    /* Additional light mode styling */
-    :deep(.light) {
-        .bg-green-900 {
-            background-color: rgba(16, 185, 129, 0.2);
-        }
-
-        .bg-yellow-900 {
-            background-color: rgba(245, 158, 11, 0.2);
-        }
-
-        .bg-red-900 {
-            background-color: rgba(239, 68, 68, 0.2);
-        }
-
-        .text-green-300 {
-            color: var(--success-color);
-        }
-
-        .text-yellow-300 {
-            color: var(--warning-color);
-        }
-
-        .text-red-300 {
-            color: var(--error-color);
-        }
-
-        .bg-red-900\/50 {
-            background-color: rgba(239, 68, 68, 0.1);
-        }
-
-        .border-red-700 {
-            border-color: var(--error-color);
-        }
-    }
-</style>

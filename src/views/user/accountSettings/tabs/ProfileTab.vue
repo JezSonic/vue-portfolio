@@ -133,8 +133,8 @@ const avatarUrl = () => {
             <h2 class="text-lg font-medium text-gray-200">{{ t("accountSettingsView.profile.title") }}</h2>
         </div>
         <div class="p-6">
-            <div class="flex flex-col md:flex-row items-start">
-                <div class="w-full md:w-1/4 mb-4 md:mb-0">
+            <div class="flex flex-col gap-0 lg:flex-row lg:gap-4 items-start">
+                <div class="w-full lg:w-1/4 mb-4 lg:mb-0">
                     <div class="flex flex-col items-center">
                         <img
                             :src="avatarUrl() || userDefault"
@@ -153,7 +153,7 @@ const avatarUrl = () => {
                         />
                     </div>
                 </div>
-                <div class="w-full md:w-3/4">
+                <div class="w-full lg:w-3/4">
                     <dl class="divide-y divide-gray-700">
                         <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
                             <dt class="text-sm font-medium text-gray-400 flex items-center">

@@ -38,7 +38,7 @@
 
 <template>
     <div
-        class="mouse-aura"
+        class="fixed z-[-100] rounded-full bg-linear-to-r from-[#bd43c8] from-15% to-[#1384da] animate-mouse-rotate"
         :style="{
             top: toFixed(y) - height / 2 + 'px',
             left: x - width / 2 + 'px',
@@ -47,33 +47,3 @@
         }">
     </div>
 </template>
-
-<style scoped lang="scss">
-    @keyframes rotate {
-        from {
-            transform: rotateZ(0deg);
-            filter: hue-rotate(0deg) blur(120px);
-        }
-
-        to {
-            transform: rotateZ(360deg);
-            filter: hue-rotate(360deg) blur(120px);
-        }
-    }
-
-    .mouse-aura {
-        z-index: -100;
-        position: fixed;
-        background: linear-gradient(
-            90deg,
-            rgba(189, 67, 200, 1) 15%,
-            rgb(19, 132, 218) 100%
-        );
-        border-radius: 100%;
-        animation-name: rotate;
-        animation-duration: 10s;
-        animation-delay: 0s;
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-    }
-</style>

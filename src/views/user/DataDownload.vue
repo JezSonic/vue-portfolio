@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { onMounted, ref } from "vue";
+    import { computed, onMounted, ref } from "vue";
     import router from "@/router";
     import { useUserStore } from "@/stores/userStore.ts";
     import Loading from "@/components/ui/Loading.vue";
@@ -35,25 +35,34 @@
                 error.value = true;
             });
     });
+
+    const statusClass = computed(() => {
+        if (dataStatus.value === EUserExportDataStatus.COMPLETED) {
+            return 'text-green-500 bg-green-500/20';
+        } else if (dataStatus.value === EUserExportDataStatus.QUEUED || dataStatus.value === EUserExportDataStatus.PROCESSING) {
+            return 'text-amber-500 bg-amber-500/20';
+        } else if (dataStatus.value === EUserExportDataStatus.NOT_FOUND || dataStatus.value === EUserExportDataStatus.FAILED) {
+            return 'text-red-500 bg-red-500/20';
+        }
+    })
 </script>
 
 <template>
-    <div class="data-download-container">
+    <div class="flex flex-col absolute items-center justify-center w-full top-1/2 left-1/2 translate-[-50%] py-0 px-4 sm:px-2">
         <Loading :loading="isLoading" :error="error" v-if="isLoading"/>
-
         <div v-else class="bg-gray-800 rounded-lg shadow-lg max-w-2xl w-full p-6">
-            <div class="px-6 py-4 border-b border-gray-700 mb-6">
+            <div class="pb-4 border-b border-gray-700 mb-6">
                 <h2 class="text-xl font-medium text-gray-200">{{ t("accountSettingsView.security.dataExport.title") }}</h2>
             </div>
 
             <div class="flex flex-col items-center space-y-6 px-4">
                 <!-- Status message -->
-                <div class="status-container">
-                    <div class="status-icon" :class="dataStatus">
+                <div class="flex flex-col items-center mb-4">
+                    <div :class="`flex items-center justify-center rounded-full ${statusClass} w-16 h-16`">
                         <svg v-if="dataStatus === EUserExportDataStatus.COMPLETED" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                         </svg>
-                        <svg v-else-if="dataStatus === EUserExportDataStatus.QUEUED || dataStatus === EUserExportDataStatus.PROCESSING" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg v-else-if="dataStatus === EUserExportDataStatus.QUEUED || dataStatus === EUserExportDataStatus.PROCESSING" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -77,8 +86,8 @@
 
                 <!-- Download button -->
                 <div v-if="dataStatus === EUserExportDataStatus.COMPLETED" class="mt-6 w-full flex justify-center">
-                    <a 
-                        download 
+                    <a
+                        download
                         :href="getApiUrl() + `user/${userStore.id}/export-data/download`"
                         class="rounded-md bg-blue-600 hover:bg-blue-700 px-5 py-3 text-sm font-semibold text-white shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 cursor-pointer flex items-center justify-center transition-colors w-full max-w-xs">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -90,7 +99,7 @@
 
                 <!-- Return to settings button -->
                 <div class="mt-1 w-full flex justify-center">
-                    <Button @click="router.push('/user/settings')" class="w-full max-w-xs">
+                    <Button @click="router.push('/user/settings?tab=security')" class="w-full max-w-xs">
                         {{ t("accountSettingsView.tabs.security") }}
                     </Button>
                 </div>
@@ -98,57 +107,3 @@
         </div>
     </div>
 </template>
-
-<style lang="scss" scoped>
-    .data-download-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        top: 50%; 
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        padding: 0 1rem;
-    }
-
-    .status-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 1rem;
-    }
-
-    .status-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 4rem;
-        height: 4rem;
-        border-radius: 50%;
-        margin-bottom: 1rem;
-
-        &.completed {
-            background-color: rgba(16, 185, 129, 0.2);
-            color: #10b981; /* green-500 */
-        }
-
-        &.pending, &.queued {
-            background-color: rgba(245, 158, 11, 0.2);
-            color: #f59e0b; /* amber-500 */
-        }
-
-        &.failed, &.not_found {
-            background-color: rgba(239, 68, 68, 0.2);
-            color: #ef4444; /* red-500 */
-        }
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 640px) {
-        .data-download-container {
-            padding: 0 0.5rem;
-        }
-    }
-</style>

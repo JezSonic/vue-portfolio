@@ -70,8 +70,13 @@
 
 <template>
 <!--    v-slot="{ open }"-->
-    <div :class="[!transparent ? 'bg-transparent shadow-sm backdrop-blur-xs transparent' : 'z-100', 'top-0', 'left-0', 'fixed', 'w-full']">
-        <div :class="`mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ${open && 'bg-gray-800'}`">
+    <div :class="[
+        !transparent
+            ? 'backdrop-blur-xs border-b duration-500 bg-black/50 border-white/20 shadow-[-2px_2px_5px_#00000080] light:bg-white/80 light:border-black/10 light:shadow-[-2px_2px_5px_rgba(0,0,0,0.1)]'
+            : '',
+        'top-0 left-0 fixed w-full z-100'
+    ]">
+        <div :class="['mx-auto max-w-7xl px-2 sm:px-6 lg:px-8', open ? 'bg-gray-800' : '']">
             <div class="relative flex h-16 items-center justify-between">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                     <!-- Mobile menu button-->
@@ -80,8 +85,8 @@
                         :aria-expanded="open" @click="open = !open; userDropdownOpen = false; langDropdownOpen = false; themeDropdownOpen = false">
                         <span v-once class="absolute -inset-0.5" />
                         <span v-once class="sr-only">Open main menu</span>
-                        <font-awesome-icon v-if="!open" icon="fa-solid fa-bars" class="block size-6 text-white!" aria-hidden="true"/>
-                        <font-awesome-icon v-else icon="fa-solid fa-times" class="block size-6 text-white!" aria-hidden="true"/>
+                        <font-awesome-icon v-if="!open" icon="fa-solid fa-bars" class="block size-6 text-white" aria-hidden="true"/>
+                        <font-awesome-icon v-else icon="fa-solid fa-times" class="block size-6 text-white" aria-hidden="true"/>
                     </div>
                 </div>
                 <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
@@ -190,10 +195,12 @@
         </div>
 
         <transition
-            enter-active-class="disclosure-enter-active"
-            leave-active-class="disclosure-leave-active"
-            enter-from-class="disclosure-enter-from"
-            leave-to-class="disclosure-leave-to"
+            enter-active-class="transition duration-200 ease-out"
+            enter-from-class="transform -translate-y-2 opacity-0"
+            enter-to-class="transform translate-y-0 opacity-100"
+            leave-active-class="transition duration-100 ease-in"
+            leave-from-class="transform translate-y-0 opacity-100"
+            leave-to-class="transform -translate-y-2 opacity-0"
         >
             <div class="sm:hidden absolute w-full bg-gray-800 shadow-lg z-40" v-if="open">
                 <div class="space-y-1 px-2 pt-2 pb-3 max-h-[calc(100vh-4rem)] overflow-y-auto">
@@ -272,25 +279,3 @@
     </div>
 </template>
 
-<style scoped lang="scss">
-    .transparent {
-        z-index: 100;
-        position: fixed;
-        border-bottom: 1px solid rgba(255, 255, 255, .2);
-        background-color: #00000080;
-        box-shadow: -2px 2px 5px #00000080;
-        transition-duration: .5s;
-    }
-
-    /* Mobile menu transitions */
-    .disclosure-enter-active,
-    .disclosure-leave-active {
-        transition: all 0.3s ease-out;
-    }
-
-    .disclosure-enter-from,
-    .disclosure-leave-to {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-</style>

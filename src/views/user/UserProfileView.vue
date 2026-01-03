@@ -70,25 +70,25 @@
 
 <template>
     <div class="w-full h-full">
-        <div v-if="isPrivateProfile && error" class="error-container">
-            <div class="error-card" v-once>
-                <font-awesome-icon :icon="['fas', 'lock']" class="error-icon text-yellow-500" />
-                <h2 class="error-title">{{ t("userProfileView.error.privateProfile") }}</h2>
-                <p class="error-description">This user has set their profile to private. Only the profile owner can view
+        <div v-if="isPrivateProfile && error" class="flex flex-col items-center justify-center absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 w-full max-w-125">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_25px_rgba(0,0,0,0.3)] p-8 text-center w-full" v-once>
+                <font-awesome-icon :icon="['fas', 'lock']" class="text-[4rem] mb-4 text-yellow-500" />
+                <h2 class="text-gray-800 dark:text-gray-100 text-2xl font-bold mb-3">{{ t("userProfileView.error.privateProfile") }}</h2>
+                <p class="text-gray-500 dark:text-gray-400 text-base mb-6">This user has set their profile to private. Only the profile owner can view
                     their information.</p>
-                <button @click="router.push('/')" class="error-button bg-blue-600 hover:bg-blue-700">
+                <button @click="router.push('/')" class="border-none rounded-md text-white cursor-pointer text-sm font-semibold px-5 py-2.5 transition-colors duration-200 ease-in-out bg-blue-600 hover:bg-blue-700">
                     <font-awesome-icon :icon="['fas', 'house']" class="mr-2" />
                     Return to Home
                 </button>
             </div>
         </div>
-        <div v-else-if="error" class="error-container">
-            <div class="error-card" v-once>
-                <font-awesome-icon :icon="['fas', 'user-slash']" class="error-icon text-red-500" />
-                <h2 class="error-title">{{ t("userProfileView.error.notFound") }}</h2>
-                <p class="error-description">We couldn't find the user profile you're looking for. The user may not
+        <div v-else-if="error" class="flex flex-col items-center justify-center absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 w-full max-w-125">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_25px_rgba(0,0,0,0.3)] p-8 text-center w-full" v-once>
+                <font-awesome-icon :icon="['fas', 'user-slash']" class="text-[4rem] mb-4 text-red-500" />
+                <h2 class="text-gray-800 dark:text-gray-100 text-2xl font-bold mb-3">{{ t("userProfileView.error.notFound") }}</h2>
+                <p class="text-gray-500 dark:text-gray-400 text-base mb-6">We couldn't find the user profile you're looking for. The user may not
                     exist or has been removed.</p>
-                <button @click="router.push('/')" class="error-button bg-blue-600 hover:bg-blue-700">
+                <button @click="router.push('/')" class="border-none rounded-md text-white cursor-pointer text-sm font-semibold px-5 py-2.5 transition-colors duration-200 ease-in-out bg-blue-600 hover:bg-blue-700">
                     <font-awesome-icon :icon="['fas', 'house']" class="mr-2" />
                     Return to Home
                 </button>
@@ -105,7 +105,7 @@
                             :alt="t('userProfileView.alt.profilePicture')"
                             class="w-32 h-32 rounded-full object-cover border-4 border-white/20 shadow-lg"
                         >
-                        <div class="absolute -bottom-2 -right-2 bg-gray-900 rounded-full p-1 shadow-lg"
+                        <div class="absolute -bottom-2 -right-2 bg-gray-900 rounded-full p-1 shadow-lg flex items-center justify-center"
                              v-if="userData.profile_settings.is_public">
                             <span
                                 class="text-xs px-2 py-1 bg-green-600 text-white rounded-full">{{ t("userProfileView.profileStatus.public")
@@ -157,7 +157,7 @@
                         {{ t("userProfileView.sections.profileInformation") }}</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Account Details -->
-                        <div class="bg-gray-750 rounded-lg p-4 shadow-inner">
+                        <div class="bg-gray-200/50 dark:bg-gray-800/50 hover:bg-gray-200/70 dark:hover:bg-gray-800/70 transition-colors duration-300 rounded-lg p-4 shadow-inner">
                             <h3 v-once
                                 class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3 flex items-center">
                                 <font-awesome-icon icon="fa-solid fa-user-circle" class="mr-2" />
@@ -180,7 +180,7 @@
                         </div>
 
                         <!-- Account Timeline -->
-                        <div class="bg-gray-750 rounded-lg p-4 shadow-inner">
+                        <div class="bg-gray-200/50 dark:bg-gray-800/50 hover:bg-gray-200/70 dark:hover:bg-gray-800/70 transition-colors duration-300 rounded-lg p-4 shadow-inner">
                             <h3 v-once
                                 class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3 flex items-center">
                                 <font-awesome-icon icon="fa-solid fa-clock" class="mr-2" />
@@ -230,7 +230,7 @@
                         {{ t("userProfileView.sections.connectedAccounts") }}</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Google Account -->
-                        <div class="bg-gray-750 rounded-lg p-4 shadow-inner" v-if="userData?.google">
+                        <div class="bg-gray-200/50 dark:bg-gray-800/50 hover:bg-gray-200/70 dark:hover:bg-gray-800/70 transition-colors duration-300 rounded-lg p-4 shadow-inner" v-if="userData?.google">
                             <div class="flex items-center">
                                 <div v-once
                                      class="shrink-0 h-12 w-12 rounded-full bg-white flex items-center justify-center">
@@ -247,7 +247,7 @@
                         </div>
 
                         <!-- GitHub Account -->
-                        <div class="bg-gray-750 rounded-lg p-4 shadow-inner" v-if="userData?.github">
+                        <div class="bg-gray-200/50 dark:bg-gray-800/50 hover:bg-gray-200/70 dark:hover:bg-gray-800/70 transition-colors duration-300 rounded-lg p-4 shadow-inner" v-if="userData?.github">
                             <div class="flex items-center">
                                 <div v-once
                                      class="shrink-0 h-12 w-12 rounded-full bg-gray-900 flex items-center justify-center">
@@ -290,88 +290,3 @@
         </div>
     </div>
 </template>
-
-<style lang="scss" scoped>
-    .error-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        top: 50%;
-        right: 50%;
-        transform: translate(50%, -50%);
-        width: 100%;
-        max-width: 500px;
-    }
-
-    .error-card {
-        background-color: white;
-        border-radius: 12px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        padding: 2rem;
-        text-align: center;
-        width: 100%;
-
-        :root.dark & {
-            background-color: #1f2937;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        }
-    }
-
-    .error-icon {
-        font-size: 4rem;
-        margin-bottom: 1rem;
-    }
-
-    .error-title {
-        color: #1f2937;
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 0.75rem;
-
-        :root.dark & {
-            color: #f3f4f6;
-        }
-    }
-
-    .error-description {
-        color: #6b7280;
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
-
-        :root.dark & {
-            color: #d1d5db;
-        }
-    }
-
-    .error-button {
-        border: none;
-        border-radius: 0.375rem;
-        color: white;
-        cursor: pointer;
-        font-size: 0.875rem;
-        font-weight: 600;
-        padding: 0.625rem 1.25rem;
-        transition: background-color 0.2s ease;
-    }
-
-    .bg-gray-750 {
-        background-color: rgba(229, 231, 235, 0.5);
-    }
-
-    :root.dark .bg-gray-750 {
-        background-color: rgba(31, 41, 55, 0.5);
-    }
-
-    /* Add subtle hover effects */
-    .bg-gray-750:hover {
-        background-color: rgba(229, 231, 235, 0.7);
-        transition: background-color 0.3s ease;
-    }
-
-    :root.dark .bg-gray-750:hover {
-        background-color: rgba(31, 41, 55, 0.7);
-        transition: background-color 0.3s ease;
-    }
-</style>
