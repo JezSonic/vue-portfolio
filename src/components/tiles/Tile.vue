@@ -9,10 +9,6 @@
             type: String,
             default: null,
         },
-        hoverShadowColor: {
-            type: String,
-            default: '#2e303ea0'
-        },
         badges: {
             type: Boolean,
             default: false,
@@ -26,9 +22,9 @@
 </script>
 
 <template>
-    <div :class="`contain-content rounded-xl p-6 shadow-sm ${props.backgroundImage == null ? 'bg-gray-800' : 'background-image bg-blend-darken'}`">
+    <div :class="`contain-content rounded-xl p-6 shadow-sm ${props.backgroundImage == null ? 'bg-white dark:bg-gray-800' : 'background-image bg-blend-darken dark'}`">
         <div :class="`${props.badges ? 'text__badges' : 'text'} ${props.textClass}`">
-            <h2 class="text-2xl/7 font-display font-medium text-blue-600 mb-2">{{ props.title }}</h2>
+            <h2 class="text-2xl/7 font-display font-medium text-blue-600 dark:text-blue-500 mb-2">{{ props.title }}</h2>
             <slot name="default" />
             <div class="badges" v-if="props.badges">
                 <slot name="badges" />

@@ -1,8 +1,8 @@
 import { env, getApiUrl } from "@/helpers/app.ts";
-import { EExceptionType, IExceptionResponse } from "@/types/services/api.d.ts";
+import { EExceptionType, IExceptionResponse } from "@/types/services/api.ts";
 import { useUserStore } from "@/stores/userStore.ts";
 import AuthService from "@/services/authService.ts";
-import { EEnvironment } from "@/types/utils.d.ts";
+import { EEnvironment } from "@/types/utils.ts";
 
 /**
  * Basic API service inherited by all other API Services

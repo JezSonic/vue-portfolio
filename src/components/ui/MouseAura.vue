@@ -38,7 +38,7 @@
 
 <template>
     <div
-        class="fixed z-[-100] rounded-full bg-linear-to-r from-[#bd43c8] from-15% to-[#1384da] animate-mouse-rotate"
+        class="fixed z-[-100] rounded-full bg-linear-to-r from-fuchsia-600 from-15% to-blue-600 animate-mouse-rotate"
         :style="{
             top: toFixed(y) - height / 2 + 'px',
             left: x - width / 2 + 'px',

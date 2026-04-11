@@ -87,28 +87,28 @@ const routes: Array<RouteRecordRaw> = [
       requires_backend: false,
     }
   },
-  // {
-  //   name: 'commissions-tos',
-  //   path: '/commissions/tos',
-  //   component: () => import('../views/commissions/TosView.vue'),
-  //   meta: {
-  //     title: 'Commissions - Terms of Service',
-  //     description: 'Terms of Service for my commission work.',
-  //     keywords: 'tos, terms of service, commissions, legal',
-  //     requires_backend: false,
-  //   }
-  // },
-  // {
-  //   name: 'privacy-policy',
-  //   path: '/privacy-policy',
-  //   component: () => import('../views/PrivacyPolicyView.vue'),
-  //   meta: {
-  //     title: 'Privacy Policy',
-  //     description: 'Read the Privacy Policy for this website.',
-  //     keywords: 'privacy, policy, data, security, legal',
-  //     requires_backend: false,
-  //   }
-  // },
+  {
+    name: 'commissions-tos',
+    path: '/commissions/tos',
+    component: () => import('../views/commissions/TosView.vue'),
+    meta: {
+      title: 'Commissions - Terms of Service',
+      description: 'Terms of Service for my commission work.',
+      keywords: 'tos, terms of service, commissions, legal',
+      requires_backend: false,
+    }
+  },
+  {
+    name: 'privacy-policy',
+    path: '/privacy-policy',
+    component: () => import('../views/PrivacyPolicyView.vue'),
+    meta: {
+      title: 'Privacy Policy',
+      description: 'Read the Privacy Policy for this website.',
+      keywords: 'privacy, policy, data, security, legal',
+      requires_backend: false,
+    }
+  },
   {
     name: 'auth',
     path: '/auth',

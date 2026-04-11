@@ -6,7 +6,7 @@ const { t } = useI18n();
 </script>
 
 <template>
-    <div class="container mx-auto px-4 py-8">
+    <div class="w-full max-w-7xl mx-auto py-8">
         <!-- Header Section -->
         <div class="mb-8 text-center">
             <h1 class="text-4xl font-bold text-blue-600 mb-2">{{ t('tosView.title') }}</h1>
@@ -191,7 +191,7 @@ const { t } = useI18n();
                 </p>
                 <p class="text-white text-lg">
                     {{ t('tosView.dataSecurity.personalData.moreInfo') }} 
-                    <a class="font-semibold" href="/privacy-policy/">{{ t('tosView.dataSecurity.personalData.privacyPolicy') }}</a>.
+                    <router-link class="font-semibold text-blue-500 hover:text-blue-400" to="/privacy-policy/">{{ t('tosView.dataSecurity.personalData.privacyPolicy') }}</router-link>.
                 </p>
             </div>
         </Tile>

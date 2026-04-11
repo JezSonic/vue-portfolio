@@ -2,14 +2,27 @@
     import { ref, computed, onMounted } from "vue";
     import UserService from "@/services/userService.ts";
     import router from "@/router";
-    import type { IUserData } from "@/types/user.d.ts";
+    import type { IUserData } from "@/types/user.ts";
     import Loading from "@/components/ui/Loading.vue";
-    import { EOAuthProvider } from "@/types/services/auth.d.ts";
+    import { EOAuthProvider } from "@/types/services/auth.ts";
     import Badge from "@/components/badges/Badge.vue";
     import userDefault from "@/assets/profile/userDefault.png";
     import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
     import { useI18n } from "vue-i18n";
-    import type { IExceptionResponse } from "@/types/services/api.d.ts";
+    import type { IExceptionResponse } from "@/types/services/api.ts";
+    import {
+        faLock,
+        faHouse,
+        faUserSlash,
+        faEnvelope,
+        faUserCircle,
+        faClock,
+        faPlus,
+        faCalendar,
+        faEdit,
+        faMapMarkerAlt
+    } from "@fortawesome/free-solid-svg-icons";
+    import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons";
 
     const { t, locale } = useI18n();
     const error = ref<boolean>(false);
@@ -72,32 +85,32 @@
     <div class="w-full h-full">
         <div v-if="isPrivateProfile && error" class="flex flex-col items-center justify-center absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 w-full max-w-125">
             <div class="bg-white dark:bg-gray-800 rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_25px_rgba(0,0,0,0.3)] p-8 text-center w-full" v-once>
-                <font-awesome-icon :icon="['fas', 'lock']" class="text-[4rem] mb-4 text-yellow-500" />
+                <font-awesome-icon :icon="faLock" class="text-[4rem] mb-4 text-yellow-500" />
                 <h2 class="text-gray-800 dark:text-gray-100 text-2xl font-bold mb-3">{{ t("userProfileView.error.privateProfile") }}</h2>
                 <p class="text-gray-500 dark:text-gray-400 text-base mb-6">This user has set their profile to private. Only the profile owner can view
                     their information.</p>
                 <button @click="router.push('/')" class="border-none rounded-md text-white cursor-pointer text-sm font-semibold px-5 py-2.5 transition-colors duration-200 ease-in-out bg-blue-600 hover:bg-blue-700">
-                    <font-awesome-icon :icon="['fas', 'house']" class="mr-2" />
+                    <font-awesome-icon :icon="faHouse" class="mr-2" />
                     Return to Home
                 </button>
             </div>
         </div>
         <div v-else-if="error" class="flex flex-col items-center justify-center absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 w-full max-w-125">
             <div class="bg-white dark:bg-gray-800 rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_25px_rgba(0,0,0,0.3)] p-8 text-center w-full" v-once>
-                <font-awesome-icon :icon="['fas', 'user-slash']" class="text-[4rem] mb-4 text-red-500" />
+                <font-awesome-icon :icon="faUserSlash" class="text-[4rem] mb-4 text-red-500" />
                 <h2 class="text-gray-800 dark:text-gray-100 text-2xl font-bold mb-3">{{ t("userProfileView.error.notFound") }}</h2>
                 <p class="text-gray-500 dark:text-gray-400 text-base mb-6">We couldn't find the user profile you're looking for. The user may not
                     exist or has been removed.</p>
                 <button @click="router.push('/')" class="border-none rounded-md text-white cursor-pointer text-sm font-semibold px-5 py-2.5 transition-colors duration-200 ease-in-out bg-blue-600 hover:bg-blue-700">
-                    <font-awesome-icon :icon="['fas', 'house']" class="mr-2" />
+                    <font-awesome-icon :icon="faHouse" class="mr-2" />
                     Return to Home
                 </button>
             </div>
         </div>
         <Loading v-if="isLoading && !error" :loading="true" />
-        <div v-else-if="userData != null" class="text-gray-900 dark:text-white w-full max-w-6xl mx-auto px-4 py-8">
+        <div v-else-if="userData != null" class="text-gray-900 dark:text-white w-full max-w-7xl mx-auto py-8">
             <!-- Profile Header -->
-            <div class="bg-linear-to-r from-blue-900 to-purple-900 rounded-t-lg p-6 shadow-lg">
+            <div class="bg-linear-to-r from-blue-900 to-purple-900 rounded-t-lg p-6 shadow-lg dark">
                 <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
                     <div class="relative z-0">
                         <img
@@ -122,28 +135,26 @@
                         <div class="flex flex-wrap justify-center md:justify-start gap-2 mb-4">
                             <Badge
                                 v-if="connectedSocialAccounts.includes(EOAuthProvider.Google)"
-                                icon="fa-google"
+                                :icon="faGoogle"
                                 text="Google"
-                                bg_color="rgba(219, 68, 55, 0.2)"
-                                text_color="#DB4437"
+                                color="red"
                             />
                             <Badge
                                 v-if="connectedSocialAccounts.includes(EOAuthProvider.GitHub)"
-                                icon="fa-github"
+                                :icon="faGithub"
                                 text="GitHub"
-                                bg_color="rgba(36, 41, 46, 0.2)"
-                                text_color="#ffffff"
+                                color="gray"
                             />
                         </div>
                         <p class="text-gray-100! flex items-center flex-wrap">
-                            <font-awesome-icon icon="fa-solid fa-envelope" class="shrink-0 mr-2" />
+                            <font-awesome-icon :icon="faEnvelope" class="shrink-0 mr-2" />
                             <span class="truncate max-w-50 sm:max-w-75 md:max-w-100">{{ userData?.email
                                 }}</span>
                             <span v-if="userData?.email_verified_at"
-                                  class="ml-2 px-2 py-0.5 bg-green-900 text-green-300 rounded-full text-xs shrink-0">{{ t("userProfileView.emailStatus.verified")
+                                  class="ml-2 px-2 py-0.5 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 rounded-full text-xs shrink-0">{{ t("userProfileView.emailStatus.verified")
                                 }}</span>
                             <span v-else
-                                  class="ml-2 px-2 py-0.5 bg-yellow-900 text-yellow-300 rounded-full text-xs shrink-0">{{ t("userProfileView.emailStatus.notVerified")
+                                  class="ml-2 px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300 rounded-full text-xs shrink-0">{{ t("userProfileView.emailStatus.notVerified")
                                 }}</span>
                         </p>
                     </div>
@@ -160,7 +171,7 @@
                         <div class="bg-gray-200/50 dark:bg-gray-800/50 hover:bg-gray-200/70 dark:hover:bg-gray-800/70 transition-colors duration-300 rounded-lg p-4 shadow-inner">
                             <h3 v-once
                                 class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3 flex items-center">
-                                <font-awesome-icon icon="fa-solid fa-user-circle" class="mr-2" />
+                                <font-awesome-icon :icon="faUserCircle" class="mr-2" />
                                 {{ t("userProfileView.sections.accountDetails") }}
                             </h3>
                             <div class="space-y-3">
@@ -183,22 +194,22 @@
                         <div class="bg-gray-200/50 dark:bg-gray-800/50 hover:bg-gray-200/70 dark:hover:bg-gray-800/70 transition-colors duration-300 rounded-lg p-4 shadow-inner">
                             <h3 v-once
                                 class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3 flex items-center">
-                                <font-awesome-icon icon="fa-solid fa-clock" class="mr-2" />
+                                <font-awesome-icon :icon="faClock" class="mr-2" />
                                 {{ t("userProfileView.sections.accountTimeline") }}
                             </h3>
                             <div class="space-y-3">
                                 <div class="flex items-start">
                                     <div v-once
                                          class="shrink-0 h-10 w-10 rounded-full bg-blue-900 flex items-center justify-center">
-                                        <font-awesome-icon icon="fa-solid fa-plus" class="text-blue-300" />
+                                        <font-awesome-icon :icon="faPlus" class="text-blue-300" />
                                     </div>
                                     <div class="ml-4">
                                         <p v-once class="text-sm font-medium text-gray-700 dark:text-gray-300">
                                             {{ t("userProfileView.fields.accountCreated") }}</p>
                                         <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                                            <font-awesome-icon icon="fa-solid fa-calendar" class="mr-1" />
+                                            <font-awesome-icon :icon="faCalendar" class="mr-1" />
                                             {{ formatDate(userData?.created_at) }}
-                                            <font-awesome-icon icon="fa-solid fa-clock" class="ml-3 mr-1" />
+                                            <font-awesome-icon :icon="faClock" class="ml-3 mr-1" />
                                             {{ formatTime(userData?.created_at) }}
                                         </div>
                                     </div>
@@ -206,15 +217,15 @@
                                 <div class="flex items-start">
                                     <div v-once
                                          class="shrink-0 h-10 w-10 rounded-full bg-purple-900 flex items-center justify-center">
-                                        <font-awesome-icon icon="fa-solid fa-edit" class="text-purple-300" />
+                                        <font-awesome-icon :icon="faEdit" class="text-purple-300" />
                                     </div>
                                     <div class="ml-4">
                                         <p v-once class="text-sm font-medium text-gray-700 dark:text-gray-300">
                                             {{ t("userProfileView.fields.lastUpdated") }}</p>
                                         <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                                            <font-awesome-icon icon="fa-solid fa-calendar" class="mr-1" />
+                                            <font-awesome-icon :icon="faCalendar" class="mr-1" />
                                             {{ formatDate(userData?.updated_at) }}
-                                            <font-awesome-icon icon="fa-solid fa-clock" class="ml-3 mr-1" />
+                                            <font-awesome-icon :icon="faClock" class="ml-3 mr-1" />
                                             {{ formatTime(userData?.updated_at) }}
                                         </div>
                                     </div>
@@ -234,8 +245,8 @@
                             <div class="flex items-center">
                                 <div v-once
                                      class="shrink-0 h-12 w-12 rounded-full bg-white flex items-center justify-center">
-                                    <font-awesome-icon class="text-2xl" style="color: #DB4437;"
-                                                       :icon="['fab', 'google']" />
+                                    <font-awesome-icon class="text-2xl text-red-600"
+                                                       :icon="faGoogle" />
                                 </div>
                                 <div class="ml-4 overflow-hidden">
                                     <h3 v-once class="text-lg font-medium text-gray-700 dark:text-gray-300">
@@ -251,7 +262,7 @@
                             <div class="flex items-center">
                                 <div v-once
                                      class="shrink-0 h-12 w-12 rounded-full bg-gray-900 flex items-center justify-center">
-                                    <font-awesome-icon class="text-2xl text-white" :icon="['fab', 'github']" />
+                                    <font-awesome-icon class="text-2xl text-white" :icon="faGithub" />
                                 </div>
                                 <div class="ml-4 overflow-hidden">
                                     <h3 v-once class="text-lg font-medium text-gray-700 dark:text-gray-300">
@@ -261,7 +272,7 @@
                                             {{ userData?.github?.login }}</p>
                                         <p class="text-sm text-gray-500 dark:text-gray-400 truncate max-w-50! sm:max-w-full"
                                            v-if="userData?.github?.location">
-                                            <font-awesome-icon icon="fa-solid fa-map-marker-alt"
+                                            <font-awesome-icon :icon="faMapMarkerAlt"
                                                                class="mr-1 shrink-0" />
                                             {{ userData?.github?.location }}
                                         </p>

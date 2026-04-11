@@ -1,7 +1,7 @@
 import { createI18n } from 'vue-i18n';
 import en from '../locales/en.json';
 import pl from '../locales/pl.json'
-import type { Lang } from "@/types/utils.d.ts";
+import type { Lang } from "@/types/utils.ts";
 
 export const allowedLanguages = ['en', 'pl'];
 

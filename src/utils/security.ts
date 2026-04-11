@@ -1,4 +1,4 @@
-import type { I2FAConfirmResponse } from "@/types/services/2fa";
+import type { I2FAConfirmResponse } from "@/types/services/2fa.ts";
 
 /**
  * Sanitize a 2FA code by stripping all non-digit characters.

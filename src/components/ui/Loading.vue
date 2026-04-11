@@ -32,10 +32,10 @@
 
 <template>
     <div v-if="loading || error" :class="_class">
-        <div v-if="loading && !error" class="animate-spin m-0 p-0 w-16 h-16 rounded-[50%] border-t-blue-500 border-t-5 border-5 border-white" />
+        <div v-if="loading && !error" class="animate-spin m-0 p-0 w-16 h-16 rounded-[50%] border-t-blue-500 border-t-5 border-5 border-gray-200 dark:border-white" />
         <div v-if="error" class="flex flex-col items-center justify-center text-center gap-1.5 font-normal min-w-52 w-md">
-            <h1 class="text-white">{{ errorText || "Oops! Something went wrong" }}</h1>
-            <p class="text-white">Please, try again in a while or if the issue persists, report it to me via the <a
+            <h1 class="text-gray-900 dark:text-white">{{ errorText || "Oops! Something went wrong" }}</h1>
+            <p class="text-gray-900 dark:text-white">Please, try again in a while or if the issue persists, report it to me via the <a
                 class="font-semibold text-blue-600 hover:text-blue-500" href="/contact">Contact page</a></p>
         </div>
     </div>

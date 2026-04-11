@@ -2,7 +2,7 @@
 import { ref, watch, computed, onUnmounted } from "vue";
 import Loading from "@/components/ui/Loading.vue";
 import UserService from "@/services/userService.ts";
-import type { ILoginHistory, IUserData } from "@/types/user.d.ts";
+import type { ILoginHistory, IUserData } from "@/types/user.ts";
 import { useI18n } from "vue-i18n";
 import { formatLoginMethod, parseUserAgent } from "@/helpers/activity.ts";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { I2FARecoveryCode } from "@/types/services/2fa";
+import { I2FARecoveryCode } from "@/types/services/2fa.ts";
 import Button from "@/components/ui/Button.vue";
 import BaseModal from "@/components/modals/BaseModal.vue";
 import { ref } from "vue";

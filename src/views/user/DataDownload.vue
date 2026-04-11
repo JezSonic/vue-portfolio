@@ -7,7 +7,7 @@
     import { getApiUrl } from "@/helpers/app.ts";
     import { useI18n } from "vue-i18n";
     import Button from "@/components/ui/Button.vue";
-    import { EUserExportDataStatus } from "@/types/user.d.ts";
+    import { EUserExportDataStatus } from "@/types/user.ts";
 
     const userStore = useUserStore()
     const isLoading = ref<boolean>(true);

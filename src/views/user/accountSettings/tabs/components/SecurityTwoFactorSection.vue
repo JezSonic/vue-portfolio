@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import type { IUserData } from "@/types/user.d.ts";
+import type { IUserData } from "@/types/user.ts";
 import Button from "@/components/ui/Button.vue";
 import TwoFactorAuthService from "@/services/2faService.ts";
-import { I2FAPrepareResponse, I2FAConfirmResponse, I2FARecoveryCode } from "@/types/services/2fa";
+import { I2FAPrepareResponse, I2FAConfirmResponse, I2FARecoveryCode } from "@/types/services/2fa.ts";
 import TwoFactorRecoveryCodesModal from "@/components/modals/TwoFactorRecoveryCodesModal.vue";
 import TwoFactorSetupModal from "@/components/modals/TwoFactorSetupModal.vue";
 import { configureModal, type ModalController } from "@/services/modalService.ts";

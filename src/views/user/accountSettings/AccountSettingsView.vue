@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import { onMounted, ref, watch } from "vue";
     import UserService from "@/services/userService.ts";
-    import type { IUserData } from "@/types/user.d.ts";
+    import type { IUserData } from "@/types/user.ts";
     import Loading from "@/components/ui/Loading.vue";
     import { useUserStore } from "@/stores/userStore.js";
     import i18n from "@/i18n/index.js";
@@ -18,6 +18,7 @@
     import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
     import AuthService from "@/services/authService.js";
     import { useRoute } from "vue-router";
+    import { faUserSlash, faHouse } from "@fortawesome/free-solid-svg-icons";
 
     const { t } = useI18n();
 
@@ -172,27 +173,27 @@
                      :error-text="t('accountSettingsView.error.notFound')" />
             <div class="flex flex-col items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-125" v-if="error">
                 <div class="bg-white dark:bg-gray-800 rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_25px_rgba(0,0,0,0.3)] p-8 text-center w-full">
-                    <font-awesome-icon :icon="['fas', 'user-slash']" class="text-[4rem] mb-4 text-red-500" />
+                    <font-awesome-icon :icon="faUserSlash" class="text-[4rem] mb-4 text-red-500" />
                     <h2 class="text-gray-900 dark:text-gray-100 text-2xl font-bold mb-3">{{ t('userProfileView.error.notFound') }}</h2>
                     <p class="text-gray-500 dark:text-gray-400 text-base mb-6">We couldn't find the user profile you're looking for. The user may not exist or has been removed.</p>
                     <button @click="router.push('/')" class="bg-blue-600 hover:bg-blue-700 border-none rounded-md text-white cursor-pointer text-sm font-semibold px-5 py-2.5 transition-colors duration-200">
-                        <font-awesome-icon :icon="['fas', 'house']" class="mr-2" />
+                        <font-awesome-icon :icon="faHouse" class="mr-2" />
                         Return to Home
                     </button>
                 </div>
             </div>
         </div>
-        <div v-else class="text-white! w-full max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div v-else class="text-white! w-full max-w-7xl mx-auto py-8">
             <div class="mb-8">
-                <h1 class="text-2xl font-bold text-gray-100!">{{ t("accountSettingsView.title") }}</h1>
-                <p class="mt-2 text-sm text-gray-400!">{{ t("accountSettingsView.subtitle") }}</p>
+                <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100!">{{ t("accountSettingsView.title") }}</h1>
+                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400!">{{ t("accountSettingsView.subtitle") }}</p>
             </div>
 
             <!-- Mobile Tab Dropdown -->
             <div class="md:hidden mb-4">
                 <div class="relative z-0">
                     <button
-                        class="w-full flex items-center justify-between px-4 py-2 bg-gray-800 border border-gray-700 rounded-md text-gray-200 cursor-pointer"
+                        class="w-full flex items-center justify-between px-4 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md text-gray-900 dark:text-gray-200 cursor-pointer"
                         @click="isMobileMenuOpen = !isMobileMenuOpen"
                     >
                         <span>{{ t(tabs.find(tab => tab.id === activeTab).label) }}</span>
@@ -207,14 +208,14 @@
                     </button>
                     <div
                         v-if="isMobileMenuOpen"
-                        class="absolute z-10 w-full mt-1 bg-gray-800 border border-gray-700 rounded-md shadow-lg cursor-pointer"
+                        class="absolute z-10 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg cursor-pointer"
                     >
                         <div class="py-1">
                             <button
                                 v-for="tab in tabs"
                                 :key="tab.id"
-                                :class="{ 'bg-gray-700': activeTab === tab.id }"
-                                class="w-full text-left px-4 py-2 text-sm text-gray-200 hover:bg-gray-700"
+                                :class="{ 'bg-gray-100 dark:bg-gray-700': activeTab === tab.id }"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-900 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                                 @click="navigateToTab(tab.id)"
                             >
                                 {{ t(tab.label) }}
@@ -228,16 +229,16 @@
             <div class="flex flex-col md:flex-row gap-6">
                 <!-- Desktop Tab Navigation (Left Side) -->
                 <div class="hidden md:block w-64 shrink-0">
-                    <div class="bg-gray-800 rounded-lg shadow">
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow">
                         <div class="p-4">
-                            <h3 class="text-sm font-medium text-gray-400 mb-3">Settings</h3>
+                            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">Settings</h3>
                             <nav class="flex flex-col gap-1">
                                 <button
                                     v-for="tab in tabs"
                                     :key="tab.id"
                                     :class="activeTab === tab.id ?
-                                        'bg-gray-700 text-white' :
-                                        'text-gray-300 hover:bg-gray-700 hover:text-white'"
+                                        'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white' :
+                                        'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white'"
                                     class="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer"
                                     @click="navigateToTab(tab.id)"
                                 >

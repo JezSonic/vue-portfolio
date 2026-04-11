@@ -1,4 +1,4 @@
-import { IGoogleUserData, IGitHubUserData } from "@/types/services/auth.d.ts";
+import { IGoogleUserData, IGitHubUserData } from "@/types/services/auth.ts";
 
 /**
  * Interface representing user data.

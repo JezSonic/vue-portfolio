@@ -7,7 +7,8 @@
     import Loading from "@/components/ui/Loading.vue";
     import ApiService from "@/services/apiService";
     import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-    import { EOAuthProvider } from "@/types/services/auth.d.ts";
+    import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+    import { EOAuthProvider } from "@/types/services/auth.ts";
     import { useAuthStore } from "@/stores/authStore.ts";
     import Button from "@/components/ui/Button.vue";
     const userStore = useUserStore()
@@ -45,7 +46,7 @@
         <Loading v-if="loading && !error" :loading="true" />
         <div v-if="error" class="flex flex-col items-center justify-center absolute top-1/2 right-1/2 width-full max-w-125 translate-x-1/2 -translate-y-1/2">
             <div class="bg-gray-800 rounded-xl shadow p-8 text-center w-full flex flex-col items-center ">
-                <font-awesome-icon :icon="['fas', 'circle-exclamation']" class="text-6xl mb-4 text-red-500" />
+                <font-awesome-icon :icon="faCircleExclamation" class="text-6xl mb-4 text-red-500" />
                 <h2 class="text-gray-800 dark:text-white text-2xl font-bold mb-3">Authentication Failed</h2>
                 <p class="text-gray-500 dark:text-white mb-6 text-lg">We couldn't authenticate you with the provided credentials. Please try again or use a different authentication method.</p>
                 <Button variant="primary" @click="router.push('/auth')" text="Return to Login" />

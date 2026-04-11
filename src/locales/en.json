@@ -139,8 +139,8 @@
     "linkedin": {
       "title": "LinkedIn",
       "name": "Karol Tomaszewski",
-      "school": "Full-stack Junior Web Developer at Kenja K. K.",
-      "company": "Kenja K.K.",
+      "school": "Full-stack Junior Web Developer at Confronter sp. z o. o.",
+      "company": "Confronter sp. z o. o.",
       "viewProfile": "View LinkedIn Profile"
     },
     "email": {
@@ -217,7 +217,7 @@
       }
     },
     "cta": {
-      "title": "Interested in Working Together?",
+      "title": "Interested in working together?",
       "description": "If you like my work and are interested in collaborating on a project, I'd love to hear from you!",
       "contactButton": "Contact Me",
       "tosButton": "View Terms of Service"

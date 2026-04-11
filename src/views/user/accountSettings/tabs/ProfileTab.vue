@@ -8,7 +8,7 @@ import Button from "@/components/ui/Button.vue";
 import { useUserStore } from "@/stores/userStore.js";
 import { useThemeStore } from "@/stores/themeStore.js";
 import UserService from "@/services/userService.ts";
-import type { IUserData } from "@/types/user.d.ts";
+import type { IUserData } from "@/types/user.ts";
 
 const props = defineProps<{
     userData: IUserData | null;

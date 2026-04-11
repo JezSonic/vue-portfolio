@@ -5,14 +5,14 @@ import type {
     IProfileUpdateData,
     IUserData,
     EUserExportDataStatus
-} from "@/types/user.d.ts";
+} from "@/types/user.ts";
 
 import type {
     IApiResponse,
     IApiStatusResponse,
     IEmptyRequestBody,
     IPaginatedResponse
-} from "@/types/services/api.d.ts";
+} from "@/types/services/api.ts";
 
 export default class UserService extends ApiService {
     constructor() {

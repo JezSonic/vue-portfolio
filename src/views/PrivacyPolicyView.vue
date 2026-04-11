@@ -6,19 +6,19 @@ const { t } = useI18n();
 </script>
 
 <template>
-    <div class="container mx-auto px-4 sm:px-6 md:px-8 py-6 sm:py-8">
+    <div class="w-full max-w-7xl mx-auto py-8">
         <!-- Header Section -->
         <div class="mb-6 sm:mb-8 text-center">
             <h1 class="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">{{ t('privacyPolicy.title') }}</h1>
-            <p class="text-gray-400!">{{ t('privacyPolicy.lastUpdated') }}</p>
+            <p class="text-gray-600 dark:text-gray-400!">{{ t('privacyPolicy.lastUpdated') }}</p>
         </div>
 
         <!-- Introduction -->
         <Tile :title="t('privacyPolicy.introduction.title')" class="mb-6 sm:mb-8">
-            <p class="text-white text-base sm:text-lg mb-3 sm:mb-4">
+            <p class="text-gray-900 dark:text-white text-base sm:text-lg mb-3 sm:mb-4">
                 {{ t('privacyPolicy.introduction.paragraph1') }}
             </p>
-            <p class="text-white text-base sm:text-lg">
+            <p class="text-gray-900 dark:text-white text-base sm:text-lg">
                 {{ t('privacyPolicy.introduction.paragraph2') }}
             </p>
         </Tile>
@@ -26,65 +26,65 @@ const { t } = useI18n();
         <!-- Interpretation and Definitions -->
         <Tile :title="t('privacyPolicy.interpretationDefinitions.title')" class="mb-6 sm:mb-8">
             <h3 class="text-lg sm:text-xl font-semibold text-blue-500 mb-2 sm:mb-3">{{ t('privacyPolicy.interpretationDefinitions.interpretation.title') }}</h3>
-            <p class="text-white text-base sm:text-lg mb-4 sm:mb-6">
+            <p class="text-gray-900 dark:text-white text-base sm:text-lg mb-4 sm:mb-6">
                 {{ t('privacyPolicy.interpretationDefinitions.interpretation.content') }}
             </p>
 
             <h3 class="text-lg sm:text-xl font-semibold text-blue-500 mb-2 sm:mb-3">{{ t('privacyPolicy.interpretationDefinitions.definitions.title') }}</h3>
-            <p class="text-white text-base sm:text-lg mb-3 sm:mb-4">{{ t('privacyPolicy.interpretationDefinitions.definitions.intro') }}</p>
+            <p class="text-gray-900 dark:text-white text-base sm:text-lg mb-3 sm:mb-4">{{ t('privacyPolicy.interpretationDefinitions.definitions.intro') }}</p>
 
-            <div class="bg-gray-700 rounded-lg p-4 sm:p-6">
+            <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-4 sm:p-6">
                 <ul class="space-y-4">
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.account') }}:</span>
-                        <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.accountDesc') }}</span>
+                        <span class="font-bold text-blue-600 dark:text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.account') }}:</span>
+                        <span class="text-gray-900 dark:text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.accountDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.company') }}:</span>
-                        <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.companyDesc') }}</span>
+                        <span class="font-bold text-blue-600 dark:text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.company') }}:</span>
+                        <span class="text-gray-900 dark:text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.companyDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.cookies') }}:</span>
-                        <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.cookiesDesc') }}</span>
+                        <span class="font-bold text-blue-600 dark:text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.cookies') }}:</span>
+                        <span class="text-gray-900 dark:text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.cookiesDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.country') }}:</span>
-                        <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.countryDesc') }}</span>
+                        <span class="font-bold text-blue-600 dark:text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.country') }}:</span>
+                        <span class="text-gray-900 dark:text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.countryDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.device') }}:</span>
-                        <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.deviceDesc') }}</span>
+                        <span class="font-bold text-blue-600 dark:text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.device') }}:</span>
+                        <span class="text-gray-900 dark:text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.deviceDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.personalData') }}:</span>
-                        <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.personalDataDesc') }}</span>
+                        <span class="font-bold text-blue-600 dark:text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.personalData') }}:</span>
+                        <span class="text-gray-900 dark:text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.personalDataDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.service') }}:</span>
-                        <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.serviceDesc') }}</span>
+                        <span class="font-bold text-blue-600 dark:text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.service') }}:</span>
+                        <span class="text-gray-900 dark:text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.serviceDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.serviceProvider') }}:</span>
-                        <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.serviceProviderDesc') }}</span>
+                        <span class="font-bold text-blue-600 dark:text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.serviceProvider') }}:</span>
+                        <span class="text-gray-900 dark:text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.serviceProviderDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.thirdPartySocialMedia') }}:</span>
-                        <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.thirdPartySocialMediaDesc') }}</span>
+                        <span class="font-bold text-blue-600 dark:text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.thirdPartySocialMedia') }}:</span>
+                        <span class="text-gray-900 dark:text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.thirdPartySocialMediaDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.usageData') }}:</span>
-                        <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.usageDataDesc') }}</span>
+                        <span class="font-bold text-blue-600 dark:text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.usageData') }}:</span>
+                        <span class="text-gray-900 dark:text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.usageDataDesc') }}</span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.website') }}:</span>
-                        <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.websiteDesc') }} 
+                        <span class="font-bold text-blue-600 dark:text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.website') }}:</span>
+                        <span class="text-gray-900 dark:text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.websiteDesc') }} 
                             <a class="font-semibold text-blue-600 hover:text-blue-500" href="https://newdev.web.app/">https://newdev.web.app/</a> and 
                             <a class="font-semibold text-blue-600 hover:text-blue-500" href="https://newdev.pl/">https://newdev.pl/</a>
                         </span>
                     </li>
                     <li class="flex flex-col sm:flex-row">
-                        <span class="font-bold text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.you') }}:</span>
-                        <span class="text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.youDesc') }}</span>
+                        <span class="font-bold text-blue-600 dark:text-blue-400 mb-1 sm:mb-0 sm:mr-2 sm:min-w-40 sm:max-w-40">{{ t('privacyPolicy.interpretationDefinitions.definitions.you') }}:</span>
+                        <span class="text-gray-900 dark:text-white">{{ t('privacyPolicy.interpretationDefinitions.definitions.youDesc') }}</span>
                     </li>
                 </ul>
             </div>
@@ -95,10 +95,10 @@ const { t } = useI18n();
 
             <div class="mb-4 sm:mb-6">
                 <h4 class="text-base sm:text-lg font-medium text-blue-400 mb-1 sm:mb-2">{{ t('privacyPolicy.personalData.typesCollected.personalData.title') }}</h4>
-                <p class="text-white text-base sm:text-lg mb-2 sm:mb-3">
+                <p class="text-gray-900 dark:text-white text-base sm:text-lg mb-2 sm:mb-3">
                     {{ t('privacyPolicy.personalData.typesCollected.personalData.content') }}
                 </p>
-                <ul class="list-disc pl-6 text-white space-y-1">
+                <ul class="list-disc pl-6 text-gray-900 dark:text-white space-y-1">
                     <li>{{ t('privacyPolicy.personalData.typesCollected.personalData.item1') }}</li>
                     <li>{{ t('privacyPolicy.personalData.typesCollected.personalData.item2') }}</li>
                 </ul>
@@ -106,63 +106,63 @@ const { t } = useI18n();
 
             <div class="mb-4 sm:mb-6">
                 <h4 class="text-base sm:text-lg font-medium text-blue-400 mb-1 sm:mb-2">{{ t('privacyPolicy.personalData.typesCollected.usageData.title') }}</h4>
-                <p class="text-white text-base sm:text-lg mb-2 sm:mb-3">
+                <p class="text-gray-900 dark:text-white text-base sm:text-lg mb-2 sm:mb-3">
                     {{ t('privacyPolicy.personalData.typesCollected.usageData.paragraph1') }}
                 </p>
-                <p class="text-white text-base sm:text-lg mb-2 sm:mb-3">
+                <p class="text-gray-900 dark:text-white text-base sm:text-lg mb-2 sm:mb-3">
                     {{ t('privacyPolicy.personalData.typesCollected.usageData.paragraph2') }}
                 </p>
-                <p class="text-white text-base sm:text-lg mb-2 sm:mb-3">
+                <p class="text-gray-900 dark:text-white text-base sm:text-lg mb-2 sm:mb-3">
                     {{ t('privacyPolicy.personalData.typesCollected.usageData.paragraph3') }}
                 </p>
-                <p class="text-white text-base sm:text-lg">
+                <p class="text-gray-900 dark:text-white text-base sm:text-lg">
                     {{ t('privacyPolicy.personalData.typesCollected.usageData.paragraph4') }}
                 </p>
             </div>
 
             <div class="mb-4 sm:mb-6">
                 <h4 class="text-base sm:text-lg font-medium text-blue-400 mb-1 sm:mb-2">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.title') }}</h4>
-                <p class="text-white text-base sm:text-lg mb-2 sm:mb-3">
+                <p class="text-gray-900 dark:text-white text-base sm:text-lg mb-2 sm:mb-3">
                     {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.paragraph1') }}
                 </p>
-                <p class="text-white text-base sm:text-lg mb-2 sm:mb-3">
+                <p class="text-gray-900 dark:text-white text-base sm:text-lg mb-2 sm:mb-3">
                     {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.paragraph2') }}
                 </p>
-                <p class="text-white text-base sm:text-lg mb-2 sm:mb-3">
+                <p class="text-gray-900 dark:text-white text-base sm:text-lg mb-2 sm:mb-3">
                     {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.paragraph3') }}
                     <a class="font-semibold text-blue-600 hover:text-blue-500" href="https://www.termsfeed.com/blog/cookies/" rel="noopener noreferrer" target="_blank">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.cookiesLink') }}</a>.
                 </p>
-                <p class="text-white text-base sm:text-lg mb-2 sm:mb-3">
+                <p class="text-gray-900 dark:text-white text-base sm:text-lg mb-2 sm:mb-3">
                     {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.paragraph4') }}
                 </p>
 
-                <div class="bg-gray-700 rounded-lg p-4 sm:p-6 space-y-4 sm:space-y-6">
+                <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-4 sm:p-6 space-y-4 sm:space-y-6">
                     <div>
                         <h5 class="font-bold text-blue-400 mb-1 sm:mb-2">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.necessaryCookies.title') }}</h5>
-                        <p class="text-white mb-1"><span class="text-gray-400">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.necessaryCookies.type') }}</span> {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.necessaryCookies.typeValue') }}</p>
-                        <p class="text-white mb-1"><span class="text-gray-400">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.necessaryCookies.administeredBy') }}</span> {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.necessaryCookies.administeredByValue') }}</p>
-                        <p class="text-white">
-                            <span class="text-gray-400">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.necessaryCookies.purpose') }}</span> {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.necessaryCookies.purposeValue') }}
+                        <p class="text-gray-900 dark:text-white mb-1"><span class="text-gray-600 dark:text-gray-400">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.necessaryCookies.type') }}</span> {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.necessaryCookies.typeValue') }}</p>
+                        <p class="text-gray-900 dark:text-white mb-1"><span class="text-gray-600 dark:text-gray-400">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.necessaryCookies.administeredBy') }}</span> {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.necessaryCookies.administeredByValue') }}</p>
+                        <p class="text-gray-900 dark:text-white">
+                            <span class="text-gray-600 dark:text-gray-400">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.necessaryCookies.purpose') }}</span> {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.necessaryCookies.purposeValue') }}
                         </p>
                     </div>
 
                     <div>
                         <h5 class="font-bold text-blue-400 mb-1 sm:mb-2">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.acceptanceCookies.title') }}</h5>
-                        <p class="text-white mb-1"><span class="text-gray-400">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.acceptanceCookies.type') }}</span> {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.acceptanceCookies.typeValue') }}</p>
-                        <p class="text-white"><span class="text-gray-400">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.acceptanceCookies.administeredBy') }}</span> {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.acceptanceCookies.administeredByValue') }}</p>
+                        <p class="text-gray-900 dark:text-white mb-1"><span class="text-gray-600 dark:text-gray-400">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.acceptanceCookies.type') }}</span> {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.acceptanceCookies.typeValue') }}</p>
+                        <p class="text-gray-900 dark:text-white"><span class="text-gray-600 dark:text-gray-400">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.acceptanceCookies.administeredBy') }}</span> {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.acceptanceCookies.administeredByValue') }}</p>
                     </div>
 
                     <div>
                         <h5 class="font-bold text-blue-400 mb-1 sm:mb-2">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.functionalityCookies.title') }}</h5>
-                        <p class="text-white mb-1"><span class="text-gray-400">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.functionalityCookies.type') }}</span> {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.functionalityCookies.typeValue') }}</p>
-                        <p class="text-white mb-1"><span class="text-gray-400">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.functionalityCookies.administeredBy') }}</span> {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.functionalityCookies.administeredByValue') }}</p>
-                        <p class="text-white">
-                            <span class="text-gray-400">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.functionalityCookies.purpose') }}</span> {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.functionalityCookies.purposeValue') }}
+                        <p class="text-gray-900 dark:text-white mb-1"><span class="text-gray-600 dark:text-gray-400">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.functionalityCookies.type') }}</span> {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.functionalityCookies.typeValue') }}</p>
+                        <p class="text-gray-900 dark:text-white mb-1"><span class="text-gray-600 dark:text-gray-400">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.functionalityCookies.administeredBy') }}</span> {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.functionalityCookies.administeredByValue') }}</p>
+                        <p class="text-gray-900 dark:text-white">
+                            <span class="text-gray-600 dark:text-gray-400">{{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.functionalityCookies.purpose') }}</span> {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.functionalityCookies.purposeValue') }}
                         </p>
                     </div>
                 </div>
 
-                <p class="text-white text-base sm:text-lg mt-3 sm:mt-4">
+                <p class="text-gray-900 dark:text-white text-base sm:text-lg mt-3 sm:mt-4">
                     {{ t('privacyPolicy.personalData.typesCollected.trackingTechnologies.moreInfo') }}
                 </p>
             </div>
@@ -388,7 +388,7 @@ const { t } = useI18n();
             <div class="bg-gray-700 rounded-lg p-4 sm:p-6 inline-block">
                 <p class="text-white flex items-center">
                     <span class="text-blue-400 mr-2">•</span>
-                    {{ t('privacyPolicy.contact.byVisiting') }} <a class="font-semibold text-blue-600 hover:text-blue-500 ml-1" href="/contact">{{ t('privacyPolicy.contact.contactPage') }}</a>&nbsp;{{ t('privacyPolicy.contact.onWebsite') }}
+                    {{ t('privacyPolicy.contact.byVisiting') }} <router-link class="font-semibold text-blue-600 hover:text-blue-500 ml-1" to="/contact">{{ t('privacyPolicy.contact.contactPage') }}</router-link>&nbsp;{{ t('privacyPolicy.contact.onWebsite') }}
                 </p>
             </div>
         </Tile>

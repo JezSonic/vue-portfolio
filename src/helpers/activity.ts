@@ -1,19 +1,29 @@
+import { faGoogle, faMicrosoft, faGithub } from "@fortawesome/free-brands-svg-icons";
+import { 
+    faCircleQuestion, 
+    faEnvelope, 
+    faTabletButton, 
+    faMobileButton, 
+    faLaptop, 
+    faComputer 
+} from "@fortawesome/free-solid-svg-icons";
+
 // Helper function to format login method with icon
 export const formatLoginMethod = (method: string) => {
     const methodLower = method.toLowerCase();
-    let icon = ['fas', 'circle-question'];
+    let icon: any = faCircleQuestion;
     let label = method;
     if (methodLower.includes('google')) {
-        icon = ['fab', 'google'];
+        icon = faGoogle;
         label = 'Google';
     } else if (methodLower.includes('microsoft') || methodLower.includes('azure')) {
-        icon = ['fab', 'microsoft'];
+        icon = faMicrosoft;
         label = 'Microsoft';
     } else if (methodLower.includes('github')) {
-        icon = ['fab', 'github'];
+        icon = faGithub;
         label = 'GitHub';
     } else if (methodLower.includes('email') || methodLower.includes('password')) {
-        icon = ['fas', 'envelope']
+        icon = faEnvelope;
         label = 'Email';
     }
 
@@ -22,21 +32,21 @@ export const formatLoginMethod = (method: string) => {
 
 // Helper function to parse user agent and return device info
 export const parseUserAgent = (userAgent: string) => {
-    let deviceType: string[];
+    let deviceType: any;
     let deviceName: string;
 
     // Check for mobile devices
     if (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase())) {
         if (/ipad/i.test(userAgent.toLowerCase()) || /tablet/i.test(userAgent.toLowerCase())) {
-            deviceType = ['fas', 'tablet-button'];
+            deviceType = faTabletButton;
             deviceName = 'Tablet';
         } else {
-            deviceType = ['fas', 'mobile-button'];
+            deviceType = faMobileButton;
             deviceName = 'Mobile';
         }
     } else {
         // Desktop/laptop detection
-        deviceType = /macintosh|mac os x/i.test(userAgent) ? ['fas', 'laptop'] : ['fas', 'computer'];
+        deviceType = /macintosh|mac os x/i.test(userAgent) ? faLaptop : faComputer;
         deviceName = /macintosh|mac os x/i.test(userAgent) ? 'Mac' : 'PC';
     }
 

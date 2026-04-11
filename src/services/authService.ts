@@ -9,8 +9,8 @@ import {
     IRefreshTokenRequestBody,
     IRegisterRequestBody,
     IVerifyTokenResponse
-} from "@/types/services/auth.d.ts";
-import type { IApiAuthResponse, IApiResponse, IEmptyRequestBody } from "@/types/services/api.d.ts";
+} from "@/types/services/auth.ts";
+import type { IApiAuthResponse, IApiResponse, IEmptyRequestBody } from "@/types/services/api.ts";
 import { useUserStore } from "@/stores/userStore.ts";
 import router from "@/router/index.ts";
 

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
     import { computed, ref } from "vue";
-    import { IExceptionResponse } from "@/types/services/api.d";
+    import { IExceptionResponse } from "@/types/services/api.ts";
     import router from "@/router";
     import { useUserStore } from "@/stores/userStore.ts";
-    import { EOAuthProvider } from "@/types/services/auth.d";
+    import { EOAuthProvider } from "@/types/services/auth.ts";
     import AuthService from "@/services/authService.ts";
     import logo from "@/assets/img/logo.webp";
     import Button from "@/components/ui/Button.vue";
@@ -13,6 +13,9 @@
     import { GoogleLogin } from "vue3-google-login";
     import { useAuthStore } from "@/stores/authStore.ts";
     import { useThemeStore } from "@/stores/themeStore.ts";
+    import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+    import { faEye, faEyeSlash, faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+    import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons";
 
     const password = ref<string>("");
     const email = ref<string>("");
@@ -127,7 +130,7 @@
 </script>
 
 <template>
-    <div class="container px-1 py-12 flex min-h-full flex-1 flex-col justify-center">
+    <div class="w-full max-w-7xl mx-auto py-12 flex min-h-full flex-1 flex-col justify-center">
         <div class="bg-gray-800 rounded-lg shadow-lg max-w-lg lg:min-w-lg md:min-w-md mx-auto p-6">
             <div class="text-center mb-8">
                 <img :src="logo" :alt="t('authView.logo.alt')" class="mx-auto h-16 w-auto mb-6" />
@@ -140,7 +143,7 @@
             <div class="space-y-6">
                 <div v-if="accountNotFound" class="bg-red-500/20 border border-red-500/50 rounded-md p-3 mb-4">
                     <div class="flex items-center">
-                        <font-awesome-icon :icon="['fas', 'circle-exclamation']" class="text-red-400 mr-2" />
+                        <font-awesome-icon :icon="faCircleExclamation" class="text-red-400 mr-2" />
                         <p class="text-red-200 text-sm">{{ t("authView.resetPassword.errors.accountNotFound") }}</p>
                     </div>
                 </div>
@@ -185,7 +188,7 @@
                             @click="showPassword = !showPassword"
                             class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-500 focus:outline-none"
                         >
-                            <font-awesome-icon :icon="['fas', showPassword ? 'eye-slash' : 'eye']" />
+                            <font-awesome-icon :icon="showPassword ? faEyeSlash : faEye" />
                         </button>
                     </div>
                 </div>
@@ -242,7 +245,7 @@
                         v-if="getSupportedOAuthProviders()?.includes(EOAuthProvider.Google) || false"
                         @click="performOAuth(EOAuthProvider.Google)"
                         :loading="isGithubLoading">
-                        <font-awesome-icon class="mr-2" :icon="['fab', 'google']" />
+                        <font-awesome-icon class="mr-2" :icon="faGoogle" />
                     </Button>
                     <GoogleLogin v-if="getSupportedOAuthProviders()?.includes(EOAuthProvider.GoogleOneTap) || false" :callback="callback" :id-configuration="{use_fedcm_for_button: true}" :button-config="{text: 'continue_with', theme: ui_theme === 'dark' ? 'filled_black' : 'filled_white'}"/>
                     <Button 
@@ -253,7 +256,7 @@
                         v-if="getSupportedOAuthProviders()?.includes(EOAuthProvider.GitHub) || false"
                         @click="performOAuth(EOAuthProvider.GitHub)" 
                         :loading="isGithubLoading">
-                        <font-awesome-icon class="mr-2" :icon="['fab', 'github']" />
+                        <font-awesome-icon class="mr-2" :icon="faGithub" />
                     </Button>
                 </div>
             </div>

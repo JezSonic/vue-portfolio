@@ -8,6 +8,19 @@ import maszyna_reloaded from '@/assets/projects/maszyna_reloaded.webp';
 import artist from '@/assets/projects/artist.webp';
 import irenka from "@/assets/projects/irenka.webp"
 import { useI18n } from "vue-i18n";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import {
+    faDiscord,
+    faTelegram,
+    faReact,
+    faVuejs,
+    faSass,
+    faTailwindCss, faTypescript
+} from "@fortawesome/free-brands-svg-icons";
+import {
+    faCode,
+    faGamepad
+} from "@fortawesome/free-solid-svg-icons";
 
 const { t } = useI18n();
 
@@ -17,11 +30,11 @@ const goTo = (url: string) => {
 </script>
 
 <template>
-    <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="w-full max-w-7xl mx-auto py-8">
         <!-- Hero Section -->
         <div class="mb-12 text-center">
             <h1 class="text-4xl md:text-5xl font-bold text-blue-600 mb-4">{{ t('commissionsView.hero.title') }}</h1>
-            <p class="text-lg text-gray-300! max-w-3xl mx-auto">
+            <p class="text-lg text-white max-w-3xl mx-auto">
                 {{ t('commissionsView.hero.description') }}
             </p>
         </div>
@@ -30,20 +43,20 @@ const goTo = (url: string) => {
         <Tile :title="t('commissionsView.info.title')" class="mb-12">
             <template #default>
                 <div class="space-y-4">
-                    <p class="text-white text-lg">
+                    <p class="text-gray-900 dark:text-white text-lg">
                         {{ t('commissionsView.info.paragraph1') }}
                     </p>
-                    <p class="text-white text-lg">
+                    <p class="text-gray-900 dark:text-white text-lg">
                         {{ t('commissionsView.info.paragraph2') }}
                     </p>
 
                     <div v-once class="flex flex-wrap gap-4 mt-4">
-                        <div class="flex items-center gap-2 px-4 py-2 bg-gray-700 rounded-lg">
-                            <font-awesome-icon icon="fa-brands fa-discord" class="w-6 h-6 text-white" />
-                            <span class="text-white">{{ t('commissionsView.info.discord') }}: <span class="font-semibold">dos_cutey</span></span>
+                        <div class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg">
+                            <font-awesome-icon :icon="faDiscord" class="w-6 h-6 text-gray-900 dark:text-white" />
+                            <span class="text-gray-900 dark:text-white">{{ t('commissionsView.info.discord') }}: <span class="font-semibold">dos_cutey</span></span>
                         </div>
-                        <div class="flex items-center gap-2 px-4 py-2 bg-gray-700 rounded-lg">
-                            <font-awesome-icon icon="fa-brands fa-telegram" class="w-6 h-6 text-white" />
+                        <div class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg">
+                            <font-awesome-icon :icon="faTelegram" class="w-6 h-6 text-gray-900 dark:text-white" />
                             <a class="text-blue-500 hover:text-blue-400 font-semibold" 
                                href="https://t.me/Futrzasty" target="_blank" rel="noopener noreferrer">@Futrzasty</a>
                         </div>
@@ -56,32 +69,32 @@ const goTo = (url: string) => {
         <div class="mb-8">
             <h2 class="text-2xl font-bold text-blue-600 mb-6">{{ t('commissionsView.projects.title') }}</h2>
             <div class="grid gap-6 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
-                <Tile :background-image="irenka" hover-shadow-color="#70685b" v-once :title="t('commissionsView.projects.irenka.tileTitle')">
+                <Tile :background-image="irenka" v-once :title="t('commissionsView.projects.irenka.tileTitle')">
                     <div class="space-y-3">
                         <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.irenka.title') }}</h4>
-                        <p class="text-white!">{{ t('commissionsView.projects.irenka.subtitle') }}</p>
+                        <p class="text-white">{{ t('commissionsView.projects.irenka.subtitle') }}</p>
                         <div class="flex flex-wrap gap-2 my-3">
-                            <Badge text="Next.js" icon="fa-react" bg_color="#61dafb" text_color="#000" link="https://nextjs.org/"/>
-                            <Badge text="TypeScript" icon="fa-code" bg_color="#3178c6" link="https://www.typescriptlang.org/" />
-                            <Badge text="TailwindCSS" icon="fa-css" bg_color="#00bcff" link="https://tailwindcss.com/" />
+                            <Badge text="Next.js" :icon="faReact" color="sky" link="https://nextjs.org/"/>
+                            <Badge text="TypeScript" :icon="faTypescript" color="blue" link="https://www.typescriptlang.org/" />
+                            <Badge text="TailwindCSS" :icon="faTailwindCss" color="sky" link="https://tailwindcss.com/" />
                         </div>
-                        <p class="text-gray-300!">{{ t('commissionsView.projects.irenka.description') }}</p>
+                        <p class="text-gray-300">{{ t('commissionsView.projects.irenka.description') }}</p>
                         <div class="flex justify-end mt-4">
                             <Button @click="goTo('https://irenka-511e7.web.app/')" variant="primary" :text="t('commissionsView.projects.irenka.viewButton')" />
                         </div>
                     </div>
                 </Tile>
-                <Tile :background-image="old_website" hover-shadow-color="#00459280" v-once text-class="h-full" :title="t('commissionsView.projects.oldWebsite.tileTitle')">
+                <Tile :background-image="old_website" v-once text-class="h-full" :title="t('commissionsView.projects.oldWebsite.tileTitle')">
                     <div class="flex flex-col justify-between h-full pb-6">
                         <div class="space-y-3">
                             <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.oldWebsite.title') }}</h4>
-                            <p class="text-white!"><i>{{ t('commissionsView.projects.oldWebsite.subtitle') }}</i></p>
+                            <p class="text-white"><i>{{ t('commissionsView.projects.oldWebsite.subtitle') }}</i></p>
                             <div class="flex flex-wrap gap-2 my-3">
-                                <Badge text="Vue.js" icon="fa-vuejs" bg_color="#42b883" link="https://vuejs.org/" />
-                                <Badge text="SCSS" icon="fa-sass" bg_color="#cd6799" link="https://sass-lang.com/" />
-                                <Badge text="TypeScript" icon="fa-code" bg_color="#3178c6" link="https://www.typescriptlang.org/" />
+                                <Badge text="Vue.js" :icon="faVuejs" color="emerald" link="https://vuejs.org/" />
+                                <Badge text="SCSS" :icon="faSass" color="pink" link="https://sass-lang.com/" />
+                                <Badge text="TypeScript" :icon="faTypescript" color="blue" link="https://www.typescriptlang.org/" />
                             </div>
-                            <p class="text-gray-300!">{{ t('commissionsView.projects.oldWebsite.description') }}</p>
+                            <p class="text-gray-300">{{ t('commissionsView.projects.oldWebsite.description') }}</p>
                         </div>
                         <div class="flex justify-end mt-4">
                             <Button @click="goTo('https://old-newdev.web.app')" variant="primary" :text="t('commissionsView.projects.oldWebsite.viewButton')" />
@@ -89,30 +102,30 @@ const goTo = (url: string) => {
                     </div>
                 </Tile>
 
-                <Tile :background-image="artist" hover-shadow-color="#f7af3260" v-once :title="t('commissionsView.projects.artist.tileTitle')">
+                <Tile :background-image="artist" v-once :title="t('commissionsView.projects.artist.tileTitle')">
                     <div class="space-y-3">
                         <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.artist.title') }}</h4>
-                        <p class="text-white!">{{ t('commissionsView.projects.artist.subtitle') }}</p>
+                        <p class="text-white">{{ t('commissionsView.projects.artist.subtitle') }}</p>
                         <div class="flex flex-wrap gap-2 my-3">
-                            <Badge text="Next.js" icon="fa-react" bg_color="#61dafb" text_color="#000" link="https://nextjs.org/"/>
-                            <Badge text="TailwindCSS" icon="fa-css" bg_color="#00bcff" link="https://tailwindcss.com/" />
+                            <Badge text="Next.js" :icon="faReact" color="sky" link="https://nextjs.org/"/>
+                            <Badge text="TailwindCSS" :icon="faTailwindCss" color="sky" link="https://tailwindcss.com/" />
                         </div>
-                        <p class="text-gray-300!">{{ t('commissionsView.projects.artist.description') }}</p>
+                        <p class="text-gray-300">{{ t('commissionsView.projects.artist.description') }}</p>
                         <div class="flex justify-end mt-4">
                             <Button @click="goTo('https://artist.com.pl')" variant="primary" :text="t('commissionsView.projects.artist.viewButton')" />
                         </div>
                     </div>
                 </Tile>
 
-                <Tile :background-image="maszyna_reloaded" hover-shadow-color="#70685b" v-once :title="t('commissionsView.projects.maszyna.tileTitle') ">
+                <Tile :background-image="maszyna_reloaded" v-once :title="t('commissionsView.projects.maszyna.tileTitle') ">
                     <div class="space-y-3">
                         <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.maszyna.title') }}</h4>
-                        <p class="text-white!">{{ t('commissionsView.projects.maszyna.subtitle') }}</p>
+                        <p class="text-white">{{ t('commissionsView.projects.maszyna.subtitle') }}</p>
                         <div class="flex flex-wrap gap-2 my-3">
-                            <Badge text="C++" icon="fa-code" bg_color="#00599c" />
-                            <Badge text="Godot Engine" icon="fa-gamepad" bg_color="#4d9fdc" link="https://godotengine.org/" />
+                            <Badge text="C++" :icon="faCode" color="blue" />
+                            <Badge text="Godot Engine" :icon="faGamepad" color="sky" link="https://godotengine.org/" />
                         </div>
-                        <p class="text-gray-300!">{{ t('commissionsView.projects.maszyna.description') }}</p>
+                        <p class="text-gray-300">{{ t('commissionsView.projects.maszyna.description') }}</p>
                         <div class="flex justify-end mt-4">
                             <Button @click="goTo('https://github.com/MaSzyna-Reloaded')" variant="primary" :text="t('commissionsView.projects.maszyna.viewButton')" />
                         </div>
@@ -125,12 +138,12 @@ const goTo = (url: string) => {
         <div class="mb-8">
             <h2 class="text-2xl font-bold text-blue-600 mb-6">Unfinished projects</h2>
             <div class="grid gap-6 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
-                <Tile hover-shadow-color="#70685b" v-once title="Foxy Adventure">
+                <Tile v-once title="Foxy Adventure">
                     <div class="space-y-3">
                         <div class="flex flex-wrap gap-2 my-3">
-                            <Badge text="Godot Engine" icon="fa-gamepad" bg_color="#4d9fdc" link="https://godotengine.org/" />
+                            <Badge text="Godot Engine" :icon="faGamepad" color="sky" link="https://godotengine.org/" />
                         </div>
-                        <p class="text-gray-300!">
+                        <p class="text-gray-600 dark:text-gray-300">
                             Small platformer game with a blue fox as a main character, where you have to fight monsters and collect treasures.
                         </p>
                         <div class="flex justify-end mt-4">
@@ -139,38 +152,38 @@ const goTo = (url: string) => {
                     </div>
                 </Tile>
 
-                <Tile hover-shadow-color="#70685b" v-once title="RCKU Stories">
+                <Tile v-once title="RCKU Stories">
                     <div class="space-y-3">
                         <div class="flex flex-wrap gap-2 my-3">
-                            <Badge text="Godot Engine" icon="fa-gamepad" bg_color="#4d9fdc" link="https://godotengine.org/" />
+                            <Badge text="Godot Engine" :icon="faGamepad" color="sky" link="https://godotengine.org/" />
                         </div>
-                        <p class="text-gray-300!">RPG-like game concept localised in school with pixel-art style and adventure elements</p>
+                            <p class="text-gray-600 dark:text-gray-300">RPG-like game concept localised in school with pixel-art style and adventure elements</p>
                         <div class="flex justify-end mt-4">
                             <Button @click="goTo('https://github.com/NewDEV-github/RCKU-Stories')" variant="primary" :text="t('commissionsView.projects.maszyna.viewButton')" />
                         </div>
                     </div>
                 </Tile>
 
-                <Tile hover-shadow-color="#00459280" v-once title="Super Duper Disco">
+                <Tile v-once title="Super Duper Disco">
                     <div class="space-y-3">
-                        <p class="text-white!">Small game made for <a class="text-blue-500 hover:text-blue-400 font-semibold" href="https://itch.io/jam/godocikowy-dzem-4">Godocikowy Dżem #4</a></p>
+                        <p class="text-gray-900 dark:text-white!">Small game made for <a class="text-blue-500 hover:text-blue-400 font-semibold" href="https://itch.io/jam/godocikowy-dzem-4">Godocikowy Dżem #4</a></p>
                         <div class="flex flex-wrap gap-2 my-3">
-                            <Badge text="Godot Engine" icon="fa-gamepad" bg_color="#4d9fdc" link="https://godotengine.org/" />
+                            <Badge text="Godot Engine" :icon="faGamepad" color="sky" link="https://godotengine.org/" />
                         </div>
-                        <p class="text-gray-300!">Inspired by Friday Night Funkin' - local multiplayer game where you have to press keys in time</p>
+                        <p class="text-gray-600 dark:text-gray-300">Inspired by Friday Night Funkin' - local multiplayer game where you have to press keys in time</p>
                         <div class="flex justify-end mt-4">
                             <Button @click="goTo('https://github.com/NewDEV-github/super-duper-disco')" variant="primary" :text="t('commissionsView.projects.oldWebsite.viewButton')" />
                         </div>
                     </div>
                 </Tile>
 
-                <Tile hover-shadow-color="#f7af3260" v-once title="Furry Potato">
+                <Tile v-once title="Furry Potato">
                     <div class="space-y-3">
-                        <p class="text-white!">Small game made for <a class="text-blue-500 hover:text-blue-400 font-semibold" href="https://itch.io/jam/godocikowy-dzem-5">Godocikowy Dżem #5</a></p>
+                        <p class="text-gray-900 dark:text-white!">Small game made for <a class="text-blue-500 hover:text-blue-400 font-semibold" href="https://itch.io/jam/godocikowy-dzem-5">Godocikowy Dżem #5</a></p>
                         <div class="flex flex-wrap gap-2 my-3">
-                            <Badge text="Godot Engine" icon="fa-gamepad" bg_color="#4d9fdc" link="https://godotengine.org/" />
+                            <Badge text="Godot Engine" :icon="faGamepad" color="sky" link="https://godotengine.org/" />
                         </div>
-                        <p class="text-gray-300!">Small DJ Simulator a bit mixed up with visual novel where you go up the DJ carrer ladder</p>
+                        <p class="text-gray-600 dark:text-gray-300">Small DJ Simulator a bit mixed up with visual novel where you go up the DJ carrer ladder</p>
                         <div class="flex justify-end mt-4">
                             <Button @click="goTo('https://github.com/NewDEV-github/Furry-Potato')" variant="primary" :text="t('commissionsView.projects.artist.viewButton')" />
                         </div>
@@ -182,7 +195,7 @@ const goTo = (url: string) => {
         <!-- Contact CTA -->
         <Tile :title="t('commissionsView.cta.title')" class="mt-12">
             <template #default>
-                <p class="text-white text-lg mb-6">
+                <p class="text-gray-900 dark:text-white text-lg mb-6">
                     {{ t('commissionsView.cta.description') }}
                 </p>
                 <div class="flex flex-wrap gap-4">

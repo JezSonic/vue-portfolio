@@ -1,6 +1,6 @@
 import ApiService from "@/services/apiService.ts";
-import { I2FACode, I2FAConfirmResponse, I2FAPrepareResponse, I2FARecoveryCode } from "@/types/services/2fa";
-import { IApiResponse, IEmptyRequestBody } from "@/types/services/api";
+import { I2FACode, I2FAConfirmResponse, I2FAPrepareResponse, I2FARecoveryCode } from "@/types/services/2fa.ts";
+import { IApiResponse, IEmptyRequestBody } from "@/types/services/api.ts";
 
 export default class TwoFactorAuthService extends ApiService {
     constructor() {

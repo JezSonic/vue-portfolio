@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, watch } from "vue";
-import type { IUserData } from "@/types/user.d.ts";
+import type { IUserData } from "@/types/user.ts";
 import UserService from "@/services/userService.ts";
 import { useI18n } from "vue-i18n";
 import Button from "@/components/ui/Button.vue";

@@ -1,4 +1,4 @@
-import { EOAuthProvider } from "@/types/services/auth.js";
+import { EOAuthProvider } from "@/types/services/auth.ts";
 
 /**
  * Represents a type for supported languages.

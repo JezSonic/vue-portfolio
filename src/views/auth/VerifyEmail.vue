@@ -6,7 +6,7 @@
     import { useUserStore } from "@/stores/userStore.ts";
     import UserService from "@/services/userService.ts";
     import Loading from "@/components/ui/Loading.vue";
-    import type { IExceptionResponse } from "@/types/services/api.d.ts";
+    import type { IExceptionResponse } from "@/types/services/api.ts";
     import logo from "@/assets/img/logo.webp";
     const userStore = useUserStore();
     const errorText = ref<string|undefined>(undefined);
@@ -37,7 +37,7 @@
 </script>
 
 <template>
-    <div class="container px-4 py-12 flex min-h-full flex-1 flex-col justify-center">
+    <div class="w-full max-w-7xl mx-auto py-12 flex min-h-full flex-1 flex-col justify-center">
         <div v-if="loading" class="flex justify-center">
             <Loading :loading="true" :error="error" :error-text="errorText"/>
         </div>

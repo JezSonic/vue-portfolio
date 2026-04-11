@@ -1,9 +1,9 @@
 <script lang="ts" setup>
     import { computed, ref, watch } from "vue";
     import { useUserStore } from "@/stores/userStore.js";
-    import { EOAuthProvider } from "@/types/services/auth.d.ts";
+    import { EOAuthProvider } from "@/types/services/auth.ts";
     import AuthService from "@/services/authService.ts";
-    import type { IUserData } from "@/types/user.d.ts";
+    import type { IUserData } from "@/types/user.ts";
     import { getSupportedOAuthProviders } from "@/helpers/app.js";
     import { useI18n } from "vue-i18n";
     import Button from "@/components/ui/Button.vue";

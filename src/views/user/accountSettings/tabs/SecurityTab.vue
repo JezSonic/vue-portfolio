@@ -3,7 +3,8 @@ import { ref } from "vue";
 import UserService from "@/services/userService.ts";
 import { useUserStore } from "@/stores/userStore.ts";
 import { env } from "@/helpers/app.ts";
-import type { IUserData } from "@/types/user.d.ts";
+import router from "@/router";
+import type { IUserData } from "@/types/user.ts";
 import { useI18n } from "vue-i18n";
 import Button from "@/components/ui/Button.vue";
 import AuthService from "@/services/authService.ts";
@@ -109,7 +110,7 @@ const deleteAccount = () => {
         .finally(() => {
             userStore.logout();
             // Logout and redirect
-            window.location.href = "/";
+            router.push("/");
             // Note: No need to reset isDeleteAccountLoading since we're redirecting
         });
     showDeleteConfirm.value = false;

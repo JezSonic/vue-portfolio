@@ -9,8 +9,16 @@
     import { env } from "@/helpers/app";
     import { useI18n } from "vue-i18n";
     import { setLanguage } from "@/i18n";
-    import { Lang } from "@/types/utils.d.ts";
+    import { Lang } from "@/types/utils.ts";
     import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+    import {
+        faBars,
+        faTimes,
+        faSun,
+        faMoon,
+        faLanguage,
+        faSignInAlt,
+    } from "@fortawesome/free-solid-svg-icons";
 
     interface NavigationItem {
         name: string;
@@ -24,7 +32,7 @@
     }
 
     const { t, locale } = useI18n();
-    const currentRoute = ref<string>(router.currentRoute.value.path);
+    const currentRoute = computed(() => router.currentRoute.value.path);
     const transparent = ref<boolean>(true);
     const open = ref<boolean>(false);
     const userDropdownOpen = ref<boolean>(false);
@@ -64,7 +72,6 @@
 
     onMounted(() => {
         window.addEventListener("scroll", onDocumentScroll);
-        currentRoute.value = router.currentRoute.value.path;
     });
 </script>
 
@@ -72,7 +79,7 @@
 <!--    v-slot="{ open }"-->
     <div :class="[
         !transparent
-            ? 'backdrop-blur-xs border-b duration-500 bg-black/50 border-white/20 shadow-[-2px_2px_5px_#00000080] light:bg-white/80 light:border-black/10 light:shadow-[-2px_2px_5px_rgba(0,0,0,0.1)]'
+            ? 'backdrop-blur-xs border-b duration-500 bg-black/50 light:bg-black/50 border-white/20 shadow-[-2px_2px_5px_#00000080]'
             : '',
         'top-0 left-0 fixed w-full z-100'
     ]">
@@ -81,23 +88,23 @@
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                     <!-- Mobile menu button-->
                     <div
-                        class="relative z-50 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 light:bg-gray-white hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
+                        class="relative z-50 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 light:bg-gray-white hover:text-white focus:outline-hidden"
                         :aria-expanded="open" @click="open = !open; userDropdownOpen = false; langDropdownOpen = false; themeDropdownOpen = false">
                         <span v-once class="absolute -inset-0.5" />
                         <span v-once class="sr-only">Open main menu</span>
-                        <font-awesome-icon v-if="!open" icon="fa-solid fa-bars" class="block size-6 text-white" aria-hidden="true"/>
-                        <font-awesome-icon v-else icon="fa-solid fa-times" class="block size-6 text-white" aria-hidden="true"/>
+                        <font-awesome-icon v-if="!open" :icon="faBars" class="block size-6 text-white" aria-hidden="true"/>
+                        <font-awesome-icon v-else :icon="faTimes" class="block size-6 text-white" aria-hidden="true"/>
                     </div>
                 </div>
                 <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                     <div class="flex shrink-0 items-center cursor-pointer">
-                        <img v-once class="h-8 w-auto" :src="logo" @click="router.push('/')" alt="Your Company" width="426" height="475"/>
+                        <img v-once class="h-9.5 w-auto" :src="logo" @click="router.push('/')" alt="Your Company" width="426" height="475"/>
                     </div>
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
-                            <a v-for="item in navigation" :key="item.href" :href="item.href"
-                               :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300! hover:bg-gray-700 not-dark:hover:text-gray-700! hover:text-white', 'rounded-md px-3 py-2 text-sm font-medium cursor-pointer']"
-                               :aria-current="item.href === currentRoute? 'page' : undefined">{{ t(item.name) }}</a>
+                            <router-link v-for="item in navigation" :key="item.href" :to="item.href"
+                               :class="[item.current ? 'dark:bg-gray-900 dark:text-white bg-white' : 'text-white dark:text-gray-300 hover:bg-gray-50/50 dark:hover:bg-gray-700', 'rounded-md px-3 py-2 text-sm font-medium cursor-pointer']"
+                               :aria-current="item.href === currentRoute? 'page' : undefined">{{ t(item.name) }}</router-link>
                         </div>
                     </div>
                 </div>
@@ -105,11 +112,11 @@
                     <!-- Theme toggle -->
                     <button v-if="env('ENABLE_THEMES') && !open"
                             @click="toggleTheme"
-                            class="relative cursor-pointer flex gap-2 items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+                            class="relative cursor-pointer flex gap-2 items-center rounded-md dark:bg-gray-900 bg-white px-3 py-2 text-sm dark:text-white hover:bg-gray-700 hover:text-white focus:outline-hidden"
                             aria-label="Toggle theme"
                     >
                         <font-awesome-icon
-                            :icon="themeStore.actualTheme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon'"
+                            :icon="themeStore.actualTheme === 'dark' ? faSun : faMoon"
                         />
                         <span
                             class="hidden md:inline">{{ themeStore.actualTheme === "dark" ? t("theme.light") : t("theme.dark") }}</span>
@@ -118,9 +125,9 @@
                     <!-- Language dropdown -->
                     <div class="relative ml-3" v-if="env('ENABLE_LOCALIZATION') && !open">
                         <div @click="langDropdownOpen = !langDropdownOpen"
-                            class="relative cursor-pointer flex gap-2 items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+                            class="relative cursor-pointer flex gap-2 items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:outline-hidden"
                             aria-label="Select language">
-                            <font-awesome-icon icon="fa-solid fa-language" />
+                            <font-awesome-icon :icon="faLanguage" />
                             <span class="hidden md:inline">{{ t("common.language") }}</span>
                         </div>
                         <transition enter-active-class="transition ease-out duration-100"
@@ -146,7 +153,7 @@
                     <div class="relative ml-3">
                         <div v-if="userStore.isLoggedIn() && env('ENABLE_BACKEND') && !open">
                             <div @click="userDropdownOpen = !userDropdownOpen"
-                                class="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
+                                class="relative flex rounded-full bg-gray-800 text-sm focus:outline-hidden">
                                 <span class="absolute -inset-1.5" />
                                 <span class="sr-only">Open user menu</span>
                                 <img class="size-8 rounded-full" :src="userStore.avatarSourceUrl || userDefault"
@@ -155,9 +162,9 @@
                         </div>
                         <div v-else-if="env('ENABLE_BACKEND') && !open">
                             <button
-                                class="relative cursor-pointer flex gap-2 items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden mr-2"
+                                class="relative cursor-pointer flex gap-2 items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white focus:outline-hidden mr-2"
                                 @click="router.push('/auth')">
-                                <font-awesome-icon icon="fa-solid fa-sign-in-alt" />
+                                <font-awesome-icon :icon="faSignInAlt" />
                                 <span class="hidden md:inline"
                                 >{{ t("auth.loginRegister") }}
                                 </span>
@@ -173,14 +180,14 @@
                                 class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden"
                                 v-if="userStore.isLoggedIn() && userDropdownOpen">
                                 <div>
-                                    <a :href="`/user/profile/${userStore.id}`"
+                                    <router-link :to="`/user/profile/${userStore.id}`"
                                        :class="[currentRoute == `/user/profile/${userStore.id}` ? 'bg-gray-100 outline-hidden' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ t("auth.profile")
-                                        }}</a>
+                                        }}</router-link>
                                 </div>
                                 <div>
-                                    <a href="/user/settings"
+                                    <router-link to="/user/settings"
                                        :class="[currentRoute == '/user/settings' ? 'bg-gray-100 outline-hidden' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ t("auth.settings")
-                                        }}</a>
+                                        }}</router-link>
                                 </div>
                                 <div>
                                     <a href="#" @click="AuthService.logout()"
@@ -204,10 +211,10 @@
         >
             <div class="sm:hidden absolute w-full bg-gray-800 shadow-lg z-40" v-if="open">
                 <div class="space-y-1 px-2 pt-2 pb-3 max-h-[calc(100vh-4rem)] overflow-y-auto">
-                    <a v-for="item in navigation" :key="item.href" :href="item.href"
+                    <router-link v-for="item in navigation" :key="item.href" :to="item.href"
                                       :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block rounded-md px-3 py-2 text-base font-medium']"
-                                      :aria-current="item.current ? 'page' : undefined">{{ t(item.name) }}
-                    </a>
+                                      :aria-current="item.current ? 'page' : undefined" @click="open = false">{{ t(item.name) }}
+                    </router-link>
 
                     <!-- Theme toggle for mobile -->
                     <div v-if="env('ENABLE_THEMES')" class="mt-3 border-t border-gray-700 pt-3">
@@ -216,7 +223,7 @@
                             class="w-full text-left text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
                         >
                             <font-awesome-icon
-                                :icon="themeStore.actualTheme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon'"
+                                :icon="themeStore.actualTheme === 'dark' ? faSun : faMoon"
                                 class="mr-2"
                             />
                             {{ themeStore.actualTheme === "dark" ? t("theme.light") : t("theme.dark") }}
@@ -243,13 +250,14 @@
                     <!-- Login/Register button for mobile -->
                     <div v-if="!userStore.isLoggedIn() && env('ENABLE_BACKEND')"
                          class="mt-3 border-t border-gray-700 pt-3">
-                        <a
-                            href="/auth"
+                        <router-link
+                            to="/auth"
                             class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                            @click="open = false"
                         >
-                            <font-awesome-icon icon="fa-solid fa-sign-in-alt" class="mr-2" />
+                            <font-awesome-icon :icon="faSignInAlt" class="mr-2" />
                             {{ t("auth.loginRegister") }}
-                        </a>
+                        </router-link>
                     </div>
 
                     <!-- User profile options for mobile -->
@@ -260,15 +268,17 @@
                                  alt="" />
                             <span class="text-white font-medium">{{ userStore.userData?.name }}</span>
                         </div>
-                        <a :href="`/user/profile/${userStore.id}`" target="_blank" rel="noopener"
-                           class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
+                        <router-link :to="`/user/profile/${userStore.id}`"
+                           class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                           @click="open = false">
                             {{ t("auth.profile") }}
-                        </a>
-                        <a href="/user/settings" target="_blank" rel="noopener"
-                           class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
+                        </router-link>
+                        <router-link to="/user/settings"
+                           class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                           @click="open = false">
                             {{ t("auth.settings") }}
-                        </a>
-                        <a href="#" @click="AuthService.logout()" target="_blank" rel="noopener"
+                        </router-link>
+                        <a href="#" @click="AuthService.logout(); open = false"
                            class="text-red-500 hover:bg-gray-700 hover:text-red-300 block rounded-md px-3 py-2 text-base font-medium">
                             {{ t("auth.signOut") }}
                         </a>
