@@ -7,6 +7,7 @@ import old_website from '@/assets/projects/oldwebsite.webp';
 import maszyna_reloaded from '@/assets/projects/maszyna_reloaded.webp';
 import artist from '@/assets/projects/artist.webp';
 import irenka from "@/assets/projects/irenka.webp"
+import gladosWebChat from "@/assets/projects/glados-web-chat.webp"
 import { useI18n } from "vue-i18n";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
@@ -15,17 +16,17 @@ import {
     faReact,
     faVuejs,
     faSass,
-    faTailwindCss, faTypescript
+    faTailwindCss, faTypescript, faPython
 } from "@fortawesome/free-brands-svg-icons";
 import {
     faCode,
-    faGamepad
+    faGamepad, faPlug
 } from "@fortawesome/free-solid-svg-icons";
 
 const { t } = useI18n();
 
 const goTo = (url: string) => {
-    window.location.href = url
+    window.open(url, '_blank')
 }
 </script>
 
@@ -69,6 +70,23 @@ const goTo = (url: string) => {
         <div class="mb-8">
             <h2 class="text-2xl font-bold text-blue-600 mb-6">{{ t('commissionsView.projects.title') }}</h2>
             <div class="grid gap-6 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
+                <Tile :background-image="gladosWebChat" v-once :title="t('commissionsView.projects.gladosWebApp.tileTitle')">
+                    <div class="space-y-3">
+                        <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.gladosWebApp.title') }}</h4>
+                        <p class="text-white">{{ t('commissionsView.projects.gladosWebApp.subtitle') }}</p>
+                        <div class="flex flex-wrap gap-2 my-3">
+                            <Badge text="Next.js" :icon="faReact" color="sky" link="https://nextjs.org/"/>
+                            <Badge text="TypeScript" :icon="faTypescript" color="blue" link="https://www.typescriptlang.org/" />
+                            <Badge text="TailwindCSS" :icon="faTailwindCss" color="sky" link="https://tailwindcss.com/" />
+                            <Badge text="Python" :icon="faPython" color="yellow" link="https://www.python.org/" />
+                            <Badge text="WebSockets" :icon="faPlug" color="sky" link="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API" />
+                        </div>
+                        <p class="text-gray-300">{{ t('commissionsView.projects.gladosWebApp.description') }}</p>
+                        <div class="flex justify-end mt-4">
+                            <Button @click="goTo('https://glados-web-chat.web.app/')" variant="primary" :text="t('commissionsView.projects.gladosWebApp.viewButton')" />
+                        </div>
+                    </div>
+                </Tile>
                 <Tile :background-image="irenka" v-once :title="t('commissionsView.projects.irenka.tileTitle')">
                     <div class="space-y-3">
                         <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.irenka.title') }}</h4>

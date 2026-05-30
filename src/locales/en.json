@@ -208,6 +208,13 @@
         "description": "Demo app for train drivers allowing to see notifications from Company dispatchers/staff and see their shifts along with details such as crew information and vehicle information. It also comes with a built-in search for trains which allows the driver to see their details",
         "viewButton": "View Project"
       },
+      "gladosWebApp": {
+        "tileTitle": "GLaDOS Web Chat",
+        "title": "Web app for chatting with GLaDOS",
+        "subtitle": "A chat that allows talking to AI that behaves like GLaDOS",
+        "description": "A web chat with custom-made backend that uses WebSockets to communicate with frontend. It contains all GLaDOS personality and responds with TTS using GLaDOS voice on every message.",
+        "viewButton": "View Project"
+      },
       "maszyna": {
         "tileTitle": "MaSzyna: Reloaded",
         "title": "Train Simulator",
