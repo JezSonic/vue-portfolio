@@ -214,6 +214,13 @@
         "subtitle": "Port symulatora MaSzyna do silnika Godot",
         "description": "Projekt tworzenia gier przenoszący symulator pociągów na nowoczesny silnik gier.",
         "viewButton": "Repozytorium GitHub"
+      },
+      "acServerManager": {
+        "tileTitle": "AC Server Manager",
+        "title": "Assetto Corsa Cloud Server Manager",
+        "subtitle": "Zdalne zarządzanie serwerami Assetto Corsa",
+        "description": "Dedykowana aplikacja stworzona w Rust i QML do zdalnego zarządzania serwerami Assetto Corsa przy użyciu SSH i Dockera. Zapewnia monitorowanie w czasie rzeczywistym i łatwą konfigurację.",
+        "viewButton": "Repozytorium GitHub"
       }
     },
     "cta": {

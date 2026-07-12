@@ -8,6 +8,7 @@ import maszyna_reloaded from '@/assets/projects/maszyna_reloaded.webp';
 import artist from '@/assets/projects/artist.webp';
 import irenka from "@/assets/projects/irenka.webp"
 import gladosWebChat from "@/assets/projects/glados-web-chat.webp"
+import acServerManager from '@/assets/projects/ac_server_manager.webp';
 import { useI18n } from "vue-i18n";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
@@ -16,11 +17,11 @@ import {
     faReact,
     faVuejs,
     faSass,
-    faTailwindCss, faTypescript, faPython
+    faTailwindCss, faTypescript, faPython, faRust, faDocker
 } from "@fortawesome/free-brands-svg-icons";
 import {
     faCode,
-    faGamepad, faPlug
+    faGamepad, faPlug, faTerminal
 } from "@fortawesome/free-solid-svg-icons";
 
 const { t } = useI18n();
@@ -70,6 +71,22 @@ const goTo = (url: string) => {
         <div class="mb-8">
             <h2 class="text-2xl font-bold text-blue-600 mb-6">{{ t('commissionsView.projects.title') }}</h2>
             <div class="grid gap-6 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
+                <Tile :background-image="acServerManager" v-once :title="t('commissionsView.projects.acServerManager.tileTitle')">
+                    <div class="space-y-3">
+                        <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.acServerManager.title') }}</h4>
+                        <p class="text-white">{{ t('commissionsView.projects.acServerManager.subtitle') }}</p>
+                        <div class="flex flex-wrap gap-2 my-3">
+                            <Badge text="Rust" :icon="faRust" color="orange" link="https://www.rust-lang.org/" />
+                            <Badge text="Qt/QML" :icon="faCode" color="emerald" link="https://www.qt.io/" />
+                            <Badge text="Docker" :icon="faDocker" color="blue" link="https://www.docker.com/" />
+                            <Badge text="SSH" :icon="faTerminal" color="gray" />
+                        </div>
+                        <p class="text-gray-300">{{ t('commissionsView.projects.acServerManager.description') }}</p>
+                        <div class="flex justify-end mt-4">
+                            <Button @click="goTo('https://github.com/JezSonic/ac-cloud-server-manager')" variant="primary" :text="t('commissionsView.projects.acServerManager.viewButton')" />
+                        </div>
+                    </div>
+                </Tile>
                 <Tile :background-image="gladosWebChat" v-once :title="t('commissionsView.projects.gladosWebApp.tileTitle')">
                     <div class="space-y-3">
                         <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.gladosWebApp.title') }}</h4>
@@ -134,7 +151,6 @@ const goTo = (url: string) => {
                         </div>
                     </div>
                 </Tile>
-
                 <Tile :background-image="maszyna_reloaded" v-once :title="t('commissionsView.projects.maszyna.tileTitle') ">
                     <div class="space-y-3">
                         <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.maszyna.title') }}</h4>

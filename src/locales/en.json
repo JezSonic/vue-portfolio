@@ -221,6 +221,13 @@
         "subtitle": "Port of MaSzyna Train Simulator into Godot Engine",
         "description": "A game development project porting a train simulator to a modern game engine.",
         "viewButton": "GitHub Repository"
+      },
+      "acServerManager": {
+        "tileTitle": "AC Server Manager",
+        "title": "Assetto Corsa Cloud Server Manager",
+        "subtitle": "Remote management for Assetto Corsa servers",
+        "description": "A dedicated application built with Rust and QML for remote management of Assetto Corsa servers via SSH and Docker. Provides real-time monitoring and seamless control.",
+        "viewButton": "GitHub Repository"
       }
     },
     "cta": {

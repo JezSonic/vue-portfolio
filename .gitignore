@@ -140,3 +140,5 @@ test-results
 /.idea/
 /dev-dist/
 /.junie/
+
+public/.well-known/discord
