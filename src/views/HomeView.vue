@@ -28,12 +28,12 @@ import {
     faGitAlt,
     faDiscord,
     faLinkedin,
-    faTailwindCss
+    faTailwindCss, faRust
 } from "@fortawesome/free-brands-svg-icons";
 import {
     faCode,
     faGamepad,
-    faEnvelope
+    faEnvelope, faTerminal
 } from "@fortawesome/free-solid-svg-icons";
 
 const { t } = useI18n();
@@ -141,7 +141,10 @@ useLazyLoad(maszynaReloadedPicRef);
                     <Badge text="Godot Engine" :icon="faGamepad" color="sky" link="https://godotengine.org/" />
                     <Badge text="Unity Engine" :icon="faUnity" color="gray" link="https://unity.com/" />
                     <Badge text="Node.js" :icon="faNodeJs" color="green" link="https://nodejs.org/"/>
+                    <Badge text="Rust" :icon="faRust" color="orange" link="https://www.rust-lang.org/" />
+                    <Badge text="Qt/QML" :icon="faCode" color="emerald" link="https://www.qt.io/" />
                     <Badge text="Docker" :icon="faDocker" color="blue" link="https://www.docker.com/" />
+                    <Badge text="SSH" :icon="faTerminal" color="gray" />
                     <Badge text="SCSS" :icon="faSass" color="pink" link="https://sass-lang.com/" />
                     <Badge text="JavaScript" :icon="faJs" color="yellow" />
                     <Badge text="HTML5" :icon="faHtml5" color="orange" />
