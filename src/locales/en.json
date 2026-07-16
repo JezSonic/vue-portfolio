@@ -106,6 +106,11 @@
       "paragraph2": "My experience includes frontend and backend development, game development, light devops, and design. You can check my projects",
       "paragraph3": "Feel free to take a look at some of my projects listed below:"
     },
+    "discordAd": {
+      "title": "ㅤ",
+      "description": "Looking for help with Godot, want to talk about gamedev, or just looking for a cool community? Drop by the {link} server!",
+      "button": "Join Server"
+    },
     "skills": {
       "title": "My Skills",
       "description": "I'm proficient in a variety of web development technologies, including:"

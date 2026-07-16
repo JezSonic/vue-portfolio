@@ -4,12 +4,13 @@ import Badge from "@/components/badges/Badge.vue";
 import { useI18n } from 'vue-i18n';
 import Button from "@/components/ui/Button.vue";
 import router from "@/router/index.js";
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useLazyLoad } from '@/composables/useLazyLoad';
 
 // Image imports for webpack processing
 import artist from '@/assets/projects/artist.webp';
 import maszyna_reloaded from '@/assets/projects/maszyna_reloaded.webp';
+import godocik_img from '@/assets/projects/godocik.webp'
 import VLazyImage from "v-lazy-image";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
@@ -36,11 +37,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const { t } = useI18n();
-const currentYear = new Date().getFullYear();
-const currentMonth = new Date().getMonth(); // 0-indexed
-const startDate = new Date(2023, 3, 1); // Month 3 is April (0-indexed)
-const totalMonths = (currentYear - startDate.getFullYear()) * 12 + (currentMonth - startDate.getMonth());
-const yearsOfExperience = Math.round(totalMonths / 12);
+const goTo = (url: string) => {
+    window.open(url, '_blank');
+};
 const oldWebsitePicRef = ref<HTMLPictureElement | null>(null);
 const maszynaReloadedPicRef = ref<HTMLPictureElement | null>(null);
 
@@ -72,7 +71,7 @@ useLazyLoad(maszynaReloadedPicRef);
             <template #default>
                 <div class="space-y-4">
                     <p class="text-gray-900 dark:text-white text-lg">
-                        {{ t('home.aboutMe.paragraph1', { years: yearsOfExperience }) }}
+                        {{ t('home.aboutMe.paragraph1') }}
                     </p>
                     <p class="text-gray-900 dark:text-white text-lg">
                         {{ t('home.aboutMe.paragraph2') }} <a href="https://github.com/jezsonic" class="text-blue-600 hover:text-blue-500">on GitHub</a>.
@@ -154,30 +153,48 @@ useLazyLoad(maszynaReloadedPicRef);
             </template>
         </Tile>
 
-        <!-- Contact Section -->
-        <Tile :title="t('home.contact.title')">
-            <template #default>
-                <p class="text-gray-900 dark:text-white text-lg mb-6">
-                    {{ t('home.contact.description') }}
-                </p>
-                <div class="flex flex-wrap gap-4">
-                    <router-link to="/contact"
-                       class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors">
-                        <font-awesome-icon :icon="faDiscord" class="w-6 h-6 text-gray-900 dark:text-white" />
-                        <span class="text-gray-900 dark:text-white">{{ t('home.contact.discord') }}</span>
-                    </router-link>
-                    <router-link to="/contact"
-                       class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors">
-                        <font-awesome-icon :icon="faEnvelope" class="w-6 h-6 text-gray-900 dark:text-white" />
-                        <span class="text-gray-900 dark:text-white">{{ t('home.contact.email') }}</span>
-                    </router-link>
-                    <router-link to="/contact"
-                       class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors">
-                        <font-awesome-icon :icon="faLinkedin" class="w-6 h-6 text-gray-900 dark:text-white" />
-                        <span class="text-gray-900 dark:text-white">{{ t('home.contact.linkedin') }}</span>
-                    </router-link>
-                </div>
-            </template>
-        </Tile>
+        <!-- Contact & Discord Section -->
+        <div class="flex flex-col md:flex-row gap-6 mb-12">
+            <Tile :title="t('home.contact.title')" class="flex-1">
+                <template #default>
+                    <p class="text-gray-900 dark:text-white text-lg mb-6">
+                        {{ t('home.contact.description') }}
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <router-link to="/contact"
+                                     class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors">
+                            <font-awesome-icon :icon="faDiscord" class="w-6 h-6 text-gray-900 dark:text-white" />
+                            <span class="text-gray-900 dark:text-white">{{ t('home.contact.discord') }}</span>
+                        </router-link>
+                        <router-link to="/contact"
+                                     class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors">
+                            <font-awesome-icon :icon="faEnvelope" class="w-6 h-6 text-gray-900 dark:text-white" />
+                            <span class="text-gray-900 dark:text-white">{{ t('home.contact.email') }}</span>
+                        </router-link>
+                        <router-link to="/contact"
+                                     class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors">
+                            <font-awesome-icon :icon="faLinkedin" class="w-6 h-6 text-gray-900 dark:text-white" />
+                            <span class="text-gray-900 dark:text-white">{{ t('home.contact.linkedin') }}</span>
+                        </router-link>
+                    </div>
+                </template>
+            </Tile>
+
+            <Tile :title="t('home.discordAd.title')" class="flex-1 bg-position-[50%_30%]!" :background-image="godocik_img">
+                <template #default>
+                    <i18n-t keypath="home.discordAd.description" tag="p" class="text-white text-lg mb-6">
+                        <template #link>
+                            <a href="https://godocik.pl" target="_blank" rel="noopener" class="text-blue-300 hover:text-blue-200 font-semibold underline">godocik.pl</a>
+                        </template>
+                    </i18n-t>
+                    <div class="flex flex-wrap gap-4">
+                        <Button variant="primary" @click="goTo('https://godocik.pl')" size="md" class="flex items-center gap-2">
+                            <font-awesome-icon :icon="faDiscord" />
+                            {{ t('home.discordAd.button') }}
+                        </Button>
+                    </div>
+                </template>
+            </Tile>
+        </div>
     </div>
 </template>
