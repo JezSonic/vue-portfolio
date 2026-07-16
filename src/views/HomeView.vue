@@ -187,7 +187,7 @@ useLazyLoad(maszynaReloadedPicRef);
                 <template #default>
                     <i18n-t keypath="home.discordAd.description" tag="p" class="text-white text-lg mb-6">
                         <template #link>
-                            <a href="https://godocik.pl" target="_blank" rel="noopener" class="text-blue-300 hover:text-blue-200 font-semibold underline">godocik.pl</a>
+                            <a href="https://godocik.pl" target="_blank" rel="noopener" class="text-blue-300 hover:text-blue-200 font-semibold underline">Godocik</a>
                         </template>
                     </i18n-t>
                     <div class="flex flex-wrap gap-4">
