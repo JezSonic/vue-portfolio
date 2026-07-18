@@ -20,5 +20,6 @@ export const config: IEnv = {
     ENABLE_LOCALIZATION: false,
     ENABLE_THEMES: false,
     ENABLE_2FA: true,
-    GOOGLE_CLIENT_ID: ""
+    GOOGLE_CLIENT_ID: "",
+    GOOGLE_ANALYTICS_ID: ""
 }

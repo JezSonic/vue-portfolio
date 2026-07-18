@@ -8,6 +8,7 @@ import { createPinia } from "pinia";
 import i18n from './i18n/index.ts';
 import { useThemeStore } from "./stores/themeStore.ts";
 import vue3GoogleLogin from 'vue3-google-login'
+import VueGtag from "vue-gtag-next";
 
 // Import FontAwesome core
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -38,8 +39,18 @@ app.use(router)
     .use(i18n)
     .use(vue3GoogleLogin, {
         clientId: env('GOOGLE_CLIENT_ID')
-    })
-    .mount("#app");
+    });
+
+const googleAnalyticsId = env('GOOGLE_ANALYTICS_ID');
+if (googleAnalyticsId) {
+    app.use(VueGtag, {
+        property: {
+            id: googleAnalyticsId
+        }
+    }, router); //leave it here as it works
+}
+
+app.mount("#app");
 
 // Initialize theme
 const themeStore = useThemeStore();

@@ -51,4 +51,5 @@ export interface IEnv {
     ENABLE_DATA_EXPORT: boolean
     ENABLE_2FA: boolean
     ENABLED_OAUTH_PROVIDERS: EOAuthProvider[]
+    GOOGLE_ANALYTICS_ID?: string
 }
