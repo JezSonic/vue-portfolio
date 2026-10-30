@@ -19,6 +19,7 @@
         faLanguage,
         faSignInAlt,
     } from "@fortawesome/free-solid-svg-icons";
+    import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
     interface NavigationItem {
         name: string;
@@ -56,6 +57,8 @@
         },
         { name: "navigation.contact", href: "/contact", current: router.currentRoute.value.path === "/contact" }
     ]);
+
+    const githubUrl = "https://github.com/JezSonic";
 
     const languages: LanguageItem[] = [
         { code: "en", name: "common.english" },
@@ -105,6 +108,11 @@
                             <router-link v-for="item in navigation" :key="item.href" :to="item.href"
                                :class="[item.current ? 'dark:bg-gray-900 dark:text-white bg-white' : 'text-white dark:text-gray-300 hover:bg-gray-50/50 dark:hover:bg-gray-700', 'rounded-md px-3 py-2 text-sm font-medium cursor-pointer']"
                                :aria-current="item.href === currentRoute? 'page' : undefined">{{ t(item.name) }}</router-link>
+                            <a :href="githubUrl" target="_blank" rel="noopener noreferrer"
+                               class="flex gap-2 items-center text-white dark:text-gray-300 hover:bg-gray-50/50 dark:hover:bg-gray-700 rounded-md px-3 py-2 text-sm font-medium cursor-pointer">
+                                <font-awesome-icon :icon="faGithub" />
+                                GitHub
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -215,6 +223,12 @@
                                       :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block rounded-md px-3 py-2 text-base font-medium']"
                                       :aria-current="item.current ? 'page' : undefined" @click="open = false">{{ t(item.name) }}
                     </router-link>
+                    <a :href="githubUrl" target="_blank" rel="noopener noreferrer"
+                       class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                       @click="open = false">
+                        <font-awesome-icon :icon="faGithub" class="mr-2" />
+                        GitHub
+                    </a>
 
                     <!-- Theme toggle for mobile -->
                     <div v-if="env('ENABLE_THEMES')" class="mt-3 border-t border-gray-700 pt-3">

@@ -157,6 +157,7 @@ const goTo = (url: string) => {
                         <p class="text-white">{{ t('commissionsView.projects.maszyna.subtitle') }}</p>
                         <div class="flex flex-wrap gap-2 my-3">
                             <Badge text="C++" :icon="faCode" color="blue" />
+                            <Badge text="GDScript" :icon="faCode" color="sky" />
                             <Badge text="Godot Engine" :icon="faGamepad" color="sky" link="https://godotengine.org/" />
                         </div>
                         <p class="text-gray-300">{{ t('commissionsView.projects.maszyna.description') }}</p>

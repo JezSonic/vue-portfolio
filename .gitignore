@@ -142,3 +142,6 @@ test-results
 /.junie/
 
 public/.well-known/discord
+
+.playwright-report/
+.playwright-mcp/

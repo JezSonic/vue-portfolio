@@ -113,17 +113,16 @@
     },
     "skills": {
       "title": "Moje Umiejętności",
-      "description": "Biegle posługuję się różnymi technologiami, w tym:"
+      "description": "Biegle posługuję się różnymi technologiami, w tym:",
+      "strong": "Mocne strony",
+      "familiar": "Znam podstawy",
+      "hobby": "Hobbystycznie"
     },
     "projects": {
       "title": "Wyróżnione Projekty",
       "previousPortfolio": {
         "title": "Poprzednie Portfolio",
         "description": "Moja poprzednia strona portfolio prezentująca wcześniejsze prace i umiejętności."
-      },
-      "maszynaReloaded": {
-        "title": "Maszyna: Reloaded",
-        "description": "Projekt tworzenia gier przenoszący symulator pociągów na nowoczesny silnik gier."
       },
       "viewAll": "Zobacz Wszystkie Projekty"
     },

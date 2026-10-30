@@ -102,7 +102,7 @@
     },
     "aboutMe": {
       "title": "About Me",
-      "paragraph1": "I'm a software developer with passion for designing websites, web applications, and videogames. I have 6 years of programming experience with 3 years in corporate settings.",
+      "paragraph1": "Software developer with 6 years of experience who is passionate about designing websites, web applications, and video games.",
       "paragraph2": "My experience includes frontend and backend development, game development, light devops, and design. You can check my projects",
       "paragraph3": "Feel free to take a look at some of my projects listed below:"
     },
@@ -113,17 +113,16 @@
     },
     "skills": {
       "title": "My Skills",
-      "description": "I'm proficient in a variety of development technologies, including:"
+      "description": "I'm proficient in a variety of development technologies, including:",
+      "strong": "Strong skills",
+      "familiar": "Familiar with",
+      "hobby": "Hobby"
     },
     "projects": {
       "title": "Featured Projects",
       "previousPortfolio": {
         "title": "Previous Portfolio",
         "description": "My previous portfolio website showcasing my earlier work and skills."
-      },
-      "maszynaReloaded": {
-        "title": "Maszyna: Reloaded",
-        "description": "A game development project porting a train simulator to a modern game engine."
       },
       "viewAll": "View All Projects"
     },

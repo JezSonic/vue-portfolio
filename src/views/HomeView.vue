@@ -11,29 +11,23 @@ import { useLazyLoad } from '@/composables/useLazyLoad';
 import artist from '@/assets/projects/artist.webp';
 import maszyna_reloaded from '@/assets/projects/maszyna_reloaded.webp';
 import godocik_img from '@/assets/projects/godocik.webp'
-import VLazyImage from "v-lazy-image";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
     faTypescript,
     faReact,
-    faVuejs,
-    faPhp,
     faUnity,
-    faNodeJs,
     faDocker,
-    faSass,
-    faJs,
-    faHtml5,
     faCss3Alt,
     faGitAlt,
     faDiscord,
     faLinkedin,
-    faTailwindCss, faRust
+    faLaravel,
+    faSymfony, faTailwindCss
 } from "@fortawesome/free-brands-svg-icons";
 import {
     faCode,
     faGamepad,
-    faEnvelope, faTerminal
+    faEnvelope, faDatabase
 } from "@fortawesome/free-solid-svg-icons";
 
 const { t } = useI18n();
@@ -83,49 +77,6 @@ useLazyLoad(maszynaReloadedPicRef);
             </template>
         </Tile>
 
-        <!-- Featured Projects -->
-        <Tile :title="t('home.projects.title')" class="mb-12">
-            <template #default>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                    <div v-once class="bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden shadow-md">
-                        <a href="https://artist.com.pl" target="_blank" rel="noopener">
-                            <v-lazy-image :src="artist" class="w-full h-48 object-cover" alt="Artist.com.pl"/>
-                        </a>
-                        <div class="p-4">
-                            <a href="https://artist.com.pl" target="_blank" rel="noopener" class="text-xl font-semibold text-blue-500 mb-2">
-                                {{ t('commissionsView.projects.artist.title') }}
-                            </a>
-                            <p class="text-gray-600 dark:text-white mb-4">{{ t('commissionsView.projects.artist.description') }}</p>
-                            <div class="flex gap-2 flex-wrap">
-                                <Badge text="Next.js" :icon="faReact" color="sky" link="https://nextjs.org/"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div v-once class="bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden shadow-md">
-                        <a href="https://github.com/MaSzyna-Reloaded" target="_blank" rel="noopener">
-                            <v-lazy-image :src="maszyna_reloaded" class="w-full h-48 object-cover" alt="Maszyna Reloaded Screenshot"/>
-                        </a>
-                        <div class="p-4">
-                            <a href="https://github.com/MaSzyna-Reloaded" target="_blank" rel="noopener" class="text-xl font-semibold text-blue-500 mb-2">
-                                {{ t('home.projects.maszynaReloaded.title') }}
-                            </a>
-                            <p class="text-gray-600 dark:text-white mb-4">{{ t('home.projects.maszynaReloaded.description') }}</p>
-                            <div class="flex gap-2 flex-wrap">
-                                <Badge text="C++" :icon="faCode" color="blue" />
-                                <Badge text="GDScript" :icon="faCode" color="sky" />
-                                <Badge text="Godot Engine" :icon="faGamepad" color="sky" link="https://godotengine.org/" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-6 text-center flex justify-center gap-4">
-                    <Button variant="primary" @click="router.push('/projects')" size="lg">
-                        {{ t('home.projects.viewAll') }}
-                    </Button>
-                </div>
-            </template>
-        </Tile>
-
         <!-- Skills Section -->
         <Tile :title="t('home.skills.title')" class="mb-12" :badges="true">
             <template #default>
@@ -134,24 +85,74 @@ useLazyLoad(maszynaReloadedPicRef);
                 </p>
             </template>
             <template #badges>
-                <div v-once class="flex flex-wrap gap-3 mt-4">
-                    <Badge text="TypeScript" :icon="faTypescript" color="blue" link="https://www.typescriptlang.org/" />
-                    <Badge text="Vue.js" :icon="faVuejs" color="emerald" link="https://vuejs.org/" />
-                    <Badge text="PHP" :icon="faPhp" color="indigo" link="https://www.php.net/" />
-                    <Badge text="Godot Engine" :icon="faGamepad" color="sky" link="https://godotengine.org/" />
-                    <Badge text="Unity Engine" :icon="faUnity" color="gray" link="https://unity.com/" />
-                    <Badge text="Node.js" :icon="faNodeJs" color="green" link="https://nodejs.org/"/>
-                    <Badge text="Rust" :icon="faRust" color="orange" link="https://www.rust-lang.org/" />
-                    <Badge text="Qt/QML" :icon="faCode" color="emerald" link="https://www.qt.io/" />
-                    <Badge text="Docker" :icon="faDocker" color="blue" link="https://www.docker.com/" />
-                    <Badge text="SSH" :icon="faTerminal" color="gray" />
-                    <Badge text="SCSS" :icon="faSass" color="pink" link="https://sass-lang.com/" />
-                    <Badge text="JavaScript" :icon="faJs" color="yellow" />
-                    <Badge text="HTML5" :icon="faHtml5" color="orange" />
-                    <Badge text="Next.js" :icon="faReact" color="sky" link="https://nextjs.org/"/>
-                    <Badge text="CSS3" :icon="faCss3Alt" color="blue" />
-                    <Badge text="TailwindCSS" :icon="faTailwindCss" color="sky" link="https://tailwindcss.com/" />
-                    <Badge text="Git" :icon="faGitAlt" color="red" link="https://git-scm.com/" />
+                <div v-once class="mt-4 space-y-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">{{ t('home.skills.strong') }}</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <Badge text="Laravel" :icon="faLaravel" color="red" link="https://laravel.com/" />
+                            <Badge text="Symfony" :icon="faSymfony" color="slate" link="https://symfony.com/" />
+                            <Badge text="TypeScript" :icon="faTypescript" color="blue" link="https://www.typescriptlang.org/" />
+                            <Badge text="CSS3" :icon="faCss3Alt" color="blue" />
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">{{ t('home.skills.familiar') }}</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <Badge text="Docker" :icon="faDocker" color="blue" link="https://www.docker.com/" />
+                            <Badge text="SQL" :icon="faDatabase" color="cyan" />
+                            <Badge text="Git" :icon="faGitAlt" color="red" link="https://git-scm.com/" />
+                            <Badge text="C++" :icon="faCode" color="blue" />
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">{{ t('home.skills.hobby') }}</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <Badge text="Godot Engine" :icon="faGamepad" color="sky" link="https://godotengine.org/" />
+                            <Badge text="Unity Engine" :icon="faUnity" color="gray" link="https://unity.com/" />
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </Tile>
+
+        <!-- Featured Projects -->
+        <Tile :title="t('home.projects.title')" class="mb-12">
+            <template #default>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    <Tile :background-image="artist" v-once :title="t('commissionsView.projects.artist.tileTitle')">
+                        <div class="space-y-3">
+                            <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.artist.title') }}</h4>
+                            <p class="text-white">{{ t('commissionsView.projects.artist.subtitle') }}</p>
+                            <div class="flex flex-wrap gap-2 my-3">
+                                <Badge text="Next.js" :icon="faReact" color="sky" link="https://nextjs.org/"/>
+                                <Badge text="TailwindCSS" :icon="faTailwindCss" color="sky" link="https://tailwindcss.com/" />
+                            </div>
+                            <p class="text-gray-300">{{ t('commissionsView.projects.artist.description') }}</p>
+                            <div class="flex justify-end mt-4">
+                                <Button @click="goTo('https://artist.com.pl')" variant="primary" :text="t('commissionsView.projects.artist.viewButton')" />
+                            </div>
+                        </div>
+                    </Tile>
+                    <Tile :background-image="maszyna_reloaded" v-once :title="t('commissionsView.projects.maszyna.tileTitle')">
+                        <div class="space-y-3">
+                            <h4 class="text-xl font-semibold text-blue-500">{{ t('commissionsView.projects.maszyna.title') }}</h4>
+                            <p class="text-white">{{ t('commissionsView.projects.maszyna.subtitle') }}</p>
+                            <div class="flex flex-wrap gap-2 my-3">
+                                <Badge text="C++" :icon="faCode" color="blue" />
+                                <Badge text="GDScript" :icon="faCode" color="sky" />
+                                <Badge text="Godot Engine" :icon="faGamepad" color="sky" link="https://godotengine.org/" />
+                            </div>
+                            <p class="text-gray-300">{{ t('commissionsView.projects.maszyna.description') }}</p>
+                            <div class="flex justify-end mt-4">
+                                <Button @click="goTo('https://github.com/MaSzyna-Reloaded')" variant="primary" :text="t('commissionsView.projects.maszyna.viewButton')" />
+                            </div>
+                        </div>
+                    </Tile>
+                </div>
+                <div class="mt-6 text-center flex justify-center gap-4">
+                    <Button variant="primary" @click="router.push('/projects')" size="lg">
+                        {{ t('home.projects.viewAll') }}
+                    </Button>
                 </div>
             </template>
         </Tile>
